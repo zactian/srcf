@@ -60,6 +60,7 @@ div#page {
     margin: 0 auto;
     }
 #header {
+    background-color: #003a70;
     margin: 0 10px;
     padding: 0;
     min-height: 92px;
@@ -81,9 +82,10 @@ body, #branding {
     }
 #logo {
     min-width: 200px;
+    max-width: 250px;
     display: block;
     float: left;
-    margin: 0 10px 0 0;
+    margin: 10px;
     overflow: hidden;
     padding: 10px 0 0 10px;
     }
@@ -102,6 +104,28 @@ nav {
 div#main-content {
     padding: 25px 20px 50px 20px;
     }
+/* Main Body Custom Styles */
+.form-horizontal {
+    padding-top: 30px;
+}
+.custom-boxes {
+    top:-15px;
+}
+
+.custom-radio {
+    top:-10;
+}
+.custom-label {
+    position: relative;
+    top: -17px;
+    /*transform: translateY(-50%);*/
+    color: #949394;
+    text-align: left;
+}
+#submit-btn {
+    margin-top: 20px;
+    }
+/* End Custom Styles */
 footer {
     display: block;
     }
@@ -172,7 +196,7 @@ p {
     float: left;
     margin-right: 15px;
     }
-/***FORMS***/
+/***FORMS**
 form {
     margin: 0;
     padding: 0;

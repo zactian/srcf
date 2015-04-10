@@ -1,0 +1,44 @@
+ <form class="form-group">
+            <table class="table">
+                <tr>
+                    <td>Your Email</td>
+                    <td><input type="text" name="email"></td>
+                </tr>
+                <tr>
+                    <td>Confirm Your Email</td>
+                    <td><input type="text" name="confirm-email"></td>
+                </tr>
+                <tr>
+                    <td>Undergraduate, enter your major</td>
+                    <td><input type="text" name="major"></td>
+                </tr>
+                <tr>
+                    <td>Your College</td>
+                    <td>
+
+                        <input type="checkbox" name="college" value="chemistry"> Chemistry
+                        <br>
+                        <input type="checkbox" name="college" value="engineering"> Engineering
+                        <br>
+                        <input type="checkbox" name="college" value="environmental-design"> Environmental Design
+                        <br>
+                        <input type="checkbox" name="college" value="business" > Haas School of Business
+                        <br>
+                        <input type="checkbox" name="college" value="letters-and-science"> Letters & Science
+                        <br>
+                        <input type="checkbox" name="college" value="natural-resources"> Natural Resources
+                        <br>
+                        <input type="checkbox" name="college" value="law"> School of Law
+                        <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Are you currently a NCAA athlete?</td>
+                    <td>
+                        <input type="radio" name="athlete" value="yes"> Yes
+                        <input type="radio" name="athlete" value="no"> No
+                    </td>
+                </tr>
+            </table>
+            <input type="submit" value="submit" class="btn btn-primary">
+        </form>
