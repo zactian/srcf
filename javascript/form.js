@@ -21,7 +21,7 @@ $(document).ready(function() {
 
 	});
 
-	/** warns the user if Email input values are not equal or filled out */
+	/** warns the user if Email input values are not equal or filled out. */
 	$("#email-confirm").blur(function() {
 		var initial = $("#email-init").val();
 		var confirm = $(this).val();
@@ -47,6 +47,7 @@ $(document).ready(function() {
 	// 		}
 	// 	})
 	// })
+
 
 	// $(":input").each(function() {
 	// 	console.log($(this).val());
