@@ -186,6 +186,10 @@ h6,
 .alert {
     color: red;
     font-weight: bold;
+    width: 100%;
+    text-align: center;
+    padding: 0;
+    display: none;
 }
 
 .button {
