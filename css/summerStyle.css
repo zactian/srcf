@@ -112,7 +112,8 @@ h6,
 .h3,
 .h4,
 .h5,
-.h6 {
+.h6
+.alert {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
@@ -180,6 +181,11 @@ h6,
 /*    color: #000000;
     border-radius: 3px;
     line-height: 35px;*/
+}
+
+.alert {
+    color: red;
+    font-weight: bold;
 }
 
 .button {
