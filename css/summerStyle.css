@@ -102,7 +102,7 @@ nav {
     z-index: 497;
     }
 div#main-content {
-    padding: 25px 20px 50px 20px;
+    padding: 25px 20px 0px 20px;
     }
 /* Main Body Custom Styles */
 .form-horizontal {
@@ -170,6 +170,7 @@ img, embed, object, video {
     visibility: hidden;
     }
 h1, h2, h3, h4, h5, h6 {
+    color: #003A70 !important;
     margin-bottom: 0.5em;
     margin-top: 0;
     }
@@ -196,78 +197,7 @@ p {
     float: left;
     margin-right: 15px;
     }
-/***FORMS**
-form {
-    margin: 0;
-    padding: 0;
-    }
-fieldset {
-    background: transparent;
-    border: 1px solid #9abeaa;
-    margin: 1em 0 1.5em 0;
-    padding: .7em 1.5em 2em 1.5em;
-    }
-fieldset legend {
-    display: block;
-    font-weight: bold;
-    font-size: 1.5em;
-    color: #728c7e;
-    border: 0;
-    margin: 0;
-    padding: 0 .2em 0 0;
-    }
-fieldset fieldset {
-    background: transparent;
-    border: none;
-    margin: 0;
-    padding: 0;
-    }
-fieldset fieldset legend {
-    display: block;
-    font-weight: bold;
-    font-size: 100%;
-    color: #555;
-    border: 0;
-    margin: 0;
-    padding: 1.2em 0 .3em 0;
-    }
-fieldset p + fieldset legend {
-    padding: .4em 0 .8em 0;
-    }
-input, select, textarea {
-    font-size: 100%;
-    line-height: normal;
-    }
-textarea {
-    overflow: auto;
-    vertical-align: top;
-    }
-input[type=text], textarea, select {
-    margin: 0 .5em 0 0;
-    padding: .4em;
-    font: 1em normal Arial, Helvetica, sans-serif;
-    }
-input[type=file] {
-    margin-right: .5em;
-    padding: .4em .4em .6em 0;
-    }
-input[type=radio] {
-    margin-left: .6em;
-    margin-right: .5em;
-    }
-input[type=checkbox] {
-    margin-left: 2px;
-    margin-right: .5em;
-    }
-input[type=text], input[type=radio], input[type=checkbox],
-textarea, select {
-    /* round the corners */
-    border-radius: 4px;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    outline: none;
-    border: 1px solid #ccc;
-    }
+
 .deactivate input[disabled], .deactivate select[disabled] {
     color: #6D6D6D;
     background-color: #f0f0f0;
@@ -509,88 +439,10 @@ ul.topMenu li li a {
     float: none;
     width: auto;
     }
-/* NAV END */
 
-/* TABLE STYLES */
-table:last-child  {
-    margin-bottom: 0;
-    }
-table {
-    width: 100%;
-    font-size: 1em;
-    line-height: 1.5em;
-    border-collapse: collapse;
-    margin: 10px 0 20px 0;
-    }
-table caption {
-    text-align: left;
-    color: #6a6bd3;
-    padding: 0 0 5px 0;
-    }
-th {
-    font-size: .94em;
-    font-weight: bold;
-    background: #b9c9fe;
-    border-right: 1px solid #fff;
-    border-bottom: 1px solid #fff;
-    color: #039;
-    padding: 8px;
-    }
-td input,
-td select {
-    padding: 3px;
-    margin-bottom: 0;
-    }
-td {
-    background: #e8edff;
-    border-bottom: 1px solid #fff;
-    color: #585884;
-    padding: 8px;
-    }
-tr:hover td {
-    background: #d0dafd;
-    color: #339;
-    }
-td.highlight {
-    font-weight: bold;
-    background: #c9d2f4;
-    color: #339;
-    }
-td input[type="submit"] {
-    text-align: center;
-    }
-/* For table with horizontal headers across the top. */
-.tableStyle2 th {
-    text-align: left;
-    border-top: 4px solid #aabcfe;
-    }
-.tableStyle2 td {
-    border-right: 1px solid #fff;
-    }
-.tableStyle2 th:last-child, .tableStyle2 td:last-child {
-    border-right: none;
-    }
-/* For a table where headers go vertically, in a column to the left of data. */
-.tableStyle4 th {
-    text-align: right;
-    }
-.tableStyle4 th:nth-child(1){
-    width: 30%;
-    }
-/* For Study Abroad survey table in regForms. */
-.tableStyleTS th {
-    vertical-align: bottom;
-    border: none;
-    }
-.tableStyleTS td {
-    margin: 0 auto;
-    }
-.tableStyleTS td {
-    text-align: center;
-    }
-.tableStyleTS td label {
-    text-align: left;
-    font-weight: normal;
-    padding: 0;
-    }
-/* TABLE STYLES END */
+.callout li{
+    margin-bottom: 10px;
+}
+
+
+/* NAV END */
