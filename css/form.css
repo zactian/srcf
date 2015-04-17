@@ -1931,7 +1931,7 @@ a:focus {
 .callout a:hover {
   color: #eee;
 }
-.callout  {
+.callout h4 {
   margin-top: 0;
   font-weight: 600;
 }

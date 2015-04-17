@@ -1,8 +1,10 @@
 <html lang="en" dir="ltr"><head></head><body><br>
 <meta charset="utf-8">
 <title>SRCF</title>
-<link rel="stylesheet" href="css/summerStyle.css" type="text/css" media="screen">
 <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
+<link rel="stylesheet" href="css/summerStyle.css" type="text/css" media="screen">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="javascript/form.js"></script>
 <div id="page" class="container">
     <header id="header" class="clearfix" role="banner">
         <div id="branding" class="branding-elements clearfix">
@@ -21,95 +23,114 @@
 </div>
 
 <div id="main-content">
-    <div class="form container">
-        <div class="form-title">
-            <h2 class="form-title">UCB Student Information</h2>
-        </div>
-        <form class="form-horizontal">
-            <div class="form-group">
-                <label for="email" class="col-sm-3 control-label custom-label">Your Email</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" placeholder="Email">
+        <h4>UCB Student Information</h4>
+            <form class="form-horizontal" role="form">
+
+                <div class="form-content callout">
+                    <div class="form-group">
+                        <div class="form-input-container col-centered">
+                            <label for="email" class="col-sm-3 control-label">Your Email:</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="email-init" class="form-control" placeholder="Email">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-input-container col-centered">
+                            <label for="confirm-email" class="col-sm-3 control-label">Confirm Your Email:</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="email-confirm" class="form-control" placeholder="Confirm Email">
+                            </div>
+                            <div class="warning hide">Your emails do not match</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-input-container col-centered">
+                                <label for="major" class="col-sm-3 control-label">Undergraduate Major:</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" placeholder="Major">
+                                </div>
+                            </div>
+                    </div>
+
+                    <!-- College Checkboxes -->
+                    <div class="form-group">
+                    <div class="form-input-container col-centered">
+                        <label for="college" class="col-sm-3 control-label">Your College:</label>
+                        <div class="col-sm-3 custom-boxes">
+
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="college" value="chemistry"> Chemistry
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="college" value="engineering"> Engineering
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="college" value="enviro-design"> Environemental Design
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="college" value="business"> Haas School of Business
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 custom-boxes">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="college" value="l-and-s"> Letters & Science
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="collge" value="natural-resources"> Natural Resources
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="college" value="law"> School of Law
+                                </label>
+                            </div>
+                        </div>
+                        </div>
+
+                    </div>
+                    <!-- End Collge Checkboxes -->
+
+                    <div class="form-group">
+
+                    <div class="form-input-container col-centered">
+                        <label for="athlete" id="ncaa" class="col-sm-3 control-label">Are you currently a <br> NCAA athlete?</label>
+                        <div class="col-sm-4">
+                            <div class="radio col-sm-3 custom-radio">
+                                <label>
+                                    <input type="radio" name="athlete" value="yes"> Yes
+                                </label>
+                            </div>
+                            <div class="radio col-sm-3 custom-radio">
+                                <label>
+                                    <input type="radio" name="athlete" value="no"> No
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="confirm-email" class="col-sm-3 control-label custom-label">Confirm Your Email</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" placeholder="Confirm Email">
+                <div class="form-group">
+                    <div class="col-sm-10 button container">
+                        <input type="submit" value="Submit" class="btn btn-primary btn-center">
+                    </div>
+
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="major" class="col-sm-3 control-label custom-label">Undergraduate Major:</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" placeholder="Major">
-                </div>
-            </div>
-            <!-- College Checkboxes -->
-            <div class="form-group">
-                <label for="college" class="col-sm-3 control-label custom-label">Your College</label>
-                <div class="col-sm-3 custom-boxes">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="college" value="chemistry"> Chemistry
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="college" value="engineering"> Engineering
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="college" value="enviro-design"> Environemental Design
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="college" value="business"> Haas School of Business
-                        </label>
-                    </div>
-                </div>
-                <div class="col-sm-3 custom-boxes">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="college" value="l-and-s"> Letters & Science
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="collge" value="natural-resources"> Natural Resources
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="college" value="law"> School of Law
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <!-- End Collge Checkboxes -->
-            <div class="form-group">
-                <label for="athlete" id="ncaa" class="col-sm-3 control-label custom-label">Are you currently a <br> NCAA athlete?</label>
-                <div class="col-sm-6 ">
-                    <div class="radio col-sm-3 custom-radio">
-                        <label>
-                            <input type="radio" name="athlete" value="yes"> Yes
-                        </label>
-                    </div>
-                    <div class="radio col-sm-3 custom-radio">
-                        <label>
-                            <input type="radio" name="athlete" value="no"> No
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-3">
-                    <input type="submit" value="submit" id="submit-btn" class="btn btn-primary btn-center btn-block">
-                </div>
-            </div>
-        </form>
-    </div>
+            </form>
+
 </div>
 
     <footer id="footer" class="clearfix">
