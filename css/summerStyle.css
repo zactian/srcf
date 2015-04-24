@@ -19,7 +19,7 @@ table, caption, tbody, tfoot, thead, tr, th, td {
     padding: 0;
     border: 0;
     outline: 0;
-    font-size: 100%;
+    font-size: 12px;
     vertical-align: baseline;
     background: transparent;
     }
@@ -38,7 +38,7 @@ body {
     background-color: #E6E6E6;
     margin: 0;
     padding: 0;
-    font-size: 87.5%;
+    font-size: 100%;
     color: #555;
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.42857;
@@ -124,15 +124,6 @@ h6,
     }
 
 /* Form Styles */
-
-#main-content h4 {
-    font-size: 18px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    font-weight: 500;
-    line-height: 1.1;
-    color: #003A70;
-}
 
 .form-input-container {
     padding-left: 120px;
@@ -345,18 +336,32 @@ img, embed, object, video {
     visibility: hidden;
     }
 h1, h2, h3, h4, h5, h6 {
-    color: #003A70 !important;
-    margin-bottom: 0.5em;
-    margin-top: 0;
-    }
-h1 {
     color: #003A70;
     padding: 0;
+    margin-bottom: 15px;
+    font-weight: 500;
+    line-height: 1.1;
+    color: #003A70;
+    }
+
+h1{
     font-size: 1.667em;
-    }
-h2 {
-    font-size: 1.4em;
-    }
+}
+
+h2{
+    font-size:1.4em;
+}
+
+h3{
+    font-size:1.3em;
+}
+
+h4{
+    font-size:1.2em;
+}
+
+
+
 p {
     margin-top: 0.4em;
     margin-bottom: 0.8em;
@@ -377,8 +382,13 @@ p {
 .callout {
   border-radius: 3px;
   margin: 0 0 20px 0;
-  padding: 15px 30px 15px 15px;
   border-left: 5px solid #eee;
+  font-weight: normal;
+  font-size: 97.5%;
+}
+
+.callout li {
+    margin-bottom: 10px;
 }
 
 /**media queries */
@@ -391,4 +401,10 @@ p {
         padding-left: 0px;
     }
 
+}
+
+.form-control
+{
+    font-size:12px;
+    height:24px;
 }
