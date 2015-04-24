@@ -39,7 +39,7 @@ body {
     margin: 0;
     padding: 0;
     font-size: 100%;
-    color: #555;
+    color: #222;
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.42857;
     min-height: 100%;
@@ -220,7 +220,7 @@ label {
     top: -17px;
     margin: 1.2em 0 .3em 0;
     padding: 0;
-    color: #000000;
+    color: #222;
     }
 
 
