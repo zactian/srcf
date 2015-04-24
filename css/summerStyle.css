@@ -131,29 +131,12 @@ h6,
 
 }
 
-
 .no-display {
     display: none;
 }
+
 /* Form Styles */
 
-#pdfs {
-    height: auto;
-}
-
-#pdf-table {
-    margin: 0 auto;
-}
-
-#pdf-table table, tr, td {
-    text-align: center;
-    padding: 15px;
-    table-layout: fixed;
-}
-
-#pdf-table td{
-    width: 100px;
-}
 .form-input-container {
     padding-left: 120px;
 }
@@ -203,6 +186,45 @@ h6,
     padding: 0;
     display: none;
 }
+
+
+#pdfs {
+    height: auto;
+    padding: 15px;
+}
+
+#pdfs strong {
+    padding-left: 15px;
+}
+
+#pdf-table {
+    margin: 0 auto;
+    box-shadow: none;
+    vertical-align: middle;
+    margin: 0 auto;
+    padding: 0;
+    width: 90%;
+}
+
+#pdf-table table, tr, td {
+    padding: 60px 0;
+    text-align: center
+
+}
+
+#pdf-table table {
+    padding: 60px 0;
+    vertical-align: middle;
+    margin: 1em 0;
+    padding: 0;
+    width: 90%;
+/*    font-size: 1.0em !important;
+*/}
+
+#pdf-table td{
+    width: 100px;
+}
+
 
 .button {
     float: none;
@@ -518,3 +540,4 @@ a.user_tooltip:hover > span {
     background-color:white;
 
 }
+

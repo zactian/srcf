@@ -132,6 +132,10 @@ body {
 .fixed.layout-boxed .wrapper {
   max-width: 100%;
 }
+
+.clearfix {
+  overflow: auto;
+}
 /* Content */
 .content {
   min-height: 250px;
