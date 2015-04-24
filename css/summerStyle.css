@@ -123,8 +123,37 @@ h6,
     margin: 0 auto;
     }
 
+.unformatted-wrapper {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+}
+
+
+.no-display {
+    display: none;
+}
 /* Form Styles */
 
+#pdfs {
+    height: auto;
+}
+
+#pdf-table {
+    margin: 0 auto;
+}
+
+#pdf-table table, tr, td {
+    text-align: center;
+    padding: 15px;
+    table-layout: fixed;
+}
+
+#pdf-table td{
+    width: 100px;
+}
 .form-input-container {
     padding-left: 120px;
 }
@@ -163,15 +192,7 @@ h6,
 }
 
 .warning {
-/*    width: 200px;
-    height: 35px;
-    vertical-align: middle;
-    text-align: center;
-    display: inline-block;*/
     background-color: #FFDADB;
-/*    color: #000000;
-    border-radius: 3px;
-    line-height: 35px;*/
 }
 
 .alert {
@@ -288,6 +309,7 @@ input[type="file"] {
 #saveapp_field {
     display: none;
     }
+
 /* End Form Styles */
 
 
@@ -390,6 +412,11 @@ p {
 .callout li {
     margin-bottom: 10px;
 }
+/* overriding bootstrap components */
+.gliphicon, .icon{
+    font-size: 100%;
+}
+
 
 /**media queries */
 @media (max-width: 768px) {
@@ -402,7 +429,6 @@ p {
     }
 
 }
-
 .form-control
 {
     font-size:12px;
