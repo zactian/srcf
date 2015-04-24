@@ -207,7 +207,7 @@ h6,
 }
 
 #pdf-table table, tr, td {
-    padding: 60px 0;
+    padding: 15px;
     text-align: center
 
 }
@@ -215,14 +215,17 @@ h6,
 #pdf-table table {
     padding: 60px 0;
     vertical-align: middle;
-    margin: 1em 0;
+    margin: 0 auto;
     padding: 0;
     width: 90%;
+    table-layout: fixed;
 /*    font-size: 1.0em !important;
 */}
 
 #pdf-table td{
     width: 100px;
+    text-align: center;
+
 }
 
 
@@ -230,7 +233,7 @@ h6,
     float: none;
     margin:0 auto;
     text-align: center;
-    width: 100px;
+width: 100px;
 }
 
 .button .btn {
