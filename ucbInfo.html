@@ -7,6 +7,8 @@
 <link rel="stylesheet" href="css/AdminLTE.css" type="text/css" media="screen">
 <link rel="stylesheet" href="css/summerStyle.css" type="text/css" media="screen">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="javascript/form.js"></script>
 <div id="page" class="container">
     <header id="header" class="clearfix" role="banner">
         <div id="branding" class="branding-elements clearfix">
@@ -26,10 +28,22 @@
     </div>
 
     <div id="main-content">
+        <section class="content-header">
+            <a href="" class="user_tooltip"><img src="images/default-user-icon-profile.png" width="50" height="50">
+              <span>
+                <p class="text-muted well well-sm no-shadow" style="margin-top: 0px;">
+                    <strong>First Name: </strong>&nbsp; &nbsp; Zac  <br />
+                    <strong>Last Name: </strong>&nbsp; &nbsp; Cheng  <br />
+                    <strong>SID: </strong>&nbsp; &nbsp; 90820577  <br />
+              </p>
+              </span>
+            </a>
+
+        </section>
         <h1>Student Record Change Form</h1>
-        <div class="callout "style="background: rgb(243, 248, 245);   padding: 5px 35px 25px 35px;">
+        <div class="callout "style="background: rgb(243, 248, 245);">
             <h2>Start</h2>
-            <ul>
+            <ul style="padding: 5px 0px 0px 15px;">
                 <li><strong>Please complete this form only if you are already registered in Berkeley Summer Sessions.</strong>
                      If you are
                     not a UC Berkeley student and would like to apply to Berkeley Summer Sessions,
@@ -46,17 +60,19 @@
                 <li><strong>IT IS YOUR RESPONSIBILITY TO FOLLOW UP ON YOUR STUDENT RECORD CHANGE FORM REQUEST.</strong></li>
             </ul>
         </div>
-        <div class="callout "style="background: rgb(243, 248, 245)">
+        <div class="callout "style="background: rgb(243, 248, 245); padding-bottom: 45px;">
         <h2>Deadlines</h2>
         <table id="example2" class="table table-bordered table-hover">
+            <thead>
             <tr>
-                <th></th>
-                <th>A</th>
-                <th>B</th>
-                <th>C</th>
-                <th>D</th>
-                <th>E</th>
+                <th data-sort="string"></th>
+                <th data-sort="string">A</th>
+                <th data-sort="string">B</th>
+                <th data-sort="string">C</th>
+                <th data-sort="string">D</th>
+                <th data-sort="string">E</th>
             </tr>
+            </thead>
             <tr>
                 <td>Add Courses</td>
                 <td>June 5, 2015</td>
@@ -107,13 +123,13 @@
                 <td>May 31, 2015</td>
                 <td>June 14, 2015</td>
                 <td>June 28, 2015</td>
-                <td style="text-align:center; background-color:#FFBDBD">January 1, 2015</td>
+                <td>January 1, 2015</td>
             </tr>
 
         </table>
+            <input type="submit"  id="submit-button" value="Next" class="btn btn-primary btn-center" onClick="location.href='FormPage.html'">
             </div>
     </div>
-
     <footer id="footer" class="clearfix">
         <div id="footer-inner" class="clearfix">
             <div id="sub-footer">

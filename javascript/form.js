@@ -47,6 +47,7 @@ $(document).ready(function() {
 		}
 	});
 
+
 	/*Displays PDF instructions after School(s) is/are choosen */
 	$("input[type=checkbox]").change( function() {
 		var college = $(this).val();
@@ -67,4 +68,99 @@ $(document).ready(function() {
 
 	  });
 
-})
+    $("#example2").tableSorter();
+
+
+
+
+	// $(":radio").click(function() {
+	// 	var confirmed = false;
+	// 	$(":text").each(function() {
+	// 		if ($("this").value != "") {
+	// 			confirmed = true;
+	// 		} else {
+	// 			confirmed = false;
+	// 		}
+	// 	})
+	// })
+
+
+	// $(":input").each(function() {
+	// 	console.log($(this).val());
+	//    if($(this).val() === "") {
+	//    	$("submit-button").addClass("disabled");
+	//    }
+	// });
+});
+
+function tableSorter(table,  sortFns){
+    var me = this;
+    me.thisTable = table;
+    me.$thisTable = $(table);
+    me.init();
+    var sortFns = sortFns || {};
+    var default_sort_fns = {
+        "int": function(a, b) {
+            return parseInt(a, 10) - parseInt(b, 10);
+        },
+        "float": function(a, b) {
+            return parseFloat(a) - parseFloat(b);
+        },
+        "string": function(a, b) {
+            return a.localeCompare(b);
+        },
+        "string-ins": function(a, b) {
+            a = a.toLocaleLowerCase();
+            b = b.toLocaleLowerCase();
+            return a.localeCompare(b);
+        }
+    };
+    me.dir = {ASC: "asc", DESC: "desc"};
+    me.sortFns = $.extend({}, default_sort_fns, sortFns);
+}
+
+tableSorter.prototype = {
+    init: function(){
+        var that = this;
+        this.$thisTable.find("th").each(function(index) {
+            $(this).click(function() {
+                var sort_dir = $(this).data("sort-default") || that.dir.ASC;
+                if($(this).data("sort-dir"))
+                    sort_dir = $(this).data("sort-dir") === that.dir.ASC ? that.dir.DESC : that.dir.ASC;
+                $(this).data("sort-dir", sort_dir).addClass("sorting-"+sort_dir);
+                that.onClickHeader(index, $(this).data("sort"), sort_dir);
+            });
+        });
+    },
+    onClickHeader: function(index, type, sort_dir){
+        var that = this;
+        var sortMethod = that.sortFns[type];
+        var column = [];
+        that.$thisTable.children("tbody").children("tr").each(function(rowIndex, tr){
+            column.push(tr);
+        });
+
+        column.sort(function(a, b) {
+            var keyA = $("td:eq("+index+")",a).text().trim();
+            var keyB = $("td:eq("+index+")",b).text().trim();
+            return sortMethod(keyA, keyB);
+        });
+
+        if (sort_dir != that.dir.ASC)
+            column.reverse();
+
+        $(column).each(function(index, row){
+            that.$thisTable.append(row);
+        });
+    }
+}
+
+jQuery.fn.tableSorter = function(options) {
+    return this.each(function (){
+        instance = new tableSorter(this, options);
+    });
+}
+
+
+
+
