@@ -24,27 +24,32 @@
 
 <div id="main-content">
         <h2>UCB Student Information</h2>
+            <!-- form begins -->
             <form class="form-horizontal" role="form">
                 <div class="form-content callout">
+
+                <!-- input one, first prompt for email start -->
                     <div class="form-group">
                         <div class="form-input-container col-centered">
                             <label for="email" class="col-sm-3 control-label">Your Email:</label>
                             <div class="col-sm-4">
-                                <input type="text" id="email-init" class="form-control" placeholder="Email">
+                                <input type="text" id="email-init" class="form-control" placeholder="Email" required>
                             </div>
                         </div>
                     </div>
                     <div id="invalid-email-alert"class="alert">The email you have entered is not valid.</div>
-
+                 <!-- input one, first prompt for email end -->
+                 <!-- input two, confirm email start -->
                     <div class="form-group">
                         <div class="form-input-container col-centered">
                             <label for="confirm-email" class="col-sm-3 control-label">Confirm Your Email:</label>
                             <div class="col-sm-4">
-                                <input type="text" id="email-confirm" class="form-control" placeholder="Confirm Email">
+                                <input type="text" id="email-confirm" class="form-control" placeholder="Confirm Email" required>
                             </div>
                         </div>
                     </div>
                      <div id="email-alert"class="alert">The emails you have entered do not match.</div>
+                <!-- confirm email end -->
 
                     <div class="form-group">
                         <div class="form-input-container col-centered">
@@ -124,7 +129,8 @@
                     </div>
                 </div>
 
-                <!-- College Instruction PDFs go here -->
+                <!-- College Instruction PDFs go here. {display:none} as default -->
+
                 <div id="pdfs" class="unformatted-wrapper no-display">
                     <h2>College Instructions</h2>
                     <div id="college-pdfs"class="callout form-content">
@@ -144,6 +150,7 @@
                     </div>
                 </div>
             </form>
+            <!-- form ends -->
 
 </div>
 

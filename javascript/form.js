@@ -49,9 +49,7 @@ $(document).ready(function() {
                  college + '</td>').hide().appendTo("#pdf-table tr:last").fadeIn(1500);
 	    	pdfsDisplayed ++;
 	    } else {
-	    	$('#' + college).fadeOut("slow", function() {
-	    		$(this).remove()
-	    	});
+	    	$('#' + college).remove()
 	    	pdfsDisplayed --;
 	    }
 
@@ -132,6 +130,7 @@ jQuery.fn.tableSorter = function(options) {
         instance = new tableSorter(this, options);
     });
 }
+
 
 
 
