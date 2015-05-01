@@ -544,3 +544,9 @@ a.user_tooltip:hover > span {
 
 }
 
+.college_pdfs a
+{
+    cursor: pointer;
+    text-decoration: none;
+
+}

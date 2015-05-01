@@ -3,7 +3,9 @@
 <title>SRCF</title>
 <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
 <link rel="stylesheet" href="css/summerStyle.css" type="text/css" media="screen">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script src="javascript/form.js"></script>
 <div id="page" class="container">
     <header id="header" class="clearfix" role="banner">
@@ -24,32 +26,27 @@
 
 <div id="main-content">
         <h2>UCB Student Information</h2>
-            <!-- form begins -->
             <form class="form-horizontal" role="form">
                 <div class="form-content callout">
-
-                <!-- input one, first prompt for email start -->
                     <div class="form-group">
                         <div class="form-input-container col-centered">
                             <label for="email" class="col-sm-3 control-label">Your Email:</label>
                             <div class="col-sm-4">
-                                <input type="text" id="email-init" class="form-control" placeholder="Email" required>
+                                <input type="text" id="email-init" class="form-control" placeholder="Email">
                             </div>
                         </div>
                     </div>
                     <div id="invalid-email-alert"class="alert">The email you have entered is not valid.</div>
-                 <!-- input one, first prompt for email end -->
-                 <!-- input two, confirm email start -->
+
                     <div class="form-group">
                         <div class="form-input-container col-centered">
                             <label for="confirm-email" class="col-sm-3 control-label">Confirm Your Email:</label>
                             <div class="col-sm-4">
-                                <input type="text" id="email-confirm" class="form-control" placeholder="Confirm Email" required>
+                                <input type="text" id="email-confirm" class="form-control" placeholder="Confirm Email">
                             </div>
                         </div>
                     </div>
                      <div id="email-alert"class="alert">The emails you have entered do not match.</div>
-                <!-- confirm email end -->
 
                     <div class="form-group">
                         <div class="form-input-container col-centered">
@@ -129,10 +126,9 @@
                     </div>
                 </div>
 
-                <!-- College Instruction PDFs go here. {display:none} as default -->
-
+                <!-- College Instruction PDFs go here -->
                 <div id="pdfs" class="unformatted-wrapper no-display">
-                    <h2>College Instructions</h2>
+                    <h2>College Instructionss</h2>
                     <div id="college-pdfs"class="callout form-content">
                         <strong>Please open and read the following PDF instructions for your colleges before submitting the form.</strong> <br>
                         <table id="pdf-table">
@@ -144,13 +140,18 @@
 
                 <!-- College Instruction PDFs end -->
 
+                <div id="dialog" style="display:none; height: auto; width: 100%; margin-left:0px; overflow: visible ">
+                    <div>
+                        <iframe src="quice.pdf" id="college_pdf" height="1200" width="1200" style="overflow: visible "></iframe>
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <div class="col-sm-10 button container">
                         <input type="submit" value="Submit" id="submit-button" class="btn btn-primary btn-center ">
                     </div>
                 </div>
             </form>
-            <!-- form ends -->
 
 </div>
 

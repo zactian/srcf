@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+
 	/*Variables that stores whether the initial email is invalid.
 	 * if so, unfocusing the confirm email textbox will not show another
 	 * error message until the initial email is validated */
@@ -44,8 +45,11 @@ $(document).ready(function() {
 		var college = $(this).val();
 
 	    if($(this).is(":checked")){
-	    	$('<td id="' + college + '"><a href="" target = "_blank" data-college ="' + college +
-	    		'"><img src="https://api.fnkr.net/testimg/50x70/00CED1/FFF/?text=img+placeholder"></a> <br>' +
+	    	$('<td id="' + college + '"><span  class="college_pdfs" style="position: relative" data-college ="' + college +
+	    		'"><img width="178" height="73" src="http://relevantfl.org/wp-content/uploads/2013/07/light-grey-background-pattern-i1.jpg" style="width: 98px; height: 63px;"><a class="preview" style="position: absolute; left:10px; top:-30px;">' +
+                '<img src="images/preview.png" width="22" height="22" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>' +
+                '<a style="position: absolute; left:53px; top:-30px;" class="download" target="_blank" href="download.php">' +
+                '<img src="images/download.jpg" width="22" height="22" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></span> <br>' +
                  college + '</td>').hide().appendTo("#pdf-table tr:last").fadeIn(1500);
 	    	pdfsDisplayed ++;
 	    } else {
@@ -58,6 +62,14 @@ $(document).ready(function() {
 		} else {
 			$("#pdfs").slideUp("slow");
 		}
+        $('.college_pdfs .preview').click(function(){
+            $("#dialog").dialog({
+                resizable: false,
+                width: 1200,
+                close: function() {
+                }
+            });
+        });
 	  });
 
     $("#example2").tableSorter();
