@@ -1,0 +1,92 @@
+header {
+	margin-bottom: 10px;
+}
+
+h2 {
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+.accordian {
+	padding: 20px;
+}
+
+.accordian h3 {
+	background-color: #EDEDEE;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 8px;
+	text-align: left;
+	border: 2px solid #E6E6E6;
+	border-radius: 6px;
+	margin: 0px;
+}
+
+.accordian li {
+	list-style: none;
+}
+
+.accordian .insert {
+	background-color: white;
+	border-bottom:2px solid #E6E6E6;
+	border-left:2px solid #E6E6E6;
+	border-right:2px solid #E6E6E6;
+	border-radius: 3px;
+	margin-top: -15px;
+	margin-bottom: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 15px;
+	padding-bottom: 10px;
+	display: none;
+	position: relative;
+}
+
+.accordian table {
+	font-size: inherit;
+	font-weight: inherit;
+	box-shadow: none;
+	border-collapse: separate;
+	border-spacing: 10px;
+	margin: 0 auto;
+	table-layout: fixed;
+	width: 75%;
+}
+
+.accordian table:hover {
+	background-color: white;
+}
+
+.accordian table td {
+	border: 3px solid #E6E6E6;
+	border-radius: 6px;
+	text-align: center;
+	width: 40px;
+}
+
+.accordian .single-element-table {
+	width:25%;
+	margin: 0 auto;
+}
+
+.accordian .insert ul {
+	line-height: 10px;
+	padding-bottom: 3px;
+}
+
+.accordian .insert li {
+	list-style: initial;
+	margin-left: 30px;
+}
+
+.divider {
+    width: 95%;
+    margin: 10px auto;
+    margin-bottom: 10px;
+    border-bottom:2px solid #EEEEEE;
+}
+
+.padding {
+	padding: 10px;
+}
+
+
