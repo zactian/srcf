@@ -6,6 +6,8 @@
 <link rel="stylesheet" href="css/action.css" type="text/css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="javascript/action.js"></script>
+<!-- popup overlay script below here -->
+ <script src="http://vast-engineering.github.io/jquery-popup-overlay/jquery.popupoverlay.js"></script>
 
 <div id="page" class="container">
     <header id="header" class="clearfix" role="banner">
@@ -27,36 +29,46 @@
 		<h2>What Would You Like to Do?</h2>
 		<div class="accordian callout" style="background: rgb(243, 248, 245);">
 			<ul>
-				<li><h3>Add, Drop, Change Grading Option, Change Unit Value</h3></li>
-				<div class="insert">
+
+				<li><div class="item-header">
+					<h3>Add, Drop, Change Grading Option, Change Unit Value</h3>
+					<img src="images/openArrow.png">
+				</div></li>
+				<div class="insert btn-group">
 					<p>Select your request (your Record Change Form needs to have at least one).
 						You may combine requests (such as Add a Course and Drop a Course) on the same form, but must initiate only one request listed below at a time.
 					</p>
 					<div class="divider"></div>
 					<table>
 						<tr>
-							<td>Add a Course</td>
-							<td>Enroll from Waitlist</td>
-							<td>Drop a Course</td>
+							<td><button class="my_popup_open">Add a Course</button></td>
+							<td><button class="my_popup_open">Enroll from Waitlist</button></td>
+							<td><button class="my_popup_open">Drop a Course</button></td>
 						</tr>
 						<tr>
-							<td>Change Grading Option</td>
-							<td>Change Unit Value</td>
-							<td>Switch Secondary Sections</td>
+							<td><button class="my_popup_open">Change Grading Option</button></td>
+							<td><button class="my_popup_open">Change Unit Value</button></td>
+							<td><button class="my_popup_open">Switch Secondary Sections</button></td>
 						</tr>
 					</table>
 				</div>
 
-				<li><h3>Request Reinstatement To Summer Sessions</h3></li>
+				<li><div class="item-header">
+					<h3>Request Reinstatement To Summer Sessions</h3>
+					<img src="images/openArrow.png" alt="">
+				</div></li>
 				<div class="insert">
 					<table class="single-element-table">
 						<tr>
-							<td>Add a Course</td>
+							<td><button class="my_popup_open">Add a Course</button></td>
 						</tr>
 					</table>
 				</div>
 
-				<li><h3>Cancel/Withdraw from Summer Sessions (Drop All Courses)</h3></li>
+				<li><div class="item-header negative">
+					<h3>Cancel/Withdraw from Summer Sessions (Drop All Courses)</h3>
+					<img src="images/openArrow.png" alt="">
+				</div></li>
 				<div class="insert">
 					<p>
 						If you want to drop all your courses, how you need to do that depends on whether or not any of your courses have started yet. <br> <br>
@@ -89,7 +101,7 @@
 					 <div class="divider"></div>
 					 <table class="single-element-table">
 					 	<tr>
-					 		<td>Drop a Course</td>
+					 		<td><button class="my_popup_open .warning">Drop a Course</button></td>
 					 	</tr>
 					 </table>
 				</div>
@@ -105,6 +117,78 @@
 					Click Here.
 		</a>
 	</div>
+
+	<!-- pop-up div -->
+	<div id="my_popup" class="poppop">
+		<div class="ccn-search">
+			<h3 class="box-title">Search Database for CCNs</h3>
+			<div class="ccn-content">
+				<select name="department_id" id="department_id" class="form-control" style="width: inherit; height: auto;">
+	                <option value="0">
+	                    Department
+	                </option><option value="2">African American Studies</option><option value="1">Agricultural and Resource Economics</option><option value="3">American Studies</option><option value="305">Ancient History and Mediterranean Archaeology</option><option value="4">Anthropology</option><option value="5">Arabic</option><option value="6">Architecture</option><option value="7">Art Practice</option><option value="8">Asian American Studies Program</option><option value="9">Asian Studies</option><option value="11">Astronomy</option><option value="12">Bioengineering</option><option value="13">Biology</option><option value="14">Buddhist Studies</option><option value="85">Business Administration Doctoral Program</option><option value="40">Business Administration Evening/Weekend MBA Program</option><option value="71">Business Administration Fill-time Masters</option><option value="108">Business Administration Undergraduate Program</option><option value="15">Celtic Studies</option><option value="303">Center for Educational Partnerships</option><option value="137">Chemical and Biomolecular Engineering</option><option value="16">Chemistry</option><option value="17">Chicano Studies Program</option><option value="18">Chinese</option><option value="26">City and Regional Planning</option><option value="19">Civil and Environmental Engineering</option><option value="20">Classics</option><option value="22">Cognitive Science</option><option value="23">College Writing Programs</option><option value="24">Comparative Literature</option><option value="139">Development Studies</option><option value="27">Dutch</option><option value="36">Earth and Planetary Science</option><option value="28">East Asian Languages and Cultures</option><option value="29">Economics</option><option value="30">Education</option><option value="32">Energy and Resource Program</option><option value="33">Engineering</option><option value="25">Engineering - Computer Science</option><option value="31">Engineering - Electrical Engineering</option><option value="53">Engineering - Industrial Engineering and Operation</option><option value="34">English</option><option value="35">Environmental Design</option><option value="37">Environmental Science, Policy, and Management</option><option value="39">Ethnic Studies</option><option value="111">Executive MBA</option><option value="309">FILIPINO</option><option value="41">Film and Media</option><option value="42">French</option><option value="46">Gender and Women's Studies</option><option value="43">Geography</option><option value="44">German</option><option value="311">Global Poverty and Practice</option><option value="302">Graduate Division</option><option value="45">Greek</option><option value="51">Health and Medical Sciences</option><option value="47">Hebrew</option><option value="48">Hindi-Urdu</option><option value="50">History</option><option value="49">History of Art</option><option value="54">Information</option><option value="55">Integrative Biology</option><option value="56">Interdisciplinary Studies Field Major</option><option value="52">International and Area Studies</option><option value="57">Italian Studies</option><option value="58">Japanese</option><option value="59">Jewish</option><option value="60">Journalism</option><option value="61">Korean</option><option value="65">Landscape Architecture</option><option value="63">Latin</option><option value="62">Latin American Studies</option><option value="64">LAW</option><option value="66">Legal Studies</option><option value="313">Lesbian Gay Bisexual Transgender Studies</option><option value="206">Letters and Science</option><option value="67">Linguistics</option><option value="68">Mass Communications</option><option value="74">Master's in Financial Engineering</option><option value="69">Materials Science</option><option value="70">Mathematics</option><option value="73">Mechanical Engineering</option><option value="141">Media Studies</option><option value="205">Middle Eastern Studies</option><option value="72">Molecular and Cell Biology</option><option value="75">Music</option><option value="301">Nanosciences and Nanoengineering Institute</option><option value="76">Native American Studies</option><option value="77">Near Eastern Studies</option><option value="78">Neuroscience</option><option value="21">New Media</option><option value="79">Nuclear Engineering</option><option value="80">Nutritional Sciences and Toxicology</option><option value="81">Optometry</option><option value="82">Peace and Conflict Studies</option><option value="84">Persian</option><option value="86">Philosophy</option><option value="87">Physical Education</option><option value="88">Physics</option><option value="89">Plant and Microbial Biology</option><option value="91">Political Economy</option><option value="90">Political Science</option><option value="92">Portuguese</option><option value="93">Psychology</option><option value="83">Public Health</option><option value="94">Public Policy</option><option value="95">Religious Studies</option><option value="96">Rhetoric</option><option value="99">Scandinavian</option><option value="101">Slavic Languages and Literatures</option><option value="102">Social Welfare</option><option value="103">Sociology</option><option value="98">South and Southeast Asian Studies</option><option value="97">South Asian</option><option value="100">Southeast Asian Studies</option><option value="104">Spanish</option><option value="105">Statistics</option><option value="209">Summer Sessions</option><option value="106">Theater, Dance, and Performance Studies</option><option value="107">Tibetan</option><option value="109">Undergraduate and Interdisciplinary Studies</option><option value="310">Vietnamese</option><option value="144">Vision Science</option><option value="110">Visual Studies</option>
+	            </select>
+	            <br>
+	            <select name="courseID" id="course_id" class="form-control" style="width: inherit; height: auto; display:none;">
+                    <option value="0">Select a course</option><option value="1386">Examining U.S. Cultures in Place  102 </option><option value="1385">Examining U.S. Cultures in Time  101 </option><option value="250">Race and American Film  184 I</option><option value="2694">Race and American Humor  180 D</option><option value="2693">Race and Representation in US Culture  170 AC</option><option value="2714">SPECIAL TOPICS AC  110 AC</option><option value="1387">Special Topics in American Studies  110 </option><option value="253">Supervised Independent Study and Research for Upper Division Majo  199 </option><option value="249">Visual Culture in American Society: Photography and Art  181 B</option>
+                </select>
+                <br>
+                <select name="sectionID" id="section_id" class="form-control sectionID" style="width: inherit; height: auto; margin-bottom: 15px; display:none;">
+	                <option value="0">Select a section</option>
+	                <option>AMERSTD 199-001 IND</option>
+	                <option>AMERSTD 199-002 IND</option>
+			    </select>
+
+			    <div id="course-example" class="course-info callout" style="background: rgb(243, 248, 245); display:none;">
+					<h4>African American Studies R1B P 001 LEC</h4>
+					MTuWTh 9-11A, 174 Barrows
+					<br>
+					<b>Instructor: </b>Nanda, A
+					<br>
+					<b>CCN:</b> 10110
+
+			    </div>
+			</div>
+		</div>
+		<div class="divider-horizontal"></div>
+		<div class="ccn-enter">
+			<h3 class="box-title">Enter a Class CCN</h3>
+			<input type="text" id="ccn" class="form-control" placeholder="Enter Your CCN">
+			 <div id="ccn_info"class="course-info callout" style="background: rgb(243, 248, 245); margin-top:10px; display:none;">
+					<h4>African American Studies R1B P 001 LEC</h4>
+					MTuWTh 9-11A, 174 Barrows
+					<br>
+					<b>Instructor: </b>Nanda, A
+					<br>
+					<b>CCN:</b> 10110
+			</div>
+
+			<div class="import-container" style="display:none;">
+				<h3 style="margin-bottom: 8px;">This request needs to be approved by the following:</h3>
+				<ul style="padding-left: 20px; padding-bottom: 15px; padding-top:0px;">
+	                <ol>
+	                    <li> Faculty Athletic Representative</li>
+	                    <li> Summer Session Staff</li>
+	                </ol>
+                </ul>
+                <h3 style="margin-bottom: 4px;">Please answering the following question below</h3>
+	                <ul style="padding-left: 20px; padding-bottom: 15px; padding-top:0px;">
+	                    <ol>
+	                        <li> Are you currently on a waitlist for this course? &nbsp; &nbsp;&nbsp; &nbsp; <input type="radio" />Yes  &nbsp; <input type="radio" />No</li>
+	                        <li> Have you Attended this course? &nbsp; &nbsp;&nbsp; &nbsp; <input type="radio" />Yes &nbsp; <input type="radio" />No</li>
+	                        <li> The date you last attended this course &nbsp; &nbsp;&nbsp; &nbsp; <input type="text" id="datepicker"></li>
+	                    </ol>
+	                </ul>
+	                <input type="submit" id="srcf_action" value="Drop this Course" class="btn btn-primary btn-center slide_close" style="margin-left: 35%;">
+			</div>
+
+		</div>
+
+	    <!-- Add an optional button to close the popup -->
+	    <button class="my_popup_close btn btn-default" style="float:left;">Close</button>
+	</div>
+	<!-- end pop-up div -->
+
 	</div>
 	<!-- End main content -->
 	<footer id="footer" class="clearfix">

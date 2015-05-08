@@ -10,15 +10,56 @@ h2 {
 	padding: 20px;
 }
 
+.accordian .item-header {
+	background-color: #FFFEFE;
+	border: 2px solid #EDEDED;
+	border-radius: 6px;
+	height: 30px;
+	margin: 0px;
+	overflow: auto;
+	padding: 0px;
+	padding-left: 10px;
+	text-align: left;
+	-webkit-transition: .2s;
+	z-index: 30;
+}
+
+.accordian .item-header:hover {
+	border-left: 6px solid #8B9F2C;
+}
+
+.accordian .item-header img {
+	margin-top:10px;
+	margin-right: 10px;
+	float: right;
+	vertical-align: middle;
+	height: 10px;
+	width: auto;
+	-webkit-transition: .5s;
+}
+
+/*To rotate the img*/
+.rotated {
+  transform: rotate(180deg);
+  -ms-transform: rotate(180deg); /* IE 9 */
+  -moz-transform: rotate(180deg); /* Firefox */
+  -webkit-transform: rotate(180deg); /* Safari and Chrome */
+  -o-transform: rotate(180deg); /* Opera */
+}
+
+
 .accordian h3 {
-	background-color: #EDEDEE;
+	display: inline;
 	font-size: 14px;
 	font-weight: bold;
-	padding: 8px;
-	text-align: left;
-	border: 2px solid #E6E6E6;
-	border-radius: 6px;
-	margin: 0px;
+	line-height: 25px;
+	width: 50%;
+	margin-bottom: 0px;
+	padding-right: 0px;
+}
+
+.accordian .negative:hover {
+	border-left: 6px solid #D66527;
 }
 
 .accordian li {
@@ -57,10 +98,31 @@ h2 {
 }
 
 .accordian table td {
-	border: 3px solid #E6E6E6;
+/*	border: 3px solid #E6E6E6;
 	border-radius: 6px;
 	text-align: center;
-	width: 40px;
+	width: 40px;*/
+	height:50px;
+	padding: 0;
+}
+
+.accordian td button {
+	text-align: center;
+	width: 100%;
+	height:100%;
+	display: block;
+	margin:0 auto;
+	background-color: #337ab7;
+	border: 1px solid #2e6da4;
+	border-radius: 6px;
+	color:white;
+	font-weight: 400px;
+	font-size: 13px;
+}
+
+.accordian td button:hover {
+	background-color: #286090;
+	border-color: #204d74;
 }
 
 .accordian .single-element-table {
@@ -77,6 +139,50 @@ h2 {
 	list-style: initial;
 	margin-left: 30px;
 }
+
+/* pop up css */
+.poppop {
+	width:75%;
+	height:450px;
+	background-color: white;
+	padding: 20px;
+	border: 3px solid white;
+	border-radius: 6px;
+}
+
+.ccn-search {
+	width: 45%;
+	float: left;
+}
+
+.ccn-enter {
+	width:45%;
+	float: left;
+}
+
+.ccn-content {
+	width:95%;
+}
+
+.divider-horizontal {
+	height: 95%;
+	margin-right: 20px;
+	margin-left: 10px;
+	border-left: 2px solid #EEEEEE;
+	float: left;
+}
+
+.course-info {
+	padding-left: 10px;
+	padding-top: 10px;
+}
+
+.course-info h4 {
+	padding:0;
+	margin: 0;
+}
+
+/* end popup div styles */
 
 .divider {
     width: 95%;
