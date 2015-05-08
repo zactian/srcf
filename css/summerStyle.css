@@ -191,6 +191,7 @@ h6,
 #pdfs {
     height: auto;
     padding: 15px;
+    background: rgb(243, 248, 245);
 }
 
 #pdfs strong {
@@ -225,7 +226,7 @@ h6,
 #pdf-table td{
     width: 100px;
     text-align: center;
-
+    background: rgb(243, 248, 245);
 }
 
 
@@ -461,30 +462,39 @@ p {
 }
 
 
-table {
-    padding: 60px 0;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
-    -webkit-box-shadow: #ddd 2px 8px 5px;
-    -moz-box-shadow: #ddd 2px 8px 5px;
-    box-shadow: #ddd 2px 8px 5px;
-    vertical-align: middle;
+
+
+.dataTable
+{
+    clear: both;
+    background-color: #f8f8ff;
     border-spacing: 0;
     border-color: #eee;
     margin: 1em 0;
     padding: 0;
     width: 100%;
-    font-size: 1.0em !important;
+    font-size: 1em;
+    margin-bottom: 20px;
+
 }
 
-th{
-    color:#0453AC;
-    text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.9);
-    font-size:12px;
-    background:#EDEDEE;
-    text-align:left;
+.dataTable thead{
+    border-collapse: separate;
+    border-spacing: 2px;
+    border-color: gray;
+    vertical-align: middle;
     cursor: pointer;
+}
+
+tbody tr:nth-child(2n+1) {
+    background: none repeat scroll 0% 0% white;
+    padding: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.dataTable td{
+    text-align: left;
 }
 
 
@@ -492,14 +502,7 @@ fieldset ul li {
     margin-bottom: 15px;
 }
 
-td{
-    background:none repeat scroll 0% 0% #F7F7F8;
-    text-align:left;
-}
 
-tr:hover td {
-    background:none repeat scroll 0% 0% rgb(243, 248, 245);
-}
 
 /* TABLE STYLES END */
 a.user_tooltip {
@@ -513,8 +516,6 @@ a.user_tooltip {
     top:-25px;
     cursor: pointer;
     float:right;
-
-
 }
 
 a.user_tooltip > span {
@@ -550,3 +551,125 @@ a.user_tooltip:hover > span {
     text-decoration: none;
 
 }
+
+
+#menu-v li, #menu-v a {zoom:1;} /* Hacks for IE6, IE7 */
+#menu-v, #menu-v ul
+{
+    width: 180px; /* Main Menu Item widths */
+    border: 1px solid #ccc;
+    border-top:none;
+    position: relative;
+    list-style: none; margin: 0; padding: 0; display:block;
+    z-index:9;
+}
+
+/* Top level menu links style
+---------------------------------------*/
+
+#menu-v li
+{
+    background: #ADD8E6 repeat-x 0 2px;
+    list-style: none; margin: 0; padding: 0;
+}
+#menu-v li a
+{
+    border-top: 1px solid #ccc;
+    display: block;
+    color: black;
+    text-decoration: none;
+    line-height:26px;
+    padding-left:16px;
+}
+#menu-v ul li a
+{
+    line-height:30px;
+}
+
+#menu-v li a.arrow:hover
+{
+    background-image:url(arrowon.gif);
+    background-repeat: no-repeat;
+    background-position: 97% 50%;
+}
+
+/*Sub level menu items
+---------------------------------------*/
+#menu-v li ul
+{
+    position: absolute;
+    width: 200px; /*Sub Menu Items width */
+    visibility:hidden;
+}
+
+#menu-v a.arrow
+{
+    background-image:url(arrow.gif);
+    background-repeat: no-repeat;
+    background-position: 97% 50%;
+}
+#menu-v li:hover, #menu-v li.onhover
+{
+    background-position:0 -62px;
+}
+#menu-v ul li
+{
+    background: #9ABEAA;
+    background-image:none;
+}
+#menu-v ul li:hover, #menu-v ul li.onhover
+{
+    background: #FFF;
+    background-image:none;
+}
+
+#menu-v a{
+    cursor: pointer;
+}
+
+/* Holly Hack for IE \
+* html #menu-v  li
+{
+    float:left;
+    height: 1%;
+}
+* html #menu-v  li a
+{
+    height: 1%;
+}*/
+/* End */
+
+
+a.user_tooltip2 > span {
+    width:450px;
+    height:auto;
+    margin-left: -120px;
+    opacity: 0;
+    display: block;
+    z-index: 10;
+    position: absolute;
+    font-style: normal;
+    border-radius: 3px;
+    box-shadow: 2px 2px 2px #999;
+    top:35px;
+    padding:15px;
+    text-transform: none;
+    line-height: 2;
+
+}
+
+/*a.tooltip > span:hover,*/
+a.user_tooltip2:hover > span {
+    opacity: 1;
+    text-decoration: none;
+    visibility: visible;
+    overflow: visible;
+    display: inline;
+    margin-left: -90px;
+    background-color:white;
+}
+
+
+
+
+/*a.tooltip > span:hover,*/

@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="bootstrap/css/bootstrap.css"/>
 <link rel="stylesheet" href="css/AdminLTE.css" type="text/css" media="screen">
 <link rel="stylesheet" href="css/summerStyle.css" type="text/css" media="screen">
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="javascript/form.js"></script>
 <div id="page" class="container">
@@ -41,6 +40,13 @@
 
         </section>
         <h1>Student Record Change Form</h1>
+                        <span>
+                <p class="text-muted well well-sm no-shadow" style="margin-top: 0px; width: 200px; height: 68px; float: right; margin-top: -72px; margin-right: 10px;">
+                    <strong>First Name: </strong>&nbsp; &nbsp; Zac  <br />
+                    <strong>Last Name: </strong>&nbsp; &nbsp; Cheng  <br />
+                    <strong>SID: </strong>&nbsp; &nbsp; 90820577  <br />
+                </p>
+              </span>
         <div class="callout "style="background: rgb(243, 248, 245);">
             <h2>Start</h2>
             <ul style="padding: 5px 0px 0px 15px;">
@@ -60,17 +66,17 @@
                 <li><strong>IT IS YOUR RESPONSIBILITY TO FOLLOW UP ON YOUR STUDENT RECORD CHANGE FORM REQUEST.</strong></li>
             </ul>
         </div>
-        <div class="callout "style="background: rgb(243, 248, 245); padding-bottom: 45px;">
+        <div class="callout "style="background: rgb(243, 248, 245); padding-bottom: 5px;">
         <h2>Deadlines</h2>
-        <table id="example2" class="table table-bordered table-hover">
+        <table id="example2" class="table dataTable">
             <thead>
             <tr>
                 <th data-sort="string"></th>
-                <th data-sort="string">A</th>
-                <th data-sort="string">B</th>
-                <th data-sort="string">C</th>
-                <th data-sort="string">D</th>
-                <th data-sort="string">E</th>
+                <th data-sort="string">A<img src="images/sort_both.png" /></th>
+                <th data-sort="string">B<img src="images/sort_asc.png" /></th>
+                <th data-sort="string">C<img src="images/sort_asc.png" /></th>
+                <th data-sort="string">D<img src="images/sort_asc.png" /></th>
+                <th data-sort="string">E<img src="images/sort_asc.png" /></th>
             </tr>
             </thead>
             <tr>
@@ -127,8 +133,9 @@
             </tr>
 
         </table>
-            <input type="submit"  id="submit-button" value="Next" class="btn btn-primary btn-center" onClick="location.href='FormPage.html'">
             </div>
+        <input type="submit"  id="submit-button" value="Next" style="float: right;" class="btn btn-primary btn-center" onClick="location.href='FormPage.html'">
+        <br />
     </div>
     <footer id="footer" class="clearfix">
         <div id="footer-inner" class="clearfix">

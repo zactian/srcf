@@ -1,60 +1,37 @@
-<html lang="en" dir="ltr"><head></head><body><br>
-<meta charset="utf-8">
-<title>SRCF</title>
-<link rel="stylesheet" href="css/summerStyle.css" type="text/css" media="screen">
-<link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<script language="javascript" type="text/javascript">
-    $(document).ready(function() {
+<html>
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            var startTop = $("#nav1").outerHeight() + $("#nav1").position().top;
+            var startLeft = $("#nav1").position().left;
+            $("#underline").attr("style","top: " + startTop + "px; left: " + startLeft + "px;");
 
-        $('#trigger').click(function(){
-            $("#dialog").dialog();
-            var overlay = jQuery('<div id="overlay"> </div>');
-            overlay.appendTo(document.body);
+            $(".navButton").click(function() {
+                var newPos = $(this).position().left;
+                $("#underline").animate({left: newPos},"slow");
+            });
         });
-    });
-</script>
-<style>
-    .ui-dialog{
-        z-index: 1000000;
-    }
-    #dialog {
-        z-index: 1000000;
-    }
-    #overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: #000;
-        filter:alpha(opacity=50);
-        -moz-opacity:0.5;
-        -khtml-opacity: 0.5;
-        opacity: 0.5;
-        z-index: 10000;
-    }
-</style>
-<div id="main-content">
-    <a href="#" id="trigger">this link</a>
-    <div id="dialog" style="display:none; height: auto; width: 100%; margin-left:-400px; overflow: visible ">
-        <div>
-            <iframe src="quice.pdf" id="college_pdf" height="1200" width="1200" style="overflow: visible "></iframe>
-        </div>
-    </div>
-</div>
-
-    <footer id="footer" class="clearfix">
-        <div id="footer-inner" class="clearfix">
-            <div id="sub-footer">
-                <a href="http://www.berkeley.edu">
-                    <img src="images/2014_UCBerkeleyLogo.png" alt="UC Berkeley" border="0" hspace="10"></a>
-                <p>© UC Berkeley Summer Sessions, 1995 University Avenue
-                    <br>
-                    510-642-5611</p>
-            </div> <!-- <div id="sub-footer"> -->
-        </div> <!-- <div id="footer-inner"> -->
-    </footer> <!-- <div id="footer"> -->
-</div> <!-- <div id="page" class="clearfix"> -->
-</body></html>
+    </script>
+    <style type="text/css">
+        .navButton {
+            float: left;
+            clear: none;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        #underline {
+            height: 1px;
+            border: 1px solid red;
+            width: 30px;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div class="navButton" id="nav1">nav 1</div>
+<div id="underline"></div>
+<div class="navButton" id="nav2">nav 2</div>
+<div class="navButton" id="nav3">nav 3</div>
+</body>
+</html>
