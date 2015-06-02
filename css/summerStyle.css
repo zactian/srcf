@@ -428,6 +428,7 @@ p {
 
 /** callout component */
 .callout {
+    background: rgb(243, 248, 245);
   border-radius: 3px;
   margin: 0 0 20px 0;
   border-left: 5px solid #eee;

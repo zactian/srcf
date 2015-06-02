@@ -4,17 +4,22 @@
     <link rel="stylesheet" href="css/bootstrap.css"/>
     <link rel="stylesheet" href="css/style.css"/>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"/>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
     <link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css"/>
     <title></title>
 </head>
 <body>
+
+    <!-- Script for multiselect (remove later?) -->
     <script>
         $(document).ready(function() {
-            $('#ucb-info-multi-major').multiselect();
+            $('#ucb-info-multi-major').multiselect({enableFiltering: true, buttonWidth:'100%'});
+            $('#ucb-info-multi-college').multiselect({enableFiltering: true, buttonWidth:'100%'});
         });
     </script>
+    <!-- end script -->
+
 <div class="wrapper">
     <header class="main-header">
         <div id="logo">
@@ -33,7 +38,7 @@
                 <input type="confirmEmail" class="form-control srcf-form" id="confirmEmailExample" placeholder="Confirm Email">
             </div>
             <div class="form-group col-md-5 col-md-offset-1">
-                <label for="majorExample">Major</label>
+                <label for="majorExample">Undergraduate Major(s)</label> <br>
                 <select id="ucb-info-multi-major" class="form-control" multiple="multiple">
                     <option>Please Select Your Major</option>
                     <option>Major 2</option>
@@ -43,8 +48,8 @@
                 </select>
             </div>
             <div class="form-group col-md-5">
-                <label for="majorExample">College</label>
-                <select id="ucb-info-multi-college" class="form-control" multiple="multiple">
+                <label for="majorExample">College(s)</label> <br>
+                <select id="ucb-info-multi-college" class="form-control col-md-12" multiple="multiple">
                     <option>Please Select Your College</option>
                     <option>College 2</option>
                     <option>College 3</option>
@@ -52,9 +57,9 @@
                     <option>College 5</option>
                 </select>
             </div>
-            <div class="form-group col-md-10 col-md-offset-1">
+            <div class="form-group col-md-10 col-md-offset-2">
                 <div class="checkbox">
-                    Are you an NCAA athlete?
+                    <span style="font-weight:bold; padding-right: 10%;">Are you currently an NCAA athlete?</span>
                     <label>
                         <input type="radio" name="optionsRadio" id="inlineRadio1" value="yes">
                         Yes
@@ -67,6 +72,23 @@
             </div>
         </form> <!-- form end -->
 
+        <h2>College Instruction</h2>
+        <div id="college-instructions-pdf" class="callout col-md-10 col-md-offset-1">
+            <span class="sub-header"><strong>Please open and read the PDF instructions from your college before continuing.</strong></span>
+            <div class="college-pdf col-md-2">
+                <img src="https://api.fnkr.net/testimg/50x75/00CED1/FFF/?text=img+placeholder"> <br>
+                Chemistry
+            </div>
+            <div class="college-pdf col-md-2">
+                <img src="https://api.fnkr.net/testimg/50x75/00CED1/FFF/?text=img+placeholder"> <br>
+                Engineering
+            </div>
+        </div>
+
+        <div class="col-md-12 bottom-navbar">
+            <a href="">Back</a>
+            <button type="button" class="btn btn-primary" style="float:right;">Next</button>
+        </div>
     </div>
     <footer class="main-footer">
         <div id="footer-inner" class="clearfix">
