@@ -8,6 +8,7 @@ h2 {
 }
 .accordian {
 	padding: 20px;
+	border: none;
 }
 
 .accordian .item-header {
@@ -112,17 +113,18 @@ h2 {
 	height:100%;
 	display: block;
 	margin:0 auto;
-	background-color: #337ab7;
-	border: 1px solid #2e6da4;
+	color: #333;
+	background-color: #EEEEEE;
+	border: 1px solid #ccc;
 	border-radius: 6px;
-	color:white;
 	font-weight: 400px;
 	font-size: 13px;
 }
 
 .accordian td button:hover {
-	background-color: #286090;
-	border-color: #204d74;
+  color: #333;
+  background-color: #e6e6e6;
+  border-color: #adadad;
 }
 
 .accordian .single-element-table {
