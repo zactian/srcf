@@ -19,16 +19,37 @@ body{
 }
 
 h2 {
-    color: #1B3D6E;
+    color: #023876;
     font-size:16px;
-    font-weight: 500;
-    margin:20px 0px 20px 40px;
+    margin:20px 0px 10px 0px;
+}
+
+h3 {
+    color: #023876;
+    font-size:14px;
+    margin: 0;
 }
 
 .sub-header {
     display: block;
-    margin: 10px 0 10px 0px;
+    /*padding:0 0 0 10px;*/
+    width: 95%;
+    margin:0 auto 10px;
 }
+
+.alert {
+    text-align: center;
+    padding:5px 0 5px 0;
+    margin: 5px 0 0 0;
+    display: inline-block;
+}
+
+.divider-line {
+    width: 95%;
+    border-bottom: 1px solid #EBE8DC;
+    margin: 4px auto;
+}
+
 
 
 /** callout component */
@@ -38,6 +59,7 @@ h2 {
     border-left: 5px solid #eee;
     font-weight: normal;
     font-size: 97.5%;
+    padding:5px;
 }
 
 .callout li {
@@ -66,7 +88,7 @@ h2 {
 
 /*Form Styles */
 .srcf-form {
-    border: 2px solid #C1B9A7;
+    border: 2px solid #DEDCD5;
     border-radius: 0;
 }
 
@@ -119,3 +141,63 @@ h2 {
     float: left;
     text-align: center;
 }
+
+/* Confirm Units Specific Styles */
+#unit-confirmation-table {
+    font-weight: bold;
+    text-align: left;
+    margin: 20px auto 10px;
+}
+
+#unit-confirmation-table th{
+    text-align: center;
+}
+
+#unit-confirmation-table tr {
+    margin-top: 10px;
+}
+
+#unit-confirmation-table tr:last-child {
+    border-top: 2px solid #EBE8DC;
+    text-align: center;
+}
+
+#unit-confirmation-table th:last-child{
+    color:#9D9B91;
+}
+
+#unit-confirmation-table td {
+    padding: 4px;
+    text-align: center;
+    width:100px;
+}
+
+#unit-confirmation-table input {
+    border: 2px solid #DEDCD5;
+    border-radius: 0;
+    font-weight: normal;
+    margin: 3px 0px 3px 0px;
+    text-align: center;
+    width: 50px;
+}
+
+/* Form Action specific styles */
+
+#accordian-menu ul {
+    list-style-type: none;
+}
+
+.form-action-header {
+    background-color: #EDEBEB;
+    border: 2px solid #EDEDED;
+    border-radius: 6px;
+    height: 30px;
+    margin: 5px;
+    padding: 7px 0 8px 10px;
+    text-align: left;
+}
+
+.insert {
+    margin-left: 15px;
+}
+

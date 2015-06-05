@@ -14,8 +14,18 @@
     <!-- Script for multiselect (remove later?) -->
     <script>
         $(document).ready(function() {
-            $('#ucb-info-multi-major').multiselect({enableFiltering: true, buttonWidth:'100%'});
-            $('#ucb-info-multi-college').multiselect({enableFiltering: true, buttonWidth:'100%'});
+            $('#ucb-info-multi-major').multiselect({
+                enableFiltering: true,
+                buttonWidth:'100%',
+                buttonClass: 'multiselect dropdown-toggle btn btn-default srcf-form',
+                nonSelectedText:'Select Major(s)'
+            });
+            $('#ucb-info-multi-college').multiselect({
+                enableFiltering: true,
+                buttonWidth:'100%',
+                buttonClass: 'multiselect dropdown-toggle btn btn-default srcf-form',
+                nonSelectedText:'Select College(s)'
+            });
         });
     </script>
     <!-- end script -->
@@ -40,7 +50,7 @@
             <div class="form-group col-md-5 col-md-offset-1">
                 <label for="majorExample">Undergraduate Major(s)</label> <br>
                 <select id="ucb-info-multi-major" class="form-control" multiple="multiple">
-                    <option>Please Select Your Major</option>
+                    <option>Major 1</option>
                     <option>Major 2</option>
                     <option>Major 3</option>
                     <option>Major 4</option>
@@ -50,7 +60,7 @@
             <div class="form-group col-md-5">
                 <label for="majorExample">College(s)</label> <br>
                 <select id="ucb-info-multi-college" class="form-control col-md-12" multiple="multiple">
-                    <option>Please Select Your College</option>
+                    <option>College 1</option>
                     <option>College 2</option>
                     <option>College 3</option>
                     <option>College 4</option>
@@ -87,7 +97,7 @@
 
         <div class="col-md-12 bottom-navbar">
             <a href="">Back</a>
-            <button type="button" class="btn btn-primary" style="float:right;">Next</button>
+            <button type="button" class="btn btn-primary" style="float:right;">Submit</button>
         </div>
     </div>
     <footer class="main-footer">
