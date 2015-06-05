@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"
+          type="text/css"/>
     <link rel="stylesheet" href="css/bootstrap.css"/>
     <link rel="stylesheet" href="css/style.css"/>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
+    <script type="text/javascript" src="js/srcf.js"></script>
     <link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css"/>
     <title></title>
 </head>
@@ -25,10 +27,48 @@
             enableFiltering: true,
             buttonWidth: '100%',
             buttonClass: 'multiselect dropdown-toggle btn btn-default srcf-form',
-            nonSelectedText: 'Select College(s)'
+            nonSelectedText: 'Select College(s)',
+            onChange: function (option, checked) {
+
+                var pdf = $("#college_pdfs");
+                var pdf_container = $("#college_pdfs .timeline-item .timeline-body");
+                var append_action = {
+
+                    init: function () {
+                        if (pdf_container.find("a#" + option.val()).length)
+                            append_action.removeItem();
+                        else
+                            append_action.appendItem();
+                    },
+
+                    appendItem: function () {
+                        if (append_action.checkEmpty()) {
+                            pdf.show("slow");
+                        }
+                        var source = $('<a>').attr("id", option.val()).append("<img src='http://placehold.it/150x100' />");
+                        pdf_container.append(source);
+                    },
+
+                    removeItem: function () {
+                        pdf_container.find("a#" + option.val()).remove();
+                        if (append_action.checkEmpty()) {
+                            pdf.hide("slow");
+                        }
+                    },
+
+                    checkEmpty: function () {
+                        if (pdf_container.children().length === 0)
+                            return true;
+                        else
+                            return false;
+                    }
+                }
+                append_action.init();
+            }
         });
     });
 </script>
+
 <!-- end script -->
 
 <div class="wrapper">
@@ -167,26 +207,27 @@
             </div>
         </form>
         <!-- form end -->
-        <h2>College Instruction</h2>
+        <div id="college_pdfs">
+            <h2>College Instruction</h2>
 
-        <div class="timeline-item">
-            <h3 class="timeline-header">
-            <span class="input-group-addon">Please open and read the following PDF instructions for your Colleges and then confirm that you have done so.</h3></span>
-            <div class="timeline-body">
-                <img src="http://placehold.it/150x100" alt="..." class="margin">
-                <img src="http://placehold.it/150x100" alt="..." class="margin">
-                <img src="http://placehold.it/150x100" alt="..." class="margin">
-                <img src="http://placehold.it/150x100" alt="..." class="margin">
-            </div>
-            <h3 class="timeline-footer"><span class="input-group-addon">
-        <input type="checkbox" name="read_college_instructions" value="yes" />
+            <div class="timeline-item">
+                <h3 class="timeline-header">
+                    <span class="input-group-addon">Please open and read the following PDF instructions for your Colleges and then confirm that you have done so.
+                    </span>
+                </h3>
+
+                <div class="timeline-body">
+                </div>
+                <h3 class="timeline-footer"><span class="input-group-addon">
+            <input type="checkbox" name="read_college_instructions" value="yes"/>
                 Check box to indicate that you have read the instructions for your College.
         </span>
-            </h3>
-        </div>
-        <div class="col-md-12 bottom-navbar">
-            <a href="">Back</a>
-            <button type="button" class="btn btn-primary pull-right">Submit</button>
+                </h3>
+            </div>
+            <div class="col-md-12 bottom-navbar">
+                <a href="">Back</a>
+                <button type="button" class="btn btn-primary pull-right">Submit</button>
+            </div>
         </div>
     </div>
     <footer class="main-footer">
@@ -194,7 +235,8 @@
             <div id="sub-footer">
                 <a href="http://www.berkeley.edu">
                     <img src="/images/2014_UCBerkeleyLogo.png" alt="UC Berkeley" class="footer-logo"></a>
-                    <p>© UC Berkeley Summer Sessions, 1995 University Avenue
+
+                <p>© UC Berkeley Summer Sessions, 1995 University Avenue
                     <br>
                     510-642-5611</p>
             </div>

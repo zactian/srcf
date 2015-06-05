@@ -131,16 +131,6 @@ h3 {
     line-height: 34px;
 }
 
-/*ucbInfo Specific Styles */
-#college-instructions-pdf {
-    display: block;
-    padding: 5px;
-}
-
-.college-pdf {
-    float: left;
-    text-align: center;
-}
 
 /* Confirm Units Specific Styles */
 #unit-confirmation-table {
@@ -241,3 +231,13 @@ h3 {
     font-size: 14px;
     line-height: 1.1;
 }
+
+.timeline-item>.timeline-body a{
+    margin:2px 10px 10px 2px;
+}
+
+#college_pdfs
+{
+    display:none;
+}
+
