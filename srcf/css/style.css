@@ -18,6 +18,10 @@ body{
     margin: 0 auto;
 }
 
+.center-text {
+    text-align: center;
+}
+
 h2 {
     color: #023876;
     font-size:16px;
@@ -47,7 +51,7 @@ h3 {
 .divider-line {
     width: 95%;
     border-bottom: 1px solid #EBE8DC;
-    margin: 4px auto;
+    margin: 10px auto;
 }
 
 
@@ -182,22 +186,71 @@ h3 {
 }
 
 /* Form Action specific styles */
+#accordian-menu {
+    margin-bottom: 20px;
+}
 
 #accordian-menu ul {
     list-style-type: none;
 }
 
 .form-action-header {
-    background-color: #EDEBEB;
+    background-color: #F6F3F3;
     border: 2px solid #EDEDED;
     border-radius: 6px;
     height: 30px;
-    margin: 5px;
+    margin: 5px 0;
     padding: 7px 0 8px 10px;
     text-align: left;
+    z-index: 100;
+}
+
+.form-action-header:hover {
+    background-color: #DCD9D9;
+    border: 2px solid #B2B2B2;
+}
+.form-action-header h3 {
+    display: inline;
+    margin-left: 10px;
 }
 
 .insert {
-    margin-left: 15px;
+    background-color: white;
+    border: 2px solid #E6E6E6;
+    border-radius: 3px;
+    margin:0 0 10 0;
+    padding: 15px 20px 10px;
+    display: none;
+    position: relative;
+    top:-10px;
+    z-index: 0;
+}
+
+#button-table {
+    font-size: inherit;
+    font-weight: inherit;
+    box-shadow: none;
+    border-collapse: separate;
+    border-spacing: 10px;
+    margin: 0 auto;
+    table-layout: fixed;
+    width: 75%;
+    top:-10px;
+}
+
+#button-table tr {
+}
+
+#button-table tr td {
+    text-align: center;
+    margin:5px;
+}
+
+#button-table td button {
+    text-align: center;
+    width: 100%;
+    height:100%;
+    display: block;
+    margin:0 auto;
 }
 
