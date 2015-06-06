@@ -23,15 +23,14 @@
 
         <!-- Accordian Menu -->
         <div id="accordian-menu" class="col-md-12">
-            <ul class="col-md-12 center">
-                <li>
-                    <div class="form-action-header">
-                        <img src="images/openArrow.png" alt="">
-                        <h3>Add, Drop, Change Grading Option, Change Unit Value</h3>
-                    </div>
-                </li>
-                <div class="insert btn-group">
-                    <p>
+            <div>
+                <input type="checkbox" id="option-1" name="option-1">
+                <label for="option-1">
+                    <img src="images/openArrow.png" alt="">
+                    Add, Drop, Change Grading Option, Change Unit Value
+                </label>
+                <div class="form-action-content btn-group option-1">
+                     <p>
                         Select your request (your Record Change Form needs to have at least one).
                         You may combine requests (such as Add a Course and Drop a Course) on the same form, but must initiate only one request listed below at a time.
                     </p>
@@ -49,24 +48,29 @@
                         </tr>
                     </table>
                 </div>
-
-                <li>
-                    <div class="form-action-header">
-                        <img src="images/openArrow.png" alt="">
-                        <h3>Request Reinstatement to Summer Sessions</h3>
+            </div>
+            <div>
+                <input type="checkbox" id="option-2" name="option-2">
+                <label for="option-2">
+                    <img src="images/openArrow.png" alt="">
+                    Request Reinstatement to Summer Sessions
+                </label>
+                <div class="form-action-content option-2">
+                    <p>If you would like to be reinstated in Summer Sessions, please re-enroll in at least one
+                    course.</p>
+                    <div class="divider-line"></div>
+                    <div class="center-text">
+                        <button class="btn btn-primary" style="margin-top:5px">Add a Course</button>
                     </div>
-                </li>
-                <div class="insert center-text">
-                    <button class="btn btn-primary center">Add a Course</button>
                 </div>
-
-                <li>
-                    <div class="form-action-header">
-                        <img src="images/openArrow.png" alt="">
-                        <h3>Cancel/Withdraw from Summer Sessions (Drop All Courses)</h3>
-                    </div>
-                </li>
-                <div class="insert">
+            </div>
+            <div>
+                <input type="checkbox" id="option-3" name="option-3">
+                <label for="option-3">
+                    <img src="images/openArrow.png" alt="">
+                    Cancel/Withdraw from Summer Sessions (Drop All Courses)
+                </label>
+                <div class="form-action-content option-3">
                     <p>
                         If you want to drop all your courses, how you need to do that depends on whether or not any of your courses have started yet. <br> <br>
 
@@ -97,11 +101,10 @@
                     </ul>
                     <div class="divider-line"></div>
                     <div class="center-text">
-                        <button class="btn btn-danger">Drop a Course</button>
+                        <button class="btn btn-danger" style="margin-top:5px">Drop a Course</button>
                     </div>
-
                 </div>
-            </ul>
+            </div>
         </div>
         <!-- End Accordian Menu -->
 
