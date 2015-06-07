@@ -1,0 +1,246 @@
+<html lang="en" dir="ltr">
+<head></head>
+<body><br>
+<meta charset="utf-8">
+<title>SRCF</title>
+<link rel="stylesheet" href="bootstrap/css/bootstrap.css"/>
+<link rel="stylesheet" href="css/AdminLTE.css" type="text/css" media="screen">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="css/summerStyle.css" type="text/css" media="screen">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script src="javascript/jquery.popupoverlay.js"></script>
+<script src="javascript/action2.js"></script>
+<div id="page" class="container">
+    <header id="header" class="clearfix" role="banner">
+        <div id="branding" class="branding-elements clearfix">
+            <div id="logo">
+                <a href="http://summer.berkeley.edu">
+                    <img class="site-logo" alt="Berkeley Summer Sessions" src="images/BSS_GOLDWHITE.png">
+                </a>
+            </div>
+            <hgroup id="name-and-slogan" class="element-invisible h-group">
+                <h1 id="site-name" class="element-invisible"></h1>
+            </hgroup>
+        </div>
+    </header>
+    <div id="menu-bar-wrapper">
+    </div>
+    <div id="main-content">
+        <div id="slide" class="well" style="width: 1000px;">
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- Line chart -->
+                    <div class="box box-primary">
+                        <div class="box-header">
+                            <i class="fa fa-bar-chart-o"></i>
+                            <h3 class="box-title">Search by CCNs</h3>
+                        </div>
+                        <div class="box-body">
+                            <select name="department_id" id="department_id" class="form-control" style="width: 375px; height: auto;">
+                                <option value="0">
+                                    Department(s
+                                </option><option value="2">African American Studies</option><option value="1">Agricultural and Resource Economics</option><option value="3">American Studies</option><option value="305">Ancient History and Mediterranean Archaeology</option><option value="4">Anthropology</option><option value="5">Arabic</option><option value="6">Architecture</option><option value="7">Art Practice</option><option value="8">Asian American Studies Program</option><option value="9">Asian Studies</option><option value="11">Astronomy</option><option value="12">Bioengineering</option><option value="13">Biology</option><option value="14">Buddhist Studies</option><option value="85">Business Administration Doctoral Program</option><option value="40">Business Administration Evening/Weekend MBA Program</option><option value="71">Business Administration Fill-time Masters</option><option value="108">Business Administration Undergraduate Program</option><option value="15">Celtic Studies</option><option value="303">Center for Educational Partnerships</option><option value="137">Chemical and Biomolecular Engineering</option><option value="16">Chemistry</option><option value="17">Chicano Studies Program</option><option value="18">Chinese</option><option value="26">City and Regional Planning</option><option value="19">Civil and Environmental Engineering</option><option value="20">Classics</option><option value="22">Cognitive Science</option><option value="23">College Writing Programs</option><option value="24">Comparative Literature</option><option value="139">Development Studies</option><option value="27">Dutch</option><option value="36">Earth and Planetary Science</option><option value="28">East Asian Languages and Cultures</option><option value="29">Economics</option><option value="30">Education</option><option value="32">Energy and Resource Program</option><option value="33">Engineering</option><option value="25">Engineering - Computer Science</option><option value="31">Engineering - Electrical Engineering</option><option value="53">Engineering - Industrial Engineering and Operation</option><option value="34">English</option><option value="35">Environmental Design</option><option value="37">Environmental Science, Policy, and Management</option><option value="39">Ethnic Studies</option><option value="111">Executive MBA</option><option value="309">FILIPINO</option><option value="41">Film and Media</option><option value="42">French</option><option value="46">Gender and Women's Studies</option><option value="43">Geography</option><option value="44">German</option><option value="311">Global Poverty and Practice</option><option value="302">Graduate Division</option><option value="45">Greek</option><option value="51">Health and Medical Sciences</option><option value="47">Hebrew</option><option value="48">Hindi-Urdu</option><option value="50">History</option><option value="49">History of Art</option><option value="54">Information</option><option value="55">Integrative Biology</option><option value="56">Interdisciplinary Studies Field Major</option><option value="52">International and Area Studies</option><option value="57">Italian Studies</option><option value="58">Japanese</option><option value="59">Jewish</option><option value="60">Journalism</option><option value="61">Korean</option><option value="65">Landscape Architecture</option><option value="63">Latin</option><option value="62">Latin American Studies</option><option value="64">LAW</option><option value="66">Legal Studies</option><option value="313">Lesbian Gay Bisexual Transgender Studies</option><option value="206">Letters and Science</option><option value="67">Linguistics</option><option value="68">Mass Communications</option><option value="74">Master's in Financial Engineering</option><option value="69">Materials Science</option><option value="70">Mathematics</option><option value="73">Mechanical Engineering</option><option value="141">Media Studies</option><option value="205">Middle Eastern Studies</option><option value="72">Molecular and Cell Biology</option><option value="75">Music</option><option value="301">Nanosciences and Nanoengineering Institute</option><option value="76">Native American Studies</option><option value="77">Near Eastern Studies</option><option value="78">Neuroscience</option><option value="21">New Media</option><option value="79">Nuclear Engineering</option><option value="80">Nutritional Sciences and Toxicology</option><option value="81">Optometry</option><option value="82">Peace and Conflict Studies</option><option value="84">Persian</option><option value="86">Philosophy</option><option value="87">Physical Education</option><option value="88">Physics</option><option value="89">Plant and Microbial Biology</option><option value="91">Political Economy</option><option value="90">Political Science</option><option value="92">Portuguese</option><option value="93">Psychology</option><option value="83">Public Health</option><option value="94">Public Policy</option><option value="95">Religious Studies</option><option value="96">Rhetoric</option><option value="99">Scandinavian</option><option value="101">Slavic Languages and Literatures</option><option value="102">Social Welfare</option><option value="103">Sociology</option><option value="98">South and Southeast Asian Studies</option><option value="97">South Asian</option><option value="100">Southeast Asian Studies</option><option value="104">Spanish</option><option value="105">Statistics</option><option value="209">Summer Sessions</option><option value="106">Theater, Dance, and Performance Studies</option><option value="107">Tibetan</option><option value="109">Undergraduate and Interdisciplinary Studies</option><option value="310">Vietnamese</option><option value="144">Vision Science</option><option value="110">Visual Studies</option>
+                            </select>
+                            <br />
+                            <select name="courseID" id="course_id" class="form-control" style="width: 375px; height: auto; display: none">
+                                <option value="0">Select a course</option><option value="1386">Examining U.S. Cultures in Place  102 </option><option value="1385">Examining U.S. Cultures in Time  101 </option><option value="250">Race and American Film  184 I</option><option value="2694">Race and American Humor  180 D</option><option value="2693">Race and Representation in US Culture  170 AC</option><option value="2714">SPECIAL TOPICS AC  110 AC</option><option value="1387">Special Topics in American Studies  110 </option><option value="253">Supervised Independent Study and Research for Upper Division Majo  199 </option><option value="249">Visual Culture in American Society: Photography and Art  181 B</option>
+                            </select>
+                            <br />
+                            <select name="sectionID" id="section_id" class="form-control sectionID" style="width: 375px; height: auto; display: none; margin-bottom: 15px;">
+                                <option value="0">Select a section</option>
+                                <option>AMERSTD 199-001 IND</option>
+                                <option>AMERSTD 199-002 IND</option>
+                            </select>
+                            <ul class="todo-list ui-sortable" id="listCCNS" style="width:200px; display: none;">
+                                <li class="">
+                                    <span class="text">10131</span>
+                                </li>
+                                <li class="">
+                                    <span class="text">10231</span>
+                                </li>
+                                <li class="">
+                                    <span class="text">10431</span>
+                                </li>
+                                <li class="">
+                                    <span class="text">10211</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.box-body-->
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+
+                <div class="col-md-6">
+                    <!-- Bar chart -->
+                    <div class="box box-primary" style="padding-bottom: 45px;">
+                        <div class="box-header">
+                            <i class="fa fa-bar-chart-o"></i>
+                            <h3 class="box-title">Enter Your CCNs</h3>
+                        </div>
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label>Enter Your CCN in the blow</label>
+                                <input type="text" id="ccn" class="form-control" placeholder="Enter Your CCN">
+                            </div>
+
+                            <div class="box ccn_info" style="display: none" >
+                                <div class="box-body clearfix">
+                                    <blockquote class="pull-left">
+                                        <div class="pull-left">
+                                            <strong>CCN:&nbsp;&nbsp;</strong>
+                                        </div>
+                                        <div class="right">
+                                            10131
+                                        </div>
+                                        <div class="pull-left">
+                                            <strong>Course:&nbsp;&nbsp;</strong>
+                                        </div>
+                                        <div class="right">
+                                            AFRICAM R 00001 B LEC 001
+                                        </div>
+                                        <div class="pull-left">
+                                            <strong>Location:&nbsp;&nbsp;</strong>
+                                        </div>
+                                        <div class="right">
+                                            MTuWTh 9:00A-11:00A, 174 BARROWS
+                                        </div>
+                                        <div class="pull-left">
+                                            <strong>Instructor:&nbsp;&nbsp;</strong>
+                                        </div>
+                                        <div class="right">
+                                            NANDA, A
+                                        </div>
+                                        <div class="pull-left">
+                                            <strong>Units:&nbsp;&nbsp;</strong>
+                                        </div>
+                                        <div class="right">
+                                            4.0
+                                        </div>
+                                        <div class="pull-left">
+                                            <strong>Enrollment:&nbsp;&nbsp;</strong>
+                                        </div>
+                                        <div class="right">
+                                            Full
+                                        </div>
+                                        <div class="pull-left">
+                                            <strong>WaitList:&nbsp;&nbsp;</strong>
+                                        </div>
+                                        <div class="right">
+                                            3/17                                        </div>
+
+                                    </blockquote>
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                            <div class="import-container" style="display: none" >
+                            <h3 style="margin-bottom: 8px;">This request needs to be approved by the following</h3>
+                            <ul style="padding-left: 20px; padding-bottom: 15px; padding-top:0px;">
+
+                                <ol>
+                                    <li> Faculty Athletic Representative</li>
+                                    <li> Summer Session Staff</li>
+                                </ol>
+                            </ul>
+
+                            <h3 style="margin-bottom: 4px;">Please answering the following question below</h3>
+                            <ul style="padding-left: 20px; padding-bottom: 15px; padding-top:0px;">
+                                <ol>
+                                    <li> Are you currently on a waitlist for this course? &nbsp; &nbsp;&nbsp; &nbsp; <input type="radio" />Yes  &nbsp; <input type="radio" />No</li>
+                                    <li> Have you Attended this course? &nbsp; &nbsp;&nbsp; &nbsp; <input type="radio" />Yes &nbsp; <input type="radio" />No</li>
+                                    <li> The date you last attended this course &nbsp; &nbsp;&nbsp; &nbsp; <input type="text" id="datepicker"></li>
+                                </ol>
+                            </ul>
+                            <input type="submit" id="srcf_action" value="Drop this Course" class="btn btn-primary btn-center slide_close" style="margin-left: 35%;">
+                                </div>
+                        </div><!-- /.box-body-->
+                    </div><!-- /.box -->
+
+                </div><!-- /.col -->
+            </div>
+            <button class="slide_close btn btn-default">Close</button>
+        </div>
+
+
+
+        <section class="content-header">
+            <a href="" class="user_tooltip"><img src="images/default-user-icon-profile.png" width="50" height="50">
+              <span>
+                <p class="text-muted well well-sm no-shadow" style="margin-top: 0px;">
+                    <strong>First Name: </strong>&nbsp; &nbsp; Zac  <br />
+                    <strong>Last Name: </strong>&nbsp; &nbsp; Cheng  <br />
+                    <strong>SID: </strong>&nbsp; &nbsp; 90820577  <br />
+                </p>
+              </span>
+            </a>
+        </section>
+        <h1>Students Record Change Form Actions</h1>
+        <div class="callout row"style="background: rgb(243, 248, 245);" id="course_container">
+          <div class="col-md-3">
+            <ul id="menu-v">
+                <li><a href="#">Other Enrollment Changes</a>
+                    <ul class="sub">
+                        <li><a class="initialism slide_open">Add a Course</a></li>
+                        <li><a class="initialism slide_open">Enroll from Waitlist</a></li>
+                        <li><a class="initialism slide_open">Drop a Course</a></li>
+                        <li><a class="initialism slide_open">Change Grading Option</a></li>
+                        <li><a class="initialism slide_open">Change Unit Value</a></li>
+                        <li><a class="initialism slide_open">Switch Secondary Sections</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Request Reinstatement</a>
+                    <ul class="sub">
+                        <li><a class="initialism slide_open">Add a Course</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">CANCEL/Withdraw</a>
+                    <ul class="sub">
+                        <li><a class="initialism slide_open user_tooltip2">Drop a Course <span>
+                     If you want to drop all your courses, how you need to do that depends on whether or not any of your courses have started yet.
+                        <label style="background-color: #c8cc29; padding:6px; width: auto; border-radius: 5px;">CANCELLATION: </label>
+                        If you are dropping all courses in all sessions before your earliest session begins, this is called Cancellation.
+                            You will receive a refund of all fees, minus the Cancellation Fee, if fees have already been paid in full.
+                            If no payment has been made, all Summer Sessions fees will be removed from your CARS (Campus Accounts Receivable System) bill, but you will assessed the Cancellation Fee.
+                         <label style="background-color:  #f6cdc6; padding:6px; width: auto; border-radius: 5px;">WITHDRAWAL: </label>
+                           If you are dropping all courses in all sessions AFTER your earliest session begins, this is called Withdrawal and you will assessed the Withdrawal Processing Fee
+
+                            <label style="background-color:  #9abeaa; padding:6px; width: auto; border-radius: 5px;">FEES</label>
+                     Summer Fees for UC Students  <br />
+                     Summer Fees for Visiting US Students <br />
+                     Summer Fees for Visiting International Students <br />
+                     Dropping All Courses <br />
+                        </span></a></li>
+                    </ul>
+                </li>
+            </ul>
+          </div>
+            <div class="col-md-4" style="display: none;" id="course_info" style="width: 400px;">
+              <span style="background-color: #f5f5f5;
+  border: 1px solid #e3e3e3; color:#777; font-size:16px; padding:5px; border-radius: 5px;"> Only PDF version is available for this action. <br /> <br /> </span>
+                <a href="" style="color: #777; text-decoration: none;">Click here to download the PDF version of Student Record Change Form.</a>
+
+            </div>
+
+        </div>
+    </div>
+    <footer id="footer" class="clearfix">
+        <div id="footer-inner" class="clearfix">
+            <div id="sub-footer">
+                <a href="http://www.berkeley.edu">
+                    <img src="images/2014_UCBerkeleyLogo.png" alt="UC Berkeley" border="0" hspace="10"></a>
+                <p>© UC Berkeley Summer Sessions, 1995 University Avenue
+                    <br>
+                    510-642-5611</p>
+            </div>
+            <!-- <div id="sub-footer"> -->
+        </div>
+        <!-- <div id="footer-inner"> -->
+    </footer>
+    <!-- <div id="footer"> -->
+</div>
+<!-- <div id="page" class="clearfix"> -->
+</body>
+</html>

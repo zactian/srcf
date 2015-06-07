@@ -1,0 +1,65 @@
+.main-content {
+	max-width: 890px;
+	margin:0 auto;
+}
+.call-out {
+  border-radius: 3px;
+  margin: 0 0 20px 0;
+  border-left: 5px solid #eee;
+  font-weight: normal;
+  font-size: 97.5%;
+}
+header {
+	margin-bottom: 10px;
+}
+
+h2 {
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+
+.notification {
+	width:97%%;
+	margin:0 auto;
+	background-color: #FEC1C3;
+	padding: 10px;
+	margin-bottom: 10px;
+	height: auto;
+	font-size: 95%;
+	text-align: center;
+}
+
+.units {
+	max-width:200px;
+	margin: 0 auto;
+}
+
+.units ul li {
+	padding 5px;
+	list-style: none;
+}
+
+.units ul li input {
+	width: 30px;
+	text-align: center;
+}
+
+.emphasis {
+	font-weight: bold;
+	padding-right: 50px;
+}
+
+
+/*Table styles (outdated)*/
+.units table {
+	margin: 0 auto;
+}
+
+.units table td {
+	padding: 10px;
+}
+.units table td input{
+	text-align: center;
+	width: 30px;
+}
+/*end table styles */

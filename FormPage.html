@@ -1,0 +1,169 @@
+<html lang="en" dir="ltr"><head></head><body><br>
+<meta charset="utf-8">
+<title>SRCF</title>
+<link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
+<link rel="stylesheet" href="css/summerStyle.css" type="text/css" media="screen">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script src="javascript/form.js"></script>
+<div id="page" class="container">
+    <header id="header" class="clearfix" role="banner">
+        <div id="branding" class="branding-elements clearfix">
+            <div id="logo">
+                <a href="http://summer.berkeley.edu">
+                    <img class="site-logo" alt="Berkeley Summer Sessions" src="images/BSS_GOLDWHITE.png">
+                </a>
+            </div>
+            <!-- start: Site name and Slogan hgroup -->
+            <hgroup id="name-and-slogan" class="element-invisible h-group">
+                <h1 id="site-name" class="element-invisible"></h1>
+            </hgroup>
+            <!-- /end #name-and-slogan -->
+        </div>
+    </header><div id="menu-bar-wrapper">
+</div>
+
+<div id="main-content">
+        <h2>UCB Student Information</h2>
+            <form class="form-horizontal" role="form">
+                <div class="form-content callout">
+                    <div class="form-group">
+                        <div class="form-input-container col-centered">
+                            <label for="email" class="col-sm-3 control-label">Your Email:</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="email-init" class="form-control" placeholder="Email">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="invalid-email-alert"class="alert">The email you have entered is not valid.</div>
+
+                    <div class="form-group">
+                        <div class="form-input-container col-centered">
+                            <label for="confirm-email" class="col-sm-3 control-label">Confirm Your Email:</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="email-confirm" class="form-control" placeholder="Confirm Email">
+                            </div>
+                        </div>
+                    </div>
+                     <div id="email-alert"class="alert">The emails you have entered do not match.</div>
+
+                    <div class="form-group">
+                        <div class="form-input-container col-centered">
+                                <label for="major" class="col-sm-3 control-label">Undergraduate Major:</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" placeholder="Major">
+                                </div>
+                            </div>
+                    </div>
+
+                    <!-- College Checkboxes -->
+                    <div class="form-group">
+                    <div class="form-input-container col-centered">
+                        <label for="college" class="col-sm-3 control-label">Your College:</label>
+                        <div class="col-sm-3 custom-boxes">
+
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox"name="college" value="chemistry"> Chemistry
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="college" value="engineering"> Engineering
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="college" value="enviro-design"> Environemental Design
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="college" value="business"> Haas School of Business
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 custom-boxes">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="college" value="l-and-s"> Letters & Science
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="college" value="natural-resources"> Natural Resources
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="college" value="law"> School of Law
+                                </label>
+                            </div>
+                        </div>
+                        </div>
+
+                    </div>
+                    <!-- End Collge Checkboxes -->
+
+                <div class="form-group">
+                    <div class="form-input-container col-centered">
+                        <label for="athlete" id="ncaa" class="col-sm-3 control-label">Are you currently a <br> NCAA athlete?</label>
+                        <div class="col-sm-4">
+                            <div class="radio col-sm-3 custom-radio">
+                                <label>
+                                    <input type="radio" name="athlete" value="yes"> Yes
+                                </label>
+                            </div>
+                            <div class="radio col-sm-3 custom-radio" style="margin-left: 15px;">
+                                <label>
+                                    <input type="radio" name="athlete" value="no"> No
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                <!-- College Instruction PDFs go here -->
+                <div id="pdfs" class="unformatted-wrapper no-display">
+                    <h2>College Instructionss</h2>
+                    <div id="college-pdfs"class="callout form-content">
+                        <strong>Please open and read the following PDF instructions for your colleges before submitting the form.</strong> <br>
+                        <table id="pdf-table">
+                            <tr>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- College Instruction PDFs end -->
+
+                <div id="dialog" style="display:none; height: auto; width: 100%; margin-left:0px; overflow: visible ">
+                    <div>
+                        <iframe src="quice.pdf" id="college_pdf" height="1200" width="1200" style="overflow: visible "></iframe>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-10 button container">
+                        <input type="submit" value="Submit" id="submit-button" class="btn btn-primary btn-center ">
+                    </div>
+                </div>
+            </form>
+
+</div>
+
+    <footer id="footer" class="clearfix">
+        <div id="footer-inner" class="clearfix">
+            <div id="sub-footer">
+                <a href="http://www.berkeley.edu">
+                    <img src="images/2014_UCBerkeleyLogo.png" alt="UC Berkeley" border="0" hspace="10"></a>
+                <p>© UC Berkeley Summer Sessions, 1995 University Avenue
+                    <br>
+                    510-642-5611</p>
+            </div> <!-- <div id="sub-footer"> -->
+        </div> <!-- <div id="footer-inner"> -->
+    </footer> <!-- <div id="footer"> -->
+</div> <!-- <div id="page" class="clearfix"> -->
+</body></html>

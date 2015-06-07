@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"
+          type="text/css"/>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
+    <script type="text/javascript" src="js/srcf.js"></script>
+    <link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css"/>
+    <title></title>
+</head>
+<body>
+
+<!-- Script for multiselect (remove later?) -->
+<script>
+    $(document).ready(function () {
+        $('#ucb-info-multi-major').multiselect({
+            enableFiltering: true,
+            buttonWidth: '100%',
+            buttonClass: 'multiselect dropdown-toggle btn btn-default srcf-form',
+            nonSelectedText: 'Select Major(s)'
+        });
+        $('#ucb-info-multi-college').multiselect({
+            enableFiltering: true,
+            buttonWidth: '100%',
+            buttonClass: 'multiselect dropdown-toggle btn btn-default srcf-form',
+            nonSelectedText: 'Select College(s)',
+            onChange: function (option, checked) {
+
+                var pdf = $("#college_pdfs");
+                var pdf_container = $("#college_pdfs .timeline-item .timeline-body");
+                var append_action = {
+
+                    init: function () {
+                        if (pdf_container.find("a#" + option.val()).length)
+                            append_action.removeItem();
+                        else
+                            append_action.appendItem();
+                    },
+
+                    appendItem: function () {
+                        if (append_action.checkEmpty()) {
+                            pdf.show("slow");
+                        }
+                        var source = $('<a>').attr("id", option.val()).append("<img src='http://placehold.it/150x100' />");
+                        pdf_container.append(source);
+                    },
+
+                    removeItem: function () {
+                        pdf_container.find("a#" + option.val()).remove();
+                        if (append_action.checkEmpty()) {
+                            pdf.hide("slow");
+                        }
+                    },
+
+                    checkEmpty: function () {
+                        if (pdf_container.children().length === 0)
+                            return true;
+                        else
+                            return false;
+                    }
+                }
+                append_action.init();
+            }
+        });
+    });
+</script>
+
+<!-- end script -->
+
+<div class="wrapper">
+    <header class="main-header">
+        <div id="logo">
+            <img src="images/2014_BSSLogo.jpg"/>
+        </div>
+    </header>
+    <div class="content-wrapper">
+        <h2>Student Information</h2>
+
+        <form id="ucb-info-form" class="col-md-12">
+            <div class="form-group col-md-5 col-md-offset-1">
+                <label for="emailExample">Email</label>&nbsp;<i class="fa fa-envelope"></i>
+                <input type="email" class="form-control srcf-form" id="emailExample" placeholder="Enter Email">
+            </div>
+            <div class="form-group col-md-5">
+                <label for="confirmEmailExample">Confirm Email</label>&nbsp;<i class="fa fa-envelope"></i>
+                <input type="confirmEmail" class="form-control srcf-form" id="confirmEmailExample"
+                       placeholder="Confirm Email">
+            </div>
+            <div class="form-group col-md-5 col-md-offset-1">
+                <label for="majorExample">Undergraduate Major(s)</label> <br>
+                <select id="ucb-info-multi-major" class="form-control" multiple="multiple">
+                    <option value="1">African American Studies</option>
+                    <option value="2">American Studies</option>
+                    <option value="3">Anthropology</option>
+                    <option value="4">Architecture</option>
+                    <option value="5">History of Art</option>
+                    <option value="6">Practice of Art</option>
+                    <option value="7">Asian Studies</option>
+                    <option value="8">Asian American Studies</option>
+                    <option value="9">Astrophysics</option>
+                    <option value="10">Business Administration</option>
+                    <option value="11">Celtic Studies</option>
+                    <option value="12">Chemical Biology</option>
+                    <option value="13">Chemical Engineering</option>
+                    <option value="14">Chemistry</option>
+                    <option value="15">Chicano Studies</option>
+                    <option value="16">Chinese Language</option>
+                    <option value="17">Classical Civilizations</option>
+                    <option value="18">Classical Languages</option>
+                    <option value="19">Cognitive Science</option>
+                    <option value="20">Comparative Literature</option>
+                    <option value="21">Computer Science</option>
+                    <option value="22">Conservation and Resource Studies</option>
+                    <option value="23">Dance and Performance Studies</option>
+                    <option value="24">Development Studies</option>
+                    <option value="25">Dutch Studies</option>
+                    <option value="26">Earth and Planetary Science</option>
+                    <option value="27">Economics</option>
+                    <option value="28">Engineering</option>
+                    <option value="29">English</option>
+                    <option value="30">Environmental Economics and Policy</option>
+                    <option value="31">Environmental Sciences</option>
+                    <option value="32">Ethnic Studies</option>
+                    <option value="33">Film</option>
+                    <option value="34">Forestry and Natural Resources</option>
+                    <option value="35">French</option>
+                    <option value="36">Gender and Womens Studies</option>
+                    <option value="37">Genetics and Plant Biology</option>
+                    <option value="38">Geography</option>
+                    <option value="39">German</option>
+                    <option value="40">Greek</option>
+                    <option value="41">History</option>
+                    <option value="42">Integrative Biology</option>
+                    <option value="43">Interdisciplinary Studies Field Major</option>
+                    <option value="44">Italian Studies</option>
+                    <option value="45">Japanese Language</option>
+                    <option value="46">Landscape Architecture</option>
+                    <option value="47">Latin</option>
+                    <option value="48">Latin American Studies</option>
+                    <option value="49">Legal Studies</option>
+                    <option value="50">Linguistics</option>
+                    <option value="51">Mass Communications</option>
+                    <option value="52">Mathematics</option>
+                    <option value="53">Mathematics, Applied</option>
+                    <option value="54">Microbial Biology</option>
+                    <option value="55">Middle Eastern Studies</option>
+                    <option value="56">Molecular and Cell Biology</option>
+                    <option value="57">Molecular Environmental Biology</option>
+                    <option value="58">Molecular Toxicology</option>
+                    <option value="59">Music</option>
+                    <option value="60">Native American Studies</option>
+                    <option value="61">Near Eastern Studies</option>
+                    <option value="62">Nutritional Sciences</option>
+                    <option value="63">Operations Research and Management Science</option>
+                    <option value="64">Peace and Conflict Studies</option>
+                    <option value="65">Philosophy</option>
+                    <option value="66">Physical Sciences Field Major</option>
+                    <option value="67">Physics</option>
+                    <option value="68">Political Economy of Industrial Societies</option>
+                    <option value="69">Political Science</option>
+                    <option value="70">Psychology</option>
+                    <option value="71">Public Policy</option>
+                    <option value="72">Religious Studies</option>
+                    <option value="73">Rhetoric</option>
+                    <option value="74">Scandinavian</option>
+                    <option value="75">Slavic Languages and Literatures</option>
+                    <option value="76">Social Welfare</option>
+                    <option value="77">Sociology</option>
+                    <option value="78">South and Southeast Asian Studies</option>
+                    <option value="79">Spanish</option>
+                    <option value="80">Statistics</option>
+                    <option value="81">Theater and Performance Studies</option>
+                    <option value="82">Urban Studies</option>
+                    <option value="83">Vision Science</option>
+                    <option value="85">Women's Studies</option>
+                    <option value="86">Other</option>
+                </select>
+            </div>
+            <div class="form-group col-md-5">
+                <label for="majorExample">College(s)</label> <br>
+                <select id="ucb-info-multi-college" class="form-control col-md-12" multiple="multiple">
+                    <option value="2">Chemistry</option>
+                    <option value="3">Engineering</option>
+                    <option value="4">Environmental Design</option>
+                    <option value="6">Haas School of Business</option>
+                    <option value="1">letter of Science</option>
+                    <option value="5">Natural Resources</option>
+                    <option value="7">School of Law</option>
+                </select>
+            </div>
+            <div class="form-group col-md-10 col-md-offset-2">
+                <div class="checkbox">
+                    <span style="font-weight:bold; padding-right: 10%;">Are you currently an NCAA athlete?</span>
+                    <label>
+                        <input type="radio" name="optionsRadio" id="inlineRadio1" value="yes">
+                        Yes
+                    </label>
+                    <label>
+                        <input type="radio" name="optionsRadio" id="inlineRadio1" value="no">
+                        No
+                    </label>
+                </div>
+            </div>
+        </form>
+        <!-- form end -->
+        <div id="college_pdfs">
+            <h2>College Instruction</h2>
+
+            <div class="timeline-item">
+                <h3 class="timeline-header">
+                    <span class="input-group-addon">Please open and read the following PDF instructions for your Colleges and then confirm that you have done so.
+                    </span>
+                </h3>
+
+                <div class="timeline-body">
+                </div>
+                <h3 class="timeline-footer"><span class="input-group-addon">
+            <input type="checkbox" name="read_college_instructions" value="yes"/>
+                Check box to indicate that you have read the instructions for your College.
+        </span>
+                </h3>
+            </div>
+            <div class="col-md-12 bottom-navbar">
+                <a href="">Back</a>
+                <button type="button" class="btn btn-primary pull-right">Submit</button>
+            </div>
+        </div>
+    </div>
+    <footer class="main-footer">
+        <div id="footer-inner" class="clearfix">
+            <div id="sub-footer">
+                <a href="http://www.berkeley.edu">
+                    <img src="/images/2014_UCBerkeleyLogo.png" alt="UC Berkeley" class="footer-logo"></a>
+
+                <p>© UC Berkeley Summer Sessions, 1995 University Avenue
+                    <br>
+                    510-642-5611</p>
+            </div>
+            <!-- <div id="sub-footer"> -->
+        </div>
+    </footer>
+</div>
+</body>
+</html>

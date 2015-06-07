@@ -1,0 +1,393 @@
+body{
+    background-color: #E6E6E6;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+}
+
+.wrapper
+{
+    max-width: 960px;
+    margin: 0 auto;
+    min-height: 100%;
+    box-shadow: 0 0 8px rgba(0,0,0,0.5);
+    position: relative;
+    background-color: #ffffff;
+}
+
+.center {
+    margin: 0 auto;
+}
+
+.center-text {
+    text-align: center;
+}
+
+h2 {
+    color: #023876;
+    font-size:16px;
+    margin:20px 0px 10px 0px;
+}
+
+h3 {
+    color: #023876;
+    font-size:14px;
+    margin: 0;
+}
+
+.sub-header {
+    display: block;
+    /*padding:0 0 0 10px;*/
+    width: 95%;
+    margin:0 auto 10px;
+}
+
+.alert {
+    text-align: center;
+    padding:5px 0 5px 0;
+    margin: 5px 0 0 0;
+    display: inline-block;
+}
+
+.divider-line {
+    width: 95%;
+    border-bottom: 1px solid #EBE8DC;
+    margin: 5px auto;
+}
+
+
+
+/** callout component */
+.callout {
+    background: rgb(243, 248, 245);
+    border-radius: 3px;
+    border-left: 5px solid #eee;
+    font-weight: normal;
+    font-size: 97.5%;
+    padding:5px;
+}
+
+.callout li {
+    margin-bottom: 10px;
+}
+
+/* Header Styles */
+.main-header
+{
+    box-shadow: 0 0 1px rgba(0,0,0,0.5);
+    position: relative;
+    max-height: 100px;
+    z-index: 1030;
+}
+
+#logo
+{
+	margin-left:10px;
+}
+
+.content-wrapper
+{
+    padding: 25px;
+    min-height: 350px;
+}
+
+/*Form Styles */
+.srcf-form {
+    border: 2px solid #DEDCD5;
+    border-radius: 0;
+}
+
+/*Footer Styles*/
+.main-footer
+{
+    border: 0;
+    clear: both;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 20px auto 0;
+    padding: 10px;
+}
+
+#footer-inner {
+    color: #eee;
+    background-color: #003a70;
+    border-radius: 4px;
+    margin: 0;
+    padding: 0 10px;
+}
+
+#sub-footer {
+    font-size: 10px;
+    line-height: 18px;
+    margin: 0 auto;
+    padding: 15px 0 0 15px;
+    position: relative;
+}
+
+#footer a {
+    color: #64727F;
+    text-decoration: none;
+    font-size: 75%;
+}
+
+/* Other Styles */
+.bottom-navbar {
+    margin-top: 30px;
+    line-height: 34px;
+}
+
+
+/* Confirm Units Specific Styles */
+#unit-confirmation-table {
+    font-weight: bold;
+    text-align: left;
+    margin: 20px auto 10px;
+}
+
+#unit-confirmation-table th{
+    text-align: center;
+}
+
+#unit-confirmation-table tr {
+    margin-top: 10px;
+}
+
+#unit-confirmation-table tr:last-child {
+    border-top: 2px solid #EBE8DC;
+    text-align: center;
+}
+
+#unit-confirmation-table th:last-child{
+    color:#9D9B91;
+}
+
+#unit-confirmation-table td {
+    padding: 4px;
+    text-align: center;
+    width:100px;
+}
+
+#unit-confirmation-table input {
+    border: 2px solid #DEDCD5;
+    border-radius: 0;
+    font-weight: normal;
+    margin: 3px 0px 3px 0px;
+    text-align: center;
+    width: 50px;
+}
+
+/* Form Action specific styles */
+#accordian-menu {
+    margin-bottom: 20px;
+}
+
+#accordian-menu input{
+    display: none;
+}
+
+#accordian-menu label {
+    background-color: #F6F3F3;
+    border: 2px solid #EDEDED;
+    border-radius: 6px;
+    height: 30px;
+    margin: 5px 0;
+    padding: 7px 0 8px 10px;
+    position:relative;
+    text-align: left;
+    z-index: 100;
+    width:100%;
+}
+
+#accordian-menu label:hover {
+    background-color: #DCD9D9;
+    border: 2px solid #B2B2B2;
+}
+
+#accordian-menu label img{
+    margin-right: 7px;
+}
+
+.form-action-content {
+    background-color: white;
+    border: 1px solid #EDEDED;
+    border-radius: 3px;
+    margin:0;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    top:-10px;
+    z-index: 0;
+    height: 0;
+    transition: height 0.3s ease-in-out;
+}
+
+#accordian-menu .btn-group {
+    display: inherit;
+}
+
+.form-action-content p{
+    padding:10px 10px 0;
+    margin: 0;
+}
+
+#accordian-menu input:checked ~ .form-action-content{
+    transition:
+        height 0.5s ease-in-out;
+}
+
+#accordian-menu input:checked ~ .option-1 {
+    height: 182px;
+}
+
+#accordian-menu input:checked ~ .option-2 {
+    height: 104px;
+}
+
+#accordian-menu input:checked ~ .option-3 {
+    height: 360px;
+}
+
+#accordian-menu input:checked ~  {
+    height: 360px;
+}
+
+#button-table {
+    font-size: inherit;
+    font-weight: inherit;
+    box-shadow: none;
+    border-collapse: separate;
+    border-spacing: 10px;
+    margin: 0 auto;
+    table-layout: fixed;
+    width: 75%;
+    top:-10px;
+}
+
+#button-table td {
+    text-align: center;
+    margin:5px;
+}
+
+#button-table td button {
+    text-align: center;
+    width: 100%;
+    height:100%;
+    display: block;
+    margin:0 auto;
+}
+
+/* Timeline SPecific Styles */
+.timeline-item {
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    border-radius: 3px;
+    margin-top: 0px;
+    background: #fff;
+    color: #444;
+    margin-left: 60px;
+    margin-right: 15px;
+    padding: 0;
+    position: relative;
+}
+
+
+.timeline-item>.time {
+    color: #999;
+    float: right;
+    padding: 10px;
+    font-size: 12px;
+}
+
+.timeline-item>.timeline-header {
+    margin: 0;
+    color: #555;
+    border-bottom: 1px solid #f4f4f4;
+    padding: 10px;
+    font-size: 14px;
+    line-height: 1.1;
+}
+
+.timeline-item>.timeline-body, .timeline-item>.timeline-footer {
+    padding: 10px;
+    margin: 0;
+    color: #555;
+    border-bottom: 1px solid #f4f4f4;
+    padding: 10px;
+    font-size: 14px;
+    line-height: 1.1;
+}
+
+.timeline-item>.timeline-body a{
+    margin:2px 10px 10px 2px;
+}
+
+#college_pdfs
+{
+    display:none;
+}
+
+#srcf_start
+{
+    padding-right:35px;
+}
+
+#srcf_start li
+{
+    margin: 10px 0px 0px 0px;
+    line-height: 18px;
+}
+
+.button {
+    width: 150px;
+    padding: 10px;
+    background-color: #FF8C00;
+    box-shadow: -8px 8px 10px 3px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#covers {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+#popupAction {
+    width: 75%;
+    height: 450px;
+    margin: -400px auto;
+    position: relative;
+    z-index: 10;
+    display: none;
+    background-color: white;
+    padding: 20px;
+    border: 3px solid white;
+    border-radius: 6px;
+}
+
+#popupAction:target, #popupAction:target + #covers {
+    display: block;
+    opacity: 2;
+
+    outline: none;
+    vertical-align: middle;
+}
+
+.cancel {
+    display: block;
+    position: absolute;
+    top: 3px;
+    right: 2px;
+    background: rgb(245, 245, 245);
+    color: black;
+    height: 30px;
+    width: 35px;
+    font-size: 30px;
+    text-decoration: none;
+    text-align: center;
+    font-weight: bold;
+}
