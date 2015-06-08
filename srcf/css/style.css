@@ -345,49 +345,92 @@ h3 {
     text-decoration: none;
 }
 
-#covers {
+.modalsrcf:before {
+    content: "";
+    display: none;
+    background: rgba(0, 0, 0, 0.6);
     position: fixed;
     top: 0;
     left: 0;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 5;
-    width: 100%;
-    height: 100%;
+    right: 0;
+    bottom: 0;
+    z-index: 1070;
+}
+.modalsrcf:target:before {
+    display: block;
+}
+.modalsrcf:target .modal-dialog {
+    -webkit-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    transform: translate(0, 0);
+    top: 20%;
+}
+.modal-dialog {
+    background: #fefefe;
+    border: #333333 solid 1px;
+    border-radius: 5px;
+    margin-left: -200px;
+    position: fixed;
+    left: 35.5%;
+    top: -100%;
+    z-index: 1070;
+    width: 50%;
+    -webkit-transform: translate(0, -500%);
+    -ms-transform: translate(0, -500%);
+    transform: translate(0, -500%);
+    -webkit-transition: -webkit-transform 0.3s ease-out;
+    -moz-transition: -moz-transform 0.3s ease-out;
+    -o-transition: -o-transform 0.3s ease-out;
+    transition: transform 0.3s ease-out;
+}
+
+/*ADDED TO STOP SCROLLING TO TOP*/
+#close {
     display: none;
 }
 
-#popupAction {
-    width: 75%;
-    height: 450px;
-    margin: -400px auto;
+.box {
     position: relative;
-    z-index: 10;
-    display: none;
-    background-color: white;
-    padding: 20px;
-    border: 3px solid white;
-    border-radius: 6px;
+    border-radius: 3px;
+    background: #ffffff;
+    border-top: 3px solid #d2d6de;
+    margin-bottom: 20px;
+    width: 100%;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
 
-#popupAction:target, #popupAction:target + #covers {
-    display: block;
-    opacity: 2;
-
-    outline: none;
-    vertical-align: middle;
+.box.box-primary {
+    border-top-color: #3c8dbc;
+    padding-bottom:45px;
+    margin-top:25px;
 }
 
-.cancel {
+.box-header {
+    color: #444;
     display: block;
-    position: absolute;
-    top: 3px;
-    right: 2px;
-    background: rgb(245, 245, 245);
-    color: black;
-    height: 30px;
-    width: 35px;
-    font-size: 30px;
-    text-decoration: none;
-    text-align: center;
-    font-weight: bold;
+    padding: 10px;
+    position: relative;
+}
+
+.box-header > .fa {
+    display: inline-block;
+    font-size: 18px;
+    margin: 0;
+    line-height: 1;
+    margin-right:5px;
+}
+
+.box-header .box-title {
+    display: inline-block;
+    font-size: 18px;
+    margin: 0;
+    line-height: 1;
+}
+
+.box-body {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    padding: 10px;
 }
