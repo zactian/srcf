@@ -35,15 +35,15 @@
             <li><strong>IT IS YOUR RESPONSIBILITY TO FOLLOW UP ON YOUR STUDENT RECORD CHANGE FORM REQUEST.</strong></li>
         </ul>
         <h3 style="margin-top: 25px;">Deadlines</h3>
-        <table id="example2" class="table dataTable">
+        <table id="srcf_deadline" class="table dataTable">
             <thead>
             <tr>
                 <th data-sort="string"></th>
-                <th data-sort="string">A<img src="images/sort_both.png"></th>
-                <th data-sort="string">B<img src="images/sort_asc.png"></th>
-                <th data-sort="string">C<img src="images/sort_asc.png"></th>
-                <th data-sort="string">D<img src="images/sort_asc.png"></th>
-                <th data-sort="string">E<img src="images/sort_asc.png"></th>
+                <th data-sort="int" data-type="date">A<img src="images/sort_both.png"></th>
+                <th data-sort="int" data-type="date">B<img src="images/sort_asc.png"></th>
+                <th data-sort="int" data-type="date">C<img src="images/sort_asc.png"></th>
+                <th data-sort="int" data-type="date">D<img src="images/sort_asc.png"></th>
+                <th data-sort="int" data-type="date">E<img src="images/sort_asc.png"></th>
             </tr>
             </thead>
             <tbody><tr>
@@ -113,3 +113,7 @@
 </div>
 </body>
 </html>
+<script type="text/javascript">
+    $("#srcf_deadline").tableSorter();
+
+</script>
