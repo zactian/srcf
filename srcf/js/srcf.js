@@ -80,8 +80,6 @@
     }
 
     $.fn.validateInput = function(input, regex, comparable, id) {
-        console.log(this);
-        console.log(id);
         var input = input;
         var regex = regex;
         var comparable = comparable;
@@ -93,23 +91,25 @@
             that.main = {
                 init: function() {
                     if (comparable != null) {
-                        validation.compareEmails();
+                        console.log("here");
+                        that.main.compareEmails();
                     } else {
-                        validation.validateEmail();
+                        console.log('there');
+                        that.main.validateEmail();
                     }
                 },
                 validateEmail: function() {
-                    if(!regex.test(email_input)) {
-                        validation.displayError();
+                    if(!regex.test(input)) {
+                        that.main.displayError();
                     } else {
-                        validation.validated();
+                        that.main.validated();
                     }
                 },
                 compareEmails: function() {
                     if (input != comparable) {
-                        validation.displayError();
+                        that.main.displayError();
                     } else {
-                        validated();
+                        that.main.validated();
                     }
                 },
                 displayError: function() {
@@ -124,7 +124,7 @@
                 }
             }
             that.main.init();
-        });
-    }();
+        })();
+    };
 }(jQuery));
 

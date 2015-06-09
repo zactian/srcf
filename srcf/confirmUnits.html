@@ -3,84 +3,86 @@
 <head>
     <link rel="stylesheet" href="css/bootstrap.css"/>
     <link rel="stylesheet" href="css/style.css"/>
-    <script type="text/javascript" src="js/bootstrap.min.js"/>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"/>
     <title></title>
 </head>
 <body>
-<div class="wrapper">
-    <header class="main-header">
-        <div id="logo">
-            <img src="images/2014_BSSLogo.jpg" />
-        </div>
-    </header>
-    <div class="content-wrapper">
-        <h2>Confirm Your Units</h2>
-        <div class="sub-header">
-            <p>What do you think about Sudden Valley? It sounds like a salad dressing, but for some reason I don't want to eat it. Way to plant, Ann! Michael was concerned that he was caught in a lie about his family. The family was concerned that they were being confronted by a woman they had clubbed, drugged, and left on a bench. </p>
-        </div>
+    <div class="wrapper">
+        <header class="main-header">
+            <div id="logo">
+                <img src="images/2014_BSSLogo.jpg" />
+            </div>
+        </header>
+        <div class="content-wrapper">
+            <h2>Confirm Your Units</h2>
+            <div class="sub-header">
+                <p>What do you think about Sudden Valley? It sounds like a salad dressing, but for some reason I don't want to eat it. Way to plant, Ann! Michael was concerned that he was caught in a lie about his family. The family was concerned that they were being confronted by a woman they had clubbed, drugged, and left on a bench. </p>
+            </div>
 
-        <div class="alert alert-danger col-md-12">
-            <p>We were not able to find your units in Telebears. Please enter units that you are currently enrolled in. Make sure you include both enrolled and waitlisted units.</p>
-        </div>
-        <div class="alert alert-danger col-md-12" style="margin-bottom:20px">
-            <p>If you are an international student, please make sure that you are enrolled full-time in order to keep your I-20 visa status.</p>
-        </div>
+            <div class="alert alert-danger col-md-12">
+                <p>We were not able to find your units in Telebears. Please enter units that you are currently enrolled in. Make sure you include both enrolled and waitlisted units.</p>
+            </div>
+            <div class="alert alert-danger col-md-12" style="margin-bottom:20px">
+                <p>If you are an international student, please make sure that you are enrolled full-time in order to keep your I-20 visa status.</p>
+            </div>
 
-        <table id="unit-confirmation-table">
-            <tr>
-                <th></th>
-                <th><strong>Enrolled</strong></th>
-                <th>Waitlisted</th>
-            </tr>
-            <tr>
-                <td>Session A</td>
-                <td><input class="srcf-form" type="text" value="0"></td>
-                <td><input class="srcf-form" type="text" value="0"></td>
-            </tr>
-            <tr>
-                <td>Session B</td>
-                <td><input class="srcf-form" type="text" value="0"></td>
-                <td><input class="srcf-form" type="text" value="0"></td>
-            </tr>
-            <tr>
-                <td>Session C</td>
-                <td><input class="srcf-form" type="text" value="0"></td>
-                <td><input class="srcf-form" type="text" value="0"></td>
-            </tr>
-            <tr>
-                <td>Session D</td>
-                <td><input class="srcf-form" type="text" value="0"></td>
-                <td><input class="srcf-form" type="text" value="0"></td>
-            </tr>
-            <tr>
-                <td>Session E</td>
-                <td><input class="srcf-form" type="text" value="0"></td>
-                <td><input class="srcf-form" type="text" value="0"></td>
-            </tr>
-            <tr>
-                <td>Total</td>
-                <td>0</td>
-                <td>0</td>
-            </tr>
-        </table>
+            <form id="unit-confirmation-form">
+                <table id="unit-confirmation-table">
+                    <tr>
+                        <th></th>
+                        <th><strong>Enrolled</strong></th>
+                        <th>Waitlisted</th>
+                    </tr>
+                    <tr>
+                        <td>Session A</td>
+                        <td><input id="example" class="srcf-input" type="text" value="0"></td>
+                        <td><input class="srcf-input" type="text" value="0"></td>
+                    </tr>
+                    <tr>
+                        <td>Session B</td>
+                        <td><input class="srcf-input" type="text" value="0"></td>
+                        <td><input class="srcf-input" type="text" value="0"></td>
+                    </tr>
+                    <tr>
+                        <td>Session C</td>
+                        <td><input class="srcf-input" type="text" value="0"></td>
+                        <td><input class="srcf-input" type="text" value="0"></td>
+                    </tr>
+                    <tr>
+                        <td>Session D</td>
+                        <td><input class="srcf-input" type="text" value="0"></td>
+                        <td><input class="srcf-input" type="text" value="0"></td>
+                    </tr>
+                    <tr>
+                        <td>Session E</td>
+                        <td><input class="srcf-input" type="text" value="0"></td>
+                        <td><input class="srcf-input" type="text" value="0"></td>
+                    </tr>
+                    <tr>
+                        <td>Total</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                </table>
+            </form>
 
-        <div class="col-md-12 bottom-navbar">
-            <a href="">Back</a>
-            <button type="button" class="btn btn-primary" style="float:right;">Submit</button>
+            <div class="col-md-12 bottom-navbar">
+                <a href="">Back</a>
+                <button type="button" class="btn btn-primary" style="float:right;">Submit</button>
+            </div>
         </div>
+        <footer class="main-footer">
+            <div id="footer-inner" class="clearfix">
+                <div id="sub-footer">
+                    <a href="http://www.berkeley.edu">
+                        <img src="/images/2014_UCBerkeleyLogo.png" alt="UC Berkeley" class="footer-logo"></a>
+                    <p>© UC Berkeley Summer Sessions, 1995 University Avenue
+                        <br>
+                        510-642-5611</p>
+                </div> <!-- <div id="sub-footer"> -->
+            </div>
+        </footer>
     </div>
-    <footer class="main-footer">
-        <div id="footer-inner" class="clearfix">
-            <div id="sub-footer">
-                <a href="http://www.berkeley.edu">
-                    <img src="/images/2014_UCBerkeleyLogo.png" alt="UC Berkeley" class="footer-logo"></a>
-                <p>© UC Berkeley Summer Sessions, 1995 University Avenue
-                    <br>
-                    510-642-5611</p>
-            </div> <!-- <div id="sub-footer"> -->
-        </div>
-    </footer>
-</div>
 </body>
 </html>

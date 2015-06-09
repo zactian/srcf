@@ -93,7 +93,7 @@ h3 {
 
 /*Form Styles */
 .srcf-form {
-    height: 73;
+    height:73px;
 }
 
 .srcf-input {
@@ -104,7 +104,6 @@ h3 {
 .form-danger {
     background-color: #f2dede;
     border-color: #DA7679;
-
 }
 
 /*Footer Styles*/

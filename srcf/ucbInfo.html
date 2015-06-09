@@ -68,37 +68,13 @@
             }
         });
 
-
-        // $('#emailExample').blur(function() {
-        //     var email_input = $(this).val();
-        //     var regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-        //     var validate_email = {
-        //         init: function() {
-        //             if(!regex.test(email_input)) {
-        //                 validate_email.showError();
-        //             } else {
-        //                 validate_email.validate();
-        //             }
-        //         },
-
-        //         showError: function() {
-        //             $('#emailExample').addClass('form-danger');
-        //             $('#initial_error').slideDown('slow');
-        //         },
-
-        //         validate: function() {
-        //             $('#emailExample').removeClass('form-danger');
-        //             if ($('#initial_error').css('display') != 'none') {
-        //                 $('#initial_error').slideUp('medium');
-        //             }
-        //         }
-        //     }
-        //     validate_email.init();
-        // })
         $('#emailExample').blur(function() {
-            console.log("this " + this);
             $(this).validateInput($(this).val(), /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, null, {containerID: 'emailExample', errorID: 'initial_error'})
         });
+
+        $('#confirmEmailExample').blur(function() {
+            $(this).validateInput($(this).val(), null, $('#emailExample').val(), {containerID: 'confirmEmailExample', errorID: 'secondary_error'});
+        })
     });
 </script>
 
@@ -121,9 +97,9 @@
             </div>
             <div id="email-secondary" class="form-group col-md-5 srcf-form">
                 <label for="confirmEmailExample">Confirm Email</label>&nbsp;<i class="fa fa-envelope"></i>
-                <input type="confirmEmail" class="form-danger form-control srcf-input " id="confirmEmailExample"
+                <input type="confirmEmail" class="form-control srcf-input " id="confirmEmailExample"
                        placeholder="Confirm Email">
-               <div id="secondary_error">error message</div>
+               <div id="secondary_error" style="display:none">error message</div>
             </div>
             <div class="form-group col-md-5 col-md-offset-1">
                 <label for="majorExample">Undergraduate Major(s)</label> <br>
