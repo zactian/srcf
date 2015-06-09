@@ -115,12 +115,15 @@
                 displayError: function() {
                     $inputID.addClass('form-danger');
                     $errorID.slideDown('slow');
+                    return false;
                 },
                 validated: function() {
                     $inputID.removeClass('form-danger');
                     if ($errorID.css('display') != 'none') {
                         $errorID.slideUp('medium');
                     }
+                    console.log(true);
+                    return true;
                 }
             }
             that.main.init();
