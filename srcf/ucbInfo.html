@@ -69,32 +69,36 @@
         });
 
 
+        // $('#emailExample').blur(function() {
+        //     var email_input = $(this).val();
+        //     var regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+        //     var validate_email = {
+        //         init: function() {
+        //             if(!regex.test(email_input)) {
+        //                 validate_email.showError();
+        //             } else {
+        //                 validate_email.validate();
+        //             }
+        //         },
+
+        //         showError: function() {
+        //             $('#emailExample').addClass('form-danger');
+        //             $('#initial_error').slideDown('slow');
+        //         },
+
+        //         validate: function() {
+        //             $('#emailExample').removeClass('form-danger');
+        //             if ($('#initial_error').css('display') != 'none') {
+        //                 $('#initial_error').slideUp('medium');
+        //             }
+        //         }
+        //     }
+        //     validate_email.init();
+        // })
         $('#emailExample').blur(function() {
-            var email_input = $(this).val();
-            var regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-            var validate_email = {
-                init: function() {
-                    if(!regex.test(email_input)) {
-                        validate_email.showError();
-                    } else {
-                        validate_email.validate();
-                    }
-                },
-
-                showError: function() {
-                    $('#emailExample').addClass('form-danger');
-                    $('#initial_error').slideDown('slow');
-                },
-
-                validate: function() {
-                    $('#emailExample').removeClass('form-danger');
-                    if ($('#initial_error').css('display') != 'none') {
-                        $('#initial_error').slideUp('medium');
-                    }
-                }
-            }
-            validate_email.init();
-        })
+            console.log("this " + this);
+            $(this).validateInput($(this).val(), /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, null, {containerID: 'emailExample', errorID: 'initial_error'})
+        });
     });
 </script>
 

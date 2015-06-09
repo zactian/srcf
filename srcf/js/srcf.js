@@ -78,4 +78,53 @@
             that.main.init();
         })();
     }
+
+    $.fn.validateInput = function(input, regex, comparable, id) {
+        console.log(this);
+        console.log(id);
+        var input = input;
+        var regex = regex;
+        var comparable = comparable;
+        var $inputID = $('#' + id.containerID);
+        var $errorID = $("#" + id.errorID);
+
+        var validation = (function() {
+            var that = this;
+            that.main = {
+                init: function() {
+                    if (comparable != null) {
+                        validation.compareEmails();
+                    } else {
+                        validation.validateEmail();
+                    }
+                },
+                validateEmail: function() {
+                    if(!regex.test(email_input)) {
+                        validation.displayError();
+                    } else {
+                        validation.validated();
+                    }
+                },
+                compareEmails: function() {
+                    if (input != comparable) {
+                        validation.displayError();
+                    } else {
+                        validated();
+                    }
+                },
+                displayError: function() {
+                    $inputID.addClass('form-danger');
+                    $errorID.slideDown('slow');
+                },
+                validated: function() {
+                    $inputID.removeClass('form-danger');
+                    if ($errorID.css('display') != 'none') {
+                        $errorID.slideUp('medium');
+                    }
+                }
+            }
+            that.main.init();
+        });
+    }();
 }(jQuery));
+
