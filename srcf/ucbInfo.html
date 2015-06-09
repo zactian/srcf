@@ -20,14 +20,15 @@
         $('#ucb-info-multi-major').multiselect({
             enableFiltering: true,
             buttonWidth: '100%',
-            buttonClass: 'multiselect dropdown-toggle btn btn-default srcf-form',
+            buttonClass: 'multiselect dropdown-toggle btn btn-default srcf-input',
             nonSelectedText: 'Select Major(s)'
         });
         $('#ucb-info-multi-college').multiselect({
             enableFiltering: true,
             buttonWidth: '100%',
-            buttonClass: 'multiselect dropdown-toggle btn btn-default srcf-form',
+            buttonClass: 'multiselect dropdown-toggle btn btn-default srcf-input',
             nonSelectedText: 'Select College(s)',
+
             onChange: function (option, checked) {
 
                 var pdf = $("#college_pdfs");
@@ -66,6 +67,34 @@
                 append_action.init();
             }
         });
+
+
+        $('#emailExample').blur(function() {
+            var email_input = $(this).val();
+            var regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+            var validate_email = {
+                init: function() {
+                    if(!regex.test(email_input)) {
+                        validate_email.showError();
+                    } else {
+                        validate_email.validate();
+                    }
+                },
+
+                showError: function() {
+                    $('#emailExample').addClass('form-danger');
+                    $('#initial_error').slideDown('slow');
+                },
+
+                validate: function() {
+                    $('#emailExample').removeClass('form-danger');
+                    if ($('#initial_error').css('display') != 'none') {
+                        $('#initial_error').slideUp('medium');
+                    }
+                }
+            }
+            validate_email.init();
+        })
     });
 </script>
 
@@ -81,14 +110,16 @@
         <h2>Student Information</h2>
 
         <form id="ucb-info-form" class="col-md-12">
-            <div class="form-group col-md-5 col-md-offset-1">
+            <div id ="email-initial" class="form-group col-md-5 col-md-offset-1 srcf-form">
                 <label for="emailExample">Email</label>&nbsp;<i class="fa fa-envelope"></i>
-                <input type="email" class="form-control srcf-form" id="emailExample" placeholder="Enter Email">
+                <input type="email" class="form-control srcf-input" id="emailExample" placeholder="Enter Email">
+                <div id="initial_error" style="display:none">error message</div>
             </div>
-            <div class="form-group col-md-5">
+            <div id="email-secondary" class="form-group col-md-5 srcf-form">
                 <label for="confirmEmailExample">Confirm Email</label>&nbsp;<i class="fa fa-envelope"></i>
-                <input type="confirmEmail" class="form-control srcf-form" id="confirmEmailExample"
+                <input type="confirmEmail" class="form-danger form-control srcf-input " id="confirmEmailExample"
                        placeholder="Confirm Email">
+               <div id="secondary_error">error message</div>
             </div>
             <div class="form-group col-md-5 col-md-offset-1">
                 <label for="majorExample">Undergraduate Major(s)</label> <br>
