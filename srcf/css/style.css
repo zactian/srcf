@@ -52,6 +52,7 @@ h3 {
     width: 95%;
     border-bottom: 1px solid #EBE8DC;
     margin: 5px auto;
+    background-color: #ffffff;
 }
 
 
@@ -371,10 +372,10 @@ h3 {
     border-radius: 5px;
     margin-left: -200px;
     position: fixed;
-    left: 35.5%;
+    left: 42%;
     top: -100%;
     z-index: 1070;
-    width: 50%;
+    width: 600px;
     -webkit-transform: translate(0, -500%);
     -ms-transform: translate(0, -500%);
     transform: translate(0, -500%);
@@ -432,5 +433,81 @@ h3 {
     border-top-right-radius: 0;
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;
+}
+
+.pull-left {
+    float: left !important;
+}
+blockquote {
+    border-color: #ddd;
+    border-color: rgba(0, 0, 0, .15);
+}
+
+
+.box.box-solid {
+    border-top: 0px;
+}
+
+.box-header.with-border {
+    border-bottom: 1px solid #f4f4f4;
+}
+
+.box-header {
+    color: #444;
+    display: block;
     padding: 10px;
+    position: relative;
+}
+
+.box-header>.fa, .box-header>.glyphicon, .box-header>.ion {
+    margin-right: 5px;
+}
+
+.box-header>.fa, .box-header>.glyphicon, .box-header>.ion, .box-header .box-title {
+    display: inline-block;
+    font-size: 18px;
+    margin: 0;
+    line-height: 1;
+}
+
+.box-header>.fa, .box-header>.glyphicon, .box-header>.ion, .box-header .box-title {
+    display: inline-block;
+    font-size: 18px;
+    margin: 0;
+    line-height: 1;
+}
+
+.box-body label
+{
+    margin-bottom: 0px;
+}
+
+.box-body blockquote
+{
+    font-size: 12px;
+}
+
+
+small li{
+    margin-bottom: 0px !important;
+}
+
+small ol{
+    padding-left: 15px;
+}
+
+.divider-line-requests .col-md-4 {
+    margin-left:2%;
+    padding: 0;
+    width:30%;
+}
+
+.alert-dismissable blockquote
+{
+    color:black;
+}
+
+.alert-dismissable
+{
+    padding-right: 10px;
 }
