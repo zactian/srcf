@@ -12,10 +12,11 @@
 <script>
     $(document).ready(function() {
         $('#unit-confirmation-form input:text').change(function() {
-             if ($(this).validateInput($(this).val(), /^[0-5]$/, null, {containerID: $(this).attr('id'), errorID: 'numerical_error_msg'})) {
-                console.log("yay");
-             }
-        });
+                     $(this).validateInput($(this).val(), /^(?:[0-9]|0[1-9]|1[0-9]|20)$/, null,
+                        {containerID: $(this).attr('id'), errorID: 'numerical_error_msg',
+                        parentID: 'unit-confirmation-form', enrollTotal:'eTotal',
+                        waitlistTotal: 'wTotal'});
+                 });
     });
 </script>
 
@@ -47,33 +48,33 @@
                     </tr>
                     <tr>
                         <td>Session A</td>
-                        <td><input id="e1" class="srcf-input" type="text" value="0"></td>
-                        <td><input id="w1" class="srcf-input" type="text" value="0"></td>
+                        <td><input id="e1" class="srcf-input enrolled-units" type="text" value="0"></td>
+                        <td><input id="w1" class="srcf-input waitlisted-units" type="text" value="0"></td>
                     </tr>
                     <tr>
                         <td>Session B</td>
-                        <td><input id="e2" class="srcf-input" type="text" value="0"></td>
-                        <td><input id="w2" class="srcf-input" type="text" value="0"></td>
+                        <td><input id="e2" class="srcf-input enrolled-units" type="text" value="0"></td>
+                        <td><input id="w2" class="srcf-input waitlisted-units" type="text" value="0"></td>
                     </tr>
                     <tr>
                         <td>Session C</td>
-                        <td><input id="e3" class="srcf-input" type="text" value="0"></td>
-                        <td><input id="w3" class="srcf-input" type="text" value="0"></td>
+                        <td><input id="e3" class="srcf-input enrolled-units" type="text" value="0"></td>
+                        <td><input id="w3" class="srcf-input waitlisted-units" type="text" value="0"></td>
                     </tr>
                     <tr>
                         <td>Session D</td>
-                        <td><input id="e4" class="srcf-input" type="text" value="0"></td>
-                        <td><input id="w4" class="srcf-input" type="text" value="0"></td>
+                        <td><input id="e4" class="srcf-input enrolled-units" type="text" value="0"></td>
+                        <td><input id="w4" class="srcf-input waitlisted-units" type="text" value="0"></td>
                     </tr>
                     <tr>
                         <td>Session E</td>
-                        <td><input id="e5" class="srcf-input" type="text" value="0"></td>
-                        <td><input id="w5" class="srcf-input" type="text" value="0"></td>
+                        <td><input id="e5" class="srcf-input enrolled-units" type="text" value="0"></td>
+                        <td><input id="w5" class="srcf-input waitlisted-units" type="text" value="0"></td>
                     </tr>
                     <tr>
                         <td>Total</td>
-                        <td>0</td>
-                        <td>0</td>
+                        <td id='eTotal'>0</td>
+                        <td id='wTotal'>0</td>
                     </tr>
                 </table>
             </form>

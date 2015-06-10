@@ -83,18 +83,26 @@
         var input = input;
         var regex = regex;
         var comparable = comparable;
+        var parent = id.parentID;
+        var $element = $(this);
         var $inputID = $('#' + id.containerID);
         var $errorID = $("#" + id.errorID);
 
         var validation = (function() {
             var that = this;
+
+            //set the parent jquery object if parent exists
+            if (parent != null) {
+                var $parent = $('#' + parent);
+                var $eTotal = $('#' + id.enrollTotal);
+                var $wTotal = $('#' + id.waitlistTotal);
+            }
+
             that.main = {
                 init: function() {
                     if (comparable != null) {
-                        console.log("here");
                         that.main.compareEmails();
                     } else {
-                        console.log('there');
                         that.main.validateEmail();
                     }
                 },
@@ -115,15 +123,36 @@
                 displayError: function() {
                     $inputID.addClass('form-danger');
                     $errorID.slideDown('slow');
-                    return false;
                 },
                 validated: function() {
                     $inputID.removeClass('form-danger');
-                    if ($errorID.css('display') != 'none') {
+                    if (parent == null) {
                         $errorID.slideUp('medium');
+                    //special case for confirm units page
+                    } else {
+                        if ($parent.has('.form-danger').length == 0) {
+                            $errorID.slideUp('medium');
+                            that.main.updateTotals();
+                        }
                     }
-                    console.log(true);
-                    return true;
+                },
+                //confirm units page specific function
+                updateTotals: function() {
+                    if ($element.hasClass('enrolled-units')) {
+                        var enrolledElements = $parent.find('.enrolled-units');
+                        var total = 0;
+                        for (var i=0; i < enrolledElements.length; i++) {
+                            total += parseInt($(enrolledElements[i]).val());
+                        }
+                        $eTotal[0].innerHTML = total.toString();
+                    } else {
+                        var waitlistedElements = $parent.find('.waitlisted-units');
+                        var total = 0;
+                        for (var i=0; i < waitlistedElements.length; i++) {
+                            total += parseInt($(waitlistedElements[i]).val());
+                        }
+                        $wTotal[0].innerHTML = total.toString();
+                    }
                 }
             }
             that.main.init();
