@@ -1,10 +1,10 @@
 (function ($) {
 
     $.fn.tableSorter = function (options) {
+
         var settings = $.extend({}, options);
         var thisTable = this;
         var $thisTable = $(this);
-
         var ray = (function () {
 
             var default_sort_fns = {
@@ -37,10 +37,18 @@
                                 if ($(this).data("type")) {
                                     var sort_type = $(this).data("type");
                                 }
-                                if (sort_dir === dir.ASC)
+                                if (sort_dir === dir.ASC){
+                                    $(this).siblings().andSelf().each(function(index){
+                                        $(this).children(":first").removeClass().addClass("fa fa-fw fa-sort-asc");
+                                    });
                                     $(this).removeClass().addClass(dir.DESC);
-                                else if (sort_dir === dir.DESC)
+                                }
+                                else if (sort_dir === dir.DESC){
+                                    $(this).siblings().andSelf().each(function(index){
+                                        $(this).children(":first").removeClass().addClass("fa fa-fw fa-sort-desc");
+                                    });
                                     $(this).removeClass().addClass(dir.ASC);
+                                }
                                 that.main.attachSort(index, $(this).data("sort"), sort_dir, sort_type);
                             });
                         });
