@@ -12,7 +12,7 @@
 <script>
     $(document).ready(function() {
         $('#unit-confirmation-form input:text').change(function() {
-                     $(this).validateInput($(this).val(), /^(?:[0-9]|0[1-9]|1[0-9]|20)$/, null,
+                     $(this).validateInput($(this).val(), /^(?:[0-9]|0[1-9]|1[0-9]|20)$/,
                         {containerID: $(this).attr('id'), errorID: 'numerical_error_msg',
                         parentID: 'unit-confirmation-form', enrollTotal:'eTotal',
                         waitlistTotal: 'wTotal'});

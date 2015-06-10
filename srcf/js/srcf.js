@@ -79,84 +79,120 @@
         })();
     }
 
-    $.fn.validateInput = function(input, regex, comparable, id) {
-        var input = input;
-        var regex = regex;
-        var comparable = comparable;
-        var parent = id.parentID;
-        var $element = $(this);
-        var $inputID = $('#' + id.containerID);
-        var $errorID = $("#" + id.errorID);
+    /**
+     * Validate Input takes in an input from a form field and determines if it is correct before the form can
+     * be submitted. This function is utlized by both the UCBInfo page as well as the ConfirmUnits page, but
+     * page utlizes different methods of this function. For emails, they are compared against a
+     * @param  {Array} input - Inputed text to be validated (used for emails)
+     * @param  {Object} regex - Regular expression that determines if the input is the correct format
+     *                          (used for emails)
+     * @param  {String} comparable - Comparison email to ensure that both emails are the same
+     *                          (used when confirming emails)
+     * @param  {Object} id - JS Object that stores a map of keywords connected to all the important ID's
+     */
+    $.fn.validateInput = function(input, comparable, id) {
+    var $element = $(this);
+    var $inputID = $('#' + id.containerID);
+    var $errorID = $("#" + id.errorID);
 
-        var validation = (function() {
-            var that = this;
+    var validate = (function() {
+        var that = this;
 
-            //set the parent jquery object if parent exists
-            if (parent != null) {
-                var $parent = $('#' + parent);
-                var $eTotal = $('#' + id.enrollTotal);
-                var $wTotal = $('#' + id.waitlistTotal);
-            }
+        if (id.parentID != null) {
+            var $parent = $('#' + id.parentID);
+        }
+        if (id.enrollTotal != null && id.waitlistTotal != null) {
+            var $eTotal = $('#' + id.enrollTotal);
+            var $wTotal = $('#' + id.waitlistTotal);
+        }
+        if(id.formID != null) {
+            var $formID = $('#' + id.formID);
+        }
 
-            that.main = {
-                init: function() {
-                    if (comparable != null) {
-                        that.main.compareEmails();
-                    } else {
-                        that.main.validateEmail();
-                    }
-                },
-                validateEmail: function() {
-                    if(!regex.test(input)) {
-                        that.main.displayError();
-                    } else {
-                        that.main.validated();
-                    }
-                },
-                compareEmails: function() {
-                    if (input != comparable) {
-                        that.main.displayError();
-                    } else {
-                        that.main.validated();
-                    }
-                },
-                displayError: function() {
+        that.main = {
+            init: function() {
+                if(typeof comparable === 'object' ||
+                    comparable instanceof Object) {
+                    that.main.validateInput();
+                } else if (typeof comparable === 'string' ||
+                    comparable instanceof String) {
+                    that.main.compareInput();
+                } else {
+                    that.main.validateForm();
+                }
+            },
+            validateInput: function() {
+                if(!comparable.test(input)) {
+                    that.main.formDanger();
+                    that.main.displayError();
+                } else {
+                    that.main.validated();
+                }
+            },
+            compareInput: function() {
+                if (input != comparable) {
+                    that.main.formDanger();
+                    that.main.displayError();
+                } else {
+                    that.main.validated();
+                }
+            },
+            formDanger: function() {
+                if (!$inputID.hasClass('form-danger')) {
                     $inputID.addClass('form-danger');
+                }
+            },
+            displayError: function() {
+                if (!$errorID.is(":visible")) {
                     $errorID.slideDown('slow');
-                },
-                validated: function() {
+                }
+                return false;
+            },
+            validated: function() {
+                if ($inputID.hasClass('form-danger')) {
                     $inputID.removeClass('form-danger');
-                    if (parent == null) {
+                }
+                if (id.parentID == null && $errorID.is(":visible")) {
+                    $errorID.slideUp('medium');
+                }
+                if (id.parent != null) {
+                    if ($parent.has('.form-danger').length == 0) {
                         $errorID.slideUp('medium');
-                    //special case for confirm units page
-                    } else {
-                        if ($parent.has('.form-danger').length == 0) {
-                            $errorID.slideUp('medium');
-                            that.main.updateTotals();
-                        }
-                    }
-                },
-                //confirm units page specific function
-                updateTotals: function() {
-                    if ($element.hasClass('enrolled-units')) {
-                        var enrolledElements = $parent.find('.enrolled-units');
-                        var total = 0;
-                        for (var i=0; i < enrolledElements.length; i++) {
-                            total += parseInt($(enrolledElements[i]).val());
-                        }
-                        $eTotal[0].innerHTML = total.toString();
-                    } else {
-                        var waitlistedElements = $parent.find('.waitlisted-units');
-                        var total = 0;
-                        for (var i=0; i < waitlistedElements.length; i++) {
-                            total += parseInt($(waitlistedElements[i]).val());
-                        }
-                        $wTotal[0].innerHTML = total.toString();
+                        that.main.updateTotals();
                     }
                 }
+                return true;
+            },
+            validateForm: function() {
+                var inputs = $formID[0].find('input');
+                for (var i = 0; i < inputs.length; i++) {
+                    if (!inputs[i].value) {
+                        that.main.displayError();
+                    } else {
+                        return true;
+                    }
+                }
+            },
+            updateTotals: function() {
+                if ($element.hasClass('enrolled-units')) {
+                    var enrolledElements = $parent.find('.enrolled-units');
+                    var total = 0;
+                    for (var i=0; i < enrolledElements.length; i++) {
+                        total += parseInt($(enrolledElements[i]).val());
+                    }
+                    $eTotal[0].innerHTML = total.toString();
+                } else {
+                    var waitlistedElements = $parent.find('.waitlisted-units');
+                    var total = 0;
+                    for (var i=0; i < waitlistedElements.length; i++) {
+                        total += parseInt($(waitlistedElements[i]).val());
+                    }
+                    $wTotal[0].innerHTML = total.toString();
+                }
             }
-            that.main.init();
-        })();
-    };
+        }
+        that.main.init();
+    })();
+};
 }(jQuery));
 

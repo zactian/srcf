@@ -69,12 +69,15 @@
         });
 
         $('#emailExample').blur(function() {
-            $(this).validateInput($(this).val(), /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, null, {containerID: 'emailExample', errorID: 'initial_error'})
+            $(this).validateInput($(this).val(), /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, {containerID: 'emailExample', errorID: 'initial_error'})
         });
 
         $('#confirmEmailExample').blur(function() {
-            $(this).validateInput($(this).val(), null, $('#emailExample').val(), {containerID: 'confirmEmailExample', errorID: 'secondary_error'});
+            $(this).validateInput($(this).val(), $('#emailExample').val(), {containerID: 'confirmEmailExample', errorID: 'secondary_error'});
         })
+        $('#ucbInfo-submit').click(function() {
+            $(this).validateInput(null, null, {containerID:'ucbInfo-submit', errorID:'general-form-error', formID:'ucb-info-form'});
+        });
     });
 </script>
 
@@ -88,7 +91,7 @@
     </header>
     <div class="content-wrapper">
         <h2>Student Information</h2>
-
+        <div id="general-form-error" class="col-md-12 form-danger" style="text-align:center; display:none">This form is messed up</div>
         <form id="ucb-info-form" class="col-md-12">
             <div id ="email-initial" class="form-group col-md-5 col-md-offset-1 srcf-form">
                 <label for="emailExample">Email</label>&nbsp;<i class="fa fa-envelope"></i>
@@ -237,7 +240,7 @@
             </div>
             <div class="col-md-12 bottom-navbar">
                 <a href="">Back</a>
-                <button type="button" class="btn btn-primary pull-right">Submit</button>
+                <button type="button" id="ucbInfo-submit" class="btn btn-primary pull-right">Submit</button>
             </div>
         </div>
     </div>
