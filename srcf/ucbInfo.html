@@ -69,14 +69,27 @@
         });
 
         $('#emailExample').blur(function() {
-            $(this).validateInput($(this).val(), /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, {containerID: 'emailExample', errorID: 'initial_error'})
+            $(this).validateInput({
+                input: $(this).val(),
+                comparable: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                containerID: 'emailExample',
+                errorID: 'initial_error'})
         });
 
         $('#confirmEmailExample').blur(function() {
-            $(this).validateInput($(this).val(), $('#emailExample').val(), {containerID: 'confirmEmailExample', errorID: 'secondary_error'});
+            $(this).validateInput({
+                input:$(this).val(),
+                comparable: $('#emailExample').val(),
+                containerID: 'confirmEmailExample',
+                errorID: 'secondary_error'});
         })
         $('#ucbInfo-submit').click(function() {
-            $(this).validateInput(null, null, {containerID:'ucbInfo-submit', errorID:'general-form-error', formID:'ucb-info-form'});
+            $(this).validateInput({
+                input: undefined,
+                comparable: undefined,
+                containerID:'ucbInfo-submit',
+                errorID:'general-form-error',
+                formID:'ucb-info-form'});
         });
     });
 </script>
@@ -91,16 +104,18 @@
     </header>
     <div class="content-wrapper">
         <h2>Student Information</h2>
-        <div id="general-form-error" class="col-md-12 form-danger" style="text-align:center; display:none">This form is messed up</div>
+        <div id="general-form-error" class="alert alert-warning col-md-12" style="margin-bottom:10px;text-align:center; display:none">
+            <p>This form is messed up</p>
+        </div>
         <form id="ucb-info-form" class="col-md-12">
             <div id ="email-initial" class="form-group col-md-5 col-md-offset-1 srcf-form">
                 <label for="emailExample">Email</label>&nbsp;<i class="fa fa-envelope"></i>
-                <input type="email" class="form-control srcf-input" id="emailExample" placeholder="Enter Email">
+                <input type="email" class="form-control srcf-input required" id="emailExample" placeholder="Enter Email">
                 <div id="initial_error" style="display:none">error message</div>
             </div>
             <div id="email-secondary" class="form-group col-md-5 srcf-form">
                 <label for="confirmEmailExample">Confirm Email</label>&nbsp;<i class="fa fa-envelope"></i>
-                <input type="confirmEmail" class="form-control srcf-input " id="confirmEmailExample"
+                <input type="confirmEmail" class="form-control srcf-input required" id="confirmEmailExample"
                        placeholder="Confirm Email">
                <div id="secondary_error" style="display:none">error message</div>
             </div>
@@ -238,10 +253,10 @@
         </span>
                 </h3>
             </div>
-            <div class="col-md-12 bottom-navbar">
-                <a href="">Back</a>
-                <button type="button" id="ucbInfo-submit" class="btn btn-primary pull-right">Submit</button>
-            </div>
+        </div>
+        <div class="col-md-12 bottom-navbar">
+            <a href="">Back</a>
+            <button type="button" id="ucbInfo-submit" class="btn btn-primary pull-right">Submit</button>
         </div>
     </div>
     <footer class="main-footer">

@@ -98,24 +98,21 @@
      *                          (used when confirming emails)
      * @param  {Object} id - JS Object that stores a map of keywords connected to all the important ID's
      */
-    $.fn.validateInput = function(input, comparable, id) {
+    $.fn.validateInput = function(id) {
     var $element = $(this);
+    var input = id.input;
+    var comparable = id.comparable;
     var $inputID = $('#' + id.containerID);
-    var $errorID = $("#" + id.errorID);
+    var $errorID = $('#' + id.errorID);
+    var $parent = $('#' + id.parentID);
+    var $eTotal = $('#' + id.enrollTotal);
+    var $wTotal = $('#' + id.waitlistTotal);
+    var $formID = $('#' + id.formID);
+
+    console.log($errorID);
 
     var validate = (function() {
         var that = this;
-
-        if (id.parentID != null) {
-            var $parent = $('#' + id.parentID);
-        }
-        if (id.enrollTotal != null && id.waitlistTotal != null) {
-            var $eTotal = $('#' + id.enrollTotal);
-            var $wTotal = $('#' + id.waitlistTotal);
-        }
-        if(id.formID != null) {
-            var $formID = $('#' + id.formID);
-        }
 
         that.main = {
             init: function() {
@@ -131,7 +128,7 @@
             },
             validateInput: function() {
                 if(!comparable.test(input)) {
-                    that.main.formDanger();
+                    that.main.formDanger($inputID);
                     that.main.displayError();
                 } else {
                     that.main.validated();
@@ -139,15 +136,16 @@
             },
             compareInput: function() {
                 if (input != comparable) {
-                    that.main.formDanger();
+                    that.main.formDanger($inputID);
                     that.main.displayError();
                 } else {
                     that.main.validated();
                 }
             },
-            formDanger: function() {
-                if (!$inputID.hasClass('form-danger')) {
-                    $inputID.addClass('form-danger');
+            formDanger: function(input) {
+                console.log(input);
+                if (!input.hasClass('form-danger')) {
+                    input.addClass('form-danger');
                 }
             },
             displayError: function() {
@@ -163,7 +161,7 @@
                 if (id.parentID == null && $errorID.is(":visible")) {
                     $errorID.slideUp('medium');
                 }
-                if (id.parent != null) {
+                if (id.parentID != null) {
                     if ($parent.has('.form-danger').length == 0) {
                         $errorID.slideUp('medium');
                         that.main.updateTotals();
@@ -172,16 +170,19 @@
                 return true;
             },
             validateForm: function() {
-                var inputs = $formID[0].find('input');
+                var inputs = $formID.find('input.required');
                 for (var i = 0; i < inputs.length; i++) {
-                    if (!inputs[i].value) {
+                    console.log(inputs[i]);
+                    if (!inputs[i].value || $(inputs[i]).hasClass('form-danger')) {
+                        that.main.formDanger($(inputs[i]));
                         that.main.displayError();
-                    } else {
-                        return true;
                     }
+
                 }
+                return true;
             },
             updateTotals: function() {
+                console.log('updateTotals');
                 if ($element.hasClass('enrolled-units')) {
                     var enrolledElements = $parent.find('.enrolled-units');
                     var total = 0;

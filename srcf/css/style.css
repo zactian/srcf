@@ -151,6 +151,7 @@ h3 {
     font-weight: bold;
     text-align: left;
     margin: 20px auto 10px;
+    display: inline-block;
 }
 
 #unit-confirmation-table th{
