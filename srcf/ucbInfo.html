@@ -8,8 +8,10 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
+    <script type="text/javascript" src="js/jquery.fancybox.js"></script>
     <script type="text/javascript" src="js/srcf.js"></script>
     <link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css"/>
+    <link rel="stylesheet" href="css/jquery.fancybox.css" type="text/css"/>
     <title></title>
 </head>
 <body>
@@ -36,7 +38,7 @@
                 var append_action = {
 
                     init: function () {
-                        if (pdf_container.find("a#" + option.val()).length)
+                        if (pdf_container.find("div#" + option.val()).length)
                             append_action.removeItem();
                         else
                             append_action.appendItem();
@@ -46,12 +48,44 @@
                         if (append_action.checkEmpty()) {
                             pdf.show("slow");
                         }
-                        var source = $('<a>').attr("id", option.val()).append("<img src='http://placehold.it/150x100' />");
+
+                        var source = $('<div style="position: relative; width:150px; height:100px; float:left; margin-right: 10px; margin-top: 10px; ">').attr("id", option.val()).append("<img src='images/pdf.jpg' width='25' height='25' style='position: absolute; z-index: 10; margin-left:20%; margin-top: 25%; cursor: pointer' class='view_pdf' />" +
+                                "<img src='images/pdf.jpg' width='25' height='25' style='position: absolute; z-index: 10; margin-left:60%; margin-top: 25%; cursor: pointer' />" +
+                               "<img src='http://placehold.it/150x100' />");
+
                         pdf_container.append(source);
+
+                        var pdfs = new Array();
+                        pdfs[2] = "chem.pdf";
+                        pdfs[3] = "coe.pdf";
+                        pdfs[4] = "ced.pdf";
+                        pdfs[6] = "haas.pdf";
+                        pdfs[1] = "l_and_s.pdf";
+                        pdfs[5] = "cnr.pdf";
+                        pdfs[7] = "law.pdf";
+
+
+                        $(".view_pdf").click(function(){
+                            var that = this;
+                            $.fancybox({
+                                type: 'html',
+                                autoSize: false,
+                                content: '<embed src="pdfs/'+pdfs[$(that).parent().attr("id")]+'"' +' type="application/pdf" height="99%" width="100%" />',
+                                beforeClose: function() {
+                                    $(".fancybox-inner").unwrap();
+                                },
+                                'overlayShow'	:	true,
+                                 closeBtn : true,
+                                 width: 800,
+                                 height: 700
+
+                            }); //fancybox
+                            return false;
+                        });
                     },
 
                     removeItem: function () {
-                        pdf_container.find("a#" + option.val()).remove();
+                        pdf_container.find("div#" + option.val()).remove();
                         if (append_action.checkEmpty()) {
                             pdf.hide("slow");
                         }
@@ -91,6 +125,10 @@
                 errorID:'general-form-error',
                 formID:'ucb-info-form'});
         });
+
+        $(this).validateInput($(this).val(), null, $('#emailExample').val(), {containerID: 'confirmEmailExample', errorID: 'secondary_error'});
+
+
     });
 </script>
 
@@ -245,7 +283,8 @@
                     </span>
                 </h3>
 
-                <div class="timeline-body">
+                <div class="timeline-body row">
+
                 </div>
                 <h3 class="timeline-footer"><span class="input-group-addon">
             <input type="checkbox" name="read_college_instructions" value="yes"/>
