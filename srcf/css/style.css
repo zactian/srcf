@@ -77,7 +77,7 @@ h3 {
     box-shadow: 0 0 1px rgba(0,0,0,0.5);
     position: relative;
     max-height: 100px;
-    z-index: 1030;
+    z-index: 1;
 }
 
 #logo
@@ -145,6 +145,10 @@ h3 {
     line-height: 34px;
 }
 
+#ucb-info-form
+{
+    z-index: 11;
+}
 
 /* Confirm Units Specific Styles */
 #unit-confirmation-table {
@@ -202,7 +206,7 @@ h3 {
     padding: 7px 0 8px 10px;
     position:relative;
     text-align: left;
-    z-index: 100;
+    z-index: 2;
     width:100%;
 }
 
@@ -332,6 +336,12 @@ h3 {
 #college_pdfs
 {
     display:none;
+    position: relative;
+}
+
+.pdf-body
+{
+    position: relative;
 }
 
 #srcf_start
@@ -363,7 +373,7 @@ h3 {
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 1070;
+    z-index: 10;
 }
 .modalsrcf:target:before {
     display: block;
@@ -382,7 +392,7 @@ h3 {
     position: fixed;
     left: 42%;
     top: -100%;
-    z-index: 1070;
+    z-index: 10;
     width: 600px;
     -webkit-transform: translate(0, -500%);
     -ms-transform: translate(0, -500%);
