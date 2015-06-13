@@ -337,7 +337,8 @@ h3 {
 #college_pdfs
 {
     display:none;
-    position: relative;
+    height: auto;
+
 }
 
 .pdf-body

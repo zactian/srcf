@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/srcf.js"></script>
+    <title></title>
+</head>
+<body>
+<script>
+    $(document).ready(function () {
+        $('#unit-confirmation-form input:text').change(function () {
+            $(this).validateInput({
+                input: $(this).val(),
+                comparable: /^(?:[0-9]|0[1-9]|1[0-9]|20)$/,
+                containerID: $(this).attr('id'),
+                errorID: 'numerical_error_msg',
+                parentID: 'unit-confirmation-form',
+                enrollTotal: 'eTotal',
+                waitlistTotal: 'wTotal'});
+        });
+        $('#confirmUnits-submit').click(function () {
+            $(this).validateInput({
+                input: undefined,
+                comparable: undefined,
+                containerID: 'confirmUnits-submit',
+                errorID: 'general-form-error2',
+                formID: 'unit-confirmation-form'
+            });
+        });
+    });
+</script>
+
+<div class="wrapper">
+    <header class="main-header">
+        <div id="logo">
+            <img src="images/2014_BSSLogo.jpg"/>
+        </div>
+    </header>
+    <div class="content-wrapper">
+        <h2>Your Student Record Change Form has been submitted confirmation.</h2>
+
+        <p>Your record change form has been submitted. You will be receiving confirmation email to the email address you gave.
+            It is recommendated that you will print this page and safe it for your records. The very minimum I would write down the SRCF ID: 5996.</p>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-solid">
+                    <div class="box-header with-border">
+                        <i class="fa fa-text-width"></i>
+                        <h3 class="box-title">Important Messages</h3>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                        <ul>
+                            <li>Deadlines are applied to the date the form is successfully submitted online.</li>
+                            <li>You can check the status of your request(s) by logging in to MySummer student portal (http://summer.berkeley.edu/mysummer).</li>
+                            <li>It is your responsibility to check the status of all your requests and follow up with the appropriate person(s) as needed, or if requested.</li>
+                        </ul>
+                    </div><!-- /.box-body -->
+                </div><!-- /.box -->
+            </div>
+        </div>
+
+
+        <div class="col-md-12 bottom-navbar">
+            <a href="">Back</a>
+            <button type="button" id="confirmUnits-submit" class="btn btn-primary" style="float:right;">Submit</button>
+        </div>
+    </div>
+    <footer class="main-footer">
+        <div id="footer-inner" class="clearfix">
+            <div id="sub-footer">
+                <a href="http://www.berkeley.edu">
+                    <img src="/images/2014_UCBerkeleyLogo.png" alt="UC Berkeley" class="footer-logo"></a>
+                <p>© UC Berkeley Summer Sessions, 1995 University Avenue
+                    <br>
+                    510-642-5611</p>
+            </div>
+            <!-- <div id="sub-footer"> -->
+        </div>
+    </footer>
+</div>
+</body>
+</html>

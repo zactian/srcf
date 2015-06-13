@@ -18,7 +18,33 @@
 
 <!-- Script for multiselect (remove later?) -->
 <script>
+
     $(document).ready(function () {
+
+        var pdf_count= new Array();
+        $("#read_college_instructions").change(function() {
+            if(this.checked) {
+                var pass = true;
+                var pdf_container = $("#college_pdfs .timeline-item .timeline-body");
+                pdf_container.find("div").each(function(){
+                    var id = parseInt($(this).attr("id"));
+                    console.log(parseInt(jQuery.inArray(id, pdf_count)) + ": "+id);
+                    if(jQuery.inArray(id, pdf_count) == -1){
+                        pass = false;
+                    }
+                });
+                if(pass == false){
+
+                }
+                else
+                  $(this).parent().removeClass().addClass("alert alert-success row").find("i").removeClass().addClass("icon fa fa-check");
+            }
+            else{
+                $(this).parent().removeClass().addClass("alert alert-warning row").find("i").removeClass().addClass("icon fa fa-warning");
+            }
+        });
+
+
         $('#ucb-info-multi-major').multiselect({
             enableFiltering: true,
             buttonWidth: '100%',
@@ -46,12 +72,12 @@
 
                     appendItem: function () {
                         if (append_action.checkEmpty()) {
-                            pdf.show("slow");
+                            pdf.slideToggle("slow");
                         }
 
                         var source = $('<div style="position: relative; width:150px; height:100px; float:left; margin-right: 10px; margin-top: 10px; ">').attr("id", option.val()).append("<img src='images/pdf.jpg' width='25' height='25' style='position: absolute; z-index: 10; margin-left:20%; margin-top: 25%; cursor: pointer' class='view_pdf' />" +
                                 "<img src='images/pdf.jpg' width='25' height='25' style='position: absolute; z-index: 10; margin-left:60%; margin-top: 25%; cursor: pointer' />" +
-                               "<img src='http://placehold.it/150x100' />");
+                                "<img src='http://placehold.it/150x100' />");
 
                         pdf_container.append(source);
 
@@ -65,20 +91,18 @@
                         pdfs[7] = "law.pdf";
 
 
-                        $(".view_pdf").click(function(){
-                            var that = this;
+                        $(".view_pdf").click(function () {
+                           var that = this;
+                           if(parseInt(jQuery.inArray(parseInt($(that).parent().attr("id")), pdf_count)) === -1){
+                               pdf_count.push(parseInt($(that).parent().attr("id")));
+                           }
                             $.fancybox({
                                 type: 'html',
                                 autoSize: false,
-                                content: '<embed src="pdfs/'+pdfs[$(that).parent().attr("id")]+'"' +' type="application/pdf" height="99%" width="100%" />',
-                                beforeClose: function() {
-                                    $(".fancybox-inner").unwrap();
-                                },
-                                'overlayShow'	:	true,
-                                 closeBtn : true,
-                                 width: 800,
-                                 height: 700
-
+                                content: '<embed src="pdfs/' + pdfs[$(that).parent().attr("id")] + '"' + ' type="application/pdf" height="99%" width="100%" />',
+                                closeBtn: true,
+                                width: 800,
+                                height: 700
                             }); //fancybox
                             return false;
                         });
@@ -87,7 +111,7 @@
                     removeItem: function () {
                         pdf_container.find("div#" + option.val()).remove();
                         if (append_action.checkEmpty()) {
-                            pdf.hide("slow");
+                            pdf.slideToggle("slow");
                         }
                     },
 
@@ -102,7 +126,7 @@
             }
         });
 
-        $('#emailExample').blur(function() {
+        $('#emailExample').blur(function () {
             $(this).validateInput({
                 input: $(this).val(),
                 comparable: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
@@ -110,23 +134,23 @@
                 errorID: 'initial_error'})
         });
 
-        $('#confirmEmailExample').blur(function() {
+        $('#confirmEmailExample').blur(function () {
             $(this).validateInput({
-                input:$(this).val(),
+                input: $(this).val(),
                 comparable: $('#emailExample').val(),
                 containerID: 'confirmEmailExample',
                 errorID: 'secondary_error'});
         })
-        $('#ucbInfo-submit').click(function() {
+        $('#ucbInfo-submit').click(function () {
             $(this).validateInput({
                 input: undefined,
                 comparable: undefined,
-                containerID:'ucbInfo-submit',
-                errorID:'general-form-error',
-                formID:'ucb-info-form'});
+                containerID: 'ucbInfo-submit',
+                errorID: 'general-form-error',
+                formID: 'ucb-info-form'});
         });
 
-        $(this).validateInput($(this).val(), null, $('#emailExample').val(), {containerID: 'confirmEmailExample', errorID: 'secondary_error'});
+        //$(this).validateInput($(this).val(), null, $('#emailExample').val(), {containerID: 'confirmEmailExample', errorID: 'secondary_error'});
 
 
     });
@@ -142,20 +166,25 @@
     </header>
     <div class="content-wrapper">
         <h2>Student Information</h2>
-        <div id="general-form-error" class="alert alert-warning col-md-12" style="margin-bottom:10px;text-align:center; display:none">
+
+        <div id="general-form-error" class="alert alert-warning col-md-12"
+             style="margin-bottom:10px;text-align:center; display:none">
             <p>This form is messed up</p>
         </div>
         <form id="ucb-info-form" class="col-md-12">
-            <div id ="email-initial" class="form-group col-md-5 col-md-offset-1 srcf-form">
+            <div id="email-initial" class="form-group col-md-5 col-md-offset-1 srcf-form">
                 <label for="emailExample">Email</label>&nbsp;<i class="fa fa-envelope"></i>
-                <input type="email" class="form-control srcf-input required" id="emailExample" placeholder="Enter Email">
+                <input type="email" class="form-control srcf-input required" id="emailExample"
+                       placeholder="Enter Email">
+
                 <div id="initial_error" style="display:none">error message</div>
             </div>
             <div id="email-secondary" class="form-group col-md-5 srcf-form">
                 <label for="confirmEmailExample">Confirm Email</label>&nbsp;<i class="fa fa-envelope"></i>
                 <input type="confirmEmail" class="form-control srcf-input required" id="confirmEmailExample"
                        placeholder="Confirm Email">
-               <div id="secondary_error" style="display:none">error message</div>
+
+                <div id="secondary_error" style="display:none">error message</div>
             </div>
             <div class="form-group col-md-5 col-md-offset-1">
                 <label for="majorExample">Undergraduate Major(s)</label> <br>
@@ -278,19 +307,17 @@
             <h2>College Instruction</h2>
 
             <div class="timeline-item">
-                <h3 class="timeline-header">
-                    <span class="input-group-addon">Please open and read the following PDF instructions for your Colleges and then confirm that you have done so.
-                    </span>
-                </h3>
 
-                <div class="timeline-body row">
+                <div class="timeline-body row" style="border: 0">
 
                 </div>
-                <h3 class="timeline-footer"><span class="input-group-addon">
-            <input type="checkbox" name="read_college_instructions" value="yes"/>
-                Check box to indicate that you have read the instructions for your College.
-        </span>
-                </h3>
+
+                <div class="alert alert-warning row" style="width: 100%; padding: 10px; font-size: 12px;">
+                    <i class="icon fa fa-warning"></i> Please open and read the following PDF instructions for your Colleges and then confirm that you have
+                    done so. <br/>
+                    <input type="checkbox" name="read_college_instructions" id="read_college_instructions" value="yes"/>
+                    Check box to indicate that you have read the instructions for your College.
+                </div>
             </div>
         </div>
         <div class="col-md-12 bottom-navbar">
