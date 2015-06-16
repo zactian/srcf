@@ -53,13 +53,28 @@ p {
 }
 
 .divider-line {
-    width: 95%;
+    width: 99%;
     border-bottom: 1px solid #EBE8DC;
     margin: 5px auto;
     background-color: #ffffff;
 }
 
+.flex-container {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
 
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.flex-box {
+    overflow: hidden;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
 
 /** callout component */
 .callout {
@@ -71,10 +86,6 @@ p {
     padding:5px;
     text-align: left;
     display: inline-block;
-}
-
-.callout li {
-    margin-bottom: 10px;
 }
 
 /* Header Styles */
@@ -195,6 +206,8 @@ p {
     width: 50px;
 }
 
+
+
 /* Form Action specific styles */
 #accordian-menu {
     margin-bottom: 20px;
@@ -295,7 +308,63 @@ p {
     margin:0 auto;
 }
 
-/* Timeline SPecific Styles */
+/* Confirm Enrollment Changes Specific Styles */
+#ec-system-info {
+    padding: 0 5px 0 0;
+}
+
+#ec-provided-info {
+    padding: 0 0 0 5px;
+}
+
+.ec-course-action {
+    width: 48%;
+    margin-top: 10px;
+}
+
+.confirm-ec-table {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.confirm-ec-table tr {
+    height: 25px;
+}
+
+.confirm-ec-table tr td {
+    padding:0 10px;
+}
+
+.confirm-ec-table tr:nth-child(even) {
+    background-color: #fff;
+}
+
+.confirm-ec-table ul {
+    padding:10px 15px;
+    margin-bottom:0;
+}
+
+
+@media only screen and (max-width : 992px) {
+    #ec-system-info {
+        padding: 0;
+    }
+
+    #ec-provided-info {
+        padding:0;
+        margin-top: 10px;
+    }
+}
+
+@media only screen and (max-width:600px) {
+    .ec-course-action {
+        width:90%;
+        margin:0 auto;
+    }
+
+}
+
+/* Timeline Specific Styles */
 .timeline-item {
     -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.1);
     box-shadow: 0 1px 1px rgba(0,0,0,0.1);

@@ -16,12 +16,13 @@
     </header>
     <div class="content-wrapper">
         <h2>Confirm Your Enrollment Changes</h2>
-        <div class="col-md-6" style="padding:0">
-                <div class="col-md-11 callout">
+        <div class="flex-container">
+            <div id="ec-system-info" class="col-md-6 col-xs-12 flex-box">
+                <div class="callout" style="width:100%">
                     <h3>System Student Information</h3>
                     <p>Please confirm the following information is correct. If this information
-                    is not correct, please contact Summer Sessions.</p>
-                    <table>
+                        is not correct, please contact Summer Sessions.</p>
+                    <table class="confirm-ec-table">
                         <tr>
                             <td><strong>First Name:</strong></td>
                             <td>Robert</td>
@@ -43,86 +44,72 @@
                             <td>Undergraduate</td>
                         </tr>
                     </table>
+                </div>
             </div>
-        </div>
-        <div class="col-md-6" style="padding:0">
-                <div class="col-md-11 callout">
-                    <h3>System Student Information</h3>
-                    <p>Please confirm the following information is correct. If this information
-                    is not correct, please contact Summer Sessions.</p>
-                    <table>
+            <div id="ec-provided-info" class="col-md-6 col-xs-12 flex-box">
+                <div class="callout" style="width:100%">
+                     <h3>Provided Student Information</h3>
+                    <p>Please verify the information you provided is correct.</p>
+                    <table class="confirm-ec-table">
                         <tr>
-                            <td><strong>First Name:</strong></td>
-                            <td>Robert</td>
+                            <td><strong>Contact Email:</strong></td>
+                            <td>rstudentman@berkeley.edu</td>
                         </tr>
                         <tr>
-                            <td><strong>Last Name:</strong></td>
-                            <td>Studentman</td>
+                            <td><strong>Major(s):</strong></td>
+                            <td>Chemistry</td>
                         </tr>
                         <tr>
-                            <td><strong>Student Id:</strong></td>
-                            <td>0000010</td>
+                            <td><strong>Read College Instructions:</strong></td>
+                            <td>Something</td>
                         </tr>
                         <tr>
-                            <td><strong>UC Berkeley Student:</strong></td>
-                            <td>Yes</td>
+                            <td><strong>Your College(s):</strong></td>
+                            <td>
+                                <ul>
+                                <li>Chemistry</li>
+                                <li>Culinary Science</li>
+                                </ul>
+                            </td>
                         </tr>
                         <tr>
-                            <td><strong>Current Status:</strong></td>
-                            <td>Undergraduate</td>
+                            <td><strong>Is an NCAA Athlete::</strong></td>
+                            <td>No</td>
                         </tr>
                     </table>
+                </div>
             </div>
-        </div>
-        <div class="col-md-6 callout">
-            <h3>Provided Student Information</h3>
-            <p>Please verify the information you provided is correct.</p>
-            <table>
-                <tr>
-                    <td><strong>Contact Email:</strong></td>
-                    <td>rstudentman@berkeley.edu</td>
-                </tr>
-                <tr>
-                    <td><strong>Major(s):</strong></td>
-                    <td>Chemistry</td>
-                </tr>
-                <tr>
-                    <td><strong>Read College Instructions:</strong></td>
-                    <td>Something</td>
-                </tr>
-                <tr>
-                    <td><strong>Your College(s):</strong></td>
-                    <td>
-                        <ul>
-                        <li>Chemistry</li>
-                        <li>Culinary Science</li>
-                        </ul>
-                    </td>
-                </tr>
-                <tr>
-                    <td><strong>Is an NCAA Athlete::</strong></td>
-                    <td>No</td>
-                </tr>
-            </table>
-        </div>
-        <div class="col-md-12 callout">
+        <div class="col-md-12 col-xs-12 callout" style="margin-top:10px">
             <h3>Form Requests</h3>
-            <blockquote>
-                <label>Course:</label> AFRICAN R-18 LEC 001 <br />
-                <label>CCN:</label> 10110 <br />
-                <label>Units:</label> 4.0 <br />
-                <label>Action Type:</label> Regular <br />
-                <label>Waitlisted?</label> No <br />
-                <label>Attended?</label> No <br />
-                <small style="font-size: 12px;">&nbsp;Approvers
-                    <ol>
-                        <li>Faculty Athletic Representative</li>
-                        <li>Summer Session Staff</li>
-                    </ol>
-                </small>
-            </blockquote>
+            <div class="divider-line"></div>
+
+            <div class="col-md-4 ec-course-action">
+                <div class="box box-solid">
+                    <div class="box-header with-border">
+                        <i class="fa fa-fw fa-edit"></i>&nbsp;
+                        <h3 class="box-title"  style="font-size: 16px;">Drop a Course</h3><i class="fa fa-fw fa-times pull-right"></i>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                        <blockquote>
+                            <label>Course:</label> AFRICAN R-18 LEC 001 <br />
+                            <label>CCN:</label> 10110 <br />
+                            <label>Units:</label> 4.0 <br />
+                            <label>Action Type:</label> Regular <br />
+                            <label>Waitlisted?</label> No <br />
+                            <label>Attended?</label> No <br />
+                            <small style="font-size: 12px;">&nbsp;Approvers
+                                <ol>
+                                    <li>Faculty Athletic Representative</li>
+                                    <li>Summer Session Staff</li>
+                                </ol>
+                            </small>
+                        </blockquote>
+                    </div><!-- /.box-body -->
+                </div><!-- /.box -->
+            </div>
         </div>
     </div>
+
     <div class="col-md-12 bottom-navbar">
         <a href="">Back</a>
         <button type="button" id="ucbInfo-submit" class="btn btn-primary pull-right">Submit</button>
