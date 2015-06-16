@@ -31,6 +31,10 @@ h3 {
 }
 
 h4 {
+     color: #023876 !important;
+}
+
+h5 {
     color: #023876 !important;
 }
 
@@ -295,11 +299,11 @@ p {
 }
 
 #accordian-menu input:checked ~ .option-2 {
-    height: 104px;
+    height: 90px;
 }
 
 #accordian-menu input:checked ~ .option-3 {
-    height: 360px;
+    height: 400px;
 }
 
 #accordian-menu input:checked ~  {

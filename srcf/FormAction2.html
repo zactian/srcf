@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="css/bootstrap.css"/>
     <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/jquery.fancybox.css" type="text/css"/>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
@@ -12,6 +13,8 @@
     <title></title>
     <script type="text/javascript">
         $( document ).ready(function() {
+
+
             $("#ccn").keyup(function() {
                 if($(this).val().length == 5){
                     $("#ccn_info").fadeIn(1000);
@@ -29,8 +32,16 @@
                 else{
                     var text = $(".divider-line-requests .col-md-4").html();;
                     var vv = $(".divider-line-requests");
-                    $(".divider-line-requests").append("<div class='col-md-4' style='width: 48%; margin-top: 10px;'>"+text+"</div>");
+                    $(".divider-line-requests").append("<div class='col-md-4' style='width: 95%; margin-top: 0px; margin-left: 12px;'>"+text+"</div>");
                 }
+
+                $('#accordian-menu').children(":gt(1)").each(function(){
+                    $(this).find('label').css({"background":"#D0D0D0", "color": "#505050"});
+                    $(this).find('img').remove();
+
+
+                });
+
                 $("#courseInfo").find('.box-default').remove();
             });
 
@@ -71,7 +82,7 @@
         </div>
 
         <!-- Accordian Menu -->
-        <div id="accordian-menu" class="col-md-6">
+        <div id="accordian-menu" class="col-md-8">
             <h4>Please Select a Form Action</h4>
             <div>
                 <input type="checkbox" id="option-1" name="option-1">
@@ -79,27 +90,37 @@
                     <img src="images/openArrow.png" alt="">
                     Add, Drop, Change Grading Option, Change Unit Value
                 </label>
-                <div class="form-action-content btn-group option-1" style="height: 245px;">
+                <div class="form-action-content btn-group option-1">
                     <p>
                         Select your request (your Record Change Form needs to have at least one).
                         You may combine requests (such as Add a Course and Drop a Course) on the same form, but must initiate only one request listed below at a time.
                     </p>
-                    <div class="divider-line"></div>
-                    <table id="button-table" style="width: 90%;">
-                        <tr>
-                            <td><a href="#modal-one" class="btn btn-block btn-primary btn-sm">Add a Course</a></td>
-                            <td><a href="#modal-one"  class="btn btn-block btn-primary btn-sm">Enroll from Waitlist</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#modal-one"  class="btn btn-block btn-primary btn-sm">Drop a Course</a></td>
-                            <td><a  href="#modal-one" class="btn btn-block btn-primary btn-sm">Change Grading Option</a></td>
-                        </tr>
-                        <tr>
-
-                            <td><a  href="#modal-one"class="btn btn-block btn-primary btn-sm">Change Unit Value</a></td>
-                            <td><a  href="#modal-one" class="btn btn-block btn-primary btn-sm">Switch Secondary Sections</a></td>
-                        </tr>
-                    </table>
+                    <div class="divider-line"></div><br />
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4 col-md-offset-0">
+                                <a href="#modal-one" class="btn btn-block btn-primary btn-sm">Add a Course</a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="#modal-one"  class="btn btn-block btn-primary btn-sm">Enroll from Waitlist</a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="#modal-one"  class="btn btn-block btn-primary btn-sm">Drop a Course</a>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a  href="#modal-one" class="btn btn-block btn-primary btn-sm">Change Grading Option</a>
+                            </div>
+                            <div class="col-md-4">
+                                <a  href="#modal-one"class="btn btn-block btn-primary btn-sm">Change Unit Value</a>
+                            </div>
+                            <div class="col-md-4">
+                                <a  href="#modal-one" class="btn btn-block btn-primary btn-sm">Switch Secondary Sections</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div>
@@ -113,7 +134,7 @@
                         course.</p>
                     <div class="divider-line"></div>
                     <div class="center-text">
-                        <a  href="#modal-one" class="btn btn-block btn-primary btn-sm" style="margin-top:10px; margin-bottom: 10px; width: 30%; margin-left:auto; margin-right: auto;">Add a Course</a>
+                        <a  href="#modal-one" class="btn btn-block btn-primary btn-sm" style="margin-top:10px; margin-bottom: 0px; width: 30%; margin-left:auto; margin-right: auto;">Add a Course</a>
                     </div>
                 </div>
             </div>
@@ -156,7 +177,7 @@
         </div>
         <!-- End Accordian Menu -->
 
-        <div class="col-md-6" id="courseInfo">
+        <div class="col-md-4" id="courseInfo">
             <h4>Requests in this Form</h4>
             <div class="box box-default">
                 <div class="box-header with-border alert alert-danger alert-dismissable">
@@ -164,7 +185,7 @@
                 </div><!-- /.box-header -->
             </div><!-- /.box -->
             <div class="divider-line-requests row alert-success alert-dismissable   ">
-                <div class="col-md-4" style="display: none; width: 48%; margin-top: 10px;" >
+                <div class="col-md-4" style="display: none; width: 95%; margin-top: 15px; margin-left: 12px" >
                     <div class="box box-solid">
                         <div class="box-header with-border">
                             <i class="fa fa-fw fa-edit"></i>&nbsp;
@@ -200,6 +221,7 @@
         <!-- Modal -->
         <div class="modalsrcf" id="modal-one" aria-hidden="true">
             <div class="modal-dialog">
+                <a title="Close" class="fancybox-item fancybox-close" href="#close"></a>
                 <div class="col-md-6" style="width: 100%;">
                     <!-- Bar chart -->
                     <div class="box box-primary" style="padding-bottom: 15px;">
@@ -212,11 +234,12 @@
                         </div>
                         <div class="box-body">
                             <div class="form-group">
-                                <label>Enter Your CCN in the box below</label>
-                                <input type="text" id="ccn" class="form-control" placeholder="Enter Your CCN">
+                                <label>CCN:</label>
+                                <input type="text" class="form-control srcf-input required input-sm" id="ccn"
+                                       placeholder="Enter CCN" style="width: 50%;">
                             </div>
                             <div id="ccn_info" class="course-info callout" style="margin-top: 10px; margin-bottom: 10px; background: rgb(243, 248, 245); padding:10px; display:none;">
-                                <h4 style="margin-top: 0px; margin-bottom: 5px; ">African American Studies R1B P 001 LEC</h4>
+                                <h5 style="margin-top: 0px; margin-bottom: 5px; ">African American Studies R1B P 001 LEC</h5>
                                 MTuWTh 9-11A, 174 Barrows
                                 <br />
                                 <b>Instructor: </b>Nanda, A
@@ -224,17 +247,18 @@
                                 <b>CCN:</b> 10110
                             </div>
                             <div class="import-container" style="display: none">
-                                <h4 style="margin-bottom: 8px;">This request needs to be approved by the following</h4>
+                                <h5 style="margin-bottom: 8px;">This request needs to be approved by the following</h5>
                                 <ol>
                                     <li> Faculty Athletic Representative</li>
                                     <li> Summer Session Staff</li>
                                 </ol>
-                                <h4 style="margin-bottom: 4px;">Please answering the following question below</h4>
+                                <h5 style="margin-bottom: 4px;">Please answering the following question below</h5>
                                 <ol>
                                     <li> Are you currently on a waitlist for this course? &nbsp; &nbsp;&nbsp; &nbsp; <input type="radio">Yes  &nbsp; <input type="radio">No</li>
                                     <li> Have you Attended this course? &nbsp; &nbsp;&nbsp; &nbsp; <input type="radio">Yes &nbsp; <input type="radio">No</li>
-                                    <li> The date you last attended this course? &nbsp; &nbsp;
-                                        <input type="text" placeholder="" id="datepicker">
+                                    <li> The date you last attended this course?
+                                        <input type="text" class="form-control srcf-input required input-sm" id="datepicker"
+                                               placeholder="Click here to pick a date" style="width: 25%;">
                                     </li>
                                 </ol>
 
