@@ -24,14 +24,14 @@ body{
 
 h2 {
     color: #023876;
-    font-size:16px;
-    margin:20px 0px 10px 0px;
 }
 
 h3 {
-    color: #023876;
-    font-size:14px;
-    margin: 7px 0 5px 5px;
+    color: #023876 !important;
+}
+
+h4 {
+    color: #023876 !important;
 }
 
 p {
@@ -490,10 +490,10 @@ p {
     border-radius: 5px;
     margin-left: -200px;
     position: fixed;
-    left: 42%;
+    left: 48%;
     top: -100%;
     z-index: 10;
-    width: 600px;
+    width: 500px;
     -webkit-transform: translate(0, -500%);
     -ms-transform: translate(0, -500%);
     transform: translate(0, -500%);

@@ -18,15 +18,15 @@
     </header>
     <div class="content-wrapper">
         <div class="row">
-        <div class="col-lg-4 col-lg-offset-4 pull-left"><h2>Student Record Change Form Starts </h2></div>
-            <div class="col-mod-1 col-lg-offset-1 pull-right invoice-col">
+        <div class="col-lg-6 col-lg-offset-3 pull-left"><h3>Student Record Change Form Starts </h3></div>
+            <div class="col-sm-2 col-lg-offset-1 pull-right invoice-col">
                     <address>
                         <strong>Name: Tian Strenfel</strong><br />
-                        UC Berkeley SID: 908206889<br>
+                        SID: 908206889<br>
                     </address>
             </div>
         </div>
-        <h3 style="margin-top: 25px;">Start</h3>
+        <h4 style="margin-top: 25px;">Start</h4>
         <ul id="srcf_start">
             <li><strong>Please complete this form only if you are already registered in Berkeley Summer Sessions.</strong>
                 If you are not a UC Berkeley student and would like to apply to Berkeley Summer Sessions,
@@ -42,7 +42,9 @@
             </li>
             <li><strong>IT IS YOUR RESPONSIBILITY TO FOLLOW UP ON YOUR STUDENT RECORD CHANGE FORM REQUEST.</strong></li>
         </ul>
-        <h3 style="margin-top: 25px;">Deadlines</h3>
+        <br />
+        <div class="divider-line"></div>
+        <h4 style="margin-top: 25px;">Deadlines</h4>
         <table id="srcf_deadline" class="table dataTable">
             <thead>
             <tr>
@@ -104,8 +106,7 @@
                 <td>January 1, 2015</td>
             </tr>
             </tbody></table>
-
-        <button type="button" class="btn btn-primary pull-right">Next</button>
+        <button type="button" class="btn btn-primary pull-right next_step">Next</button>
     </div>
     <footer class="main-footer">
         <div id="footer-inner" class="clearfix">
@@ -124,4 +125,8 @@
 </html>
 <script type="text/javascript">
     $("#srcf_deadline").tableSorter();
+    $(".next_step").click(function() {
+        var url = 'ucbInfo.html';
+        $(location).attr('href', url);
+    })
 </script>
