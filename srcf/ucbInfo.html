@@ -51,13 +51,14 @@
         $('#ucb-info-multi-major').multiselect({
             enableFiltering: true,
             buttonWidth: '100%',
-            buttonClass: 'multiselect dropdown-toggle btn btn-default srcf-input',
-            nonSelectedText: 'Select Major(s)'
+            buttonClass: 'multiselect dropdown-toggle btn btn-default srcf-input input-sm',
+            nonSelectedText: 'Select Major(s)',
+            maxHeight: 300
         });
         $('#ucb-info-multi-college').multiselect({
             enableFiltering: true,
             buttonWidth: '100%',
-            buttonClass: 'multiselect dropdown-toggle btn btn-default srcf-input',
+            buttonClass: 'multiselect dropdown-toggle btn btn-default srcf-input input-sm',
             nonSelectedText: 'Select College(s)',
 
             onChange: function (option, checked) {
@@ -177,25 +178,26 @@
                 </address>
             </div>
         </div>
-        <div id="general-form-error" class="alert alert-warning col-md-12"
-             style="margin-bottom:10px;text-align:center; display:none">
-            <p>This form is messed up</p>
+        <div id="general-form-error" class="alert alert-danger col-md-12">
+            <p>Please complete the form before continuing to the next page.</p>
         </div>
         <form id="ucb-info-form" class="col-md-12">
-            <div id="email-initial" class="form-group col-md-5 col-md-offset-1 srcf-form">
-                <label for="emailExample">Email</label>&nbsp;<i class="fa fa-envelope"></i>
-                <input type="email" class="form-control srcf-input required" id="emailExample"
-                       placeholder="Enter Email">
 
-                <div id="initial_error" style="display:none">error message</div>
+            <div class="flex-container col-md-12" style="padding:0">
+                <div class="col-md-5 col-xs-12 col-md-offset-1 form-group">
+                    <label for="emailExample">Email</label>&nbsp;<i class="fa fa-envelope"></i>
+                    <input type="text" class="form-control srcf-input required input-sm" id="emailExample"
+                           placeholder="Enter Email">
+                     <div id="initial_error" class="alert-danger alert col-md-6">The email you have entered is not valid.</div>
+                </div>
+                <div class="col-md-5 col-xs-12 form-group">
+                    <label for="confirmEmailExample">Confirm Email</label>&nbsp;<i class="fa fa-envelope"></i>
+                    <input type="text" class="form-control srcf-input required input-sm" id="confirmEmailExample"
+                           placeholder="Confirm Email">
+                    <div id="secondary_error" class="alert-danger alert">The emails you have entered do not match.</div>
+                </div>
             </div>
-            <div id="email-secondary" class="form-group col-md-5 srcf-form">
-                <label for="confirmEmailExample">Confirm Email</label>&nbsp;<i class="fa fa-envelope"></i>
-                <input type="confirmEmail" class="form-control srcf-input required" id="confirmEmailExample"
-                       placeholder="Confirm Email">
 
-                <div id="secondary_error" style="display:none">error message</div>
-            </div>
             <div class="form-group col-md-5 col-md-offset-1">
                 <label for="majorExample">Undergraduate Major(s)</label> <br>
                 <select id="ucb-info-multi-major" class="form-control" multiple="multiple">

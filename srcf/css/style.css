@@ -47,8 +47,8 @@ p {
 
 .alert {
     text-align: center;
-    padding:5px 0 5px 0;
-    margin: 5px 0 0 0;
+    padding:3px 0 3px 0;
+    margin: 5px 0;
     display: inline-block;
 }
 
@@ -110,12 +110,16 @@ p {
 
 /*Form Styles */
 .srcf-form {
-    height:73px;
+    /*height:73px;*/
 }
 
 .srcf-input {
     border: 2px solid #DEDCD5;
     border-radius: 0;
+    padding:0;
+    vertical-align: center;
+    color: #555;
+    font-size: 12px;
 }
 
 .form-danger {
@@ -156,15 +160,34 @@ p {
     font-size: 75%;
 }
 
-/* Other Styles */
 .bottom-navbar {
     margin-top: 30px;
     line-height: 34px;
 }
 
+/* UCB Info Specific Styles */
+#general-form-error {
+    margin-bottom: 10px;
+    display: none;
+}
+
 #ucb-info-form
 {
     z-index: 11;
+}
+
+#ucb-info-form input[type=text] {
+    padding-left: 10px;
+}
+
+#initial_error {
+    display:none;
+    width:100%
+}
+
+#secondary_error {
+    display:none;
+    width:100%
 }
 
 /* Confirm Units Specific Styles */

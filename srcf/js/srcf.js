@@ -87,17 +87,6 @@
         })();
     }
 
-    /**
-     * Validate Input takes in an input from a form field and determines if it is correct before the form can
-     * be submitted. This function is utlized by both the UCBInfo page as well as the ConfirmUnits page, but
-     * page utlizes different methods of this function. For emails, they are compared against a
-     * @param  {Array} input - Inputed text to be validated (used for emails)
-     * @param  {Object} regex - Regular expression that determines if the input is the correct format
-     *                          (used for emails)
-     * @param  {String} comparable - Comparison email to ensure that both emails are the same
-     *                          (used when confirming emails)
-     * @param  {Object} id - JS Object that stores a map of keywords connected to all the important ID's
-     */
     $.fn.validateInput = function(id) {
     var $element = $(this);
     var input = id.input;
