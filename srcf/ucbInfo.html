@@ -22,7 +22,8 @@
     $(document).ready(function () {
 
         var pdf_count= new Array();
-        $("#read_college_instructions").change(function() {
+        $("#read_college_instructions").change(function(e) {
+            e.preventDefault();
             if(this.checked) {
                 var pass = true;
                 var pdf_container = $("#college_pdfs .timeline-item .timeline-body");
@@ -33,6 +34,7 @@
                     }
                 });
                 if(pass == false){
+                    $(this).removeProp("checked");
                     $("#general-form-error").show("slow").empty().text("You have to open up instruction PDF(s) to demonstrated that you have read and understood them");
                 }
                 else{
@@ -158,9 +160,7 @@
 
     });
 </script>
-
 <!-- end script -->
-
 <div class="wrapper">
     <header class="main-header">
         <div id="logo">
@@ -169,18 +169,19 @@
     </header>
     <div class="content-wrapper">
         <div class="row">
-            <div class="col-lg-4 col-lg-offset-4 pull-left"><h2>Student Record Change Form Starts </h2></div>
-            <div class="col-mod-1 col-lg-offset-1 pull-right invoice-col">
+            <div class="col-lg-2 col-lg-offset-5 pull-left"><h3>UCB Info</h3></div>
+            <div class="col-sm-2 col-lg-offset-1 pull-right invoice-col">
                 <address>
                     <strong>Name: Tian Strenfel</strong><br />
-                    UC Berkeley SID: 908206889<br>
+                    SID: 908206889<br>
                 </address>
             </div>
         </div>
-        <div id="general-form-error" class="alert alert-warning col-md-12"
-             style="margin-bottom:10px;text-align:center; display:none">
+        <br />
+        <div id="general-form-error" class="alert alert-warning col-md-12" style="margin-bottom:10px;text-align:center; display:none">
             <p>This form is messed up</p>
         </div>
+        <h4 style="margin-top: 0px;">Student Infomration</h4><br />
         <form id="ucb-info-form" class="col-md-12">
             <div id="email-initial" class="form-group col-md-5 col-md-offset-1 srcf-form">
                 <label for="emailExample">Email</label>&nbsp;<i class="fa fa-envelope"></i>
@@ -314,12 +315,11 @@
         </form>
         <!-- form end -->
         <div id="college_pdfs">
-            <h2>College Instruction</h2>
+            <h4>College Instruction</h4>
 
             <div class="timeline-item">
 
                 <div class="timeline-body row" style="border: 0">
-
                 </div>
 
                 <div class="alert alert-warning row" style="width: 100%; padding: 10px; font-size: 12px;">
@@ -331,9 +331,10 @@
             </div>
         </div>
         <div class="col-md-12 bottom-navbar">
-            <a href="">Back</a>
-            <button type="button" id="ucbInfo-submit" class="btn btn-primary pull-right">Submit</button>
+            <button type="button" id="ucbInfo-submit" class="btn btn-primary pull-left next_prev">Previous</button>
+            <button type="button" id="ucbInfo-submit" class="btn btn-primary pull-right next_step">Next</button><br /><br />
         </div>
+
     </div>
     <footer class="main-footer">
         <div id="footer-inner" class="clearfix">
@@ -351,3 +352,10 @@
 </div>
 </body>
 </html>
+
+<script type="text/javascript">
+    $(".next_step").click(function() {
+        var url = 'confirmUnits.html';
+        $(location).attr('href', url);
+    })
+</script>

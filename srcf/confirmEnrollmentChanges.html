@@ -110,10 +110,10 @@
         </div>
     </div>
 
-    <div class="col-md-12 bottom-navbar">
-        <a href="">Back</a>
-        <button type="button" id="ucbInfo-submit" class="btn btn-primary pull-right">Submit</button>
-    </div>
+        <div class="col-md-12 bottom-navbar" style="margin-bottom: 15px;">
+            <button type="button" id="ucbInfo-submit" class="btn btn-primary pull-left next_prev">Previous</button>
+            <button type="button" id="ucbInfo-submit" class="btn btn-primary pull-right next_step">Next</button><br />
+        </div>
     <footer class="main-footer">
         <div id="footer-inner" class="clearfix">
             <div id="sub-footer">
@@ -126,5 +126,12 @@
         </div>
     </footer>
 </div>
+</div>
 </body>
 </html>
+<script type="text/javascript">
+    $(".next_step").click(function() {
+        var url = 'srcfFinal.html';
+        $(location).attr('href', url);
+    })
+</script>

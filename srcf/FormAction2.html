@@ -56,27 +56,23 @@
     </header>
     <div class="content-wrapper">
         <div class="row">
-            <div class="col-lg-4 col-lg-offset-4 pull-left"><h2>Student Record Change Form Starts </h2></div>
-            <div class="col-mod-1 col-lg-offset-1 pull-right invoice-col">
+            <div class="col-lg-6 col-lg-offset-3 pull-left"><h3>Student Record Change Form Action</h3></div>
+            <div class="col-sm-2 col-lg-offset-1 pull-right invoice-col">
                 <address>
                     <strong>Name: Tian Strenfel</strong><br />
-                    UC Berkeley SID: 908206889<br>
+                    SID: 908206889<br>
                 </address>
             </div>
         </div>
+        <div class="alert alert-warning alert-dismissable" style="font-size: 12px; padding: 15px;">
+            <i class="icon fa fa-warning"></i>
+            Select request (your Record Change Form needs to have at least one request).
+            You may combine requests (such as Add a Course and Drop a Course) on the same form. You can, however, initiate only one request listed below at a time.
+        </div>
 
-    <div class="col-md-12">
-        <div class="box box-default">
-            <div class="box-header with-border alert-warning alert-dismissable">
-                <i class="fa fa-warning"></i>
-                <h3 class="box-title">Student Record Change Form Actions</h3><br /><br />
-                <p>What do you think about Sudden Valley? It sounds like a salad dressing, but for some reason I don't want to eat it. Way to plant, Ann! Michael was concerned that he was caught in a lie about his family. The family was concerned that they were being confronted by a woman they had clubbed, drugged, and left on a bench.</p>
-            </div><!-- /.box-header -->
-        </div><!-- /.box -->
-    </div>
         <!-- Accordian Menu -->
         <div id="accordian-menu" class="col-md-6">
-            <h2>Please Select a Form Action</h2>
+            <h4>Please Select a Form Action</h4>
             <div>
                 <input type="checkbox" id="option-1" name="option-1">
                 <label for="option-1">
@@ -129,9 +125,9 @@
                 </label>
                 <div class="form-action-content option-3">
                     <br />
-                    <div class="center-text">
+                    <div class="center-text col-md-4 col-md-offset-4">
                         <a  href="#modal-one" class="btn btn-block btn-primary btn-sm" style="margin-top:5px">Drop a Course</a>
-                    </div>
+                    </div><br /><br /><br />
                     <div class="divider-line"></div>
                     <p>
                         If you want to drop all your courses, how you need to do that depends on whether or not any of your courses have started yet. <br> <br>
@@ -153,10 +149,6 @@
                             Summer Fees for Visiting International Students
                         </a>
                         </li>
-                        <li><a href="Dropping All Courses">
-                            Dropping All Courses
-                        </a>
-                        </li>
                     </ul>
 
                 </div>
@@ -165,7 +157,7 @@
         <!-- End Accordian Menu -->
 
         <div class="col-md-6" id="courseInfo">
-            <h2>Requests in this Form</h2>
+            <h4>Requests in this Form</h4>
             <div class="box box-default">
                 <div class="box-header with-border alert alert-danger alert-dismissable">
                     <p>There are currently no requests in this form.</p>
@@ -200,9 +192,9 @@
         </div>
 
         <!-- bottom navbar -->
-        <div class="col-md-12 bottom-navbar">
-            <a href="">Back</a>
-            <button type="button" class="btn btn-primary" style="float:right;">Submit</button>
+        <div class="col-md-12 bottom-navbar" style="margin-bottom: 15px;">
+            <button type="button" id="ucbInfo-submit" class="btn btn-primary pull-left next_prev">Previous</button>
+            <button type="button" id="ucbInfo-submit" class="btn btn-primary pull-right next_step">Next</button><br />
         </div>
 
         <!-- Modal -->
@@ -224,7 +216,7 @@
                                 <input type="text" id="ccn" class="form-control" placeholder="Enter Your CCN">
                             </div>
                             <div id="ccn_info" class="course-info callout" style="margin-top: 10px; margin-bottom: 10px; background: rgb(243, 248, 245); padding:10px; display:none;">
-                                <h3 style="margin-top: 0px; margin-bottom: 5px; ">African American Studies R1B P 001 LEC</h3>
+                                <h4 style="margin-top: 0px; margin-bottom: 5px; ">African American Studies R1B P 001 LEC</h4>
                                 MTuWTh 9-11A, 174 Barrows
                                 <br />
                                 <b>Instructor: </b>Nanda, A
@@ -232,13 +224,12 @@
                                 <b>CCN:</b> 10110
                             </div>
                             <div class="import-container" style="display: none">
-                                <h3 style="margin-bottom: 8px;">This request needs to be approved by the following</h3>
-
+                                <h4 style="margin-bottom: 8px;">This request needs to be approved by the following</h4>
                                 <ol>
                                     <li> Faculty Athletic Representative</li>
                                     <li> Summer Session Staff</li>
                                 </ol>
-                                <h3 style="margin-bottom: 4px;">Please answering the following question below</h3>
+                                <h4 style="margin-bottom: 4px;">Please answering the following question below</h4>
                                 <ol>
                                     <li> Are you currently on a waitlist for this course? &nbsp; &nbsp;&nbsp; &nbsp; <input type="radio">Yes  &nbsp; <input type="radio">No</li>
                                     <li> Have you Attended this course? &nbsp; &nbsp;&nbsp; &nbsp; <input type="radio">Yes &nbsp; <input type="radio">No</li>
@@ -251,9 +242,7 @@
                             </div>
                         </div><!-- /.box-body-->
                     </div><!-- /.box -->
-
                 </div>
-
             </div>
         </div>
     </div>
@@ -271,3 +260,9 @@
 </div>
 </body>
 </html>
+<script type="text/javascript">
+    $(".next_step").click(function() {
+        var url = 'confirmEnrollmentChanges.html';
+        $(location).attr('href', url);
+    })
+</script>
