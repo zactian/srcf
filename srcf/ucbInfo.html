@@ -28,16 +28,19 @@
                 var pdf_container = $("#college_pdfs .timeline-item .timeline-body");
                 pdf_container.find("div").each(function(){
                     var id = parseInt($(this).attr("id"));
-                    console.log(parseInt(jQuery.inArray(id, pdf_count)) + ": "+id);
                     if(jQuery.inArray(id, pdf_count) == -1){
                         pass = false;
                     }
                 });
                 if(pass == false){
-
+                    $("#general-form-error").show("slow").empty().text("You have to open up instruction PDF(s) to demonstrated that you have read and understood them");
                 }
-                else
+                else{
+                    if($("#general-form-error:contains('PDF')" )){
+                        $("#general-form-error").hide("slow");
+                    }
                   $(this).parent().removeClass().addClass("alert alert-success row").find("i").removeClass().addClass("icon fa fa-check");
+                }
             }
             else{
                 $(this).parent().removeClass().addClass("alert alert-warning row").find("i").removeClass().addClass("icon fa fa-warning");
@@ -165,8 +168,15 @@
         </div>
     </header>
     <div class="content-wrapper">
-        <h2>Student Information</h2>
-
+        <div class="row">
+            <div class="col-lg-4 col-lg-offset-4 pull-left"><h2>Student Record Change Form Starts </h2></div>
+            <div class="col-mod-1 col-lg-offset-1 pull-right invoice-col">
+                <address>
+                    <strong>Name: Tian Strenfel</strong><br />
+                    UC Berkeley SID: 908206889<br>
+                </address>
+            </div>
+        </div>
         <div id="general-form-error" class="alert alert-warning col-md-12"
              style="margin-bottom:10px;text-align:center; display:none">
             <p>This form is messed up</p>

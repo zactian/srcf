@@ -8,6 +8,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/srcf.js"></script>
     <title></title>
     <script type="text/javascript">
         $( document ).ready(function() {
@@ -21,20 +22,28 @@
                     $(".import-container").hide();
                 }
             });
-
             $( "#srcf_action" ).click(function() {
                 if(!$(".divider-line-requests .col-md-4").is(":visible")){
                     $(".divider-line-requests .col-md-4").show();
                 }
                 else{
                     var text = $(".divider-line-requests .col-md-4").html();;
-                    var vv = $(".ddivider-line-requests");
+                    var vv = $(".divider-line-requests");
                     $(".divider-line-requests").append("<div class='col-md-4' style='width: 48%; margin-top: 10px;'>"+text+"</div>");
                 }
                 $("#courseInfo").find('.box-default').remove();
             });
 
+
             $( "#datepicker" ).datepicker();
+
+            $('#ccn').blur(function () {
+                $(this).validateInput({
+                    input: $(this).val(),
+                    comparable: /^[0-9]{5}$/i,
+                    containerID: 'general-form-error',
+                    errorID: 'general-form-error'})
+            });
         });
     </script>
 </head>
@@ -46,6 +55,15 @@
         </div>
     </header>
     <div class="content-wrapper">
+        <div class="row">
+            <div class="col-lg-4 col-lg-offset-4 pull-left"><h2>Student Record Change Form Starts </h2></div>
+            <div class="col-mod-1 col-lg-offset-1 pull-right invoice-col">
+                <address>
+                    <strong>Name: Tian Strenfel</strong><br />
+                    UC Berkeley SID: 908206889<br>
+                </address>
+            </div>
+        </div>
 
     <div class="col-md-12">
         <div class="box box-default">
@@ -197,12 +215,14 @@
                             <i class="fa fa-bar-chart-o"></i>
                             <h3 class="box-title">Drop a Course (Regular)</h3>
                         </div>
+                        <div id="general-form-error" class="alert alert-warning col-md-12" style="margin-bottom: 10px; text-align: center; display: none;">
+                            <p>This form is messed up</p>
+                        </div>
                         <div class="box-body">
                             <div class="form-group">
                                 <label>Enter Your CCN in the box below</label>
                                 <input type="text" id="ccn" class="form-control" placeholder="Enter Your CCN">
                             </div>
-
                             <div id="ccn_info" class="course-info callout" style="margin-top: 10px; margin-bottom: 10px; background: rgb(243, 248, 245); padding:10px; display:none;">
                                 <h3 style="margin-top: 0px; margin-bottom: 5px; ">African American Studies R1B P 001 LEC</h3>
                                 MTuWTh 9-11A, 174 Barrows

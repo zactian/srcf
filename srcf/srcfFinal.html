@@ -9,30 +9,6 @@
     <title></title>
 </head>
 <body>
-<script>
-    $(document).ready(function () {
-        $('#unit-confirmation-form input:text').change(function () {
-            $(this).validateInput({
-                input: $(this).val(),
-                comparable: /^(?:[0-9]|0[1-9]|1[0-9]|20)$/,
-                containerID: $(this).attr('id'),
-                errorID: 'numerical_error_msg',
-                parentID: 'unit-confirmation-form',
-                enrollTotal: 'eTotal',
-                waitlistTotal: 'wTotal'});
-        });
-        $('#confirmUnits-submit').click(function () {
-            $(this).validateInput({
-                input: undefined,
-                comparable: undefined,
-                containerID: 'confirmUnits-submit',
-                errorID: 'general-form-error2',
-                formID: 'unit-confirmation-form'
-            });
-        });
-    });
-</script>
-
 <div class="wrapper">
     <header class="main-header">
         <div id="logo">
@@ -40,10 +16,19 @@
         </div>
     </header>
     <div class="content-wrapper">
+        <div class="row">
+            <div class="col-lg-4 col-lg-offset-4 pull-left"><h2>Student Record Change Form Starts </h2></div>
+            <div class="col-mod-1 col-lg-offset-1 pull-right invoice-col">
+                <address>
+                    <strong>Name: Tian Strenfel</strong><br />
+                    UC Berkeley SID: 908206889<br>
+                </address>
+            </div>
+        </div>
         <h2>Your Student Record Change Form has been submitted confirmation.</h2>
-
         <p>Your record change form has been submitted. You will be receiving confirmation email to the email address you gave.
-            It is recommendated that you will print this page and safe it for your records. The very minimum I would write down the SRCF ID: 5996.</p>
+            It is recommended that you will download Request Information. <a href="srcf.pdf">Click here to
+                download Request Information</a></p>
 
         <div class="row">
             <div class="col-md-12">
@@ -62,12 +47,6 @@
                 </div><!-- /.box -->
             </div>
         </div>
-
-
-        <div class="col-md-12 bottom-navbar">
-            <a href="">Back</a>
-            <button type="button" id="confirmUnits-submit" class="btn btn-primary" style="float:right;">Submit</button>
-        </div>
     </div>
     <footer class="main-footer">
         <div id="footer-inner" class="clearfix">
@@ -78,7 +57,6 @@
                     <br>
                     510-642-5611</p>
             </div>
-            <!-- <div id="sub-footer"> -->
         </div>
     </footer>
 </div>

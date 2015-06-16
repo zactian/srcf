@@ -11,6 +11,9 @@
                 "int": function (a, b) {
                     return parseInt(a, 10) - parseInt(b, 10);
                 },
+                "date": function (a, b) {
+                    return parseInt(a, 10) - parseInt(b, 10);
+                },
                 "float": function (a, b) {
                     return parseFloat(a) - parseFloat(b);
                 },
@@ -33,10 +36,6 @@
                         $thisTable.find("th").each(function (index) {
                             $(this).click(function () {
                                 var sort_dir = $(this).attr("class") || dir.ASC;
-                                var sort_type;
-                                if ($(this).data("type")) {
-                                    var sort_type = $(this).data("type");
-                                }
                                 if (sort_dir === dir.ASC){
                                     $(this).siblings().andSelf().each(function(index){
                                         $(this).children(":first").removeClass().addClass("fa fa-fw fa-sort-asc");
@@ -49,13 +48,13 @@
                                     });
                                     $(this).removeClass().addClass(dir.ASC);
                                 }
-                                that.main.attachSort(index, $(this).data("sort"), sort_dir, sort_type);
+                                that.main.attachSort(index, $(this).data("sort"), sort_dir);
                             });
                         });
                     }
                 },
 
-                attachSort: function (index, type, sort_dir, sort_type) {
+                attachSort: function (index, type, sort_dir) {
 
                     var column = [];
                     var sortMethod = sortFns[type];
@@ -66,7 +65,7 @@
                     column.sort(function (a, b) {
                         var keyA = $("td:eq(" + index + ")", a).text().trim();
                         var keyB = $("td:eq(" + index + ")", b).text().trim();
-                        if (sort_type === "date") {
+                        if (type === "date") {
                             var datum = new Date(keyA);
                             keyA = datum.getTime() / 1000;
                             var datumB = new Date(keyB);
@@ -74,6 +73,7 @@
                         }
                         return sortMethod(keyA, keyB);
                     });
+
 
                     if (sort_dir != dir.ASC)
                         column.reverse();
