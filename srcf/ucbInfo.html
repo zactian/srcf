@@ -35,7 +35,8 @@
                 });
                 if(pass == false){
                     $(this).removeProp("checked");
-                    $("#general-form-error").show("slow").empty().text("You have to open up instruction PDF(s) to demonstrated that you have read and understood them");
+                    $("#general-form-error").slideDown("slow").empty().html('<span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style="line-height:16px;"></span>&nbsp;' +
+                            'You have to open up instruction PDF(s) to demonstrated that you have read and understood them');
                 }
                 else{
                     if($("#general-form-error:contains('PDF')" )){
@@ -81,12 +82,6 @@
                             pdf.slideToggle("slow");
                         }
 
-                        var source = $('<div style="position: relative; width:150px; height:100px; float:left; margin-right: 10px; margin-top: 10px; ">').attr("id", option.val()).append("<img src='images/pdf.jpg' width='25' height='25' style='position: absolute; z-index: 10; margin-left:20%; margin-top: 25%; cursor: pointer' class='view_pdf' />" +
-                                "<img src='images/pdf.jpg' width='25' height='25' style='position: absolute; z-index: 10; margin-left:60%; margin-top: 25%; cursor: pointer' />" +
-                                "<img src='http://placehold.it/150x100' />");
-
-                        pdf_container.append(source);
-
                         var pdfs = new Array();
                         pdfs[2] = "chem.pdf";
                         pdfs[3] = "coe.pdf";
@@ -95,6 +90,28 @@
                         pdfs[1] = "l_and_s.pdf";
                         pdfs[5] = "cnr.pdf";
                         pdfs[7] = "law.pdf";
+
+
+                        pdf_container.next().removeClass().addClass("alert alert-warning row");
+                        pdf_container.next().find("i").removeClass().addClass("icon fa fa-warning");
+                        $("#read_college_instructions").removeProp("checked");
+
+
+
+                        var source = $('<div style="position: relative; width:100px; height:75px; float:left; margin-right: 10px; margin-top: 10px; ">').attr("id", option.val()).append("" +
+                                "<a width='200' height='200' style='position: absolute; z-index: 10; margin-left:5%; margin-top: 25%; cursor: pointer;' class='view_pdf'> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</a>" +
+                                "<a class='download_pdf' href='download.php?file="+pdfs[option.val()]+"' width='100' height='100' style='position: absolute; z-index: 10; margin-left:60%; margin-top: 25%; cursor: pointer; '> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </a>" +
+                                "<img src='images/fileIcon.png' width='100' height='75' />");
+
+                        pdf_container.append(source);
+
+
+                        $(".download_pdf").click(function () {
+                            var that = this;
+                            if(parseInt(jQuery.inArray(parseInt($(that).parent().attr("id")), pdf_count)) === -1){
+                                pdf_count.push(parseInt($(that).parent().attr("id")));
+                            }
+                        });
 
 
                         $(".view_pdf").click(function () {
@@ -185,7 +202,7 @@
             <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style="line-height:16px;"></span>
             <p style="display: inline; margin-left:2px;">Please complete the form before continuing to the next page.</p>
         </div>
-        <h4 style="margin-top: 0px;">Student Infomration</h4><br />
+        <h4>Student Infomration</h4><br />
         <form id="ucb-info-form" class="col-md-12">
 
             <div class="flex-container col-md-12" style="padding:0">

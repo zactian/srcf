@@ -443,6 +443,17 @@ p {
 
 }
 
+#college_pdfs a:hover
+{
+    text-decoration: none;
+}
+
+#college_pdfs a:visited
+{
+    text-decoration: none;
+
+}
+
 .pdf-body
 {
     position: relative;
