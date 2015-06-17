@@ -40,10 +40,9 @@
                 }
 
                 $('#accordian-menu').children(":gt(1)").each(function(){
+                    $(this).find('label').trigger( "click" );
                     $(this).find('label').css({"background":"#D0D0D0", "color": "#505050"}).click(false);
                     $(this).find('img').remove();
-
-
                 });
 
                 $("#courseInfo").find('.box-default').remove();
