@@ -63,6 +63,16 @@
                     containerID: 'general-form-error',
                     errorID: 'general-form-error'})
             });
+
+            $('#accordian-menu label').click(function() {
+                var $arrow = $(this).children('.glyphicon')
+                if( $arrow.css('transform') == 'none') {
+                    $arrow.css("transform","rotate(180deg)");
+               } else {
+                    $arrow.css('transform', "");
+               }
+            });
+
         });
     </script>
 </head>
@@ -95,7 +105,7 @@
             <div>
                 <input type="checkbox" id="option-1" name="option-1" checked>
                 <label for="option-1">
-                    <img src="images/openArrow.png" alt="">
+                    <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
                     Add, Drop, Change Grading Option, Change Unit Value
                 </label>
                 <div class="form-action-content btn-group option-1">
@@ -133,8 +143,8 @@
             </div>
             <div>
                 <input type="checkbox" id="option-2" name="option-2" checked>
-                <label for="option-2">
-                    <img src="images/openArrow.png" alt="">
+                <label for="option-2" id="option-2">
+                    <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
                     Request Reinstatement to Summer Sessions
                 </label>
                 <div class="form-action-content option-2">
@@ -148,8 +158,8 @@
             </div>
             <div>
                 <input type="checkbox" id="option-3" name="option-3" checked>
-                <label for="option-3">
-                    <img src="images/openArrow.png" alt="">
+                <label for="option-3" id="option-3">
+                    <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
                     Cancel/Withdraw from Summer Sessions (Drop All Courses)
                 </label>
                 <div class="form-action-content option-3">

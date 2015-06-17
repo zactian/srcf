@@ -255,6 +255,7 @@ p {
     text-align: left;
     z-index: 2;
     width:100%;
+    line-height: 1em;
 }
 
 #accordian-menu label:hover {
@@ -262,8 +263,11 @@ p {
     border: 2px solid #B2B2B2;
 }
 
-#accordian-menu label img{
-    margin-right: 7px;
+#accordian-menu label .glyphicon{
+    transform:;
+    transition: all .5s ease;
+    color: #646464;
+    margin-right: 3px;
 }
 
 .form-action-content {
