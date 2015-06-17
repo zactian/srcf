@@ -497,7 +497,7 @@ p {
     left: 48%;
     top: -100%;
     z-index: 10;
-    width: 500px;
+    width: 450px;
     -webkit-transform: translate(0, -500%);
     -ms-transform: translate(0, -500%);
     transform: translate(0, -500%);

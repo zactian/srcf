@@ -14,6 +14,10 @@
     <script type="text/javascript">
         $( document ).ready(function() {
 
+            $(".fa-times").click(function() {
+                $(this).parent().parent().hide();
+            });
+
 
             $("#ccn").keyup(function() {
                 if($(this).val().length == 5){
@@ -21,7 +25,7 @@
                     $(".import-container").delay(700).fadeIn(1000);
                 }
                 else{
-                    $(".ccn_info").hide();
+                    $("#ccn_info").hide();
                     $(".import-container").hide();
                 }
             });
@@ -36,13 +40,17 @@
                 }
 
                 $('#accordian-menu').children(":gt(1)").each(function(){
-                    $(this).find('label').css({"background":"#D0D0D0", "color": "#505050"});
+                    $(this).find('label').css({"background":"#D0D0D0", "color": "#505050"}).click(false);
                     $(this).find('img').remove();
 
 
                 });
 
                 $("#courseInfo").find('.box-default').remove();
+
+                $(".fa-times").click(function() {
+                    $(this).parent().parent().hide();
+                });
             });
 
 
@@ -184,7 +192,7 @@
                     <p>There are currently no requests in this form.</p>
                 </div><!-- /.box-header -->
             </div><!-- /.box -->
-            <div class="divider-line-requests row alert-success alert-dismissable   ">
+            <div class="divider-line-requests row alert-success alert-dismissable">
                 <div class="col-md-4" style="display: none; width: 95%; margin-top: 15px; margin-left: 12px" >
                     <div class="box box-solid">
                         <div class="box-header with-border">
@@ -226,16 +234,16 @@
                     <!-- Bar chart -->
                     <div class="box box-primary" style="padding-bottom: 15px;">
                         <div class="box-header">
-                            <i class="fa fa-bar-chart-o"></i>
+                            <i class="fa fa-edit"></i>
                             <h3 class="box-title">Drop a Course (Regular)</h3>
                         </div>
                         <div id="general-form-error" class="alert alert-warning col-md-12" style="margin-bottom: 10px; text-align: center; display: none;">
-                            <p>This form is messed up</p>
+                            <p><i class="icon fa fa-exclamation-circle"></i>&nbsp;  Please enter 5 digits for the CCN</p>
                         </div>
                         <div class="box-body">
                             <div class="form-group">
                                 <label>CCN:</label>
-                                <input type="text" class="form-control srcf-input required input-sm" id="ccn"
+                                <input type="text" class="form-control required input-sm" id="ccn"
                                        placeholder="Enter CCN" style="width: 50%;">
                             </div>
                             <div id="ccn_info" class="course-info callout" style="margin-top: 10px; margin-bottom: 10px; background: rgb(243, 248, 245); padding:10px; display:none;">
@@ -254,15 +262,13 @@
                                 </ol>
                                 <h5 style="margin-bottom: 4px;">Please answering the following question below</h5>
                                 <ol>
-                                    <li> Are you currently on a waitlist for this course? &nbsp; &nbsp;&nbsp; &nbsp; <input type="radio">Yes  &nbsp; <input type="radio">No</li>
-                                    <li> Have you Attended this course? &nbsp; &nbsp;&nbsp; &nbsp; <input type="radio">Yes &nbsp; <input type="radio">No</li>
-                                    <li> The date you last attended this course?
-                                        <input type="text" class="form-control srcf-input required input-sm" id="datepicker"
-                                               placeholder="Click here to pick a date" style="width: 25%;">
-                                    </li>
+                                    <li> Are you currently on a waitlist for this course? &nbsp;  Yes <input type="radio" style="margin-top: 2px; position: absolute" /> &nbsp; &nbsp; &nbsp; No &nbsp;<input type="radio" style="margin-top: 2px; margin-left: 0px; position: absolute" /> </li>
+                                    <li> Have you Attended this course? &nbsp;  Yes <input type="radio" style="margin-top: 2px; position: absolute" /> &nbsp; &nbsp; &nbsp; No &nbsp;<input type="radio" style="margin-top: 2px; margin-left: 0px; position: absolute" /></li>
+                                    <li> The date you last attended this course? <input type="text" id="datepicker" class="form-control input-sm pull-right" style="width: 25%; height: 18px; margin-right: 15%"/> </li>
                                 </ol>
-
-                                <a href="#close" id="srcf_action" value="Drop this Course" class="btn btn-primary btn-center slide_close" style="margin-left: 35%;">Drop this Course</a>
+                                <a href="#close" id="srcf_action" value="Drop this Course"
+                                   class="btn btn-primary btn-center slide_close" style="margin-left: 35%;">Drop this
+                                    Course</a>
                             </div>
                         </div><!-- /.box-body-->
                     </div><!-- /.box -->
