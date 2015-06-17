@@ -32,6 +32,7 @@ h3 {
 
 h4 {
      color: #023876 !important;
+     margin-bottom: 7px;
 }
 
 h5 {
@@ -39,7 +40,7 @@ h5 {
 }
 
 p {
-    margin: 0 0 5px 10px
+    margin: 0 0 5px 0;
 }
 
 .sub-header {
@@ -349,13 +350,16 @@ p {
 }
 
 .ec-course-action {
-    width: 48%;
+    width: 28%;
     margin-top: 10px;
+    color: black;
 }
 
 .confirm-ec-table {
-    width: 80%;
-    margin: 0 auto;
+    /*width: 60%;*/
+    /*margin: 0 auto;*/
+    outline: #EFEFEF solid 1px;
+    width: 100%;
 }
 
 .confirm-ec-table tr {
@@ -364,10 +368,7 @@ p {
 
 .confirm-ec-table tr td {
     padding:0 10px;
-}
-
-.confirm-ec-table tr:nth-child(even) {
-    background-color: #fff;
+    width:50%;
 }
 
 .confirm-ec-table ul {
@@ -375,6 +376,9 @@ p {
     margin-bottom:0;
 }
 
+#provided-information table {
+    margin-top:22px;
+}
 
 @media only screen and (max-width : 992px) {
     #ec-system-info {
@@ -385,12 +389,16 @@ p {
         padding:0;
         margin-top: 10px;
     }
+
+    #provided-information table {
+        margin-top: 0;
+    }
 }
 
 @media only screen and (max-width:600px) {
     .ec-course-action {
         width:90%;
-        margin:0 auto;
+        margin:10px auto;
     }
 
 }
