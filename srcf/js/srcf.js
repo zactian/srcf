@@ -97,8 +97,10 @@
     var $eTotal = $('#' + id.enrollTotal);
     var $wTotal = $('#' + id.waitlistTotal);
     var $formID = $('#' + id.formID);
+    var url = id.url;
 
-    console.log($errorID);
+
+    console.log(url);
 
     var validate = (function() {
         var that = this;
@@ -124,7 +126,7 @@
                 }
             },
             compareInput: function() {
-                if (input != comparable) {
+                if (input != comparable || !comparable.value) {
                     that.main.formDanger($inputID);
                     that.main.displayError();
                 } else {
@@ -141,7 +143,7 @@
                 if (!$errorID.is(":visible")) {
                     $errorID.slideDown('slow');
                 }
-                return false;
+                console.log('exitin');
             },
             validated: function() {
                 if ($inputID.hasClass('form-danger')) {
@@ -160,15 +162,17 @@
             },
             validateForm: function() {
                 var inputs = $formID.find('input.required');
+                var flag = false;
                 for (var i = 0; i < inputs.length; i++) {
-                    console.log(inputs[i]);
                     if (!inputs[i].value || $(inputs[i]).hasClass('form-danger')) {
                         that.main.formDanger($(inputs[i]));
                         that.main.displayError();
+                        flag = true;
                     }
-
                 }
-                return true;
+                if (!flag) {
+                    $(location).attr('href', url);
+                }
             },
             updateTotals: function() {
                 console.log('updateTotals');

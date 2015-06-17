@@ -153,7 +153,9 @@
                 comparable: undefined,
                 containerID: 'ucbInfo-submit',
                 errorID: 'general-form-error',
-                formID: 'ucb-info-form'});
+                formID: 'ucb-info-form',
+                url: 'confirmUnits.html'
+            });
         });
 
         //$(this).validateInput($(this).val(), null, $('#emailExample').val(), {containerID: 'confirmEmailExample', errorID: 'secondary_error'});
@@ -180,7 +182,8 @@
         </div>
 
         <div id="general-form-error" class="alert alert-danger col-md-12">
-            <p>Please complete the form before continuing to the next page.</p>
+            <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style="line-height:16px;"></span>
+            <p style="display: inline; margin-left:2px;">Please complete the form before continuing to the next page.</p>
         </div>
         <h4 style="margin-top: 0px;">Student Infomration</h4><br />
         <form id="ucb-info-form" class="col-md-12">
@@ -190,13 +193,18 @@
                     <label for="emailExample">Email</label>&nbsp;<i class="fa fa-envelope"></i>
                     <input type="text" class="form-control srcf-input required input-sm" id="emailExample"
                            placeholder="Enter Email">
-                     <div id="initial_error" class="alert-danger alert col-md-6">The email you have entered is not valid.</div>
+                     <div id="initial_error" class="alert-danger alert col-md-6">
+                         <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style="line-height:16px;"></span>
+                         The email you have entered is not valid.
+                     </div>
                 </div>
                 <div class="col-md-5 col-xs-12 form-group">
                     <label for="confirmEmailExample">Confirm Email</label>&nbsp;<i class="fa fa-envelope"></i>
-                    <input type="text" class="form-control srcf-input required input-sm" id="confirmEmailExample"
-                           placeholder="Confirm Email">
-                    <div id="secondary_error" class="alert-danger alert">The emails you have entered do not match.</div>
+                    <input type="text" class="form-control srcf-input required input-sm" id="confirmEmailExample" placeholder="Confirm Email">
+                    <div id="secondary_error" class="alert-danger alert">
+                    <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style="line-height:16px";></span>
+                    The emails you have entered do not match.
+                    </div>
                 </div>
             </div>
 
@@ -302,9 +310,10 @@
                     <option value="7">School of Law</option>
                 </select>
             </div>
-            <div class="form-group col-md-10 col-md-offset-2">
+
+            <div class="form-group col-md-5 col-md-offset-1">
                 <div class="checkbox">
-                    <span style="font-weight:bold; padding-right: 10%;">Are you currently an NCAA athlete?</span>
+                    <span style="font-weight:bold; padding-right: 0;">Are you currently an NCAA athlete?</span>
                     <label>
                         <input type="radio" name="optionsRadio" id="inlineRadio1" value="yes">
                         Yes
@@ -334,7 +343,7 @@
             </div>
         </div>
         <div class="col-md-12 bottom-navbar">
-            <button type="button" id="ucbInfo-submit" class="btn btn-primary pull-left next_prev">Previous</button>
+            <button type="button" id="" class="btn btn-primary pull-left next_prev">Previous</button>
             <button type="button" id="ucbInfo-submit" class="btn btn-primary pull-right next_step">Next</button><br /><br />
         </div>
 
@@ -356,9 +365,3 @@
 </body>
 </html>
 
-<script type="text/javascript">
-    $(".next_step").click(function() {
-        var url = 'confirmUnits.html';
-        $(location).attr('href', url);
-    })
-</script>
