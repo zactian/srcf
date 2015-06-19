@@ -94,6 +94,7 @@
     var $inputID = $('#' + id.containerID);
     var $errorID = $('#' + id.errorID);
     var $parent = $('#' + id.parentID);
+    var $parentError = $('#' + id.parentError);
     var $eTotal = $('#' + id.enrollTotal);
     var $wTotal = $('#' + id.waitlistTotal);
     var $formID = $('#' + id.formID);
@@ -156,6 +157,9 @@
                     if ($parent.has('.form-danger').length == 0) {
                         $errorID.slideUp('medium');
                         that.main.updateTotals();
+                    }
+                    if ($parentError.is(":visible")) {
+                        $parentError.slideUp('medium');
                     }
                 }
                 return true;

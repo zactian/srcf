@@ -98,10 +98,10 @@
                         $("#read_college_instructions").removeProp("checked");
 
 
-                        var source = $('<div style="position: relative; width:100px; height:75px; float:left; margin-right: 10px; margin-top: 10px; ">').attr("id", option.val()).append("" +
+                        var source = $('<div style="position: relative; width:100px; height:75px; float:left; margin-right: 10px; ">').attr("id", option.val()).append("" +
                                 "<a width='200' height='200' style='position: absolute; z-index: 10; margin-left:5%; margin-top: 25%; cursor: pointer;' class='view_pdf'> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</a>" +
                                 "<a class='download_pdf' href='download.php?file=" + pdfs[option.val()] + "' width='100' height='100' style='position: absolute; z-index: 10; margin-left:60%; margin-top: 25%; cursor: pointer; '> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </a>" +
-                                "<img src='images/fileIcon.png' width='100' height='75' />");
+                                "<img src='images/fileIcon.png'/>");
 
                         pdf_container.append(source);
 
@@ -189,8 +189,10 @@
 </header>
 <div class="content-wrapper">
     <div class="row">
-        <div class="col-lg-2 col-lg-offset-5 pull-left"><h3>UCB Info</h3></div>
-        <div class="col-sm-2 col-lg-offset-1 pull-right invoice-col">
+        <div class="ol-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-6 center-text pull-left">
+            <h3>Student Information</h3>
+        </div>
+        <div class="col-md-2 col-sm-2 col-xs-5 pull-right invoice-col">
             <address>
                 <strong>Name: Tian Strenfel</strong><br/>
                 SID: 908206889<br>
@@ -204,21 +206,19 @@
         <p style="display: inline; margin-left:2px;">Please complete the form before continuing to the next page.</p>
     </div>
 
-    <form id="ucb-info-form" class="col-md-12 col-xs-12">
-        <h4>Student Information</h4><br/>
-
+    <form id="ucb-info-form" class="col-md-12 col-sm-12 col-xs-12">
         <div class="row flex-container" style="padding:0">
-            <div class="col-md-5 col-xs-12 col-md-offset-1 form-group">
+            <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1 col-xs-12 form-group">
                 <label for="emailExample">Email</label>&nbsp;<i class="fa fa-envelope"></i>
                 <input type="text" class="form-control srcf-input required input-sm" id="emailExample"
                        placeholder="Enter Email">
 
-                <div id="initial_error" class="alert-danger alert col-md-6">
+                <div id="initial_error" class="alert-danger alert">
                     <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style="line-height:16px;"></span>
                     The email you have entered is not valid.
                 </div>
             </div>
-            <div class="col-md-5 col-xs-12 form-group">
+            <div class="col-md-5 col-sm-5 col-xs-12 form-group">
                 <label for="confirmEmailExample">Confirm Email</label>&nbsp;<i class="fa fa-envelope"></i>
                 <input type="text" class="form-control srcf-input required input-sm" id="confirmEmailExample"
                        placeholder="Confirm Email">
@@ -230,7 +230,7 @@
             </div>
 
 
-            <div class="form-group col-md-5 col-md-offset-1 col-xs-12">
+            <div class="form-group col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1 col-xs-12">
                 <label for="majorExample">Undergraduate Major(s)</label> <br>
                 <select id="ucb-info-multi-major" class="form-control" multiple="multiple">
                     <option value="1">African American Studies</option>
@@ -320,7 +320,7 @@
                     <option value="86">Other</option>
                 </select>
             </div>
-            <div class="form-group col-md-5 col-xs-12">
+            <div class="form-group col-md-5 col-sm-5  col-xs-12">
                 <label for="majorExample">College(s)</label> <br>
                 <select id="ucb-info-multi-college" class="form-control" multiple="multiple">
                     <option value="2">Chemistry</option>
@@ -335,8 +335,8 @@
 
             <div class="form-group col-md-12 col-sm-12 col-xs-12 row">
                 <div class="checkbox">
-                    <span class="col-md-5 col-md-offset-1 col-sm-6 col-xs-6"style="font-weight:bold;">Are you currently an NCAA athlete?</span>
-                    <span class="col-md-5 col-sm-6 col-xs-6" style="">
+                    <span class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1 col-xs-6"style="font-weight:bold;">Are you currently an NCAA athlete?</span>
+                    <span class="col-md-5 col-sm-5 col-xs-6" style="">
                         <label>
                             <input type="radio" name="optionsRadio" id="inlineRadio1" value="yes">
                             Yes
@@ -349,12 +349,12 @@
                 </div>
             </div>
 
-            <div class="col-md-10 col-md-offset-1 col-sm-6 form-group" id="college_pdfs">
+            <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12 form-group clearfix" id="college_pdfs" style="">
                 <h5>College Instruction</h5>
                     <div class="timeline-item">
                         <div class="timeline-body row" style="border: 0">
                         </div>
-                        <div class="alert alert-warning row" style="width: 100%; padding: 10px; font-size: 12px;">
+                        <div class="alert alert-warning row" style="width: 100%; padding: 3px 7px; margin:10px auto">
                             <i class="icon fa fa-warning"></i> Please open and read the following PDF instructions for
                             your Colleges and then confirm that you have
                             done so. <br/>
@@ -362,8 +362,6 @@
                                    value="yes"/>
                             Check box to indicate that you have read the instructions for your College.
                         </div>
-
-
                 </div>
             </div>
 

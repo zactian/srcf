@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+\<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -19,6 +19,7 @@
                 containerID: $(this).attr('id'),
                 errorID: 'numerical_error_msg',
                 parentID: 'unit-confirmation-form',
+                parentError: 'general-form-error2',
                 enrollTotal:'eTotal',
                 waitlistTotal: 'wTotal',
             });
@@ -42,19 +43,17 @@
                 <img src="images/2014_BSSLogo.jpg" />
             </div>
         </header>
-        <div class="content-wrapper">
+        <div id="ucb-info" class="content-wrapper">
             <div class="row">
-                <div class="col-lg-4 col-lg-offset-4 pull-left"><h3>Edit and Confirm Units</h3></div>
-                <div class="col-sm-2 col-lg-offset-1 pull-right invoice-col">
+                <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-6 center-text pull-left">
+                    <h3>Update Units</h3>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-5 pull-right invoice-col">
                     <address>
                         <strong>Name: Tian Strenfel</strong><br />
                         SID: 908206889<br>
                     </address>
                 </div>
-            </div>
-            <h4>Update Units</h4>
-            <div class="sub-header">
-                <p>What do you think about Sudden Valley? It sounds like a salad dressing, but for some reason I don't want to eat it. Way to plant, Ann! Michael was concerned that he was caught in a lie about his family. The family was concerned that they were being confronted by a woman they had clubbed, drugged, and left on a bench. </p>
             </div>
 
             <div class="alert alert-warning col-md-12 col-sm-12">
@@ -113,15 +112,16 @@
                     </table>
                 </form>
             </div>
-            <div id="numerical_error_msg" class="col-md-12 col-sm-12 alert alert-danger col-md-12 col-sm-12" style="display:none">
-                <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style="display"></span>
+            <div id="numerical_error_msg" class="alert alert-danger col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12" style="display:none">
+                <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
                 You have entered an incorrect input into the box. Please fix before continuing
             </div>
 
-            <div class="col-md-12 bottom-navbar" style="margin-bottom: 15px;">
+            <div class="col-md-12 col-sm-12 col-xs-12 bottom-navbar" style="margin: 15px 0;">
                 <button type="button" id="" class="btn btn-primary pull-left next_prev">Previous</button>
                 <button type="button" id="ucbInfo-submit" class="btn btn-primary pull-right next_step">Next</button><br/>
             </div>
+
         </div>
         <footer class="main-footer">
             <div id="footer-inner" class="clearfix">
