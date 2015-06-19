@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="css/bootstrap.css"/>
@@ -14,10 +15,25 @@
     <script type="text/javascript">
         $( document ).ready(function() {
             var accordin_index;
+            var each_request = $(".divider-line-requests .col-md-4");
+            $(".divider-line-requests").empty();
+
             $("#accordian-menu a").click(function(){
                 accordin_index = $(this).data("index");
             });
 
+            $("#reset_form").click(function(){
+               $(".divider-line-requests").empty();
+               $(".divider-line-requests").before('<div class="alert alert-info alert-dismissable"> There is no requests in here. To add a requests, please select a form action from the left.  </div>');
+                $("#accordian-menu").children(":not(:eq("+accordin_index+"))").each(function(){
+                    $(this).find('input:checkbox').prop('checked', true).removeAttr("disabled");
+                    $(this).find('label').css({"background":"#F6F3F3", "color": "black"});
+                    $(this).find('label').removeAttr("data-toggle").removeAttr("data-replacement").removeAttr("title").removeAttr("data-original-title").removeClass("red-tooltip");
+                    $(this).find('label').prepend('<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>');
+
+                });
+                $(this).parent().hide();
+            });
 
             $("#ccn").keyup(function() {
                 if($(this).val().length == 5){
@@ -31,32 +47,27 @@
             });
             $( "#srcf_action" ).click(function(e) {
 
-                if(!$(".divider-line-requests .col-md-4").is(":visible")){
-                    $(".divider-line-requests .col-md-4").show();
-                }
-                else{
-                    var text = $(".divider-line-requests .col-md-4").html();
-                    var vv = $(".divider-line-requests");
-                    $(".divider-line-requests").append("<div class='col-md-4' style='width: 95%; margin-top: 0px; margin-left: 12px;'>"+text+"</div>");
-                }
+              if($(".divider-line-requests").children().length == 0){
 
+                $(".divider-line-requests").prev().remove();
+                $("#reset_form_actions").show();
+              }
 
+                $(".divider-line-requests").append("<div class='col-md-4' style='width: 95%; margin-top: 8px; margin-left: 12px;'>"+each_request.html()+"</div>");
                 $("#accordian-menu").children(":not(:eq("+accordin_index+"))").each(function(){
-                    $(this).find('label').trigger( "click" );
-                    $(this).find('label').css({"background":"#D0D0D0", "color": "#505050"}).click(false);
+                    $(this).find('input:checkbox').prop('checked', false).attr("disabled", true);
+                    $(this).find('label').css({"background":"#D0D0D0", "color": "#777"});
+                    $(this).find('label').attr({  class:"red-tooltip", "data-toggle":"tooltip", "data-replacement":"left bottom", "title":"You can only select one form action at the time. To select different form requests, please reset the form. "});
                     $(this).find('img').remove();
                     $(this).find('.glyphicon').remove();
+                    $('[data-toggle="tooltip"]').tooltip();
                 });
 
-                $("#courseInfo").find('.box-default').remove();
 
                 $(".fa-times").click(function() {
-                    $(this).parent().parent().parent().hide();
+                    $(this).parent().parent().parent().remove();
                 });
             });
-
-
-
 
 
             $( "#datepicker" ).datepicker();
@@ -77,8 +88,6 @@
                     $arrow.css('transform', "");
                }
             });
-
-
         });
     </script>
 </head>
@@ -100,9 +109,16 @@
             </div>
         </div>
         <div class="alert alert-warning alert-dismissable" style="font-size: 12px; padding: 15px;">
-            <i class="icon fa fa-warning"></i>
-            Select request (your Record Change Form needs to have at least one request).
-            You may combine requests (such as Add a Course and Drop a Course) on the same form. You can, however, initiate only one request listed below at a time.
+            <p>            <i class="icon fa fa-warning"></i> &nbsp;Select request (your Record Change Form needs to have at least one request).
+            You may combine requests (such as Add a Course and Drop a Course) on the same form. You can, however, initiate only one request listed below at a time.           </p>
+            <p>
+                For additional resource help, please<a href="https://mysummer-dev-demo.berkeley.edu/srcf/srcfHelp.php" target="_blank">
+                    Click Here.
+                </a>
+            </p>
+
+
+
         </div>
         <div class="row">
         <!-- Accordian Menu -->
@@ -111,7 +127,7 @@
             <div>
                 <input type="checkbox" id="option-1" name="option-1" checked>
                 <label for="option-1">
-                    <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                 <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
                     Add, Drop, Change Grading Option, Change Unit Value
                 </label>
                 <div class="form-action-content btn-group option-1">
@@ -123,25 +139,25 @@
                     <div class="col-xs-12">
                         <div class="row">
                             <div class="col-xs-4 col-md-offset-0">
-                                <a href="#modal-one" data-index="1" class="btn btn-block btn-primary btn-sm">Add a Course</a>
+                                <a data-toggle="modal" data-target=".bs-example-modal-sm" data-index="1" class="btn btn-block btn-primary btn-sm">Add a Course</a>
                             </div>
                             <div class="col-xs-4">
-                                <a href="#modal-one" data-index="1"  class="btn btn-block btn-primary btn-sm">Enroll from Waitlist</a>
+                                <a data-toggle="modal" data-target=".bs-example-modal-sm" data-index="1"  class="btn btn-block btn-primary btn-sm">Enroll from Waitlist</a>
                             </div>
                             <div class="col-xs-4">
-                                <a href="#modal-one" data-index="1"  class="btn btn-block btn-primary btn-sm">Drop a Course</a>
+                                <a data-toggle="modal" data-target=".bs-example-modal-sm" data-index="1"  class="btn btn-block btn-primary btn-sm">Drop a Course</a>
                             </div>
                         </div>
                         <br />
                         <div class="row">
                             <div class="col-xs-4">
-                                <a  href="#modal-one" data-index="1" class="btn btn-block btn-primary btn-sm">Change Grading Option</a>
+                                <a  data-toggle="modal" data-target=".bs-example-modal-sm" data-index="1" class="btn btn-block btn-primary btn-sm">Change Grading Option</a>
                             </div>
                             <div class="col-xs-4">
-                                <a  href="#modal-one" data-index="1" class="btn btn-block btn-primary btn-sm">Change Unit Value</a>
+                                <a data-toggle="modal" data-target=".bs-example-modal-sm" data-index="1" class="btn btn-block btn-primary btn-sm">Change Unit Value</a>
                             </div>
                             <div class="col-xs-4">
-                                <a  href="#modal-one" data-index="1" class="btn btn-block btn-primary btn-sm">Switch Secondary Sections</a>
+                                <a  data-toggle="modal" data-target=".bs-example-modal-sm" data-index="1" class="btn btn-block btn-primary btn-sm">Switch Secondary Sections</a>
                             </div>
                         </div>
                     </div>
@@ -150,28 +166,29 @@
             <div>
                 <input type="checkbox" id="option-2" name="option-2" checked>
                 <label for="option-2" id="option-2">
-                    <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+
+                        <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
                     Request Reinstatement to Summer Sessions
                 </label>
                 <div class="form-action-content option-2">
                     <p>If you would like to be reinstated in Summer Sessions, please re-enroll in at least one
                         course.</p>
                     <div class="divider-line"></div>
-                    <div class="center-text col-xs-8 col-xs-offset-2">
-                        <a  href="#modal-one" data-index="2" class="btn btn-block btn-primary btn-sm" style="margin-top:10px; margin-bottom: 0px; width: 30%; margin-left:auto; margin-right: auto;">Add a Course</a>
+                    <div class="center-text col-xs-4 col-xs-offset-4">
+                        <a  data-toggle="modal" data-target=".bs-example-modal-sm" data-index="2" class="btn btn-block btn-primary btn-sm">Add a Course</a>
                     </div>
                 </div>
             </div>
             <div>
                 <input type="checkbox" id="option-3" name="option-3" checked>
                 <label for="option-3" id="option-3">
-                    <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-                    Cancel/Withdraw from Summer Sessions (Drop All Courses)
+                <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+         Cancel/Withdraw from Summer Sessions (Drop All Courses)
                 </label>
                 <div class="form-action-content option-3">
                     <br />
                     <div class="center-text col-xs-4 col-xs-offset-4">
-                        <a  href="#modal-one" class="btn btn-block btn-primary btn-sm" data-index="3" style="margin-top:5px">Drop a Course</a>
+                        <a  data-toggle="modal" data-target=".bs-example-modal-sm" data-index="3" class="btn btn-block btn-primary btn-sm">Drop a Course</a>
                     </div><br /><br /><br />
                     <div class="divider-line"></div>
                     <p>
@@ -198,16 +215,18 @@
 
                 </div>
             </div>
+            <div class="alert alert-info alert-dismissable col-sm-12" style="padding: 10px; display: none;" id="reset_form_actions">
+                <h4>Reset the forms</h4>
+                By resetting the forms, the form requests will be remove at all completely. <button id="reset_form" class="btn btn-warning btn-xs">RESET THE FORM</button>
+            </div>
         </div>
         <!-- End Accordian Menu -->
 
         <div class="col-sm-4" style="width: 32%;" id="courseInfo">
             <h4>Requests in this Form</h4>
-            <div class="box box-default">
-                <div class="box-header with-border alert alert-danger alert-dismissable">
-                    <p>There are currently no requests in this form.</p>
-                </div><!-- /.box-header -->
-            </div><!-- /.box -->
+            <div class="alert alert-info alert-dismissable">
+                There is no requests in here. To add a requests, please select a form action from the left.
+            </div>
             <div class="divider-line-requests row alert-success alert-dismissable">
                 <div class="col-md-4" style="display: none; width: 95%; margin-top: 15px; margin-left: 12px" >
                     <div class="box box-solid">
@@ -241,56 +260,43 @@
             <button type="button" id="ucbInfo-submit" class="btn btn-primary pull-left next_prev">Previous</button>
             <button type="button" id="ucbInfo-submit" class="btn btn-primary pull-right next_step">Next</button><br />
 
-
-
-        <!-- Modal -->
-        <div class="modalsrcf" id="modal-one" aria-hidden="true">
-            <div class="modal-dialog">
-                <a title="Close" class="fancybox-item fancybox-close" href="#close"></a>
-                <div class="col-md-6" style="width: 100%;">
-                    <!-- Bar chart -->
-                    <div class="box box-primary" style="padding-bottom: 15px;">
-                        <div class="box-header">
-                            <i class="fa fa-edit"></i>
-                            <h3 class="box-title">Drop a Course (Regular)</h3>
+        <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Drop a Course (Regular)</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>CCN:</label>
+                            <input type="text" class="form-control required input-sm" id="ccn"
+                                   placeholder="Enter CCN" style="width: 50%;">
                         </div>
-                        <form id="the_form">
-                        <div id="general-form-error" class="alert alert-warning col-md-12" style="margin-bottom: 10px; text-align: center; display: none;">
-                            <p><i class="icon fa fa-exclamation-circle"></i>&nbsp;  Please enter 5 digits for the CCN</p>
+                        <div id="ccn_info" class="course-info callout" style="margin-top: 10px; margin-bottom: 10px; background: rgb(243, 248, 245); padding:10px; display:none;">
+                            <h5 style="margin-top: 0px; margin-bottom: 5px; ">African American Studies R1B P 001 LEC</h5>
+                            MTuWTh 9-11A, 174 Barrows
+                            <br />
+                            <b>Instructor: </b>Nanda, A
+                            <br />
+                            <b>CCN:</b> 10110
                         </div>
-
-                        <div class="box-body">
-                            <div class="form-group">
-                                <label>CCN:</label>
-                                <input type="text" class="form-control required input-sm" id="ccn"
-                                       placeholder="Enter CCN" style="width: 50%;">
-                            </div>
-                            <div id="ccn_info" class="course-info callout" style="margin-top: 10px; margin-bottom: 10px; background: rgb(243, 248, 245); padding:10px; display:none;">
-                                <h5 style="margin-top: 0px; margin-bottom: 5px; ">African American Studies R1B P 001 LEC</h5>
-                                MTuWTh 9-11A, 174 Barrows
-                                <br />
-                                <b>Instructor: </b>Nanda, A
-                                <br />
-                                <b>CCN:</b> 10110
-                            </div>
-                            <div class="import-container" style="display: none">
-                                <h5 style="margin-bottom: 8px;">This request needs to be approved by the following</h5>
-                                <ol>
-                                    <li> Faculty Athletic Representative</li>
-                                    <li> Summer Session Staff</li>
-                                </ol>
-                                <h5 style="margin-bottom: 4px;">Please answering the following question below</h5>
-                                <ol>
-                                    <li> Are you currently on a waitlist for this course? &nbsp;  Yes <input type="radio" style="margin-top: 2px; position: absolute" /> &nbsp; &nbsp; &nbsp; No &nbsp;<input type="radio" style="margin-top: 2px; margin-left: 0px; position: absolute" /> </li>
-                                    <li> Have you Attended this course? &nbsp;  Yes <input type="radio" style="margin-top: 2px; position: absolute" /> &nbsp; &nbsp; &nbsp; No &nbsp;<input type="radio" style="margin-top: 2px; margin-left: 0px; position: absolute" /></li>
-                                    <li> The date you last attended this course? <input type="text" id="datepicker" class="form-control input-sm pull-right" style="width: 25%; height: 18px; margin-right: 15%"/> </li>
-                                </ol>
-                                <a href="#close" id="srcf_action" value="Drop this Course"
-                                   class="btn btn-primary btn-center slide_close" style="margin-left: 35%;">Drop this Course</a>
-                            </div>
-                        </div><!-- /.box-body-->
-                            </form>
-                    </div><!-- /.box -->
+                        <div class="import-container" style="display: none">
+                            <h5 style="margin-bottom: 8px;">This request needs to be approved by the following</h5>
+                            <ol>
+                                <li> Faculty Athletic Representative</li>
+                                <li> Summer Session Staff</li>
+                            </ol>
+                            <h5 style="margin-bottom: 4px;">Please answering the following question below</h5>
+                            <ol>
+                                <li> Are you currently on a waitlist for this course? &nbsp;  Yes <input type="radio" style="margin-top: 2px; position: absolute" /> &nbsp; &nbsp; &nbsp; No &nbsp;<input type="radio" style="margin-top: 2px; margin-left: 0px; position: absolute" /> </li>
+                                <li> Have you Attended this course? &nbsp;  Yes <input type="radio" style="margin-top: 2px; position: absolute" /> &nbsp; &nbsp; &nbsp; No &nbsp;<input type="radio" style="margin-top: 2px; margin-left: 0px; position: absolute" /></li>
+                                <li> The date you last attended this course? <input type="text" id="datepicker" class="form-control input-sm pull-right" style="width: 25%; height: 18px; margin-right: 15%"/> </li>
+                            </ol>
+                            <a href="#close" id="srcf_action" value="Drop this Course"  data-dismiss="modal"
+                               class="btn btn-primary btn-center" style="margin-left: 35%;">Drop this Course</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

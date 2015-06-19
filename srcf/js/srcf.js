@@ -34,16 +34,17 @@
                 init: function () {
                     if ($thisTable.find("th").length > 0) {
                         $thisTable.find("th").each(function (index) {
+                            console.log(this);
                             $(this).click(function () {
                                 var sort_dir = $(this).attr("class") || dir.ASC;
                                 if (sort_dir === dir.ASC){
-                                    $(this).siblings().andSelf().each(function(index){
+                                    $(this).siblings("th").andSelf().each(function(index){
                                         $(this).children(":first").removeClass().addClass("fa fa-fw fa-sort-asc");
                                     });
                                     $(this).removeClass().addClass(dir.DESC);
                                 }
                                 else if (sort_dir === dir.DESC){
-                                    $(this).siblings().andSelf().each(function(index){
+                                    $(this).siblings("th").andSelf().each(function(index){
                                         $(this).children(":first").removeClass().addClass("fa fa-fw fa-sort-desc");
                                     });
                                     $(this).removeClass().addClass(dir.ASC);
