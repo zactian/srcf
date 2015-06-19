@@ -126,7 +126,8 @@
                 }
             },
             compareInput: function() {
-                if (input != comparable || !comparable.value) {
+                console.log(comparable === "");
+                if (input != comparable || comparable === "") {
                     that.main.formDanger($inputID);
                     that.main.displayError();
                 } else {
@@ -143,7 +144,6 @@
                 if (!$errorID.is(":visible")) {
                     $errorID.slideDown('slow');
                 }
-                console.log('exitin');
             },
             validated: function() {
                 if ($inputID.hasClass('form-danger')) {
