@@ -41,7 +41,7 @@
                 }
 
 
-                $("#accordian-menu").children(":not(:eq(1))").each(function(){
+                $("#accordian-menu").children(":not(:eq("+accordin_index+"))").each(function(){
                     $(this).find('label').trigger( "click" );
                     $(this).find('label').css({"background":"#D0D0D0", "color": "#505050"}).click(false);
                     $(this).find('img').remove();
@@ -91,8 +91,8 @@
     </header>
     <div class="content-wrapper">
         <div class="row">
-            <div class="col-lg-6 col-lg-offset-3 pull-left"><h3>Student Record Change Form Action</h3></div>
-            <div class="col-sm-2 col-lg-offset-1 pull-right invoice-col">
+            <div class="col-md-6 col-lg-offset-3 pull-left"><h3>Student Record Change Form Action</h3></div>
+            <div class="col-md-2 col-lg-offset-1 pull-right invoice-col">
                 <address>
                     <strong>Name: Tian Strenfel</strong><br />
                     SID: 908206889<br>
@@ -104,9 +104,9 @@
             Select request (your Record Change Form needs to have at least one request).
             You may combine requests (such as Add a Course and Drop a Course) on the same form. You can, however, initiate only one request listed below at a time.
         </div>
-
+        <div class="row">
         <!-- Accordian Menu -->
-        <div id="accordian-menu" class="col-md-6">
+        <div id="accordian-menu" class="col-sm-8">
             <h4>Please Select a Form Action</h4>
             <div>
                 <input type="checkbox" id="option-1" name="option-1" checked>
@@ -120,27 +120,27 @@
                         You may combine requests (such as Add a Course and Drop a Course) on the same form, but must initiate only one request listed below at a time.
                     </p>
                     <div class="divider-line"></div><br />
-                    <div class="col-md-12">
+                    <div class="col-xs-12">
                         <div class="row">
-                            <div class="col-md-4 col-md-offset-0">
+                            <div class="col-xs-4 col-md-offset-0">
                                 <a href="#modal-one" data-index="1" class="btn btn-block btn-primary btn-sm">Add a Course</a>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-xs-4">
                                 <a href="#modal-one" data-index="1"  class="btn btn-block btn-primary btn-sm">Enroll from Waitlist</a>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-xs-4">
                                 <a href="#modal-one" data-index="1"  class="btn btn-block btn-primary btn-sm">Drop a Course</a>
                             </div>
                         </div>
                         <br />
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-xs-4">
                                 <a  href="#modal-one" data-index="1" class="btn btn-block btn-primary btn-sm">Change Grading Option</a>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-xs-4">
                                 <a  href="#modal-one" data-index="1" class="btn btn-block btn-primary btn-sm">Change Unit Value</a>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-xs-4">
                                 <a  href="#modal-one" data-index="1" class="btn btn-block btn-primary btn-sm">Switch Secondary Sections</a>
                             </div>
                         </div>
@@ -157,7 +157,7 @@
                     <p>If you would like to be reinstated in Summer Sessions, please re-enroll in at least one
                         course.</p>
                     <div class="divider-line"></div>
-                    <div class="center-text">
+                    <div class="center-text col-xs-8 col-xs-offset-2">
                         <a  href="#modal-one" data-index="2" class="btn btn-block btn-primary btn-sm" style="margin-top:10px; margin-bottom: 0px; width: 30%; margin-left:auto; margin-right: auto;">Add a Course</a>
                     </div>
                 </div>
@@ -170,7 +170,7 @@
                 </label>
                 <div class="form-action-content option-3">
                     <br />
-                    <div class="center-text col-md-4 col-md-offset-4">
+                    <div class="center-text col-xs-4 col-xs-offset-4">
                         <a  href="#modal-one" class="btn btn-block btn-primary btn-sm" data-index="3" style="margin-top:5px">Drop a Course</a>
                     </div><br /><br /><br />
                     <div class="divider-line"></div>
@@ -201,7 +201,7 @@
         </div>
         <!-- End Accordian Menu -->
 
-        <div class="col-md-6" id="courseInfo">
+        <div class="col-sm-4" style="width: 32%;" id="courseInfo">
             <h4>Requests in this Form</h4>
             <div class="box box-default">
                 <div class="box-header with-border alert alert-danger alert-dismissable">
@@ -235,12 +235,13 @@
                 </div>
             </div>
         </div>
-
+            </div>
         <!-- bottom navbar -->
-        <div class="col-md-12 bottom-navbar" style="margin-bottom: 15px;">
+<br />
             <button type="button" id="ucbInfo-submit" class="btn btn-primary pull-left next_prev">Previous</button>
             <button type="button" id="ucbInfo-submit" class="btn btn-primary pull-right next_step">Next</button><br />
-        </div>
+
+
 
         <!-- Modal -->
         <div class="modalsrcf" id="modal-one" aria-hidden="true">
@@ -285,8 +286,7 @@
                                     <li> The date you last attended this course? <input type="text" id="datepicker" class="form-control input-sm pull-right" style="width: 25%; height: 18px; margin-right: 15%"/> </li>
                                 </ol>
                                 <a href="#close" id="srcf_action" value="Drop this Course"
-                                   class="btn btn-primary btn-center slide_close" style="margin-left: 35%;">Drop this
-                                    Course</a>
+                                   class="btn btn-primary btn-center slide_close" style="margin-left: 35%;">Drop this Course</a>
                             </div>
                         </div><!-- /.box-body-->
                             </form>
