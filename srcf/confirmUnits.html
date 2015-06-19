@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="css/bootstrap.css"/>
     <link rel="stylesheet" href="css/style.css"/>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -56,15 +57,17 @@
                 <p>What do you think about Sudden Valley? It sounds like a salad dressing, but for some reason I don't want to eat it. Way to plant, Ann! Michael was concerned that he was caught in a lie about his family. The family was concerned that they were being confronted by a woman they had clubbed, drugged, and left on a bench. </p>
             </div>
 
-            <div class="alert alert-warning col-md-12">
+            <div class="alert alert-warning col-md-12 col-sm-12">
                 <span class="glyphicon glyphicon-warning-sign" aria-hidden="true" style="display"></span>
                 <p style="display:inline; margin-left:2px;">We were not able to find your units in Telebears. Please enter units that you are currently enrolled in. Make sure you include both enrolled and waitlisted units.</p>
             </div>
-            <div class="alert alert-warning col-md-12">
+
+            <div class="alert alert-warning col-md-12 col-sm-12">
                 <span class="glyphicon glyphicon-warning-sign" aria-hidden="true" style="padding-right:0"></span>
                 <p style="display:inline; margin-left:2px;">If you are an international student, please make sure that you are enrolled full-time in order to keep your I-20 visa status.</p>
             </div>
-            <div id="general-form-error2" class="alert alert-danger col-md-12" style="display:none;">
+
+            <div id="general-form-error2" class="alert alert-danger col-md-12 col-sm-12" style="display:none;">
                 <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style="display"></span>
                 <p style="display:inline; margin-left:2px;">There was an error when calculating your units. Please check the form for any mistakes.</p>
             </div>
@@ -110,8 +113,9 @@
                     </table>
                 </form>
             </div>
-            <div id="numerical_error_msg" class="col-md-12" style="text-align:center; color:red; display:none">
-               <strong> you done messed up.</strong>
+            <div id="numerical_error_msg" class="col-md-12 col-sm-12 alert alert-danger col-md-12 col-sm-12" style="display:none">
+                <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style="display"></span>
+                You have entered an incorrect input into the box. Please fix before continuing
             </div>
 
             <div class="col-md-12 bottom-navbar" style="margin-bottom: 15px;">

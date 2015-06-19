@@ -52,7 +52,7 @@ p {
 
 .alert {
     text-align: center;
-    padding:3px 0 3px 0;
+    padding:3px 7px;
     margin: 5px 0;
     display: inline-block;
 }
@@ -580,6 +580,7 @@ p {
 .pull-left {
     float: left !important;
 }
+
 blockquote {
     border-color: #ddd;
     border-color: rgba(0, 0, 0, .15);
