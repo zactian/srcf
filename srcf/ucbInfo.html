@@ -21,31 +21,31 @@
 
     $(document).ready(function () {
 
-        var pdf_count= new Array();
-        $("#read_college_instructions").change(function(e) {
+        var pdf_count = new Array();
+        $("#read_college_instructions").change(function (e) {
             e.preventDefault();
-            if(this.checked) {
+            if (this.checked) {
                 var pass = true;
                 var pdf_container = $("#college_pdfs .timeline-item .timeline-body");
-                pdf_container.find("div").each(function(){
+                pdf_container.find("div").each(function () {
                     var id = parseInt($(this).attr("id"));
-                    if(jQuery.inArray(id, pdf_count) == -1){
+                    if (jQuery.inArray(id, pdf_count) == -1) {
                         pass = false;
                     }
                 });
-                if(pass == false){
+                if (pass == false) {
                     $(this).removeProp("checked");
                     $("#general-form-error").slideDown("slow").empty().html('<span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style="line-height:16px;"></span>&nbsp;' +
                             'You have to open up instruction PDF(s) to demonstrated that you have read and understood them');
                 }
-                else{
-                    if($("#general-form-error:contains('PDF')" )){
+                else {
+                    if ($("#general-form-error:contains('PDF')")) {
                         $("#general-form-error").hide("slow");
                     }
-                  $(this).parent().removeClass().addClass("alert alert-success row").find("i").removeClass().addClass("icon fa fa-check");
+                    $(this).parent().removeClass().addClass("alert alert-success row").find("i").removeClass().addClass("icon fa fa-check");
                 }
             }
-            else{
+            else {
                 $(this).parent().removeClass().addClass("alert alert-warning row").find("i").removeClass().addClass("icon fa fa-warning");
             }
         });
@@ -79,7 +79,7 @@
 
                     appendItem: function () {
                         if (append_action.checkEmpty()) {
-                            pdf.slideToggle("slow");
+                            pdf.show("slow");
                         }
 
                         var pdfs = new Array();
@@ -97,10 +97,9 @@
                         $("#read_college_instructions").removeProp("checked");
 
 
-
                         var source = $('<div style="position: relative; width:100px; height:75px; float:left; margin-right: 10px; margin-top: 10px; ">').attr("id", option.val()).append("" +
                                 "<a width='200' height='200' style='position: absolute; z-index: 10; margin-left:5%; margin-top: 25%; cursor: pointer;' class='view_pdf'> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</a>" +
-                                "<a class='download_pdf' href='download.php?file="+pdfs[option.val()]+"' width='100' height='100' style='position: absolute; z-index: 10; margin-left:60%; margin-top: 25%; cursor: pointer; '> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </a>" +
+                                "<a class='download_pdf' href='download.php?file=" + pdfs[option.val()] + "' width='100' height='100' style='position: absolute; z-index: 10; margin-left:60%; margin-top: 25%; cursor: pointer; '> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </a>" +
                                 "<img src='images/fileIcon.png' width='100' height='75' />");
 
                         pdf_container.append(source);
@@ -108,17 +107,17 @@
 
                         $(".download_pdf").click(function () {
                             var that = this;
-                            if(parseInt(jQuery.inArray(parseInt($(that).parent().attr("id")), pdf_count)) === -1){
+                            if (parseInt(jQuery.inArray(parseInt($(that).parent().attr("id")), pdf_count)) === -1) {
                                 pdf_count.push(parseInt($(that).parent().attr("id")));
                             }
                         });
 
 
                         $(".view_pdf").click(function () {
-                           var that = this;
-                           if(parseInt(jQuery.inArray(parseInt($(that).parent().attr("id")), pdf_count)) === -1){
-                               pdf_count.push(parseInt($(that).parent().attr("id")));
-                           }
+                            var that = this;
+                            if (parseInt(jQuery.inArray(parseInt($(that).parent().attr("id")), pdf_count)) === -1) {
+                                pdf_count.push(parseInt($(that).parent().attr("id")));
+                            }
                             $.fancybox({
                                 type: 'html',
                                 autoSize: false,
@@ -182,48 +181,53 @@
 </script>
 <!-- end script -->
 <div class="wrapper">
-    <header class="main-header">
-        <div id="logo">
-            <img src="images/2014_BSSLogo.jpg"/>
+<header class="main-header">
+    <div id="logo">
+        <img src="images/2014_BSSLogo.jpg"/>
+    </div>
+</header>
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-lg-2 col-lg-offset-5 pull-left"><h3>UCB Info</h3></div>
+        <div class="col-sm-2 col-lg-offset-1 pull-right invoice-col">
+            <address>
+                <strong>Name: Tian Strenfel</strong><br/>
+                SID: 908206889<br>
+            </address>
         </div>
-    </header>
-    <div class="content-wrapper">
-        <div class="row">
-            <div class="col-lg-2 col-lg-offset-5 pull-left"><h3>UCB Info</h3></div>
-            <div class="col-sm-2 col-lg-offset-1 pull-right invoice-col">
-                <address>
-                    <strong>Name: Tian Strenfel</strong><br />
-                    SID: 908206889<br>
-                </address>
-            </div>
-        </div>
+    </div>
 
-        <div id="general-form-error" class="alert alert-danger col-md-12">
-            <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style="line-height:16px;"></span>
-            <p style="display: inline; margin-left:2px;">Please complete the form before continuing to the next page.</p>
-        </div>
-        <h4>Student Infomration</h4><br />
-        <form id="ucb-info-form" class="col-md-12">
+    <div id="general-form-error" class="alert alert-danger col-md-12">
+        <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style="line-height:16px;"></span>
 
-            <div class="flex-container col-md-12" style="padding:0">
-                <div class="col-md-5 col-xs-12 col-md-offset-1 form-group">
-                    <label for="emailExample">Email</label>&nbsp;<i class="fa fa-envelope"></i>
-                    <input type="text" class="form-control srcf-input required input-sm" id="emailExample"
-                           placeholder="Enter Email">
-                     <div id="initial_error" class="alert-danger alert col-md-6">
-                         <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style="line-height:16px;"></span>
-                         The email you have entered is not valid.
-                     </div>
+        <p style="display: inline; margin-left:2px;">Please complete the form before continuing to the next page.</p>
+    </div>
+
+    <form id="ucb-info-form" class="col-md-12">
+        <h4>Student Infomration</h4><br/>
+
+        <div class="flex-container" style="padding:0">
+            <div class="col-md-5 col-xs-12 col-md-offset-1 form-group">
+                <label for="emailExample">Email</label>&nbsp;<i class="fa fa-envelope"></i>
+                <input type="text" class="form-control srcf-input required input-sm" id="emailExample"
+                       placeholder="Enter Email">
+
+                <div id="initial_error" class="alert-danger alert col-md-6">
+                    <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style="line-height:16px;"></span>
+                    The email you have entered is not valid.
                 </div>
-                <div class="col-md-5 col-xs-12 form-group">
-                    <label for="confirmEmailExample">Confirm Email</label>&nbsp;<i class="fa fa-envelope"></i>
-                    <input type="text" class="form-control srcf-input required input-sm" id="confirmEmailExample" placeholder="Confirm Email">
-                    <div id="secondary_error" class="alert-danger alert">
+            </div>
+            <div class="col-md-5 col-xs-12 form-group">
+                <label for="confirmEmailExample">Confirm Email</label>&nbsp;<i class="fa fa-envelope"></i>
+                <input type="text" class="form-control srcf-input required input-sm" id="confirmEmailExample"
+                       placeholder="Confirm Email">
+
+                <div id="secondary_error" class="alert-danger alert">
                     <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style="line-height:16px";></span>
                     The emails you have entered do not match.
-                    </div>
                 </div>
             </div>
+
 
             <div class="form-group col-md-5 col-md-offset-1">
                 <label for="majorExample">Undergraduate Major(s)</label> <br>
@@ -341,43 +345,52 @@
                     </label>
                 </div>
             </div>
-        </form>
-        <!-- form end -->
-        <div id="college_pdfs">
-            <h4>College Instruction</h4>
 
-            <div class="timeline-item">
+            <div class="col-md-10 col-md-offset-1 form-group" id="college_pdfs">
+                <h5>College Instruction</h5>
+                    <div class="timeline-item">
+                        <div class="timeline-body row" style="border: 0">
+                        </div>
+                        <div class="alert alert-warning row" style="width: 100%; padding: 10px; font-size: 12px;">
+                            <i class="icon fa fa-warning"></i> Please open and read the following PDF instructions for
+                            your Colleges and then confirm that you have
+                            done so. <br/>
+                            <input type="checkbox" name="read_college_instructions" id="read_college_instructions"
+                                   value="yes"/>
+                            Check box to indicate that you have read the instructions for your College.
+                        </div>
 
-                <div class="timeline-body row" style="border: 0">
-                </div>
 
-                <div class="alert alert-warning row" style="width: 100%; padding: 10px; font-size: 12px;">
-                    <i class="icon fa fa-warning"></i> Please open and read the following PDF instructions for your Colleges and then confirm that you have
-                    done so. <br/>
-                    <input type="checkbox" name="read_college_instructions" id="read_college_instructions" value="yes"/>
-                    Check box to indicate that you have read the instructions for your College.
                 </div>
             </div>
-        </div>
-        <div class="col-md-12 bottom-navbar">
-            <button type="button" id="" class="btn btn-primary pull-left next_prev">Previous</button>
-            <button type="button" id="ucbInfo-submit" class="btn btn-primary pull-right next_step">Next</button><br /><br />
+
+            <div class="col-md-12 col-md-offset-0 form-group">
+                <button type="button" id="" class="btn btn-primary pull-left next_prev">Previous</button>
+                <button type="button" id="ucbInfo-submit" class="btn btn-primary pull-right next_step">Next</button>
+                <br/><br/>
+            </div>
         </div>
 
+    </form>
+
+
+    <!-- form end -->
+
+
+</div>
+<footer class="main-footer">
+    <div id="footer-inner" class="clearfix">
+        <div id="sub-footer">
+            <a href="http://www.berkeley.edu">
+                <img src="/images/2014_UCBerkeleyLogo.png" alt="UC Berkeley" class="footer-logo"></a>
+
+            <p>© UC Berkeley Summer Sessions, 1995 University Avenue
+                <br>
+                510-642-5611</p>
+        </div>
+        <!-- <div id="sub-footer"> -->
     </div>
-    <footer class="main-footer">
-        <div id="footer-inner" class="clearfix">
-            <div id="sub-footer">
-                <a href="http://www.berkeley.edu">
-                    <img src="/images/2014_UCBerkeleyLogo.png" alt="UC Berkeley" class="footer-logo"></a>
-
-                <p>© UC Berkeley Summer Sessions, 1995 University Avenue
-                    <br>
-                    510-642-5611</p>
-            </div>
-            <!-- <div id="sub-footer"> -->
-        </div>
-    </footer>
+</footer>
 </div>
 </body>
 </html>

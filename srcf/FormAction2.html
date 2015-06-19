@@ -13,9 +13,9 @@
     <title></title>
     <script type="text/javascript">
         $( document ).ready(function() {
-
-            $(".fa-times").click(function() {
-                $(this).parent().parent().hide();
+            var accordin_index;
+            $("#accordian-menu a").click(function(){
+                accordin_index = $(this).data("index");
             });
 
 
@@ -29,28 +29,34 @@
                     $(".import-container").hide();
                 }
             });
-            $( "#srcf_action" ).click(function() {
+            $( "#srcf_action" ).click(function(e) {
+
                 if(!$(".divider-line-requests .col-md-4").is(":visible")){
                     $(".divider-line-requests .col-md-4").show();
                 }
                 else{
-                    var text = $(".divider-line-requests .col-md-4").html();;
+                    var text = $(".divider-line-requests .col-md-4").html();
                     var vv = $(".divider-line-requests");
                     $(".divider-line-requests").append("<div class='col-md-4' style='width: 95%; margin-top: 0px; margin-left: 12px;'>"+text+"</div>");
                 }
 
-                $('#accordian-menu').children(":gt(1)").each(function(){
+
+                $("#accordian-menu").children(":not(:eq(1))").each(function(){
                     $(this).find('label').trigger( "click" );
                     $(this).find('label').css({"background":"#D0D0D0", "color": "#505050"}).click(false);
                     $(this).find('img').remove();
+                    $(this).find('.glyphicon').remove();
                 });
 
                 $("#courseInfo").find('.box-default').remove();
 
                 $(".fa-times").click(function() {
-                    $(this).parent().parent().hide();
+                    $(this).parent().parent().parent().hide();
                 });
             });
+
+
+
 
 
             $( "#datepicker" ).datepicker();
@@ -71,6 +77,7 @@
                     $arrow.css('transform', "");
                }
             });
+
 
         });
     </script>
@@ -99,7 +106,7 @@
         </div>
 
         <!-- Accordian Menu -->
-        <div id="accordian-menu" class="col-md-8">
+        <div id="accordian-menu" class="col-md-6">
             <h4>Please Select a Form Action</h4>
             <div>
                 <input type="checkbox" id="option-1" name="option-1" checked>
@@ -116,25 +123,25 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-4 col-md-offset-0">
-                                <a href="#modal-one" class="btn btn-block btn-primary btn-sm">Add a Course</a>
+                                <a href="#modal-one" data-index="1" class="btn btn-block btn-primary btn-sm">Add a Course</a>
                             </div>
                             <div class="col-md-4">
-                                <a href="#modal-one"  class="btn btn-block btn-primary btn-sm">Enroll from Waitlist</a>
+                                <a href="#modal-one" data-index="1"  class="btn btn-block btn-primary btn-sm">Enroll from Waitlist</a>
                             </div>
                             <div class="col-md-4">
-                                <a href="#modal-one"  class="btn btn-block btn-primary btn-sm">Drop a Course</a>
+                                <a href="#modal-one" data-index="1"  class="btn btn-block btn-primary btn-sm">Drop a Course</a>
                             </div>
                         </div>
                         <br />
                         <div class="row">
                             <div class="col-md-4">
-                                <a  href="#modal-one" class="btn btn-block btn-primary btn-sm">Change Grading Option</a>
+                                <a  href="#modal-one" data-index="1" class="btn btn-block btn-primary btn-sm">Change Grading Option</a>
                             </div>
                             <div class="col-md-4">
-                                <a  href="#modal-one"class="btn btn-block btn-primary btn-sm">Change Unit Value</a>
+                                <a  href="#modal-one" data-index="1" class="btn btn-block btn-primary btn-sm">Change Unit Value</a>
                             </div>
                             <div class="col-md-4">
-                                <a  href="#modal-one" class="btn btn-block btn-primary btn-sm">Switch Secondary Sections</a>
+                                <a  href="#modal-one" data-index="1" class="btn btn-block btn-primary btn-sm">Switch Secondary Sections</a>
                             </div>
                         </div>
                     </div>
@@ -151,7 +158,7 @@
                         course.</p>
                     <div class="divider-line"></div>
                     <div class="center-text">
-                        <a  href="#modal-one" class="btn btn-block btn-primary btn-sm" style="margin-top:10px; margin-bottom: 0px; width: 30%; margin-left:auto; margin-right: auto;">Add a Course</a>
+                        <a  href="#modal-one" data-index="2" class="btn btn-block btn-primary btn-sm" style="margin-top:10px; margin-bottom: 0px; width: 30%; margin-left:auto; margin-right: auto;">Add a Course</a>
                     </div>
                 </div>
             </div>
@@ -164,7 +171,7 @@
                 <div class="form-action-content option-3">
                     <br />
                     <div class="center-text col-md-4 col-md-offset-4">
-                        <a  href="#modal-one" class="btn btn-block btn-primary btn-sm" style="margin-top:5px">Drop a Course</a>
+                        <a  href="#modal-one" class="btn btn-block btn-primary btn-sm" data-index="3" style="margin-top:5px">Drop a Course</a>
                     </div><br /><br /><br />
                     <div class="divider-line"></div>
                     <p>
@@ -194,7 +201,7 @@
         </div>
         <!-- End Accordian Menu -->
 
-        <div class="col-md-4" id="courseInfo">
+        <div class="col-md-6" id="courseInfo">
             <h4>Requests in this Form</h4>
             <div class="box box-default">
                 <div class="box-header with-border alert alert-danger alert-dismissable">
@@ -206,7 +213,7 @@
                     <div class="box box-solid">
                         <div class="box-header with-border">
                             <i class="fa fa-fw fa-edit"></i>&nbsp;
-                            <h3 class="box-title"  style="font-size: 16px;">Drop a Course</h3><i class="fa fa-fw fa-times pull-right"></i>
+                            <h3 class="box-title"  style="font-size: 16px;">Drop a Course</h3><a style="cursor: pointer; font-size: 14px;"><i class="fa fa-fw fa-times pull-right"></a></i>
                         </div><!-- /.box-header -->
                         <div class="box-body">
                             <blockquote>
@@ -246,9 +253,11 @@
                             <i class="fa fa-edit"></i>
                             <h3 class="box-title">Drop a Course (Regular)</h3>
                         </div>
+                        <form id="the_form">
                         <div id="general-form-error" class="alert alert-warning col-md-12" style="margin-bottom: 10px; text-align: center; display: none;">
                             <p><i class="icon fa fa-exclamation-circle"></i>&nbsp;  Please enter 5 digits for the CCN</p>
                         </div>
+
                         <div class="box-body">
                             <div class="form-group">
                                 <label>CCN:</label>
@@ -280,6 +289,7 @@
                                     Course</a>
                             </div>
                         </div><!-- /.box-body-->
+                            </form>
                     </div><!-- /.box -->
                 </div>
             </div>
