@@ -395,7 +395,7 @@ p {
     }
 }
 
-@media only screen and (max-width:600px) {
+@media only screen and (max-width:650px) {
     .ec-course-action {
         width:90%;
         margin:10px auto;
