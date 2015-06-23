@@ -34,7 +34,6 @@
                 init: function () {
                     if ($thisTable.find("th").length > 0) {
                         $thisTable.find("th").each(function (index) {
-                            console.log(this);
                             $(this).click(function () {
                                 var sort_dir = $(this).attr("class") || dir.ASC;
                                 if (sort_dir === dir.ASC){

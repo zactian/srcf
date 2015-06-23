@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"
+          type="text/css"/>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="css/bootstrap.css"/>
     <link rel="stylesheet" href="css/style.css"/>
@@ -13,66 +14,78 @@
     <script type="text/javascript" src="js/srcf.js"></script>
     <title></title>
     <script type="text/javascript">
-        $( document ).ready(function() {
+        $(document).ready(function () {
+
+            var accordion = $("#accordion");
             var accordin_index;
             var each_request = $(".divider-line-requests .col-md-4");
-            $(".divider-line-requests").empty();
+            var form_requests = $(".divider-line-requests");
+            form_requests.empty();
+            var reset_forms = $("#reset_form_actions");
 
-            $("#accordian-menu a").click(function(){
+            $('.panel-collapse').collapse('show');
+            $('.panel-title').attr('data-toggle', '');
+            $("#accordion .panel-body a").click(function () {
                 accordin_index = $(this).data("index");
             });
 
-            $("#reset_form").click(function(){
-               $(".divider-line-requests").empty();
-               $(".divider-line-requests").before('<div class="alert alert-info alert-dismissable"> There is no requests in here. To add a requests, please select a form action from the left.  </div>');
-                $("#accordian-menu").children(":not(:eq("+accordin_index+"))").each(function(){
-                    $(this).find('input:checkbox').prop('checked', true).removeAttr("disabled");
-                    $(this).find('label').css({"background":"#F6F3F3", "color": "black"});
-                    $(this).find('label').removeAttr("data-toggle").removeAttr("data-replacement").removeAttr("title").removeAttr("data-original-title").removeClass("red-tooltip");
-                    $(this).find('label').prepend('<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>');
+            var ray= (function () {
+                var this_object = this;
+                var $reset_button = $("#reset_form");
+                return {
+                    init:function(){
+                        var that = this;
+                        $reset_button.click(function(){
+                            that.action();
+                        });
+                    },
+                    action:function(){
+                         form_requests.empty();
+                         if(form_requests.prev().is("h4"))
+                            form_requests.before('<div class="alert alert-info alert-dismissable"> There is no requests in here. To add a requests, please select a form action from the left.</div>');
+                            accordion.children(":not(:eq(" + accordin_index + "))").each(function () {
+                            $(this).find('.panel-collapse:not(".in")').collapse('show');
+                            $(this).find('h4 a').attr({"data-toggle": "collapse"}).css({"color": "#023876", "cursor":"pointer"}).removeAttr("data-replacement").removeAttr("title").removeAttr("data-original-title").removeClass("red-tooltip");;
+                            $(this).find('.panel-heading').css({"background": "#f5f5f5"});
+                         });
+                        $reset_button.parent().hide();
+                    }
+                }
+            })();
+            ray.init();
 
+            $("#srcf_action").click(function (e) {
+                if(form_requests.children().length == 0) {
+                    form_requests.prev().remove();
+                    reset_forms.show();
+                }
+                $(".divider-line-requests").append("<div class='col-md-4' style='width: 95%; margin-top: 8px; margin-left: 12px;'>" + each_request.html() + "</div>");
+                accordion.children(":not(:eq(" + accordin_index + "))").each(function () {
+                    $(this).find('.panel-collapse.in').collapse('hide');
+                    $(this).find('h4 a').attr({"data-toggle": "tooltip", class:"red-toolip", "data-replacement": "left bottom", "title": "You can only select one form action at the time. To select different form requests, please reset the form. "}).css({"color": "#777", "cursor":"default"});
+                    $(this).find('.panel-heading').css({"background": "#D0D0D0"});
+                    $('[data-toggle="tooltip"]').tooltip({placement: 'bottom'});
                 });
-                $(this).parent().hide();
+
+                $(".fa-times").click(function () {
+                    $(this).parentsUntil(".divider-line-requests").remove();
+                     if(form_requests.children().length == 0){
+                      ray.action();
+                     }
+                });
+
             });
 
-            $("#ccn").keyup(function() {
-                if($(this).val().length == 5){
+            $("#ccn").keyup(function () {
+                if ($(this).val().length == 5) {
                     $("#ccn_info").fadeIn(1000);
                     $(".import-container").delay(700).fadeIn(1000);
                 }
-                else{
+                else {
                     $("#ccn_info").hide();
                     $(".import-container").hide();
                 }
-            });
-            $( "#srcf_action" ).click(function(e) {
-
-              if($(".divider-line-requests").children().length == 0){
-
-                $(".divider-line-requests").prev().remove();
-                $("#reset_form_actions").show();
-              }
-
-                $(".divider-line-requests").append("<div class='col-md-4' style='width: 95%; margin-top: 8px; margin-left: 12px;'>"+each_request.html()+"</div>");
-                $("#accordian-menu").children(":not(:eq("+accordin_index+"))").each(function(){
-                    $(this).find('input:checkbox').prop('checked', false).attr("disabled", true);
-                    $(this).find('label').css({"background":"#D0D0D0", "color": "#777"});
-                    $(this).find('label').attr({  class:"red-tooltip", "data-toggle":"tooltip", "data-replacement":"left bottom", "title":"You can only select one form action at the time. To select different form requests, please reset the form. "});
-                    $(this).find('img').remove();
-                    $(this).find('.glyphicon').remove();
-                    $('[data-toggle="tooltip"]').tooltip();
-                });
-
-
-                $(".fa-times").click(function() {
-                    $(this).parent().parent().parent().remove();
-                });
-            });
-
-
-            $( "#datepicker" ).datepicker();
-
-            $('#ccn').blur(function () {
+            }).blur(function () {
                 $(this).validateInput({
                     input: $(this).val(),
                     comparable: /^[0-9]{5}$/i,
@@ -80,168 +93,205 @@
                     errorID: 'general-form-error'})
             });
 
-            $('#accordian-menu label').click(function() {
-                var $arrow = $(this).children('.glyphicon')
-                if( $arrow.css('transform') == 'none') {
-                    $arrow.css("transform","rotate(180deg)");
-               } else {
-                    $arrow.css('transform', "");
-               }
+            $("#datepicker").datepicker();
+            $('#accordion .panel-title a').click(function () {
+            if($(this).parent().parent().next().hasClass( "in" )){
+                var $arrow = $(this).prev().css("transform", "rotate(180deg)");
+            }
+            else
+                var $arrow = $(this).prev().css("transform", "rotate(0deg)");
             });
+
         });
     </script>
 </head>
 <body>
 <div class="wrapper">
-    <header class="main-header">
-        <div id="logo">
-            <img src="images/2014_BSSLogo.jpg" />
-        </div>
-    </header>
-    <div class="content-wrapper">
-        <div class="row">
-            <div class="col-md-6 col-lg-offset-3 pull-left"><h3>Student Record Change Form Action</h3></div>
-            <div class="col-md-2 col-lg-offset-1 pull-right invoice-col">
-                <address>
-                    <strong>Name: Tian Strenfel</strong><br />
-                    SID: 908206889<br>
-                </address>
-            </div>
-        </div>
-        <div class="alert alert-warning alert-dismissable" style="font-size: 12px; padding: 15px;">
-            <p>            <i class="icon fa fa-warning"></i> &nbsp;Select request (your Record Change Form needs to have at least one request).
-            You may combine requests (such as Add a Course and Drop a Course) on the same form. You can, however, initiate only one request listed below at a time.           </p>
-            <p>
-                For additional resource help, please<a href="https://mysummer-dev-demo.berkeley.edu/srcf/srcfHelp.php" target="_blank">
-                    Click Here.
-                </a>
-            </p>
+<header class="main-header">
+    <div id="logo">
+        <img src="images/2014_BSSLogo.jpg"/>
+    </div>
+</header>
 
-
-
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-md-6 col-lg-offset-3 pull-left"><h3>Student Record Change Form Action</h3></div>
+        <div class="col-md-2 col-lg-offset-1 pull-right invoice-col">
+            <address>
+                <strong>Name: Tian Strenfel</strong><br/>
+                SID: 908206889<br>
+            </address>
         </div>
-        <div class="row">
-        <!-- Accordian Menu -->
-        <div id="accordian-menu" class="col-sm-8">
+    </div>
+    <div class="alert alert-warning alert-dismissable" style="font-size: 12px; padding: 15px;">
+        <p><i class="icon fa fa-warning"></i> &nbsp;Select request (your Record Change Form needs to have at least one
+            request).
+            You may combine requests (such as Add a Course and Drop a Course) on the same form. You can, however,
+            initiate only one request listed below at a time.
+        </p>
+        <p>
+            For additional resource help, please<a href="https://mysummer-dev-demo.berkeley.edu/srcf/srcfHelp.php"
+                                                   target="_blank">
+            Click Here.
+        </a>
+        </p>
+    </div>
+    <div class="row">
+        <div class="panel-group col-sm-8" id="accordion" style="font-size:12px;">
             <h4>Please Select a Form Action</h4>
-            <div>
-                <input type="checkbox" id="option-1" name="option-1" checked>
-                <label for="option-1">
-                 <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-                    Add, Drop, Change Grading Option, Change Unit Value
-                </label>
-                <div class="form-action-content btn-group option-1">
-                    <p>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <i class="fa fa-fw fa-angle-down"></i>  <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" style="font-size: 14px;">Add,
+                            Drop Change Grading Options, Change Unit Value</a>
+                    </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse in">
+                    <div class="panel-body"><p>
                         Select your request (your Record Change Form needs to have at least one).
-                        You may combine requests (such as Add a Course and Drop a Course) on the same form, but must initiate only one request listed below at a time.
+                        You may combine requests (such as Add a Course and Drop a Course) on the same form, but must
+                        initiate only one request listed below at a time.
                     </p>
-                    <div class="divider-line"></div><br />
-                    <div class="col-xs-12">
-                        <div class="row">
-                            <div class="col-xs-4 col-md-offset-0">
-                                <a data-toggle="modal" data-target=".bs-example-modal-sm" data-index="1" class="btn btn-block btn-primary btn-sm">Add a Course</a>
+
+                        <div class="divider-line"></div>
+                        <br/>
+
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <div class="col-xs-4 col-md-offset-0">
+                                    <a data-toggle="modal" data-target=".bs-example-modal-sm" data-index="1"
+                                       class="btn btn-block btn-primary">Add a Course</a>
+                                </div>
+                                <div class="col-xs-4">
+                                    <a data-toggle="modal" data-target=".bs-example-modal-sm" data-index="1"
+                                       class="btn btn-block btn-primary">Enroll from Waitlist</a>
+                                </div>
+                                <div class="col-xs-4">
+                                    <a data-toggle="modal" data-target=".bs-example-modal-sm" data-index="1"
+                                       class="btn  btn-block btn-primary">Drop a Course</a>
+                                </div>
                             </div>
-                            <div class="col-xs-4">
-                                <a data-toggle="modal" data-target=".bs-example-modal-sm" data-index="1"  class="btn btn-block btn-primary btn-sm">Enroll from Waitlist</a>
-                            </div>
-                            <div class="col-xs-4">
-                                <a data-toggle="modal" data-target=".bs-example-modal-sm" data-index="1"  class="btn btn-block btn-primary btn-sm">Drop a Course</a>
-                            </div>
-                        </div>
-                        <br />
-                        <div class="row">
-                            <div class="col-xs-4">
-                                <a  data-toggle="modal" data-target=".bs-example-modal-sm" data-index="1" class="btn btn-block btn-primary btn-sm">Change Grading Option</a>
-                            </div>
-                            <div class="col-xs-4">
-                                <a data-toggle="modal" data-target=".bs-example-modal-sm" data-index="1" class="btn btn-block btn-primary btn-sm">Change Unit Value</a>
-                            </div>
-                            <div class="col-xs-4">
-                                <a  data-toggle="modal" data-target=".bs-example-modal-sm" data-index="1" class="btn btn-block btn-primary btn-sm">Switch Secondary Sections</a>
+                            <br />
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <a data-toggle="modal" data-target=".bs-example-modal-sm" data-index="1"
+                                       class="btn  btn-primary btn-flat">Switch Secondary Sections</a>
+                                </div>
+                                <div class="col-xs-4">
+                                    <a data-toggle="modal" data-target=".bs-example-modal-sm" data-index="1"
+                                       class="btn  btn btn-primary btn-flat">Change Grading Option</a>
+                                </div>
+
+                                <div class="col-xs-4">
+                                    <a data-toggle="modal" data-target=".bs-example-modal-sm" data-index="1"
+                                       class="btn btn-block btn-primary">Change Unit Value</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div>
-                <input type="checkbox" id="option-2" name="option-2" checked>
-                <label for="option-2" id="option-2">
-
-                        <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-                    Request Reinstatement to Summer Sessions
-                </label>
-                <div class="form-action-content option-2">
-                    <p>If you would like to be reinstated in Summer Sessions, please re-enroll in at least one
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <i class="fa fa-fw fa-angle-down"></i>     <a data-toggle="collapse" data-original-title="Default tooltip" data-parent="#accordion" href="#collapse2" style="font-size: 14px;">Request
+                            Reinstatement to Summer Sessions</a>
+                    </h4>
+                </div>
+                <div id="collapse2" class="panel-collapse collapse">
+                    <div class="panel-body"><p>If you would like to be reinstated in Summer Sessions, please re-enroll
+                        in at least one
                         course.</p>
-                    <div class="divider-line"></div>
-                    <div class="center-text col-xs-4 col-xs-offset-4">
-                        <a  data-toggle="modal" data-target=".bs-example-modal-sm" data-index="2" class="btn btn-block btn-primary btn-sm">Add a Course</a>
+
+                        <div class="divider-line"></div>
+                        <div class="col-xs-4 col-xs-offset-4" style="margin-top: 8px;">
+                            <a data-toggle="modal" data-target=".bs-example-modal-sm" data-index="2"
+                               class="btn btn-block btn-primary">Add a Course</a>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div>
-                <input type="checkbox" id="option-3" name="option-3" checked>
-                <label for="option-3" id="option-3">
-                <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-         Cancel/Withdraw from Summer Sessions (Drop All Courses)
-                </label>
-                <div class="form-action-content option-3">
-                    <br />
-                    <div class="center-text col-xs-4 col-xs-offset-4">
-                        <a  data-toggle="modal" data-target=".bs-example-modal-sm" data-index="3" class="btn btn-block btn-primary btn-sm">Drop a Course</a>
-                    </div><br /><br /><br />
-                    <div class="divider-line"></div>
-                    <p>
-                        If you want to drop all your courses, how you need to do that depends on whether or not any of your courses have started yet. <br> <br>
-                        <strong>CANCELLATION:</strong> <br>
-                        If you are dropping all courses in all sessions before your earliest session begins, this is called Cancellation.
-                        You will receive a refund of all fees, minus the Cancellation Fee, if fees have already been paid in full. If no payment has been made, all Summer Sessions fees will be removed from your CARS (Campus Accounts Receivable System) bill, but you will assessed the Cancellation Fee. <br> <br>
-                        <strong>WITHDRAWAL:</strong> <br>
-                        If you are dropping all courses in all sessions AFTER your earliest session begins, this is called Withdrawal and you will assessed the Withdrawal Processing Fee <br> <br>
-                        <strong>FEES:</strong>
-                    </p>
-                    <ul>
-                        <li><a href="http://summer.berkeley.edu/registration/fees?qt-registration_fees_tab=0#qt-registration_fees_tab">
-                            Summer Fees for UC Students
-                        </a></li>
-                        <li><a href="http://summer.berkeley.edu/registration/fees?qt-registration_fees_tab=1#qt-registration_fees_tab">
-                            Summer Fees for Visiting US Students
-                        </a></li>
-                        <li><a href="http://summer.berkeley.edu/international/registration-fees">
-                            Summer Fees for Visiting International Students
-                        </a>
-                        </li>
-                    </ul>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <i class="fa fa-fw fa-angle-down"></i>   <a data-toggle="collapse" data-parent="#accordion" href="#collapse3" style="font-size: 14px;">Cancel/Withdraw
+                            from Summer Sessions(Drop All Courses)</a>
+                    </h4>
+                </div>
+                <div id="collapse3" class="panel-collapse collapse">
+                    <div class="panel-body"><br/>
 
+                        <div class="center-text col-xs-4 col-xs-offset-4">
+                            <a data-toggle="modal" data-target=".bs-example-modal-sm" data-index="3"
+                               class="btn btn-block btn-primary">Drop a Course</a>
+                        </div>
+                        <br/><br/><br/>
+
+                        <div class="divider-line"></div>
+                        <p>
+                            If you want to drop all your courses, how you need to do that depends on whether or not any
+                            of your courses have started yet. <br> <br>
+                            <strong>CANCELLATION:</strong> <br>
+                            If you are dropping all courses in all sessions before your earliest session begins, this is
+                            called Cancellation.
+                            You will receive a refund of all fees, minus the Cancellation Fee, if fees have already been
+                            paid in full. If no payment has been made, all Summer Sessions fees will be removed from
+                            your CARS (Campus Accounts Receivable System) bill, but you will assessed the Cancellation
+                            Fee. <br> <br>
+                            <strong>WITHDRAWAL:</strong> <br>
+                            If you are dropping all courses in all sessions AFTER your earliest session begins, this is
+                            called Withdrawal and you will assessed the Withdrawal Processing Fee <br> <br>
+                            <strong>FEES:</strong>
+                        </p>
+                        <ul>
+                            <li>
+                                <a href="http://summer.berkeley.edu/registration/fees?qt-registration_fees_tab=0#qt-registration_fees_tab">
+                                    Summer Fees for UC Students
+                                </a></li>
+                            <li>
+                                <a href="http://summer.berkeley.edu/registration/fees?qt-registration_fees_tab=1#qt-registration_fees_tab">
+                                    Summer Fees for Visiting US Students
+                                </a></li>
+                            <li><a href="http://summer.berkeley.edu/international/registration-fees">
+                                Summer Fees for Visiting International Students
+                            </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <div class="alert alert-info alert-dismissable col-sm-12" style="padding: 10px; display: none;" id="reset_form_actions">
+            <div class="alert alert-info alert-dismissable col-sm-12" id="reset_form_actions">
                 <h4>Reset the forms</h4>
                 By resetting the forms, the form requests will be remove at all completely. <button id="reset_form" class="btn btn-warning btn-xs">RESET THE FORM</button>
             </div>
         </div>
+
         <!-- End Accordian Menu -->
 
-        <div class="col-sm-4"  id="courseInfo">
+        <div class="col-sm-4" id="courseInfo">
             <h4>Requests in this Form</h4>
+
             <div class="alert alert-info alert-dismissable">
                 There is no requests in here. To add a requests, please select a form action from the left.
             </div>
             <div class="divider-line-requests row alert-success alert-dismissable">
-                <div class="col-md-4" style="display: none; width: 95%; margin-top: 15px; margin-left: 12px" >
+                <div class="col-md-4" style="display: none; width: 95%; margin-top: 15px; margin-left: 12px">
                     <div class="box box-solid">
                         <div class="box-header with-border">
                             <i class="fa fa-fw fa-edit"></i>&nbsp;
-                            <h3 class="box-title"  style="font-size: 16px;">Drop a Course</h3><a style="cursor: pointer; font-size: 14px;"><i class="fa fa-fw fa-times pull-right"></a></i>
-                        </div><!-- /.box-header -->
+                            <h3 class="box-title" style="font-size: 16px;">Drop a Course</h3><a
+                                style="cursor: pointer; font-size: 14px;"><i
+                                class="fa fa-fw fa-times pull-right"></a></i>
+                        </div>
+                        <!-- /.box-header -->
                         <div class="box-body">
                             <blockquote>
-                                <label>Course:</label> AFRICAN R-18 LEC 001 <br />
-                                <label>CCN:</label> 10110 <br />
-                                <label>Units:</label> 4.0 <br />
-                                <label>Action Type:</label> Regular <br />
-                                <label>Waitlisted?</label> No <br />
-                                <label>Attended?</label> No <br />
+                                <label>Course:</label> AFRICAN R-18 LEC 001 <br/>
+                                <label>CCN:</label> 10110 <br/>
+                                <label>Units:</label> 4.0 <br/>
+                                <label>Action Type:</label> Regular <br/>
+                                <label>Waitlisted?</label> No <br/>
+                                <label>Attended?</label> No <br/>
                                 <small style="font-size: 12px;">&nbsp;Approvers
                                     <ol>
                                         <li>Faculty Athletic Representative</li>
@@ -249,88 +299,105 @@
                                     </ol>
                                 </small>
                             </blockquote>
-                        </div><!-- /.box-body -->
-                    </div><!-- /.box -->
-                </div>
-            </div>
-        </div>
-            </div>
-        <!-- bottom navbar -->
-<br />
-            <button type="button" id="ucbInfo-submit" class="btn btn-primary pull-left next_prev">Previous</button>
-            <button type="button" id="ucbInfo-submit" class="btn btn-primary pull-right next_step">Next</button><br />
-
-        <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Drop a Course (Regular)</h4>
+                        </div>
+                        <!-- /.box-body -->
                     </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label>CCN:</label>
-                            <input type="text" class="form-control required input-sm" id="ccn"
-                                   placeholder="Enter CCN" style="width: 50%;">
-                        </div>
-                        <div id="ccn_info" class="course-info callout" style="margin-top: 10px; margin-bottom: 10px; background: rgb(243, 248, 245); padding:10px; display:none;">
-                            <h5 style="margin-top: 0px; margin-bottom: 5px; ">African American Studies R1B P 001 LEC</h5>
-                            MTuWTh 9-11A, 174 Barrows
-                            <br />
-                            <b>Instructor: </b>Nanda, A
-                            <br />
-                            <b>CCN:</b> 10110
-                        </div>
-                        <div class="import-container" style="display: none">
-                            <h5 style="margin-bottom: 8px;">This request needs to be approved by the following</h5>
-                            <ol>
-                                <li> Faculty Athletic Representative</li>
-                                <li> Summer Session Staff</li>
-                            </ol>
-                            <h5 style="margin-bottom: 4px;">Please answering the following question below</h5>
-                            <ol>
-                                <li> Are you currently on a waitlist for this course? &nbsp;  Yes <input type="radio" style="margin-top: 2px; position: absolute" /> &nbsp; &nbsp; &nbsp; No &nbsp;<input type="radio" style="margin-top: 2px; margin-left: 0px; position: absolute" /> </li>
-                                <li> Have you Attended this course? &nbsp;  Yes <input type="radio" style="margin-top: 2px; position: absolute" /> &nbsp; &nbsp; &nbsp; No &nbsp;<input type="radio" style="margin-top: 2px; margin-left: 0px; position: absolute" /></li>
-                                <li> The date you last attended this course? <input type="text" id="datepicker" class="form-control input-sm pull-right" style="width: 25%; height: 18px; margin-right: 15%"/> </li>
-                            </ol>
-                            <a href="#close" id="srcf_action" value="Drop this Course"  data-dismiss="modal"
-                               class="btn btn-primary btn-center" style="margin-left: 35%;">Drop this Course</a>
-                        </div>
-                    </div>
+                    <!-- /.box -->
                 </div>
             </div>
         </div>
 
-        <!-- Nav Timeline Bar -->
-        <div class="navhistory col-md-12 col-sm-12 hidden-xs">
-            <div class="inner-nav col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1">
-                <img src="images/navFormAction.svg" alt=""></img>
-                <ul>
-                    <li class="center-text col-md-3 col-sm-3"><a href="ucbinfo.html">Student Info</a></li>
-                    <li class="center-text col-md-3 col-sm-3"><a href="confirmUnits.html">Confirm Units</a></li>
-                    <li class="current center-text col-md-3 col-sm-3">Form Actions</li>
-                    <li class="center-text col-md-3 col-sm-3">Confirm Form</li>
-                </ul
+        <!-- bottom navbar -->  </div>
+    <br/>
+    <button type="button" id="ucbInfo-submit" class="btn btn-primary pull-left next_prev">Previous</button>
+    <button type="button" id="ucbInfo-submit" class="btn btn-primary pull-right next_step">Next</button>
+    <br/>
+
+    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Drop a Course (Regular)</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label>CCN:</label>
+                        <input type="text" class="form-control required input-sm" id="ccn"
+                               placeholder="Enter CCN" style="width: 50%;">
+                    </div>
+                    <div id="ccn_info" class="course-info callout"
+                         style="margin-top: 10px; margin-bottom: 10px; background: rgb(243, 248, 245); padding:10px; display:none;">
+                        <h5 style="margin-top: 0px; margin-bottom: 5px; ">African American Studies R1B P 001 LEC</h5>
+                        MTuWTh 9-11A, 174 Barrows
+                        <br/>
+                        <b>Instructor: </b>Nanda, A
+                        <br/>
+                        <b>CCN:</b> 10110
+                    </div>
+                    <div class="import-container" style="display: none">
+                        <h5 style="margin-bottom: 8px;">This request needs to be approved by the following</h5>
+                        <ol>
+                            <li> Faculty Athletic Representative</li>
+                            <li> Summer Session Staff</li>
+                        </ol>
+                        <h5 style="margin-bottom: 4px;">Please answering the following question below</h5>
+                        <ol>
+                            <li> Are you currently on a waitlist for this course? &nbsp; Yes <input type="radio"
+                                                                                                    style="margin-top: 2px; position: absolute"/>
+                                &nbsp; &nbsp; &nbsp; No &nbsp;<input type="radio"
+                                                                     style="margin-top: 2px; margin-left: 0px; position: absolute"/>
+                            </li>
+                            <li> Have you Attended this course? &nbsp; Yes <input type="radio"
+                                                                                  style="margin-top: 2px; position: absolute"/>
+                                &nbsp; &nbsp; &nbsp; No &nbsp;<input type="radio"
+                                                                     style="margin-top: 2px; margin-left: 0px; position: absolute"/>
+                            </li>
+                            <li> The date you last attended this course? <input type="text" id="datepicker"
+                                                                                class="form-control input-sm pull-right"
+                                                                                style="width: 25%; height: 18px; margin-right: 15%"/>
+                            </li>
+                        </ol>
+                        <a href="#close" id="srcf_action" value="Drop this Course" data-dismiss="modal"
+                           class="btn btn-primary btn-center" style="margin-left: 35%;">Drop this Course</a>
+                    </div>
+                </div>
             </div>
         </div>
-
     </div>
-    <footer class="main-footer">
-        <div id="footer-inner" class="clearfix">
-            <div id="sub-footer">
-                <a href="http://www.berkeley.edu">
-                    <img src="/images/2014_UCBerkeleyLogo.png" alt="UC Berkeley" class="footer-logo"></a>
-                <p>© UC Berkeley Summer Sessions, 1995 University Avenue
-                    <br>
-                    510-642-5611</p>
-            </div> <!-- <div id="sub-footer"> -->
+
+    <!-- Nav Timeline Bar -->
+    <div class="navhistory col-md-12 col-sm-12 hidden-xs">
+        <div class="inner-nav col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1">
+            <img src="images/navFormAction.svg" alt=""></img>
+            <ul>
+                <li class="center-text col-md-3 col-sm-3"><a href="ucbinfo.html">Student Info</a></li>
+                <li class="center-text col-md-3 col-sm-3"><a href="confirmUnits.html">Confirm Units</a></li>
+                <li class="current center-text col-md-3 col-sm-3">Form Actions</li>
+                <li class="center-text col-md-3 col-sm-3">Confirm Form</li>
+            </ul>
         </div>
-    </footer>
+    </div>
+</div>
+<footer class="main-footer">
+    <div id="footer-inner" class="clearfix">
+        <div id="sub-footer">
+            <a href="http://www.berkeley.edu">
+                <img src="/images/2014_UCBerkeleyLogo.png" alt="UC Berkeley" class="footer-logo"></a>
+
+            <p>© UC Berkeley Summer Sessions, 1995 University Avenue
+                <br>
+                510-642-5611</p>
+        </div>
+        <!-- <div id="sub-footer"> -->
+    </div>
+</footer>
 </div>
 </body>
 </html>
 <script type="text/javascript">
-    $(".next_step").click(function() {
+    $(".next_step").click(function () {
         var url = 'confirmEnrollmentChanges.html';
         $(location).attr('href', url);
     })
