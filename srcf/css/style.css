@@ -658,3 +658,55 @@ small ol{
 {
     padding-right: 10px;
 }
+
+/* NavHistory Styles */
+
+
+.navhistory {
+}
+
+.inner-nav {
+    position: relative;
+    vertical-align: center;
+}
+
+.navhistory img {
+    width:100%;
+    height: auto;
+    z-index: 0;
+}
+.inner-nav ul {
+    /*position: absolute;*/
+    padding:0;
+    margin-top: -4.25%;
+    margin-bottom: 4.25%;
+}
+/* need media query here */
+
+.inner-nav ul li{
+    display: inline;
+    list-style-type: none;
+    color: #ADADAD;
+}
+
+.inner-nav ul li.current{
+    font-weight: bold;
+    color: #337ab7;
+}
+
+.inner-nav li a {
+    color:#949494;
+}
+
+.inner-nav li a:hover {
+    color:#337ab7;
+}
+
+
+@media only screen and (max-width : 925px) {
+    .inner-nav ul {
+        margin-top: -4.45%;
+        margin-bottom: 4.45%;
+    }
+}
+
