@@ -374,7 +374,7 @@ p {
 }
 
 .ec-course-action {
-    width: 28%;
+    width: 300px;
     margin-top: 10px;
     color: black;
 }
@@ -407,6 +407,10 @@ p {
 
 #provided-information table {
     margin-top:22px;
+}
+
+.form-edits {
+    padding:10px;
 }
 
 @media only screen and (max-width : 992px) {
