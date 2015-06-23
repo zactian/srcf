@@ -175,8 +175,9 @@
             });
         });
 
-        //$(this).validateInput($(this).val(), null, $('#emailExample').val(), {containerID: 'confirmEmailExample', errorID: 'secondary_error'});
-
+        $('#confirmEmailExample').bind('copy paste', function (e) {
+           e.preventDefault();
+        });
 
     });
 </script>
