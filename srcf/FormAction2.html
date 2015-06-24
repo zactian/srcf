@@ -123,27 +123,24 @@
             </address>
         </div>
     </div>
+    <!-- Alert -->
     <div class="alert alert-warning alert-dismissable" style="font-size: 12px; padding: 15px;">
         <p><i class="icon fa fa-warning"></i> &nbsp;Select request (your Record Change Form needs to have at least one
             request).
             You may combine requests (such as Add a Course and Drop a Course) on the same form. You can, however,
             initiate only one request listed below at a time.
         </p>
-        <p>
-            For additional resource help, please<a href="https://mysummer-dev-demo.berkeley.edu/srcf/srcfHelp.php"
-                                                   target="_blank">
-            Click Here.
-        </a>
+        <p> For additional resource help, please<a href="https://mysummer-dev-demo.berkeley.edu/srcf/srcfHelp.php" target="_blank">Click Here. </a>
         </p>
     </div>
     <div class="row">
         <div class="panel-group col-sm-8" id="accordion" style="font-size:12px;">
             <h4>Please Select a Form Action</h4>
+            <!-- Accordian Menu -->
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <i class="fa fa-fw fa-angle-down"></i>  <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" style="font-size: 14px;">Add,
-                            Drop Change Grading Options, Change Unit Value</a>
+                        <i class="fa fa-fw fa-angle-down"></i>  <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" style="font-size: 14px;">Add, Drop, Change Grading Options, Change Unit Value</a>
                     </h4>
                 </div>
                 <div id="collapse1" class="panel-collapse collapse in">
@@ -152,13 +149,11 @@
                         You may combine requests (such as Add a Course and Drop a Course) on the same form, but must
                         initiate only one request listed below at a time.
                     </p>
-
                         <div class="divider-line"></div>
                         <br/>
-
                         <div class="col-xs-12">
                             <div class="row">
-                                <div class="col-xs-4 col-md-offset-0">
+                                <div class="col-xs-4 col-md-offset-0 center-text">
                                     <a data-toggle="modal" data-target=".bs-example-modal-sm" data-index="1"
                                        class="btn btn-block btn-primary">Add a Course</a>
                                 </div>
@@ -194,8 +189,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <i class="fa fa-fw fa-angle-down"></i>     <a data-toggle="collapse" data-original-title="Default tooltip" data-parent="#accordion" href="#collapse2" style="font-size: 14px;">Request
-                            Reinstatement to Summer Sessions</a>
+                        <i class="fa fa-fw fa-angle-down"></i>     <a data-toggle="collapse" data-original-title="Default tooltip" data-parent="#accordion" href="#collapse2" style="font-size: 14px;">Request Reinstatement to Summer Sessions</a>
                     </h4>
                 </div>
                 <div id="collapse2" class="panel-collapse collapse">
@@ -214,19 +208,16 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <i class="fa fa-fw fa-angle-down"></i>   <a data-toggle="collapse" data-parent="#accordion" href="#collapse3" style="font-size: 14px;">Cancel/Withdraw
-                            from Summer Sessions(Drop All Courses)</a>
+                        <i class="fa fa-fw fa-angle-down"></i>   <a data-toggle="collapse" data-parent="#accordion" href="#collapse3" style="font-size: 14px;">Cancel/Withdraw from Summer Sessions(Drop All Courses)</a>
                     </h4>
                 </div>
                 <div id="collapse3" class="panel-collapse collapse">
                     <div class="panel-body"><br/>
-
                         <div class="center-text col-xs-4 col-xs-offset-4">
                             <a data-toggle="modal" data-target=".bs-example-modal-sm" data-index="3"
                                class="btn btn-block btn-primary">Drop a Course</a>
                         </div>
                         <br/><br/><br/>
-
                         <div class="divider-line"></div>
                         <p>
                             If you want to drop all your courses, how you need to do that depends on whether or not any
@@ -265,12 +256,11 @@
                 By resetting the forms, the form requests will be remove at all completely. <button id="reset_form" class="btn btn-warning btn-xs">RESET THE FORM</button>
             </div>
         </div>
-
         <!-- End Accordian Menu -->
 
+        <!-- Form Requests -->
         <div class="col-sm-4" id="courseInfo">
             <h4>Requests in this Form</h4>
-
             <div class="alert alert-info alert-dismissable">
                 There is no requests in here. To add a requests, please select a form action from the left.
             </div>
@@ -308,11 +298,8 @@
         </div>
 
         <!-- bottom navbar -->  </div>
-    <br/>
-    <button type="button" id="ucbInfo-submit" class="btn btn-primary pull-left next_prev">Previous</button>
-    <button type="button" id="ucbInfo-submit" class="btn btn-primary pull-right next_step">Next</button>
-    <br/>
 
+    <!-- Overlay -->
     <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -344,8 +331,7 @@
                         </ol>
                         <h5 style="margin-bottom: 4px;">Please answering the following question below</h5>
                         <ol>
-                            <li> Are you currently on a waitlist for this course? &nbsp; Yes <input type="radio"
-                                                                                                    style="margin-top: 2px; position: absolute"/>
+                            <li> Are you currently on a waitlist for this course? &nbsp; Yes <input type="radio"                                style="margin-top: 2px; position: absolute"/>
                                 &nbsp; &nbsp; &nbsp; No &nbsp;<input type="radio"
                                                                      style="margin-top: 2px; margin-left: 0px; position: absolute"/>
                             </li>
@@ -379,7 +365,13 @@
             </ul>
         </div>
     </div>
-</div>
+
+        <div class="nav-buttons col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12">
+            <button type="button" id="" class="btn btn-primary pull-left next_prev">Previous</button>
+            <button type="button" id="ucbInfo-submit" class="btn btn-primary pull-right next_step">Next</button>
+            <br/><br/>
+        </div>
+
 <footer class="main-footer">
     <div id="footer-inner" class="clearfix">
         <div id="sub-footer">

@@ -183,215 +183,212 @@
 </script>
 <!-- end script -->
 <div class="wrapper">
-<header class="main-header">
-    <div id="logo" class="col-md-6">
-        <img src="images/2014_BSSLogo.jpg"/>
-    </div>
-</header>
-<div class="content-wrapper">
-    <div class="row">
-        <div class="ol-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-6 center-text pull-left">
-            <h3>Student Information</h3>
+    <header class="main-header">
+        <div id="logo" class="col-md-6">
+            <img src="images/2014_BSSLogo.jpg"/>
         </div>
-        <div class="col-md-2 col-sm-2 col-xs-5 pull-right invoice-col">
-            <address>
-                <strong>Name: Tian Strenfel</strong><br/>
-                SID: 908206889<br>
-            </address>
+    </header>
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="ol-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-6 center-text pull-left">
+                <h3>Student Information</h3>
+            </div>
+            <div class="col-md-2 col-sm-2 col-xs-5 pull-right invoice-col">
+                <address>
+                    <strong>Name: Tian Strenfel</strong><br/>
+                    SID: 908206889<br>
+                </address>
+            </div>
         </div>
-    </div>
 
-    <div id="general-form-error" class="alert alert-danger col-md-12 col-xs-12">
-        <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style="line-height:16px;"></span>
+        <!--Error Alert-->
+        <div id="general-form-error" class="alert alert-danger col-md-12 col-xs-12">
+            <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style="line-height:16px;"></span>
+            <p style="display: inline; margin-left:2px;">Please complete the form before continuing to the next page.</p>
+        </div>
 
-        <p style="display: inline; margin-left:2px;">Please complete the form before continuing to the next page.</p>
-    </div>
+        <!-- Main Content (Student Information Form) -->
+        <form id="ucb-info-form" class="col-md-12 col-sm-12 col-xs-12">
+            <div class="row flex-container" style="padding:0">
+                <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1 col-xs-12 form-group">
+                    <label for="emailExample">Email</label>&nbsp;<i class="fa fa-envelope"></i>
+                    <input type="text" class="form-control srcf-input required input-sm" id="emailExample"
+                           placeholder="Enter Email">
+                    <!--Error Alert-->
+                    <div id="initial_error" class="alert-danger alert">
+                        <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style="line-height:16px;"></span>
+                        The email you have entered is not valid.
+                    </div>
+                </div>
+                <div class="col-md-5 col-sm-5 col-xs-12 form-group">
+                    <label for="confirmEmailExample">Confirm Email</label>&nbsp;<i class="fa fa-envelope"></i>
+                    <input type="text" class="form-control srcf-input required input-sm" id="confirmEmailExample"
+                           placeholder="Confirm Email">
+                    <!--Error Alert-->
+                    <div id="secondary_error" class="alert-danger alert">
+                        <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style="line-height:16px";></span>
+                        The emails you have entered do not match.
+                    </div>
+                </div>
 
-    <form id="ucb-info-form" class="col-md-12 col-sm-12 col-xs-12">
-        <div class="row flex-container" style="padding:0">
-            <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1 col-xs-12 form-group">
-                <label for="emailExample">Email</label>&nbsp;<i class="fa fa-envelope"></i>
-                <input type="text" class="form-control srcf-input required input-sm" id="emailExample"
-                       placeholder="Enter Email">
+                <div class="form-group col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1 col-xs-12">
+                    <label for="majorExample">Undergraduate Major(s)</label> <br>
+                    <select id="ucb-info-multi-major" class="form-control" multiple="multiple">
+                        <option value="1">African American Studies</option>
+                        <option value="2">American Studies</option>
+                        <option value="3">Anthropology</option>
+                        <option value="4">Architecture</option>
+                        <option value="5">History of Art</option>
+                        <option value="6">Practice of Art</option>
+                        <option value="7">Asian Studies</option>
+                        <option value="8">Asian American Studies</option>
+                        <option value="9">Astrophysics</option>
+                        <option value="10">Business Administration</option>
+                        <option value="11">Celtic Studies</option>
+                        <option value="12">Chemical Biology</option>
+                        <option value="13">Chemical Engineering</option>
+                        <option value="14">Chemistry</option>
+                        <option value="15">Chicano Studies</option>
+                        <option value="16">Chinese Language</option>
+                        <option value="17">Classical Civilizations</option>
+                        <option value="18">Classical Languages</option>
+                        <option value="19">Cognitive Science</option>
+                        <option value="20">Comparative Literature</option>
+                        <option value="21">Computer Science</option>
+                        <option value="22">Conservation and Resource Studies</option>
+                        <option value="23">Dance and Performance Studies</option>
+                        <option value="24">Development Studies</option>
+                        <option value="25">Dutch Studies</option>
+                        <option value="26">Earth and Planetary Science</option>
+                        <option value="27">Economics</option>
+                        <option value="28">Engineering</option>
+                        <option value="29">English</option>
+                        <option value="30">Environmental Economics and Policy</option>
+                        <option value="31">Environmental Sciences</option>
+                        <option value="32">Ethnic Studies</option>
+                        <option value="33">Film</option>
+                        <option value="34">Forestry and Natural Resources</option>
+                        <option value="35">French</option>
+                        <option value="36">Gender and Womens Studies</option>
+                        <option value="37">Genetics and Plant Biology</option>
+                        <option value="38">Geography</option>
+                        <option value="39">German</option>
+                        <option value="40">Greek</option>
+                        <option value="41">History</option>
+                        <option value="42">Integrative Biology</option>
+                        <option value="43">Interdisciplinary Studies Field Major</option>
+                        <option value="44">Italian Studies</option>
+                        <option value="45">Japanese Language</option>
+                        <option value="46">Landscape Architecture</option>
+                        <option value="47">Latin</option>
+                        <option value="48">Latin American Studies</option>
+                        <option value="49">Legal Studies</option>
+                        <option value="50">Linguistics</option>
+                        <option value="51">Mass Communications</option>
+                        <option value="52">Mathematics</option>
+                        <option value="53">Mathematics, Applied</option>
+                        <option value="54">Microbial Biology</option>
+                        <option value="55">Middle Eastern Studies</option>
+                        <option value="56">Molecular and Cell Biology</option>
+                        <option value="57">Molecular Environmental Biology</option>
+                        <option value="58">Molecular Toxicology</option>
+                        <option value="59">Music</option>
+                        <option value="60">Native American Studies</option>
+                        <option value="61">Near Eastern Studies</option>
+                        <option value="62">Nutritional Sciences</option>
+                        <option value="63">Operations Research and Management Science</option>
+                        <option value="64">Peace and Conflict Studies</option>
+                        <option value="65">Philosophy</option>
+                        <option value="66">Physical Sciences Field Major</option>
+                        <option value="67">Physics</option>
+                        <option value="68">Political Economy of Industrial Societies</option>
+                        <option value="69">Political Science</option>
+                        <option value="70">Psychology</option>
+                        <option value="71">Public Policy</option>
+                        <option value="72">Religious Studies</option>
+                        <option value="73">Rhetoric</option>
+                        <option value="74">Scandinavian</option>
+                        <option value="75">Slavic Languages and Literatures</option>
+                        <option value="76">Social Welfare</option>
+                        <option value="77">Sociology</option>
+                        <option value="78">South and Southeast Asian Studies</option>
+                        <option value="79">Spanish</option>
+                        <option value="80">Statistics</option>
+                        <option value="81">Theater and Performance Studies</option>
+                        <option value="82">Urban Studies</option>
+                        <option value="83">Vision Science</option>
+                        <option value="85">Women's Studies</option>
+                        <option value="86">Other</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-5 col-sm-5  col-xs-12">
+                    <label for="majorExample">College(s)</label> <br>
+                    <select id="ucb-info-multi-college" class="form-control" multiple="multiple">
+                        <option value="2">Chemistry</option>
+                        <option value="3">Engineering</option>
+                        <option value="4">Environmental Design</option>
+                        <option value="6">Haas School of Business</option>
+                        <option value="1">letter of Science</option>
+                        <option value="5">Natural Resources</option>
+                        <option value="7">School of Law</option>
+                    </select>
+                </div>
 
-                <div id="initial_error" class="alert-danger alert">
-                    <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style="line-height:16px;"></span>
-                    The email you have entered is not valid.
+                <div class="form-group col-md-12 col-sm-12 col-xs-12 row">
+                    <div class="checkbox">
+                        <span class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1 col-xs-6"style="font-weight:bold;">Are you currently an NCAA athlete?</span>
+                        <span class="col-md-5 col-sm-5 col-xs-6" style="">
+                            <label>
+                                <input type="radio" name="optionsRadio" id="inlineRadio1" value="yes">
+                                Yes
+                            </label>
+                            <label>
+                                <input type="radio" name="optionsRadio" id="inlineRadio1" value="no">
+                                No
+                            </label>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12 form-group clearfix" id="college_pdfs" style="">
+                    <h5>College Instruction</h5>
+                        <div class="timeline-item">
+                            <div class="timeline-body row" style="border: 0">
+                            </div>
+                            <div class="alert alert-warning row" style="width: 100%; padding: 3px 7px; margin:10px auto">
+                                <i class="icon fa fa-warning"></i> Please open and read the following PDF instructions for
+                                your Colleges and then confirm that you have
+                                done so. <br/>
+                                <input type="checkbox" name="read_college_instructions" id="read_college_instructions"
+                                       value="yes"/>
+                                Check box to indicate that you have read the instructions for your College.
+                            </div>
+                    </div>
+                </div>
+
+                <!-- Timeline and Next Buttons -->
+                <div class="navhistory col-md-12 col-sm-12 hidden-xs">
+                    <div class="inner-nav col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1">
+                        <img src="images/navConfirmUnits.svg" alt=""></img>
+                        <ul>
+                            <li class="current center-text col-md-3 col-sm-3">Student Info</li>
+                            <li class="center-text col-md-3 col-sm-3">Confirm Units</li>
+                            <li class="center-text col-md-3 col-sm-3">Form Actions</li>
+                            <li class="center-text col-md-3 col-sm-3">Confirm Form</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-5 col-sm-5 col-xs-12 form-group">
-                <label for="confirmEmailExample">Confirm Email</label>&nbsp;<i class="fa fa-envelope"></i>
-                <input type="text" class="form-control srcf-input required input-sm" id="confirmEmailExample"
-                       placeholder="Confirm Email">
 
-                <div id="secondary_error" class="alert-danger alert">
-                    <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style="line-height:16px";></span>
-                    The emails you have entered do not match.
-                </div>
-            </div>
-
-
-            <div class="form-group col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1 col-xs-12">
-                <label for="majorExample">Undergraduate Major(s)</label> <br>
-                <select id="ucb-info-multi-major" class="form-control" multiple="multiple">
-                    <option value="1">African American Studies</option>
-                    <option value="2">American Studies</option>
-                    <option value="3">Anthropology</option>
-                    <option value="4">Architecture</option>
-                    <option value="5">History of Art</option>
-                    <option value="6">Practice of Art</option>
-                    <option value="7">Asian Studies</option>
-                    <option value="8">Asian American Studies</option>
-                    <option value="9">Astrophysics</option>
-                    <option value="10">Business Administration</option>
-                    <option value="11">Celtic Studies</option>
-                    <option value="12">Chemical Biology</option>
-                    <option value="13">Chemical Engineering</option>
-                    <option value="14">Chemistry</option>
-                    <option value="15">Chicano Studies</option>
-                    <option value="16">Chinese Language</option>
-                    <option value="17">Classical Civilizations</option>
-                    <option value="18">Classical Languages</option>
-                    <option value="19">Cognitive Science</option>
-                    <option value="20">Comparative Literature</option>
-                    <option value="21">Computer Science</option>
-                    <option value="22">Conservation and Resource Studies</option>
-                    <option value="23">Dance and Performance Studies</option>
-                    <option value="24">Development Studies</option>
-                    <option value="25">Dutch Studies</option>
-                    <option value="26">Earth and Planetary Science</option>
-                    <option value="27">Economics</option>
-                    <option value="28">Engineering</option>
-                    <option value="29">English</option>
-                    <option value="30">Environmental Economics and Policy</option>
-                    <option value="31">Environmental Sciences</option>
-                    <option value="32">Ethnic Studies</option>
-                    <option value="33">Film</option>
-                    <option value="34">Forestry and Natural Resources</option>
-                    <option value="35">French</option>
-                    <option value="36">Gender and Womens Studies</option>
-                    <option value="37">Genetics and Plant Biology</option>
-                    <option value="38">Geography</option>
-                    <option value="39">German</option>
-                    <option value="40">Greek</option>
-                    <option value="41">History</option>
-                    <option value="42">Integrative Biology</option>
-                    <option value="43">Interdisciplinary Studies Field Major</option>
-                    <option value="44">Italian Studies</option>
-                    <option value="45">Japanese Language</option>
-                    <option value="46">Landscape Architecture</option>
-                    <option value="47">Latin</option>
-                    <option value="48">Latin American Studies</option>
-                    <option value="49">Legal Studies</option>
-                    <option value="50">Linguistics</option>
-                    <option value="51">Mass Communications</option>
-                    <option value="52">Mathematics</option>
-                    <option value="53">Mathematics, Applied</option>
-                    <option value="54">Microbial Biology</option>
-                    <option value="55">Middle Eastern Studies</option>
-                    <option value="56">Molecular and Cell Biology</option>
-                    <option value="57">Molecular Environmental Biology</option>
-                    <option value="58">Molecular Toxicology</option>
-                    <option value="59">Music</option>
-                    <option value="60">Native American Studies</option>
-                    <option value="61">Near Eastern Studies</option>
-                    <option value="62">Nutritional Sciences</option>
-                    <option value="63">Operations Research and Management Science</option>
-                    <option value="64">Peace and Conflict Studies</option>
-                    <option value="65">Philosophy</option>
-                    <option value="66">Physical Sciences Field Major</option>
-                    <option value="67">Physics</option>
-                    <option value="68">Political Economy of Industrial Societies</option>
-                    <option value="69">Political Science</option>
-                    <option value="70">Psychology</option>
-                    <option value="71">Public Policy</option>
-                    <option value="72">Religious Studies</option>
-                    <option value="73">Rhetoric</option>
-                    <option value="74">Scandinavian</option>
-                    <option value="75">Slavic Languages and Literatures</option>
-                    <option value="76">Social Welfare</option>
-                    <option value="77">Sociology</option>
-                    <option value="78">South and Southeast Asian Studies</option>
-                    <option value="79">Spanish</option>
-                    <option value="80">Statistics</option>
-                    <option value="81">Theater and Performance Studies</option>
-                    <option value="82">Urban Studies</option>
-                    <option value="83">Vision Science</option>
-                    <option value="85">Women's Studies</option>
-                    <option value="86">Other</option>
-                </select>
-            </div>
-            <div class="form-group col-md-5 col-sm-5  col-xs-12">
-                <label for="majorExample">College(s)</label> <br>
-                <select id="ucb-info-multi-college" class="form-control" multiple="multiple">
-                    <option value="2">Chemistry</option>
-                    <option value="3">Engineering</option>
-                    <option value="4">Environmental Design</option>
-                    <option value="6">Haas School of Business</option>
-                    <option value="1">letter of Science</option>
-                    <option value="5">Natural Resources</option>
-                    <option value="7">School of Law</option>
-                </select>
-            </div>
-
-            <div class="form-group col-md-12 col-sm-12 col-xs-12 row">
-                <div class="checkbox">
-                    <span class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1 col-xs-6"style="font-weight:bold;">Are you currently an NCAA athlete?</span>
-                    <span class="col-md-5 col-sm-5 col-xs-6" style="">
-                        <label>
-                            <input type="radio" name="optionsRadio" id="inlineRadio1" value="yes">
-                            Yes
-                        </label>
-                        <label>
-                            <input type="radio" name="optionsRadio" id="inlineRadio1" value="no">
-                            No
-                        </label>
-                    </span>
-                </div>
-            </div>
-
-            <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12 form-group clearfix" id="college_pdfs" style="">
-                <h5>College Instruction</h5>
-                    <div class="timeline-item">
-                        <div class="timeline-body row" style="border: 0">
-                        </div>
-                        <div class="alert alert-warning row" style="width: 100%; padding: 3px 7px; margin:10px auto">
-                            <i class="icon fa fa-warning"></i> Please open and read the following PDF instructions for
-                            your Colleges and then confirm that you have
-                            done so. <br/>
-                            <input type="checkbox" name="read_college_instructions" id="read_college_instructions"
-                                   value="yes"/>
-                            Check box to indicate that you have read the instructions for your College.
-                        </div>
-                </div>
-            </div>
-
-            <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+            <div class="nav-buttons col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12">
                 <button type="button" id="" class="btn btn-primary pull-left next_prev">Previous</button>
                 <button type="button" id="ucbInfo-submit" class="btn btn-primary pull-right next_step">Next</button>
                 <br/><br/>
             </div>
 
-            <div class="navhistory col-md-12 col-sm-12 hidden-xs">
-                <div class="inner-nav col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1">
-                    <img src="images/navConfirmUnits.svg" alt=""></img>
-                    <ul>
-                        <li class="current center-text col-md-3 col-sm-3">Student Info</li>
-                        <li class="center-text col-md-3 col-sm-3">Confirm Units</li>
-                        <li class="center-text col-md-3 col-sm-3">Form Actions</li>
-                        <li class="center-text col-md-3 col-sm-3">Confirm Form</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-    </form>
-
-
-    <!-- form end -->
-
-
-</div>
+        </form>
+        <!-- form end -->
+    </div>
 <footer class="main-footer">
     <div id="footer-inner" class="clearfix">
         <div id="sub-footer">

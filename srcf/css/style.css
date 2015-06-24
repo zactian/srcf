@@ -353,7 +353,6 @@ p {
 
 .ec-course-action {
     width: 300px;
-    margin-top: 10px;
     color: black;
 }
 
@@ -388,7 +387,7 @@ p {
 }
 
 .form-edits {
-    padding:10px;
+    padding:8px 12px
 }
 
 @media only screen and (max-width : 992px) {
@@ -689,5 +688,9 @@ small ol{
         margin-top: -4.45%;
         margin-bottom: 4.45%;
     }
+}
+
+.nav-buttons {
+    margin-top: 15px;
 }
 
