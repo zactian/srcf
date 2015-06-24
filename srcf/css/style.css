@@ -241,8 +241,8 @@ p {
 
 .red-tooltip
 {
-    color: #8a6d3b !IMPORTANT;
-    background-color: #fcf8e3 !important;
+    color: #c7254e;
+    background-color: #f9f2f4;
     border-color: #faebcc !important;
     max-width:520px !important;
     font-size: 13px; !important;
@@ -250,8 +250,8 @@ p {
 
 .tooltip-inner
 {
-    color: #8a6d3b !IMPORTANT;
-    background-color: #fcf8e3 !important;
+    color: #c7254e;
+    background-color: #f9f2f4;
     border-color: #faebcc !important;
     max-width:520px !important;
     font-size: 13px; !important;
