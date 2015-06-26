@@ -639,6 +639,46 @@ small ol{
     padding-right: 10px;
 }
 
+/* Help Page Styles */
+.help-page {
+
+}
+
+.help-page li {
+    /*list-style-type: none;*/
+}
+
+.help-page table{
+    margin-top:10px;
+    margin-bottom:25px;
+    outline: #D8D8D8 solid 2px;
+}
+
+.help-page tr:hover {
+    background-color: #f9f9f9;
+}
+.help-page table th {
+    background-color: #E6E6E6;
+}
+
+.help-page table td, th{
+    vertical-align: top;0
+    height:25px;
+    padding:5px 15px;
+}
+
+.help-page td.option-td {
+    width:30%;
+}
+
+/* Policy Page Styles */
+.policy-page .btn {
+    margin:15px auto;
+}
+
+.no-padding {
+    padding:0;
+}
 /* NavHistory Styles */
 
 
