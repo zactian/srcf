@@ -37,7 +37,7 @@
             <form action="">
                 <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-12 center-text">
                     <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12">
-                        <button class="btn btn-primary btn-block">I accept this policy</button>
+                        <button type="button" class="btn btn-primary btn-block next_step">I accept this policy</button>
                     </div>
                 </div>
             </form>
@@ -59,3 +59,10 @@
 </div>
 </body>
 </html>
+<script type="text/javascript">
+    $(".next_step").click(function() {
+        console.log("pushed");
+        var url = 'srcfFinal.html';
+        $(location).attr('href', url);
+    })
+</script>

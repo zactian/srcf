@@ -7,6 +7,15 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
     <title></title>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $(".next_step").click(function() {
+            console.log("go time");
+            var url = 'PolicyPage.html';
+            $(location).attr('href', url);
+        })
+    });
+    </script>
 </head>
 <body>
 <div class="wrapper">
@@ -144,7 +153,7 @@
 
         <div class="nav-buttons col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12">
             <button type="button" id="" class="btn btn-primary pull-left next_prev">Previous</button>
-            <button type="button" id="ucbInfo-submit" class="btn btn-success pull-right next_step">Submit Form</button>
+            <button type="button" id="" class="btn btn-success pull-right next_step">Submit Form</button>
             <br/><br/>
         </div>
 
@@ -163,9 +172,3 @@
 </div>
 </body>
 </html>
-<script type="text/javascript">
-    $(".next_step").click(function() {
-        var url = 'srcfFinal.html';
-        $(location).attr('href', url);
-    })
-</script>
