@@ -98,10 +98,10 @@
                         $("#read_college_instructions").removeProp("checked");
 
 
-                        var source = $('<div style="position: relative; width:100px; height:75px; float:left; margin-right: 10px; ">').attr("id", option.val()).append("" +
-                                "<a width='200' height='200' style='position: absolute; z-index: 10; margin-left:5%; margin-top: 25%; cursor: pointer;' class='view_pdf'> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</a>" +
-                                "<a class='download_pdf' href='download.php?file=" + pdfs[option.val()] + "' width='100' height='100' style='position: absolute; z-index: 10; margin-left:60%; margin-top: 25%; cursor: pointer; '> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </a>" +
-                                "<img src='images/fileIcon.png'/>");
+                        var source = $('<div style="position: relative; width:100px; height:auto; float:left; margin-right: 10px; ">').attr("id", option.val()).append("" +
+                                "<img src='images/PDFs/" + option.val() + ".svg' />" +
+                                "<a style='font-size:10px; cursor:pointer; margin-left:11px' class='view_pdf'>View</a>" +
+                                "<a class='download_pdf' href='download.php?file=" + pdfs[option.val()] + "'  style='font-size:10px;'> Download</a>");
 
                         pdf_container.append(source);
 

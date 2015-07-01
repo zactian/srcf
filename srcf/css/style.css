@@ -107,6 +107,14 @@ p {
 	margin-left:10px;
 }
 
+@media only screen and (max-width: 390px) {
+    #logo img{
+        width:100%;
+        height:auto;
+    }
+}
+
+
 .content-wrapper
 {
     padding: 25px;
@@ -221,9 +229,7 @@ p {
     text-align: center;
 }
 
-#unit-confirmation-table th:last-child{
-    color:#9D9B91;
-}
+
 
 #unit-confirmation-table td {
     padding: 4px;
@@ -415,6 +421,46 @@ p {
     }
 
 }
+
+/*Form Action Page Styles */
+.form-action-page .accordian-header {
+    font-size: 14px;
+    line-height: 15px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.form-action-page .row .btn {
+    margin:5px 0;
+}
+
+.smaller-text {
+    font-size: 11px;
+    padding:6px 10px;
+}
+
+@media only screen and (max-width: 768px) {
+    .form-action-page .row .btn {
+        margin:10px 0px;
+        font-size: 12px;
+    }
+}
+
+@media only screen and (max-width:450px) {
+    .form-action-page .accordian-header {
+        font-size: 11px;
+        vertical-align: center;
+    }
+
+    .form-action-page .panel-heading{
+        padding:3px 0px 5px;
+    }
+
+    .form-action-page .panel-heading i{
+        margin-left: 3px;
+    }
+}
+
 
 /* Timeline Specific Styles */
 .timeline-item img {
