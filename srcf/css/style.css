@@ -114,6 +114,12 @@ p {
     }
 }
 
+@media only screen and (max-width: 550px) {
+    h3 {
+        font-size: 16px;
+    }
+}
+
 
 .content-wrapper
 {
@@ -451,17 +457,25 @@ p {
 }
 
 @media only screen and (max-width:450px) {
-    .form-action-page .accordian-header {
+    .form-action-page .accordian-header, .panel-title {
         font-size: 11px;
         vertical-align: center;
     }
 
     .form-action-page .panel-heading{
-        padding:3px 0px 5px;
+        padding:3px 0px 5px !important;
     }
 
     .form-action-page .panel-heading i{
         margin-left: 3px;
+    }
+
+    .red-tooltip {
+        color: #c7254e;
+        background-color: #f9f2f4;
+        border-color: #faebcc !important;
+        max-width:520px !important;
+        font-size: 11px; !important;
     }
 }
 
