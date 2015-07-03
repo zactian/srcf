@@ -16,7 +16,6 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
-            var ccns = [];
             var accordion = $("#accordion");
             var accordin_index;
             var each_request = $(".divider-line-requests .col-md-4");
@@ -57,13 +56,12 @@
             ray.init();
 
             $("#srcf_action").click(function (e) {
-                ccns.push($("#form_content").find("#ccn").val());
                 if (form_requests.children().length == 0) {
                     form_requests.prev().remove();
                     reset_forms.show();
                 }
-                form_requests.append("<div class='col-md-4' style='width: 95%; margin-top: 15px; margin-left: 12px;'>" + each_request.html() + "</div>");
-                    accordion.children(":not(:eq(" + accordin_index + "))").each(function () {
+                $(".divider-line-requests").append("<div class='col-md-4' style='width: 95%; margin-top: 15px; margin-left: 12px;'>" + each_request.html() + "</div>");
+                accordion.children(":not(:eq(" + accordin_index + "))").each(function () {
                     $(this).find('.panel-collapse.in').collapse('hide');
                     $(this).find('h4 a').attr({"data-toggle": "tooltip", class: "red-toolip", "data-replacement": "left bottom", "title": "You can only select one form action at the time. To select different form requests, please reset the form. "}).css({"color": "#777", "cursor": "default"});
                     $(this).find('.panel-heading').css({"background": "#D0D0D0"});
@@ -79,34 +77,12 @@
 
             });
 
-
-
             $("#ccn").keyup(function () {
                 if ($(this).val().length == 5) {
-                    if(jQuery.inArray($(this).val(), ccns) == 0){
-                        $("#secondary-error").fadeIn(1000);
-                        return;
-                    }
-                    else if($(this).val() == 55823){
-                        $("#third-error").fadeIn(1000);
-                        return;
-                    }
-                    else if($(this).val() == 13229){
-                        $("#fourth-error").fadeIn(1000);
-                        return;
-                    }
-
-                    $("#secondary-error").hide();
-                    $("#third-error").hide();
-                    $("#fourth-error").hide();
-                 //   console.log(ccns);
                     $("#ccn_info").fadeIn(1000);
                     $(".import-container").delay(700).fadeIn(1000);
                 }
                 else {
-                    $("#third-error").hide();
-                    $("#secondary-error").hide();
-                    $("#fourth-error").hide();
                     $("#ccn_info").hide();
                     $(".import-container").hide();
                 }
@@ -348,33 +324,13 @@
                         aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Drop a Course (Regular)</h4>
             </div>
-            <div class="modal-body" id="form_content">
+            <div class="modal-body">
 
-                  <div id="general-form-error" class="alert-danger alert">
-                      <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style="line-height:16px;"></span>
-                      Please enter 5 digits for CCN.
-                  </div>
                 <div class="form-group">
                     <label>CCN:</label>
                     <input type="text" class="form-control required input-sm" id="ccn"
                            placeholder="Enter CCN" style="width: 50%;">
                 </div>
-
-                <div id="secondary-error" class="alert-danger alert" style="display: none; padding: 3px 7px;">
-                    <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style="line-height:16px;"></span>
-                    You have already made a request for this course.  You can make only one. Choose a different course
-                </div>
-
-                <div id="third-error" class="alert-danger alert" style="display: none; padding: 3px 7px;">
-                    <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style="line-height:16px;"></span>
-                    You can NOT use this system for Self supporting courses.  Please enter a different CCN
-                </div>
-
-                <div id="fourth-error" class="alert-danger alert" style="display: none; padding: 3px 7px;">
-                    <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style="line-height:16px;"></span>
-                    You already have  a pending  request for course 13229
-                </div>
-
                 <div id="ccn_info" class="course-info callout"
                      style="margin-top: 10px; margin-bottom: 10px; background: rgb(243, 248, 245); padding:10px; display:none;">
                     <h5 style="margin-top: 0px; margin-bottom: 5px; ">African American Studies R1B P 001 LEC</h5>
@@ -410,7 +366,6 @@
                     <a href="#close" id="srcf_action" value="Drop this Course" data-dismiss="modal"
                        class="btn btn-primary btn-center" style="margin-left: 35%;">Drop this Course</a>
                 </div>
-
             </div>
         </div>
     </div>

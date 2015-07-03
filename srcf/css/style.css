@@ -183,11 +183,13 @@ p {
 #general-form-error {
     margin-bottom: 10px;
     display: none;
+    padding: 6px 14px;
 }
 
 #ucb-info-form
 {
     z-index: 11;
+    margin-top: 15px;
 }
 
 #ucb-info-form input[type=text] {
@@ -199,13 +201,15 @@ p {
 }
 
 #initial_error {
+    padding: 6px 14px;
     display:none;
     width:100%
 }
 
 #secondary_error {
     display:none;
-    width:100%
+    width:100%;
+    padding: 6px 14px;
 }
 
 /* Confirm Units Specific Styles */
@@ -536,7 +540,10 @@ p {
 
 #srcf_start
 {
-    padding-right:35px;
+    margin-top: 25px;
+    padding-right: 35px;
+    padding-left: 25px;
+    padding-top:0px;
 }
 
 #srcf_start li
