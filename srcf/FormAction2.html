@@ -62,7 +62,7 @@
                     form_requests.prev().remove();
                     reset_forms.show();
                 }
-                form_requests.append("<div class='col-md-4' style='width: 95%; margin-top: 15px; margin-left: 12px;'>" + each_request.html() + "</div>");
+                form_requests.append("<div class='col-md-4' style='width:98%; padding:10px 10px 0px 10px; background-color: #dff0d8; color:black'>" + each_request.html() + "</div>");
                     accordion.children(":not(:eq(" + accordin_index + "))").each(function () {
                     $(this).find('.panel-collapse.in').collapse('hide');
                     $(this).find('h4 a').attr({"data-toggle": "tooltip", class: "red-toolip", "data-replacement": "left bottom", "title": "You can only select one form action at the time. To select different form requests, please reset the form. "}).css({"color": "#777", "cursor": "default"});
@@ -158,8 +158,8 @@
     </p>
 
     <p>
-        For additional resource help, please<a href="https://mysummer-dev-demo.berkeley.edu/srcf/HelpPage.html" target="_blank">
-        click here.
+        For additional resource help, please<a href="HelpPage.html" target="_blank">
+        Click Here.
     </a>
     </p>
 </div>
@@ -303,8 +303,8 @@
         <div class="alert alert-info alert-dismissable">
             There is no requests in here. To add a requests, please select a form action from the left.
         </div>
-        <div class="divider-line-requests row alert-success alert-dismissable">
-            <div class="col-md-4" style="display: none; width: 95%; margin-top: 15px; margin-left: 12px">
+        <div class="divider-line-requests alert-success">
+            <div class="col-md-4" style="display: none; background-color: #dff0d8; color:black">
                 <div class="box box-solid">
                     <div class="box-header with-border">
                         <i class="fa fa-fw fa-edit"></i>&nbsp;
@@ -337,10 +337,7 @@
     </div>
 
     <!-- bottom navbar -->  </div>
-<br/>
-<button type="button" id="ucbInfo-submit" class="btn btn-primary pull-left next_prev">Previous</button>
-<button type="button" id="ucbInfo-submit" class="btn btn-primary pull-right next_step">Next</button>
-<br/>
+
 
 <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
@@ -419,17 +416,25 @@
 </div>
 
 <!-- Nav Timeline Bar -->
-<div class="navhistory col-md-12 col-sm-12 hidden-xs">
+<!-- Timeline and Next Buttons -->
+<div class="navhistory col-md-12 col-sm-12 hidden-xs" style="margin-top: 25px;">
     <div class="inner-nav col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1">
         <img src="images/navFormAction.svg" alt=""></img>
         <ul>
-            <li class="center-text col-md-3 col-sm-3"><a href="ucbinfo.html">Student Info</a></li>
+            <li class="center-text col-md-3 col-sm-3"><a href="ucbInfo.html">Student Info </a></li>
             <li class="center-text col-md-3 col-sm-3"><a href="confirmUnits.html">Confirm Units</a></li>
             <li class="current center-text col-md-3 col-sm-3">Form Actions</li>
             <li class="center-text col-md-3 col-sm-3">Confirm Form</li>
         </ul>
     </div>
 </div>
+
+<div class="nav-buttons col-md-12 col-md-offset-0 col-sm-12 col-sm-offset-0 col-xs-12" style="margin-bottom: 25px; margin-top: 25px;">
+    <button type="button" id="" class="btn btn-primary pull-left next_prev">Previous</button>
+    <button type="button" id="ucbInfo-submit" class="btn btn-primary pull-right next_step">Next</button>
+
+</div>
+
 </div>
 <footer class="main-footer">
     <div id="footer-inner" class="clearfix">

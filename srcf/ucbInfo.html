@@ -36,14 +36,13 @@
                 });
                 if (pass == false) {
                     $(this).removeProp("checked");
-                    $("#general-form-error").slideDown("slow").empty().html('<span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style="line-height:16px;"></span>&nbsp;' +
-                            'You have to open up instruction PDF(s) to demonstrated that you have read and understood them');
+                    if($("#college_pdfs").find(".alert p").length == 0){
+                        $("#college_pdfs").find(".alert").prepend("<p style='margin-bottom: 5px; font-weight:bold;'><span class='glyphicon glyphicon-remove-circle' aria-hidden='true' style='line-height:16px;'></span>You have to open up instruction PDF(s) to demonstrated that you have read and understood them.</p>").addClass("alert alert-danger row");
+                    }
                 }
                 else {
-                    if ($("#general-form-error:contains('PDF')")) {
-                        $("#general-form-error").hide("slow");
-                    }
                     $(this).parent().removeClass().addClass("alert alert-success row").find("i").removeClass().addClass("icon fa fa-check");
+                    $(this).parent().find("p").remove();
                 }
             }
             else {
@@ -349,7 +348,6 @@
                 <div class="form-group col-md-5 col-md-offset-0 col-sm-5 col-sm-offset-1 col-xs-12">
                     <label style="margin-top:5px">Are you currently a NCAA athlete?</label><br />
                      <input type="radio">Yes &nbsp; &nbsp; &nbsp; <input type="radio"> No
-
                 </div>
 
 
@@ -369,25 +367,27 @@
                     </div>
                 </div>
 
-                <!-- Timeline and Next Buttons -->
-                <div class="navhistory col-md-12 col-sm-12 hidden-xs">
-                    <div class="inner-nav col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1">
-                        <img src="images/navConfirmUnits.svg" alt=""></img>
-                        <ul>
-                            <li class="current center-text col-md-3 col-sm-3">Student Info</li>
-                            <li class="center-text col-md-3 col-sm-3">Confirm Units</li>
-                            <li class="center-text col-md-3 col-sm-3">Form Actions</li>
-                            <li class="center-text col-md-3 col-sm-3">Confirm Form</li>
-                        </ul>
-                    </div>
+            </div>
+
+            <!-- Timeline and Next Buttons -->
+            <div class="navhistory col-md-12 col-sm-12 hidden-xs" style="margin-top: 25px;">
+                <div class="inner-nav col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1">
+                    <img src="images/navConfirmUnits.svg" alt=""></img>
+                    <ul>
+                        <li class="current center-text col-md-3 col-sm-3">Student Info</li>
+                        <li class="center-text col-md-3 col-sm-3">Confirm Units</li>
+                        <li class="center-text col-md-3 col-sm-3">Form Actions</li>
+                        <li class="center-text col-md-3 col-sm-3">Confirm Form</li>
+                    </ul>
                 </div>
             </div>
 
-            <div class="nav-buttons col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12">
+            <div class="nav-buttons col-md-12 col-md-offset-0 col-sm-12 col-sm-offset-0 col-xs-12" style="margin-bottom: 25px; margin-top: 25px;">
                 <button type="button" id="" class="btn btn-primary pull-left next_prev">Previous</button>
                 <button type="button" id="ucbInfo-submit" class="btn btn-primary pull-right next_step">Next</button>
-                <br/><br/>
+
             </div>
+
 
         </form>
         <!-- form end -->
