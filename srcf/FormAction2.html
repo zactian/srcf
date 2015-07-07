@@ -21,6 +21,7 @@
             var accordin_index;
             var each_request = $(".divider-line-requests .col-md-4");
             var form_requests = $(".divider-line-requests");
+            var unit_counts = $("#unit_counts");
             form_requests.empty();
             var reset_forms = $("#reset_form_actions");
 
@@ -50,6 +51,7 @@
                             ;
                             $(this).find('.panel-heading').css({"background": "#f5f5f5"});
                         });
+                        unit_counts.hide();
                         $reset_button.parent().hide();
                     }
                 }
@@ -61,6 +63,7 @@
                 if (form_requests.children().length == 0) {
                     form_requests.prev().remove();
                     reset_forms.show();
+                    unit_counts.show();
                 }
                 form_requests.append("<div class='col-md-4' style='width:98%; padding:10px 10px 0px 10px; background-color: #dff0d8; color:black'>" + each_request.html() + "</div>");
                     accordion.children(":not(:eq(" + accordin_index + "))").each(function () {
@@ -140,14 +143,12 @@
 
 <div class="content-wrapper form-action-page">
 <div class="row">
-    <div class="col-md-2 col-sm-2 col-xs-6 col-xs-offset-6 pull-right invoice-col">
+    <div class="col-sm-6 col-lg-offset-3 pull-left"><h3>Student Record Change Form Actions</h3></div>
+    <div class="col-sm-2 col-lg-offset-1 pull-right invoice-col">
         <address>
             <strong>Name: Tian Strenfel</strong><br/>
             SID: 908206889<br>
         </address>
-    </div>
-    <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12 center-text pull-left">
-        <h3>Student Record Change Form Actions</h3>
     </div>
 </div>
 <div class="alert alert-warning alert-dismissable" style="font-size: 12px; padding: 15px;">
@@ -293,6 +294,63 @@
             By resetting the forms, the form requests will be remove at all completely.
             <button id="reset_form" class="btn btn-warning btn-xs">RESET THE FORM</button>
         </div>
+
+        <div class="col-sm-12" id="unit_counts" style="margin-top: 15px; display: none;">
+            <h4>Unit Counts</h4>
+            <div class="box-body table-responsive no-padding">
+                <table class="table table-hover">
+                    <tbody><tr>
+                        <th>Session</th>
+                        <th>Current Units</th>
+                        <th>Change Units</th>
+                        <th>Units After Change</th>
+                        <th>Message(s)</th>
+                    </tr>
+                    <tr>
+                        <td>A</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>B</td>
+                        <td>0</td>
+                        <td>-4</td>
+                        <td><p class="alert-danger">-4</p></td>
+                        <td><p class="alert-danger" style="padding: 5px;">If the course is dropped by petition after deadlines (requires additional approval from your college dean or Summer Sessions), no refund or credit will be available.</p></td>
+                    </tr>
+                    <tr>
+                        <td>C</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>D</td>
+                        <td>2</td>
+                        <td>-4</td>
+                        <td><p class="alert-danger">-2</p></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>E</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Totals</td>
+                        <td>2</td>
+                        <td>-8</td>
+                        <td><p class="alert-danger">-6</p></span></td>
+                        <td></td>
+                    </tr>
+                    </tbody></table>
+            </div>
+        </div>
     </div>
 
     <!-- End Accordian Menu -->
@@ -417,7 +475,7 @@
 
 <!-- Nav Timeline Bar -->
 <!-- Timeline and Next Buttons -->
-<div class="navhistory col-md-12 col-sm-12 hidden-xs" style="margin-top: 25px;">
+<div class="navhistory col-md-12 col-sm-12 hidden-xs" style="margin-top: 5px;">
     <div class="inner-nav col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1">
         <img src="images/navFormAction.svg" alt=""></img>
         <ul>
@@ -427,6 +485,7 @@
             <li class="center-text col-md-3 col-sm-3">Confirm Form</li>
         </ul>
     </div>
+
 </div>
 
 <div class="nav-buttons col-md-12 col-md-offset-0 col-sm-12 col-sm-offset-0 col-xs-12" style="margin-bottom: 25px; margin-top: 25px;">
