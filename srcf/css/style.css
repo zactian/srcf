@@ -135,7 +135,6 @@ p {
 .srcf-input {
     border: 2px solid #DEDCD5;
     border-radius: 0;
-    padding:0;
     vertical-align: center;
     color: #555;
     font-size: 12px;
@@ -200,6 +199,10 @@ p {
 
 #ucb-info-form input[type=text] {
     padding-left: 10px;
+}
+
+#ucb-info-form input[type=radio] {
+    margin-right: 7px;
 }
 
 #ucb-info-form .alert {
@@ -368,42 +371,50 @@ p {
 }
 
 .ec-course-action {
-    width: 300px;
+    /*width: 300px;*/
     color: black;
 }
 
-.confirm-ec-table {
-    /*width: 60%;*/
-    /*margin: 0 auto;*/
-    outline: #D8D8D8 solid 2px;
-    width: 100%;
-    background-color: #F8F8F8;
+.form-edits {
+    padding:8px 12px;
+    background-color:#dff0d8;
 }
 
-.confirm-ec-table tr {
-    height: 25px;
+/* Help Page Styles */
+.confirm-ec-table {
+
+}
+
+.confirm-ec-table li {
+    /*list-style-type: none;*/
+}
+
+.confirm-ec-table table{
+    margin-top:10px;
+    margin-bottom:25px;
+    outline: #D8D8D8 solid 2px;
 }
 
 .confirm-ec-table tr:hover {
-    background-color: #E9E9E9;
+    background-color: #f9f9f9;
+}
+.confirm-ec-table table th {
+    background-color: #E6E6E6;
 }
 
-.confirm-ec-table tr td {
-    padding:0 10px;
-    width:50%;
+.confirm-ec-table table td, th{
+    vertical-align: top;0
+    height:25px;
+    padding:5px 15px;
 }
 
-.confirm-ec-table ul {
-    padding:10px 15px;
-    margin-bottom:0;
+.confirm-ec-table td.option-td {
+    width:30%;
 }
 
-#provided-information table {
-    margin-top:22px;
-}
-
-.form-edits {
-    padding:8px 12px
+.enrollment-changes {
+    display:  inline-block;
+    padding:0px 40px;
 }
 
 @media only screen and (max-width : 992px) {
@@ -430,6 +441,9 @@ p {
         margin:10px auto;
     }
 
+    .enrollment-changes {
+        padding:0px 10px;
+    }
 }
 
 /*Form Action Page Styles */
@@ -750,6 +764,7 @@ small ol{
 
 
 .navhistory {
+    margin:25px 0 0 12px;
 }
 
 .inner-nav {
@@ -798,6 +813,13 @@ small ol{
 }
 
 .nav-buttons {
-    margin-top: 15px;
+    margin-bottom: 25px;
+    margin-top: -40px;
+}
+
+@media only screen and (max-width: 768px) {
+    .nav-buttons {
+        margin-top: 20px;
+    }
 }
 

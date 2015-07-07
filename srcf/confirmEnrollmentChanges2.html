@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <title></title>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $(".next_step").click(function() {
+            console.log("go time");
+            var url = 'PolicyPage.html';
+            $(location).attr('href', url);
+        })
+    });
+    </script>
+</head>
+<body>
+<div class="wrapper">
+    <header class="main-header">
+        <div id="logo">
+            <img src="images/2014_BSSLogo.jpg" />
+        </div>
+    </header>
+    <div class="content-wrapper confirm-ec">
+       <div class="row" style="margin-top:20px">
+            <div class="ol-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-6 center-text pull-left">
+                <h3 style="margin-top:0px;">Confirm Your Enrollment Changes</h3>
+            </div>
+            <div class="col-md-2 col-sm-2 col-xs-5 pull-right invoice-col">
+                <address>
+                    <strong>Name: Tian Strenfel</strong><br/>
+                    SID: 908206889<br>
+                </address>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12 confirm-ec-table">
+                <h4>Verify Information</h4>
+                <p>Please verify that the following information is correct</p>
+                <table class="col-md-12 col-sm-12 col-xs-12" style="padding:0 15px;">
+                    <tr>
+                        <th colspan="100%" class="center-text">System Student Information</th>
+                    </tr>
+                    <tr>
+                        <td align="right"><strong>First Name:</strong></td>
+                        <td>Robert</td>
+                    </tr>
+                    <tr>
+                        <td align="right"><strong>Last Name:</strong></td>
+                        <td>Studentman</td>
+                    </tr>
+                    <tr>
+                        <td align="right"><strong>Student Id:</strong></td>
+                        <td>0000010</td>
+                    </tr>
+                    <tr>
+                        <td align="right"><strong>UC Berkeley Student:</strong></td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td align="right"><strong>Current Status:</strong></td>
+                        <td>Undergraduate</td>
+                    </tr>
+                    <tr>
+                        <td colspan="100%" style="font-size:10px;">*If this information
+                            is not correct, please contact Summer Sessions.</td>
+                    </tr>
+                    <tr>
+                        <th colspan="100%" class="center-text">Provided Student Information</th>
+                    </tr>
+                    <tr>
+                        <td align="right"><strong>Contact Email:</strong></td>
+                        <td>rstudentman@berkeley.edu</td>
+                    </tr>
+                    <tr>
+                        <td align="right"><strong>Major(s):</strong></td>
+                        <td>Chemistry</td>
+                    </tr>
+                    <tr>
+                        <td align="right"><strong>Read College Instructions:</strong></td>
+                        <td>Something</td>
+                    </tr>
+                    <tr>
+                        <td align="right"><strong>Your College(s):</strong></td>
+                        <td>
+                            <ul style="padding-left:10px;">
+                            <li>Chemistry</li>
+                            <li>Culinary Science</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right"><strong>Is an NCAA Athlete::</strong></td>
+                        <td>No</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12 enrollment-changes" >
+                <h4>Form Requests</h4>
+                <p>If you wish to further edit your form actions, please return to the previous page.</p>
+                <div class="form-edits">
+                    <div class="ec-course-action ">
+                    <div class="box box-solid">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"  style="font-size: 16px;">Drop a Course</h3><i class="fa fa-fw fa-times pull-right"></i>
+                        </div><!-- /.box-header -->
+                        <div class="box-body" style=" box-shadow: 0px 0px 1px 0px #888888;">
+                            <blockquote>
+                                <label>Course:</label> AFRICAN R-18 LEC 001 <br />
+                                <label>CCN:</label> 10110 <br />
+                                <label>Units:</label> 4.0 <br />
+                                <label>Action Type:</label> Regular <br />
+                                <label>Waitlisted?</label> No <br />
+                                <label>Attended?</label> No <br />
+                                <small style="font-size: 12px;">&nbsp;Approvers
+                                    <ol>
+                                        <li>Faculty Athletic Representative</li>
+                                        <li>Summer Session Staff</li>
+                                    </ol>
+                                </small>
+                            </blockquote>
+                        </div><!-- /.box-body -->
+                    </div><!-- /.box -->
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="navhistory col-md-12 col-sm-12 hidden-xs" style="margin-top: 25px;">
+            <div class="inner-nav col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1">
+                <img src="images/navConfirmInfo.svg" alt=""/>
+                <ul>
+                    <li class="center-text col-md-3 col-sm-3">Student Info</li>
+                    <li class="center-text col-md-3 col-sm-3">Confirm Units</li>
+                    <li class="center-text col-md-3 col-sm-3">Form Actions</li>
+                    <li class="current center-text col-md-3 col-sm-3">Confirm Form</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="nav-buttons col-md-12 col-md-offset-0 col-sm-12 col-sm-offset-0 col-xs-12" style="margin-bottom: 25px; margin-top: 25px;">
+            <button type="button" id="" class="btn btn-primary pull-left next_prev">Previous</button>
+            <button type="button" id="ucbInfo-submit" class="btn btn-primary pull-right next_step">Next</button>
+
+        </div>
+
+    </div>
+    <footer class="main-footer">
+        <div id="footer-inner" class="clearfix">
+            <div id="sub-footer">
+                <a href="http://www.berkeley.edu">
+                    <img src="/images/2014_UCBerkeleyLogo.png" alt="UC Berkeley" class="footer-logo"></a>
+                <p>© UC Berkeley Summer Sessions, 1995 University Avenue
+                    <br>
+                    510-642-5611</p>
+            </div> <!-- <div id="sub-footer"> -->
+        </div>
+    </footer>
+</div>
+</body>
+</html>
