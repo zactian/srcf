@@ -44,7 +44,7 @@
                     action: function () {
                         form_requests.empty();
                         if (form_requests.prev().is("h4"))
-                            form_requests.before('<div class="alert alert-info alert-dismissable"> There is no requests in here. To add a requests, please select a form action from the left.</div>');
+                            form_requests.before('<div class="alert alert-info alert-dismissable"> You have not completed any requests. To add a request, please select an action from the left menu.</div>');
                         accordion.children(":not(:eq(" + accordin_index + "))").each(function () {
                             $(this).find('.panel-collapse:not(".in")').collapse('show');
                             $(this).find('h4 a').attr({"data-toggle": "collapse"}).css({"color": "#023876", "cursor": "pointer"}).removeAttr("data-replacement").removeAttr("title").removeAttr("data-original-title").removeClass("red-tooltip");
@@ -362,7 +362,7 @@
         <h4>Requests in this Form</h4>
 
         <div class="alert alert-info alert-dismissable">
-            There is no requests in here. To add a requests, please select a form action from the left.
+            You have not completed any requests. To add a request, please select an action from the left-menu.
         </div>
         <div class="divider-line-requests alert-success">
             <div class="col-md-4" style="display: none; background-color: #dff0d8; color:black">
@@ -414,7 +414,7 @@
 
                   <div id="general-form-error" class="alert-danger alert">
                       <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style="line-height:16px;"></span>
-                      Please enter 5 digits for CCN.
+                      Please enter a 5 digit CCN number.
                   </div>
                 <div class="form-group">
                     <label>CCN:</label>
@@ -465,7 +465,7 @@
                                                                             style="width: 25%; height: 18px; margin-right: 15%"/>
                         </li>
                     </ol>
-                    <h5 style="margin-bottom: 8px;">This request needs to be approved by the following</h5>
+                     <h5 style="margin-bottom: 8px;">This request needs to be approved by the following</h5>
                     <ol>
                         <li> Faculty Athletic Representative</li>
                         <li> Summer Session Staff</li>
