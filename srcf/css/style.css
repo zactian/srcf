@@ -417,6 +417,11 @@ p {
     padding:0px 40px;
 }
 
+.alert > h4 {
+  margin-top: 0;
+  color: inherit;
+}
+
 @media only screen and (max-width : 992px) {
     #ec-system-info {
         padding: 0;
@@ -758,6 +763,12 @@ small ol{
 }
 
 .no-padding {
+    padding:0;
+}
+
+.help-link {
+    font-size: 10px;
+    margin:0 0 10px 0;
     padding:0;
 }
 /* NavHistory Styles */
