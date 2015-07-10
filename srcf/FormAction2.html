@@ -51,6 +51,12 @@
                             ;
                             $(this).find('.panel-heading').css({"background": "#f5f5f5"});
                         });
+                        $('#current_taken_ccns').val('[]');
+                        $("#secondary-error").hide();
+                        $("#third-error").hide();
+                        $("#fourth-error").hide();
+                        $('general-form-error').hide();
+                        $('#ccn').val("");
                         unit_counts.hide();
                         $reset_button.parent().hide();
                     }
@@ -59,7 +65,8 @@
             ray.init();
 
             $("#srcf_action").click(function (e) {
-                ccns.push($("#form_content").find("#ccn").val());
+                var current = JSON.parse($('#current_taken_ccns').val());
+
                 if (form_requests.children().length == 0) {
                     form_requests.prev().remove();
                     reset_forms.show();
@@ -73,45 +80,46 @@
                     $('[data-toggle="tooltip"]').tooltip({placement: 'bottom'});
                 });
 
+                /* accessing and updating input hidden value to log ccns */
+                ccns.push($("#form_content").find("#ccn").val());
+                current.push($("#form_content").find("#ccn").val());
+                $('#current_taken_ccns').val(JSON.stringify(current));
+                $("#ccn_info").hide();
+                $(".import-container").hide();
+                $('#ccn').val("");
+
+
                 $(".fa-times").click(function () {
                     $(this).parentsUntil(".divider-line-requests").remove();
                     if (form_requests.children().length == 0) {
                         ray.action();
                     }
                 });
-
             });
 
 
+            var validate_ccn = function(ccn) {
+                var pending = JSON.parse($('#pending').val());
+                var current = JSON.parse($('#current_taken_ccns').val());
 
-            $("#ccn").keyup(function () {
-                if ($(this).val().length == 5) {
-                    if(jQuery.inArray($(this).val(), ccns) == 0){
-                        $("#secondary-error").fadeIn(1000);
-                        return;
-                    }
-                    else if($(this).val() == 55823){
-                        $("#third-error").fadeIn(1000);
-                        return;
-                    }
-                    else if($(this).val() == 13229){
-                        $("#fourth-error").fadeIn(1000);
-                        return;
-                    }
-
+                if(jQuery.inArray(ccn, pending) !== -1) {
+                    $("#fourth-error").fadeIn(1000);
+                    return;
+                } else if (jQuery.inArray(ccn, current) !== -1) {
+                    $("#secondary-error").fadeIn(1000);
+                    return;
+                } else {
                     $("#secondary-error").hide();
                     $("#third-error").hide();
                     $("#fourth-error").hide();
-                 //   console.log(ccns);
                     $("#ccn_info").fadeIn(1000);
                     $(".import-container").delay(700).fadeIn(1000);
                 }
-                else {
-                    $("#third-error").hide();
-                    $("#secondary-error").hide();
-                    $("#fourth-error").hide();
-                    $("#ccn_info").hide();
-                    $(".import-container").hide();
+            }
+
+            $("#ccn").keyup(function () {
+                if ($(this).val().length == 5) {
+                    validate_ccn($(this).val());
                 }
             }).blur(function () {
                 $(this).validateInput({
@@ -414,7 +422,7 @@
 
                   <div id="general-form-error" class="alert-danger alert">
                       <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style="line-height:16px;"></span>
-                      Please enter a 5 digit CCN number.
+                      Please enter a correct 5 digit CCN number.
                   </div>
                 <div class="form-group">
                     <label>CCN:</label>
@@ -433,9 +441,9 @@
                     You can NOT use this system for Self supporting courses.  Please enter a different CCN
                 </div>
 
-                <div id="fourth-error" class="alert-danger alert" style="display: none; padding: 3px 7px;">
+                <div id="fourth-error" class="alert-danger alert" style="width:100%; display: none; padding: 3px 7px;">
                     <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style="line-height:16px;"></span>
-                    You already have  a pending  request for course 13229
+                    You already have  a pending  request for this course.
                 </div>
 
                 <div id="ccn_info" class="course-info callout"

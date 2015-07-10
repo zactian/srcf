@@ -100,9 +100,6 @@
     var $formID = $('#' + id.formID);
     var url = id.url;
 
-
-    console.log(url);
-
     var validate = (function() {
         var that = this;
 
