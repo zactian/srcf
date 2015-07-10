@@ -64,6 +64,10 @@
             })();
             ray.init();
 
+
+            $('.close').click(function() {
+                reset_overlay();
+            });
             $("#srcf_action").click(function (e) {
                 var current = JSON.parse($('#current_taken_ccns').val());
 
@@ -84,9 +88,7 @@
                 ccns.push($("#form_content").find("#ccn").val());
                 current.push($("#form_content").find("#ccn").val());
                 $('#current_taken_ccns').val(JSON.stringify(current));
-                $("#ccn_info").hide();
-                $(".import-container").hide();
-                $('#ccn').val("");
+                reset_overlay();
 
 
                 $(".fa-times").click(function () {
@@ -117,6 +119,15 @@
                 }
             }
 
+            var reset_overlay = function() {
+                $("#secondary-error").hide();
+                $("#third-error").hide();
+                $("#fourth-error").hide();
+                $("#ccn_info").hide();
+                $(".import-container").hide();
+                $('#ccn').val("");
+            }
+
             $("#ccn").keyup(function () {
                 if ($(this).val().length == 5) {
                     validate_ccn($(this).val());
@@ -128,6 +139,7 @@
                     containerID: 'general-form-error',
                     errorID: 'general-form-error'})
             });
+
 
             $("#datepicker").datepicker();
             $('#accordion .panel-title a').click(function () {
