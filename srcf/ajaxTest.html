@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <title></title>
+    <script>
+        function getCCNInfo() {
+            var xmlhttp;
+            if (window.XMLHttpRequest) {
+                // code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            } else {
+                // code for IE6, IE5
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange=function() {
+                if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+                    document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+                }
+            }
+
+            xmlhttp.open("GET", "https://mysummer-dev-demo.berkeley.edu/services/getSelfSupportedCCN.php?ccn=10110", true);
+            xmlhttp.send();
+        }
+
+        $(document).ready(function() {
+            $("#ccn").keyup(function () {
+                if ($(this).val().length == 5) {
+                    getCCNInfo();
+                }
+            })
+        });
+
+    </script>
+</head>
+<body>
+<div class="wrapper">
+    <header class="main-header">
+        <div id="logo">
+            <img src="images/2014_BSSLogo.jpg" />
+        </div>
+    </header>
+    <div class="content-wrapper">
+    <div class="col-md-4 col-md-offset-4">
+        <div class="form-group">
+            <label>CCN:</label>
+            <input type="text" class="form-control required input-sm" id="ccn"
+                   placeholder="Enter CCN" style="width: 50%;">
+            <span class="help-link">To access the online schedule of classes, <a href="http://schedule.berkeley.edu/?PageID=srchsmr.html" target="_blank">click here</a></span>
+        </div>
+        <div id="myDiv" class="content">
+        </div>
+    </div>
+    </div>
+    <footer class="main-footer">
+        <div id="footer-inner" class="clearfix">
+            <div id="sub-footer">
+                <a href="http://www.berkeley.edu">
+                    <img src="/images/2014_UCBerkeleyLogo.png" alt="UC Berkeley" class="footer-logo"></a>
+                <p>© UC Berkeley Summer Sessions, 1995 University Avenue
+                    <br>
+                    510-642-5611</p>
+            </div> <!-- <div id="sub-footer"> -->
+        </div>
+    </footer>
+</div>
+</body>
+</html>
