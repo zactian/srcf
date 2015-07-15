@@ -2,37 +2,92 @@
 <html>
 <head>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.8.10/themes/smoothness/jquery-ui.css" type="text/css">
     <link rel="stylesheet" href="css/bootstrap.css"/>
     <link rel="stylesheet" href="css/style.css"/>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/jquery-ui.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <title></title>
-    <script>
-        function getCCNInfo() {
-            var xmlhttp;
-            if (window.XMLHttpRequest) {
-                // code for IE7+, Firefox, Chrome, Opera, Safari
-                xmlhttp = new XMLHttpRequest();
-            } else {
-                // code for IE6, IE5
-                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            xmlhttp.onreadystatechange=function() {
-                if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-                    document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
-                }
-            }
+      <script>
 
-            xmlhttp.open("GET", "https://mysummer-dev-demo.berkeley.edu/services/getSelfSupportedCCN.php?ccn=10110", true);
-            xmlhttp.send();
-        }
+        var courseInfo = {
+            init: function(ccn) {
+                courseInfo.course.ccn = ccn.toString();
+                $.ajax({
+                    url:"https://mysummer-dev-demo.berkeley.edu/services/getSelfSupportedCCN.php?ccn=" + ccn,
+                    success: function(result) {
+                        //need to check if the error node is in here 
+                        courseInfo.getTitle(result);
+                    }
+
+                })
+            },
+            getTitle: function(xml) {
+                courseInfo.course.courseTitle = getXMLInfo(xml, ["departmentCode","coursePrefixNumber","courseRootNumber", "courseSuffixNumber1", "courseSuffixNumber2",
+                    "instructionFormat", "sectionNumber"], " ");
+                courseInfo.getDateTimeLoc(xml);
+            },
+            getDateTimeLoc: function(xml) {
+                var date = getXMLInfo(xml, ["weekDay1", "weekDay2", "weekDay3", "weekDay4", "weekDay5", "weekDay6", "weekDay7",], "");
+                var DOW = ["Sun", "M", "Tu", "W", "Th", "F", "Sat"];
+                for (var i=0; i < date.length; i++) {
+                    if (date[i] === "N") {
+                        DOW[i] = ""
+                    } 
+                }
+                
+                var timeStart = getXMLInfo(xml, ["startTime"], "");
+                var startAMPM = getXMLInfo(xml, ["startTimeAmPm"], "");
+                var timeEnd = getXMLInfo(xml, ["endTime"], "");
+                var endAMPM = getXMLInfo(xml, ["endTimeAmPm"], "");
+
+                var loc = getXMLInfo(xml, ["buildingCode", "roomRootNumber"], " ");
+                courseInfo.course.dateTimeLoc = DOW.join("") + " " + timeStart.slice(0, 5) + startAMPM + "-" + timeEnd.slice(0,5) + endAMPM + " " + loc;
+
+                courseInfo.getInstructorUnitsSession(xml);
+            },
+            getInstructorUnitsSession: function(xml) {
+                courseInfo.course.instructor = getXMLInfo(xml, ["instructorName"], "");
+                courseInfo.course.session = getXMLInfo(xml, ["session"], "");
+                courseInfo.course.units = getXMLInfo(xml, ["unitsLower"], "");
+
+                
+                courseInfo.getEnrollment(xml);
+            },
+            getEnrollment: function(xml) {
+                courseInfo.course.enrollment = getXMLInfo(xml, ["enrollCount", "enrollLimit"], "/");
+                console.log(courseInfo.course);
+            },
+
+            course: {
+                courseTitle: "",
+                dateTimeLoc: "",
+                instructor: "",
+                units: "",
+                session:"",
+                enrollment: "",
+                ccn: ""
+            }
+        };
+
+        /*strips the xml info by nodes named in the input array. 
+         * returns the results as a joined string.
+         */
+        function getXMLInfo(xml, inputArray, partition) {
+            partition = partition || "";
+            var result = inputArray.map(function(input) {
+                x = xml.getElementsByTagName(input)[0];
+                y = x.childNodes[0];
+                return y.nodeValue;
+            })
+            return result.join(partition);
+        };
 
         $(document).ready(function() {
             $("#ccn").keyup(function () {
                 if ($(this).val().length == 5) {
-                    getCCNInfo();
+                    courseInfo.init($(this).val());
                 }
             })
         });
