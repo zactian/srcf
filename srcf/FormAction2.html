@@ -16,6 +16,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             var ccns = [];
+            var currentCourse = {};
             var accordion = $("#accordion");
             var accordin_index;
             var each_request = $(".divider-line-requests .col-md-4");
@@ -50,12 +51,8 @@
                             ;
                             $(this).find('.panel-heading').css({"background": "#f5f5f5"});
                         });
+                        ccnActions.resetOverlay("#ccn", ["#secondary-error", "#third-error", "#fourth-error", "#ccn_info", ".import-container", 'general-form-error']);
                         $('#current_taken_ccns').val('[]');
-                        $("#secondary-error").hide();
-                        $("#third-error").hide();
-                        $("#fourth-error").hide();
-                        $('general-form-error').hide();
-                        $('#ccn').val("");
                         unit_counts.hide();
                         $reset_button.parent().hide();
                     }
@@ -65,39 +62,32 @@
 
 
             $("#srcf_action").click(function (e) {
-                var current = JSON.parse($('#current_taken_ccns').val());
-
-                if (form_requests.children().length == 0) {
-                    form_requests.prev().remove();
-                    reset_forms.show();
-                    unit_counts.show();
-                    ccnActions.resetOverlay(["#secondary-error", "#third-error", "#fourth-error", "#ccn_info", ".import-container"]);
-                }
-                form_requests.append("<div class='col-md-4' style='width:98%; padding:10px 10px 0px 10px; background-color: #dff0d8; color:black'>" + each_request.html() + "</div>");
-                    accordion.children(":not(:eq(" + accordin_index + "))").each(function () {
-                    $(this).find('.panel-collapse.in').collapse('hide');
-                    $(this).find('h4 a').attr({"data-toggle": "tooltip", class: "red-toolip", "data-replacement": "left bottom", "title": "You can only select one form action at the time. To select different form requests, please reset the form. "}).css({"color": "#777", "cursor": "default"});
-                    $(this).find('.panel-heading').css({"background": "#D0D0D0"});
-                    $('[data-toggle="tooltip"]').tooltip({placement: 'bottom'});
-                });
-
-                /* accessing and updating input hidden value to log ccns */
-                ccns.push($("#form_content").find("#ccn").val());
-                current.push($("#form_content").find("#ccn").val());
-                $('#current_taken_ccns').val(JSON.stringify(current));
-                ccnActions.resetOverlay(["#secondary-error", "#third-error", "#fourth-error", "#ccn_info", ".import-container"]);
-
-
-                $(".fa-times").click(function () {
-                    $(this).parentsUntil(".divider-line-requests").remove();
-                    if (form_requests.children().length == 0) {
-                        ray.action();
-                    }
-                });
+                srcfAction.init();
+                srcfAction.appendContainerDIV(form_requests);
+                srcfAction.appendAction(currentCourse, form_requests);
+                srcfAction.collapseAccordian();
+                srcfAction.updateCCNs();
             });
+            $(".fa-times").click(function() {
+                srcfAction.deleteAction($(this));
+            })
+
+            /* changes the title, button text, and button value of the modal to 
+             * reflect what action was chosen. 
+             */
+            $('#courseActionModal').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget); //Button that triggers modal
+                var title = button.data('title') //extract info from data-title attr
+                var modal = $(this);
+                modal.find('.modal-title').text(title);
+                modal.find('#srcf_action').text(title);
+                modal.find('#srcf_action').attr('value', title);
+                currentCourse.actionTitle = title;
+
+            })
 
             $('.close').click(function() {
-                ccnActions.resetOverlay(["#secondary-error", "#third-error", "#fourth-error", "#ccn_info", ".import-container", "#general-form-error"]);
+                ccnActions.resetOverlay("#ccn", ["#secondary-error", "#third-error", "#fourth-error", "#ccn_info", ".import-container", "#general-form-error"]);
             });
             $("#ccn").keyup(function () {
                 if ($(this).val().length == 5) {
@@ -119,37 +109,86 @@
                 else
                     var $arrow = $(this).prev().css("transform", "rotate(0deg)");
             });
+
+            /* need documentation */
+            var srcfAction = {
+                init: function() {
+                    if (form_requests.children().length == 0) {
+                        form_requests.prev().remove();
+                        reset_forms.show();
+                        unit_counts.show();
+                    }
+                },
+                appendContainerDIV: function(target) {
+                    if($('#actionContainer').length === 0) {
+                        target.append("<div id='actionContainer' class='col-md-4' style='width:98%; padding:10px 10px 0px 10px; background-color: #dff0d8; color:black'>" + "</div>");
+                    };
+                },
+                appendAction: function(formActionInfo, target) {
+                    target.append(
+
+                        )
+                },
+                //set other accordian options to unavaliable with hover text
+                collapseAccordian: function() {
+                    accordion.children(":not(:eq(" + accordin_index + "))").each(function () {
+                        $(this).find('.panel-collapse.in').collapse('hide');
+                        $(this).find('h4 a').attr({"data-toggle": "tooltip", class: "red-toolip", "data-replacement": "left bottom", "title": "You can only select one form action at the time. To select different form requests, please reset the form. "}).css({"color": "#777", "cursor": "default"});
+                        $(this).find('.panel-heading').css({"background": "#D0D0D0"});
+                        $('[data-toggle="tooltip"]').tooltip({placement: 'bottom'});
+                    });
+                },
+                /* accessing and updating input hidden value to log ccns */
+                updateCCNs: function() {
+                    var current = JSON.parse($('#current_taken_ccns').val());
+                    ccns.push($("#form_content").find("#ccn").val());
+                    current.push($("#form_content").find("#ccn").val());
+                    $('#current_taken_ccns').val(JSON.stringify(current));
+                },
+                deleteAction: function(that) {
+                    that.parentsUntil(".divider-line-requests").remove();
+                    if (form_requests.children().length == 0) {
+                        ray.action();
+                    }
+                }
+            };
+
+            /* need documentation */
+            var ccnActions = {
+                resetOverlay: function(textInputField, inputArray) {
+                    $(textInputField).val('');
+                    ccnActions.hideElement(inputArray);
+                },
+                validateCCN: function(ccn) {
+                    var pending = JSON.parse($('#pending').val());
+                    var current = JSON.parse($('#current_taken_ccns').val());
+
+                    if(jQuery.inArray(ccn, pending) !== -1) {
+                        ccnActions.hideElement(["#ccn_info", ".import-container"]);
+                        $("#fourth-error").fadeIn(1000);
+                        return;
+                    } else if (jQuery.inArray(ccn, current) !== -1) {
+                        ccnActions.hideElement(["#ccn_info", ".import-container"]);
+                        $("#secondary-error").fadeIn(1000);
+                        return;
+                    } else {
+                        ccnActions.hideElement(["#secondary-error", "#third-error", "#fourth-error"])
+                        courseInfo.init(ccn, "ccn_info");
+                        currentCourse.course = courseInfo.course;
+                        console.log(currentCourse);
+                        $("#ccn_info").fadeIn(1000);
+                        $(".import-container").delay(700).fadeIn(1000);
+                    }
+                },
+                hideElement: function(inputArray) {
+                    $.each(inputArray, function(index, val) {
+                        $(val).hide();
+                    });
+                }
+            };
         });
 
-        var ccnActions = {
-            resetOverlay: function(inputArray) {
-                ccnActions.hideElement(inputArray);
-            },
-            validateCCN: function(ccn) {
-                var pending = JSON.parse($('#pending').val());
-                var current = JSON.parse($('#current_taken_ccns').val());
 
-                if(jQuery.inArray(ccn, pending) !== -1) {
-                    ccnActions.hideElement(["#ccn_info", ".import-container"]);
-                    $("#fourth-error").fadeIn(1000);
-                    return;
-                } else if (jQuery.inArray(ccn, current) !== -1) {
-                    ccnActions.hideElement(["#ccn_info", ".import-container"]);
-                    $("#secondary-error").fadeIn(1000);
-                    return;
-                } else {
-                    ccnActions.hideElement(["#secondary-error", "#third-error", "#fourth-error"])
-                    courseInfo.init(ccn, "ccn_info");
-                    $("#ccn_info").fadeIn(1000);
-                    $(".import-container").delay(700).fadeIn(1000);
-                }
-            },
-            hideElement: function(inputArray) {
-                $.each(inputArray, function(index, val) {
-                    $(val).hide();
-                });
-            }
-        };
     </script>
 </head>
 <body>
@@ -207,31 +246,31 @@
                     <div class="col-md-12 c0l-sm-12 col-xs-12">
                         <div class="row">
                             <div class="col-md-4 col-sm-4 col-xs-12">
-                                <a data-toggle="modal" data-target=".bs-example-modal-sm" data-index="1"
+                                <a data-toggle="modal" data-target=".bs-example-modal-sm" data-index="1" data-title="Add a Course"
                                    class="btn btn-sm btn-block btn-primary">Add a Course</a>
                             </div>
                             <div class="col-md-4 col-sm-4 col-xs-12">
-                                <a data-toggle="modal" data-target=".bs-example-modal-sm" data-index="1"
+                                <a data-toggle="modal" data-target=".bs-example-modal-sm" data-index="1" data-title="Enroll from Waitlist"
                                    class="btn btn-sm btn-block btn-primary">Enroll from Waitlist</a>
                             </div>
                             <div class="col-md-4 col-sm-4 col-xs-12">
-                                <a data-toggle="modal" data-target=".bs-example-modal-sm" data-index="1"
+                                <a data-toggle="modal" data-target=".bs-example-modal-sm" data-index="1" data-title="Drop a Course"
                                    class="btn  btn-sm btn-block btn-primary">Drop a Course</a>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-4 col-sm-4 col-xs-12">
-                                <a data-toggle="modal" data-target=".bs-example-modal-sm" data-index="1"
+                                <a data-toggle="modal" data-target=".bs-example-modal-sm" data-index="1" data-title="Switch Secondary Sections"
                                    class="btn smaller-text btn-sm btn-block btn-primary">Switch Secondary Sections</a>
                             </div>
                             <div class="col-md-4 col-sm-4 col-xs-12">
-                                <a data-toggle="modal" data-target=".bs-example-modal-sm" data-index="1"
+                                <a data-toggle="modal" data-target=".bs-example-modal-sm" data-index="1" data-title="Change Grading Option"
                                    class="btn  btn-sm btn-block btn-primary">Change Grading Option</a>
                             </div>
 
                             <div class="col-md-4 col-sm-4 col-xs-12">
-                                <a data-toggle="modal" data-target=".bs-example-modal-sm" data-index="1"
+                                <a data-toggle="modal" data-target=".bs-example-modal-sm" data-index="1" data-title="Change Unit Value"
                                    class="btn btn-sm btn-block btn-primary" style="">Change Unit Value</a>
                             </div>
                         </div>
@@ -254,7 +293,7 @@
                     <div class="divider-line"></div>
                     <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-12" style="margin-top: 5px;">
                         <a data-toggle="modal" data-target=".bs-example-modal-sm" data-index="2"
-                           class="btn btn-sm btn-block btn-primary">Add a Course</a>
+                          data-title="Add a Course" class="btn btn-sm btn-block btn-primary">Add a Course</a>
                     </div>
                 </div>
             </div>
@@ -271,7 +310,7 @@
 
                     <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-12">
                         <a data-toggle="modal" data-target=".bs-example-modal-sm" data-index="3"
-                           class="btn btn-sm btn-block btn-primary">Drop a Course</a>
+                           data-title="Drop a Course" class="btn btn-sm btn-block btn-primary">Drop a Course</a>
                     </div>
                     <br/><br/><br/>
 
@@ -419,7 +458,7 @@
     <!-- bottom navbar -->  </div>
 
 
-<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div id="courseActionModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <input type='hidden' id='pending' value='["12330","10110"]' />

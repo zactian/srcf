@@ -468,6 +468,7 @@ var courseInfo = {
     getEnrollment: function(xml) {
         courseInfo.course.enrollment = getXMLInfo(xml, ["enrollCount", "enrollLimit"], "/");
         appendCourseInfo(courseInfo.course);
+        return courseInfo.course;
     },
 
     course: {
