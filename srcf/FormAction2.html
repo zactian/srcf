@@ -8,14 +8,13 @@
     <link rel="stylesheet" href="css/bootstrap.css"/>
     <link rel="stylesheet" href="css/style.css"/>
     <link rel="stylesheet" href="css/jquery.fancybox.css" type="text/css"/>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/srcf.js"></script>
     <title></title>
     <script type="text/javascript">
         $(document).ready(function () {
-
             var ccns = [];
             var accordion = $("#accordion");
             var accordin_index;
@@ -65,10 +64,6 @@
             ray.init();
 
 
-            $('.close').click(function() {
-                reset_overlay();
-            });
-
             $("#srcf_action").click(function (e) {
                 var current = JSON.parse($('#current_taken_ccns').val());
 
@@ -76,6 +71,7 @@
                     form_requests.prev().remove();
                     reset_forms.show();
                     unit_counts.show();
+                    ccnActions.resetOverlay(["#secondary-error", "#third-error", "#fourth-error", "#ccn_info", ".import-container"]);
                 }
                 form_requests.append("<div class='col-md-4' style='width:98%; padding:10px 10px 0px 10px; background-color: #dff0d8; color:black'>" + each_request.html() + "</div>");
                     accordion.children(":not(:eq(" + accordin_index + "))").each(function () {
@@ -89,7 +85,7 @@
                 ccns.push($("#form_content").find("#ccn").val());
                 current.push($("#form_content").find("#ccn").val());
                 $('#current_taken_ccns').val(JSON.stringify(current));
-                reset_overlay();
+                ccnActions.resetOverlay(["#secondary-error", "#third-error", "#fourth-error", "#ccn_info", ".import-container"]);
 
 
                 $(".fa-times").click(function () {
@@ -100,38 +96,12 @@
                 });
             });
 
-
-            var validate_ccn = function(ccn) {
-                var pending = JSON.parse($('#pending').val());
-                var current = JSON.parse($('#current_taken_ccns').val());
-
-                if(jQuery.inArray(ccn, pending) !== -1) {
-                    $("#fourth-error").fadeIn(1000);
-                    return;
-                } else if (jQuery.inArray(ccn, current) !== -1) {
-                    $("#secondary-error").fadeIn(1000);
-                    return;
-                } else {
-                    $("#secondary-error").hide();
-                    $("#third-error").hide();
-                    $("#fourth-error").hide();
-                    $("#ccn_info").fadeIn(1000);
-                    $(".import-container").delay(700).fadeIn(1000);
-                }
-            }
-
-            var reset_overlay = function() {
-                $("#secondary-error").hide();
-                $("#third-error").hide();
-                $("#fourth-error").hide();
-                $("#ccn_info").hide();
-                $(".import-container").hide();
-                $('#ccn').val("");
-            }
-
+            $('.close').click(function() {
+                ccnActions.resetOverlay(["#secondary-error", "#third-error", "#fourth-error", "#ccn_info", ".import-container", "#general-form-error"]);
+            });
             $("#ccn").keyup(function () {
                 if ($(this).val().length == 5) {
-                    validate_ccn($(this).val());
+                    ccnActions.validateCCN($(this).val());
                 }
             }).blur(function () {
                 $(this).validateInput({
@@ -141,7 +111,6 @@
                     errorID: 'general-form-error'})
             });
 
-
             $("#datepicker").datepicker();
             $('#accordion .panel-title a').click(function () {
                 if ($(this).parent().parent().next().hasClass("in")) {
@@ -150,8 +119,37 @@
                 else
                     var $arrow = $(this).prev().css("transform", "rotate(0deg)");
             });
-
         });
+
+        var ccnActions = {
+            resetOverlay: function(inputArray) {
+                ccnActions.hideElement(inputArray);
+            },
+            validateCCN: function(ccn) {
+                var pending = JSON.parse($('#pending').val());
+                var current = JSON.parse($('#current_taken_ccns').val());
+
+                if(jQuery.inArray(ccn, pending) !== -1) {
+                    ccnActions.hideElement(["#ccn_info", ".import-container"]);
+                    $("#fourth-error").fadeIn(1000);
+                    return;
+                } else if (jQuery.inArray(ccn, current) !== -1) {
+                    ccnActions.hideElement(["#ccn_info", ".import-container"]);
+                    $("#secondary-error").fadeIn(1000);
+                    return;
+                } else {
+                    ccnActions.hideElement(["#secondary-error", "#third-error", "#fourth-error"])
+                    courseInfo.init(ccn, "ccn_info");
+                    $("#ccn_info").fadeIn(1000);
+                    $(".import-container").delay(700).fadeIn(1000);
+                }
+            },
+            hideElement: function(inputArray) {
+                $.each(inputArray, function(index, val) {
+                    $(val).hide();
+                });
+            }
+        };
     </script>
 </head>
 <body>
@@ -460,13 +458,7 @@
                 </div>
 
                 <div id="ccn_info" class="course-info callout"
-                     style="margin-top: 10px; margin-bottom: 10px; background: rgb(243, 248, 245); padding:10px; display:none;">
-                    <h5 style="margin-top: 0px; margin-bottom: 5px; ">African American Studies R1B P 001 LEC</h5>
-                    MTuWTh 9-11A, 174 Barrows
-                    <br/>
-                    <b>Instructor: </b>Nanda, A
-                    <br/>
-                    <b>CCN:</b> 10110
+                     style="width:75%; margin-bottom: 10px; background: rgb(243, 248, 245); padding:10px; display:none;">
                 </div>
                 <div class="import-container" style="display: none">
                     <h5 style="margin-bottom: 4px;">Please answering the following question below</h5>

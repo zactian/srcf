@@ -417,15 +417,16 @@ function getXMLInfo(xml, inputArray, partition) {
 };
 
 var courseInfo = {
-    init: function(ccn) {
+    init: function(ccn, target_div, error_div) {
         courseInfo.course.ccn = ccn.toString();
         $.ajax({
             url:"https://mysummer-dev-demo.berkeley.edu/services/getSelfSupportedCCN.php?ccn=" + ccn,
             success: function(result) {
                 if (result.getElementsByTagName("errors").length === 0) {
+                    courseInfo.course.target_div = target_div;
                     courseInfo.getTitle(result);
                 } else {
-                    $('#ccn-error').slideDown();
+                    $(error_div).slideDown();
                 }
                 
             }
@@ -466,7 +467,7 @@ var courseInfo = {
     },
     getEnrollment: function(xml) {
         courseInfo.course.enrollment = getXMLInfo(xml, ["enrollCount", "enrollLimit"], "/");
-        appendCourseInfo(courseInfo.course, 'courses');
+        appendCourseInfo(courseInfo.course);
     },
 
     course: {
@@ -476,21 +477,23 @@ var courseInfo = {
         units: "",
         session:"",
         enrollment: "",
-        ccn: ""
+        ccn: "",
+        target_div: ""
     }
 };
 
-function appendCourseInfo(input, target) {
-    var div = $("#" + target);
+function appendCourseInfo(input) {
+    var div = $("#" + input.target_div);
+    div.empty();
     div.append(
-        '<div id="ccn_info" class="course-info callout"' +
-     'style="margin-top: 10px; margin-bottom: 10px; background: rgb(243,' + ' 248,245); padding:10px;">' +
-        '<h5 style="margin-top: 0px; margin-bottom: 5px;">'+ input.courseTitle + '</h5><br/>' +
+        '<h5 style="margin-top: 0px; margin-bottom: 5px; font-weight: bold;">'+ 
+        input.courseTitle + '</h5>' +
+        '<div class="divider-line">'+ '</div>' +
         input.dateTimeLoc + '<br/>' +
         '<b>Instructor: </b>' + input.instructor + '<br/>' +
         '<b>Units: </b>' + input.units + '<br/>' +
         '<b>Enrollment: </b>' + input.enrollment + '<br/>' +
-        '<b>CCN: </b>' + input.ccn + '</div>'
+        '<b>CCN: </b>' + input.ccn
     )
 };
 
