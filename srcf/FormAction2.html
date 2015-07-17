@@ -20,7 +20,7 @@
             var accordion = $("#accordion");
             var accordin_index;
             var each_request = $(".divider-line-requests .col-md-4");
-            var form_requests = $(".divider-line-requests");
+            var form_requests = $("#actionContainer");
             var unit_counts = $("#unit_counts");
             form_requests.empty();
             var reset_forms = $("#reset_form_actions");
@@ -43,6 +43,7 @@
                     },
                     action: function () {
                         form_requests.empty();
+                        form_requests.hide();
                         if (form_requests.prev().is("h4"))
                             form_requests.before('<div class="alert alert-info alert-dismissable"> You have not completed any requests. To add a request, please select an action from the left menu.</div>');
                         accordion.children(":not(:eq(" + accordin_index + "))").each(function () {
@@ -63,8 +64,7 @@
 
             $("#srcf_action").click(function (e) {
                 srcfAction.init();
-                srcfAction.appendContainerDIV(form_requests);
-                srcfAction.appendAction(currentCourse, form_requests);
+                srcfAction.appendAction(currentCourse, $('#actionContainer'));
                 srcfAction.collapseAccordian();
                 srcfAction.updateCCNs();
             });
@@ -119,15 +119,35 @@
                         unit_counts.show();
                     }
                 },
-                appendContainerDIV: function(target) {
-                    if($('#actionContainer').length === 0) {
-                        target.append("<div id='actionContainer' class='col-md-4' style='width:98%; padding:10px 10px 0px 10px; background-color: #dff0d8; color:black'>" + "</div>");
-                    };
-                },
                 appendAction: function(formActionInfo, target) {
+                    if (!target.is(':visible')) {
+                        target.css('display', "block");
+                    }
                     target.append(
-
-                        )
+                    '<div class="box box-solid">' +
+                        '<div class="box-header with-border">' +
+                            '<i class="fa fa-fw fa-edit"></i>&nbsp;' +
+                            '<h3 class="box-title" style="font-size: 16px; font-weight:bold">' + formActionInfo.actionTitle + '</h3>' +
+                            '<a style="cursor: pointer; font-size: 14px;">' +
+                            '<i class="fa fa-fw fa-times pull-right"></a></i>' +
+                        '</div>' +
+                        '<div class="box-body">' +
+                            '<blockquote>' +
+                                '<label>Course:</label>'+ formActionInfo.course.courseTitle + '<br/>' +
+                                '<label>CCN:</label>' + formActionInfo.course.ccn + '<br/>' +
+                                '<label>Units:</label>' + formActionInfo.course.units + '<br/>' +
+                                '<label>Action Type:</label> Regular <br/>' +
+                                '<label>Waitlisted?</label> No <br/>' +
+                                '<label>Attended?</label> No <br/>' +
+                                '<small style="font-size: 12px;">&nbsp;Approvers' +
+                                    '<ol>' +
+                                        '<li>Faculty Athletic Representative</li>' +
+                                        '<li>Summer Session Staff</li>' +
+                                    '</ol>' +
+                               ' </small>' +
+                        '</blockquote>' +
+                    '</div>' +
+                '</div>')
                 },
                 //set other accordian options to unavaliable with hover text
                 collapseAccordian: function() {
@@ -146,7 +166,7 @@
                     $('#current_taken_ccns').val(JSON.stringify(current));
                 },
                 deleteAction: function(that) {
-                    that.parentsUntil(".divider-line-requests").remove();
+                    that.parentsUntil("#actionContainer").remove();
                     if (form_requests.children().length == 0) {
                         ray.action();
                     }
@@ -418,44 +438,12 @@
 
     <div class="col-sm-4" id="courseInfo">
         <h4>Requests in this Form</h4>
-
         <div class="alert alert-info alert-dismissable">
             You have not completed any requests. To add a request, please select an action from the left-menu.
         </div>
-        <div class="divider-line-requests alert-success">
-            <div class="col-md-4" style="display: none; background-color: #dff0d8; color:black">
-                <div class="box box-solid">
-                    <div class="box-header with-border">
-                        <i class="fa fa-fw fa-edit"></i>&nbsp;
-                        <h3 class="box-title" style="font-size: 16px;">Drop a Course</h3><a
-                            style="cursor: pointer; font-size: 14px;"><i
-                            class="fa fa-fw fa-times pull-right"></a></i>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                        <blockquote>
-                            <label>Course:</label> AFRICAN R-18 LEC 001 <br/>
-                            <label>CCN:</label> 10110 <br/>
-                            <label>Units:</label> 4.0 <br/>
-                            <label>Action Type:</label> Regular <br/>
-                            <label>Waitlisted?</label> No <br/>
-                            <label>Attended?</label> No <br/>
-                            <small style="font-size: 12px;">&nbsp;Approvers
-                                <ol>
-                                    <li>Faculty Athletic Representative</li>
-                                    <li>Summer Session Staff</li>
-                                </ol>
-                            </small>
-                        </blockquote>
-                    </div>
-                    <!-- /.box-body -->
-                </div>
-                <!-- /.box -->
-            </div>
+        <div id="actionContainer" class="col-md-12" style="background-color:#dff0d8; display:none;">
         </div>
     </div>
-
-    <!-- bottom navbar -->  </div>
 
 
 <div id="courseActionModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
