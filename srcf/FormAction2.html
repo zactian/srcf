@@ -67,10 +67,12 @@
                 srcfAction.appendAction(currentCourse, $('#actionContainer'));
                 srcfAction.collapseAccordian();
                 srcfAction.updateCCNs();
+                ccnActions.resetOverlay("#ccn", ["#secondary-error", "#third-error", "#fourth-error", "#ccn_info", ".import-container", "#general-form-error"]);
+                $(".fa-times").click(function() {
+                    srcfAction.deleteAction($(this));
+                })
             });
-            $(".fa-times").click(function() {
-                srcfAction.deleteAction($(this));
-            })
+            
 
             /* changes the title, button text, and button value of the modal to 
              * reflect what action was chosen. 
