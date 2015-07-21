@@ -52,7 +52,7 @@
                             ;
                             $(this).find('.panel-heading').css({"background": "#f5f5f5"});
                         });
-                        ccnActions.resetOverlay("#ccn", ["#secondary-error", "#third-error", "#fourth-error", "#ccn_info", ".import-container", 'general-form-error']);
+                        ccnActions.resetOverlay(["#ccn", "#datepicker"], ["#secondary-error", "#third-error", "#fourth-error", "#ccn_info", ".import-container", 'general-form-error', "#fifth-error"]);
                         $('#current_taken_ccns').val('[]');
                         unit_counts.hide();
                         $reset_button.parent().hide();
@@ -67,7 +67,7 @@
                 srcfAction.appendAction(currentCourse, $('#actionContainer'));
                 srcfAction.collapseAccordian();
                 srcfAction.updateCCNs();
-                ccnActions.resetOverlay("#ccn", ["#secondary-error", "#third-error", "#fourth-error", "#ccn_info", ".import-container", "#general-form-error"]);
+                ccnActions.resetOverlay(["#ccn", "#datepicker"], ["#secondary-error", "#third-error", "#fourth-error", "#ccn_info", ".import-container", "#general-form-error", "#fifth-error"]);
                 $(".fa-times").click(function() {
                     srcfAction.deleteAction($(this));
                 })
@@ -89,7 +89,7 @@
             })
 
             $('.close').click(function() {
-                ccnActions.resetOverlay("#ccn", ["#secondary-error", "#third-error", "#fourth-error", "#ccn_info", ".import-container", "#general-form-error"]);
+                ccnActions.resetOverlay(["#ccn", "#datepicker"], ["#secondary-error", "#third-error", "#fourth-error", "#fifth-error", "#ccn_info", ".import-container", "#general-form-error"]);
             });
             $("#ccn").keyup(function () {
                 if ($(this).val().length == 5) {
@@ -101,6 +101,14 @@
                     comparable: /^[0-9]{5}$/i,
                     containerID: 'general-form-error',
                     errorID: 'general-form-error'})
+            });
+
+            $('input[name="variableUnit"').blur(function() {
+                $(this).validateInput({
+                    input: $(this).val(),
+                    comparable: '/^[' + currentCourse.unitsLower + '-' + currentCourse.unitsUpper + ']$/',
+                    containerID: 'variableInput',
+                    errorID: 'variableInputError'})
             });
 
             $("#datepicker").datepicker();
@@ -177,8 +185,11 @@
 
             /* need documentation */
             var ccnActions = {
-                resetOverlay: function(textInputField, inputArray) {
-                    $(textInputField).val('');
+                resetOverlay: function(textInputFields, inputArray) {
+                    $.each(textInputFields, function(index, val) {
+                        $(val).val('');
+                    });
+                    $('.import-container input:radio').attr('checked', false);
                     ccnActions.hideElement(inputArray);
                 },
                 validateCCN: function(ccn) {
@@ -194,18 +205,63 @@
                         $("#secondary-error").fadeIn(1000);
                         return;
                     } else {
-                        ccnActions.hideElement(["#secondary-error", "#third-error", "#fourth-error"])
-                        courseInfo.init(ccn, "ccn_info");
-                        currentCourse.course = courseInfo.course;
-                        console.log(currentCourse);
-                        $("#ccn_info").fadeIn(1000);
-                        $(".import-container").delay(700).fadeIn(1000);
+                        ccnActions.hideElement(["#secondary-error", "#third-error", "#fourth-error", "#fifth-error"])
+                        ccnActions.getXMLInfo(ccn);
+                       }
+                },
+                getXMLInfo: function(ccn) {
+                    courseInfo.course.ccn = ccn.toString();
+                    $.ajax({
+                            url:"https://mysummer-dev-demo.berkeley.edu/services/getSelfSupportedCCN.php?ccn=" + ccn,
+                            success: function(xml) {
+                                if (xml.getElementsByTagName("errors").length === 0) {
+                                    currentCourse.course = courseInfo.init(xml);
+                                    ccnActions.showCourseInfo(courseInfo.course, 'ccn_info');
+                                } else {
+                                    ccnActions.noCCN();
+                                }
+
+                            }
+                    })
+                },
+                showCourseInfo: function(course, target) {
+                    var div = $("#" + target);
+                    div.empty();
+                    div.append(
+                        '<h5 style="margin-top: 0px; margin-bottom: 5px; font-weight: bold;">'+ 
+                        course.courseTitle + '</h5>' +
+                        '<div class="divider-line">'+ '</div>' +
+                        course.dateTimeLoc + '<br/>' +
+                        '<b>Instructor: </b>' + course.instructor + '<br/>')
+                    
+                    if(course.variable === "true") {
+                        console.log("variable")
+                        ccnActions.variableCourse(course);
+                    } else {
+                        console.log("not variable");
+                        div.append('<b>Units: </b>' + course.unitsLower + '<br/>');
                     }
+                    
+                    div.append(
+                        '<b>Enrollment: </b>' + course.enrollment + '<br/>' +
+                        '<b>CCN: </b>' + course.ccn
+                    )
+                    console.log(course);
+                    $("#ccn_info").fadeIn(1000);
+                    $(".import-container").delay(700).fadeIn(1000);
                 },
                 hideElement: function(inputArray) {
                     $.each(inputArray, function(index, val) {
                         $(val).hide();
                     });
+                },
+                noCCN: function() {
+                    ccnActions.hideElement(["#ccn_info", ".import-container"]);
+                    $("#fifth-error").fadeIn(1000);
+                },
+                variableCourse: function(course) {
+                    $('.variableCourse label').innerHtml("Enter Units (" + course.unitsLower + '-' + course.unitsUpper + ')');
+                    $('.variableCourse').fadeIn(1000);
                 }
             };
         });
@@ -485,27 +541,34 @@
                     <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style="line-height:16px;"></span>
                     You already have  a pending  request for this course.
                 </div>
+                
+                <div id="fifth-error" class="alert-danger alert" style="width:100%; display: none; padding: 3px 7px;">
+                    <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style="line-height:16px;"></span>
+                    We couldn&#39t find that CCN in our database. Please enter a different CCN.
+                </div>
 
                 <div id="ccn_info" class="course-info callout"
                      style="width:75%; margin-bottom: 10px; background: rgb(243, 248, 245); padding:10px; display:none;">
                 </div>
                 <div class="import-container" style="display: none">
+                    <div class="variableUnitDiv" style="display:none">
+                        <div class="alert alert-info">
+                            The course you have selected is a variable unit course. Please enter the unit value you would like to enroll in the course for: 
+                        </div> 
+                        <label for="variableUnit"> Unit Value </label>
+                            <input name="variableUnit" class="form-control input-sm" type="text" style="margin-left: 10px;width: 35px; height: 18px; display: inline;">
+                    </div>
+
                     <h5 style="margin-bottom: 4px;">Please answering the following question below</h5>
                     <ol>
-                        <li> Are you currently on a waitlist for this course? &nbsp; Yes <input type="radio"
-                                                                                                style="margin-top: 2px; position: absolute"/> 
-                                                                                                 &nbsp; &nbsp; &nbsp; No &nbsp;<input type="radio"
-                                                                 style="margin-top: 2px; margin-left: 0px; position: absolute"/>
-                        </li>
-                        <li> Have you Attended this course? &nbsp; Yes <input type="radio"
-                                                                              style="margin-top: 2px; position: absolute"/>
-                            &nbsp; &nbsp; &nbsp; No &nbsp;<input type="radio"
-                                                                 style="margin-top: 2px; margin-left: 0px; position: absolute"/>
-                        </li>
-                        <li> The date you last attended this course? <input type="text" id="datepicker"
-                                                                            class="form-control input-sm pull-right"
-                                                                            style="width: 25%; height: 18px; margin-right: 15%"/>
-                        </li>
+                        <li> Are you currently on a waitlist for this course? &nbsp; Yes
+                        <input type="radio"  style="margin-top: 2px; position: absolute"/> &nbsp; &nbsp; &nbsp; No &nbsp;
+                        <input type="radio"style="margin-top: 2px; margin-left: 0px; position: absolute"/></li>
+                        <li> Have you Attended this course? &nbsp; Yes 
+                        <input type="radio"style="margin-top: 2px; position: absolute"/> &nbsp; &nbsp; &nbsp; No &nbsp;
+                        <input type="radio" style="margin-top: 2px; margin-left: 0px; position: absolute"/></li>
+                        <li> The date you last attended this course? 
+                        <input type="text" id="datepicker"class="form-control input-sm pull-right" style="width: 25%; height: 18px; margin-right: 15%"/></li>
                     </ol>
                      <h5 style="margin-bottom: 8px;">This request needs to be approved by the following</h5>
                     <ol>

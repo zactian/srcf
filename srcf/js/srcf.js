@@ -417,22 +417,9 @@ function getXMLInfo(xml, inputArray, partition) {
 };
 
 var courseInfo = {
-    init: function(ccn, target_div, error_div) {
-        courseInfo.course.ccn = ccn.toString();
-        $.ajax({
-            url:"https://mysummer-dev-demo.berkeley.edu/services/getSelfSupportedCCN.php?ccn=" + ccn,
-            success: function(result) {
-                if (result.getElementsByTagName("errors").length === 0) {
-                    courseInfo.course.target_div = target_div;
-                    courseInfo.getTitle(result);
-                } else {
-                    $(error_div).slideDown();
-                }
-                
-            }
-
-        })
-    },
+    init: function(xml, target_div) {
+          courseInfo.getTitle(xml);
+       },
     getTitle: function(xml) {
         courseInfo.course.courseTitle = getXMLInfo(xml, ["departmentCode","coursePrefixNumber","courseRootNumber", "courseSuffixNumber1", "courseSuffixNumber2",
             "instructionFormat", "sectionNumber"], " ");
@@ -460,43 +447,51 @@ var courseInfo = {
     getInstructorUnitsSession: function(xml) {
         courseInfo.course.instructor = getXMLInfo(xml, ["instructorName"], "");
         courseInfo.course.session = getXMLInfo(xml, ["session"], "");
-        courseInfo.course.units = getXMLInfo(xml, ["unitsLower"], "");
+        courseInfo.course.unitsLower = getXMLInfo(xml, ["unitsLower"], "");
+        courseInfo.course.unitsLower = getXMLInfo(xml, ["unitsUpper"], "");
 
-        
+        if(courseInfo.course.unitsLower !== courseInfo.course.unitsUpper) {
+            courseInfo.course.variable = "true";
+        } else {
+            courseInfo.course.variable = "false";
+        }
         courseInfo.getEnrollment(xml);
     },
     getEnrollment: function(xml) {
         courseInfo.course.enrollment = getXMLInfo(xml, ["enrollCount", "enrollLimit"], "/");
-        appendCourseInfo(courseInfo.course);
-        return courseInfo.course;
+        courseInfo.finalize();
     },
+    finalize: function() {
+        return courseInfo.course;
+    }
 
     course: {
         courseTitle: "",
         dateTimeLoc: "",
         instructor: "",
-        units: "",
+        unitsLower: "",
+        unitsUpper:"",
         session:"",
         enrollment: "",
         ccn: "",
-        target_div: ""
+        variable:""
     }
 };
 
-function appendCourseInfo(input) {
-    var div = $("#" + input.target_div);
-    div.empty();
-    div.append(
-        '<h5 style="margin-top: 0px; margin-bottom: 5px; font-weight: bold;">'+ 
-        input.courseTitle + '</h5>' +
-        '<div class="divider-line">'+ '</div>' +
-        input.dateTimeLoc + '<br/>' +
-        '<b>Instructor: </b>' + input.instructor + '<br/>' +
-        '<b>Units: </b>' + input.units + '<br/>' +
-        '<b>Enrollment: </b>' + input.enrollment + '<br/>' +
-        '<b>CCN: </b>' + input.ccn
-    )
-};
+// function appendCourseInfo(input, target) {
+//     var div = $("#" + input.target_div);
+//     div.empty();
+//     div.append(
+//         '<h5 style="margin-top: 0px; margin-bottom: 5px; font-weight: bold;">'+ 
+//         input.courseTitle + '</h5>' +
+//         '<div class="divider-line">'+ '</div>' +
+//         input.dateTimeLoc + '<br/>' +
+//         '<b>Instructor: </b>' + input.instructor + '<br/>' +
+//         '<b>Units: </b>' + input.units + '<br/>' +
+//         '<b>Enrollment: </b>' + input.enrollment + '<br/>' +
+//         '<b>CCN: </b>' + input.ccn
+//     )
+// };
 
 
 
