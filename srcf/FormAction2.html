@@ -64,6 +64,7 @@
 
             $("#srcf_action").click(function (e) {
                 srcfAction.init();
+                srcfAction.pullFormData('.import-container');
                 srcfAction.appendAction(currentCourse, $('#actionContainer'));
                 srcfAction.collapseAccordian();
                 srcfAction.updateCCNs();
@@ -104,6 +105,7 @@
             });
 
             $('input[name="variableUnit"').blur(function() {
+                console.log("blur");
                 $(this).validateInput({
                     input: $(this).val(),
                     comparable: '/^[' + currentCourse.unitsLower + '-' + currentCourse.unitsUpper + ']$/',
@@ -129,10 +131,25 @@
                         unit_counts.show();
                     }
                 },
+                pullFormData: function(target) {
+                    var textInput = $(target + " input:text");
+                    var radioInput = $(target + " input:radio");
+                    var values = {};
+                    textInput.each(function() {
+                        values[this.name] = $(this).val();
+                    });
+                    radioInput.each(function() {
+                        if($(this).is(':checked')) {
+                            values[this.name] = $(this).val();
+                        }
+                    })
+                    console.log(values);  
+                },
                 appendAction: function(formActionInfo, target) {
                     if (!target.is(':visible')) {
                         target.css('display', "block");
                     }
+                    console.log("form action info" + formActionInfo);
                     target.append(
                     '<div class="box box-solid">' +
                         '<div class="box-header with-border">' +
@@ -205,7 +222,7 @@
                         $("#secondary-error").fadeIn(1000);
                         return;
                     } else {
-                        ccnActions.hideElement(["#secondary-error", "#third-error", "#fourth-error", "#fifth-error"])
+                        ccnActions.hideElement(["#secondary-error", "#third-error", "#fourth-error", "#fifth-error",".variableUnitDiv"])
                         ccnActions.getXMLInfo(ccn);
                        }
                 },
@@ -215,7 +232,8 @@
                             url:"https://mysummer-dev-demo.berkeley.edu/services/getSelfSupportedCCN.php?ccn=" + ccn,
                             success: function(xml) {
                                 if (xml.getElementsByTagName("errors").length === 0) {
-                                    currentCourse.course = courseInfo.init(xml);
+                                    courseInfo.init(xml);
+                                    currentCourse.course = courseInfo.course;
                                     ccnActions.showCourseInfo(courseInfo.course, 'ccn_info');
                                 } else {
                                     ccnActions.noCCN();
@@ -260,8 +278,8 @@
                     $("#fifth-error").fadeIn(1000);
                 },
                 variableCourse: function(course) {
-                    $('.variableCourse label').innerHtml("Enter Units (" + course.unitsLower + '-' + course.unitsUpper + ')');
-                    $('.variableCourse').fadeIn(1000);
+                    $('.variableUnitDiv label').html("Enter Units (" + course.unitsLower + ' - ' + course.unitsUpper + ')');
+                    $('.variableUnitDiv').fadeIn(1000);
                 }
             };
         });
@@ -559,16 +577,16 @@
                             <input name="variableUnit" class="form-control input-sm" type="text" style="margin-left: 10px;width: 35px; height: 18px; display: inline;">
                     </div>
 
-                    <h5 style="margin-bottom: 4px;">Please answering the following question below</h5>
+                    <h5 style="margin: 4px 0 4px;">Please answering the following question below</h5>
                     <ol>
                         <li> Are you currently on a waitlist for this course? &nbsp; Yes
-                        <input type="radio"  style="margin-top: 2px; position: absolute"/> &nbsp; &nbsp; &nbsp; No &nbsp;
-                        <input type="radio"style="margin-top: 2px; margin-left: 0px; position: absolute"/></li>
+                        <input type="radio" name="waitlisted" style="margin-top: 2px; position: absolute" value="Yes"/> &nbsp; &nbsp; &nbsp; No &nbsp;
+                        <input type="radio" name="waitlisted" style="margin-top: 2px; margin-left: 0px; position: absolute" value="No"/></li>
                         <li> Have you Attended this course? &nbsp; Yes 
-                        <input type="radio"style="margin-top: 2px; position: absolute"/> &nbsp; &nbsp; &nbsp; No &nbsp;
-                        <input type="radio" style="margin-top: 2px; margin-left: 0px; position: absolute"/></li>
+                        <input type="radio" name="attended" style="margin-top: 2px; position: absolute" value="Yes"/> &nbsp; &nbsp; &nbsp; No &nbsp;
+                        <input type="radio" name="attended" style="margin-top: 2px; margin-left: 0px; position: absolute"value="No"/></li>
                         <li> The date you last attended this course? 
-                        <input type="text" id="datepicker"class="form-control input-sm pull-right" style="width: 25%; height: 18px; margin-right: 15%"/></li>
+                        <input type="text" name="date" id="datepicker"class="form-control input-sm pull-right" style="width: 25%; height: 18px; margin-right: 15%"/></li>
                     </ol>
                      <h5 style="margin-bottom: 8px;">This request needs to be approved by the following</h5>
                     <ol>

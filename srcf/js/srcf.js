@@ -462,7 +462,8 @@ var courseInfo = {
         courseInfo.finalize();
     },
     finalize: function() {
-        return courseInfo.course;
+        console.log
+        return courseInfo.course[0];
     }
 
     course: {
