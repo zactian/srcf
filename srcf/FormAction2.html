@@ -17,6 +17,7 @@
         $(document).ready(function () {
             var ccns = [];
             var currentCourse = {};
+            var courseFormValues = {};
             var accordion = $("#accordion");
             var accordin_index;
             var each_request = $(".divider-line-requests .col-md-4");
@@ -65,7 +66,7 @@
             $("#srcf_action").click(function (e) {
                 srcfAction.init();
                 srcfAction.pullFormData('.import-container');
-                srcfAction.appendAction(currentCourse, $('#actionContainer'));
+                srcfAction.appendAction(currentCourse, '#actionContainer');
                 srcfAction.collapseAccordian();
                 srcfAction.updateCCNs();
                 ccnActions.resetOverlay(["#ccn", "#datepicker"], ["#secondary-error", "#third-error", "#fourth-error", "#ccn_info", ".import-container", "#general-form-error", "#fifth-error"]);
@@ -105,7 +106,6 @@
             });
 
             $('input[name="variableUnit"').blur(function() {
-                console.log("blur");
                 $(this).validateInput({
                     input: $(this).val(),
                     comparable: '/^[' + currentCourse.unitsLower + '-' + currentCourse.unitsUpper + ']$/',
@@ -134,23 +134,24 @@
                 pullFormData: function(target) {
                     var textInput = $(target + " input:text");
                     var radioInput = $(target + " input:radio");
-                    var values = {};
                     textInput.each(function() {
-                        values[this.name] = $(this).val();
+                        courseFormValues[this.name] = $(this).val();
                     });
                     radioInput.each(function() {
                         if($(this).is(':checked')) {
-                            values[this.name] = $(this).val();
+                            courseFormValues[this.name] = $(this).val();
                         }
-                    })
-                    console.log(values);  
+                    });
+                    
+                    if(courseFormValues.date === "") {
+                        courseFormValues.date = "N/A";
+                    }
                 },
                 appendAction: function(formActionInfo, target) {
-                    if (!target.is(':visible')) {
-                        target.css('display', "block");
+                    if (!$(target).is(':visible')) {
+                        $(target).css('display', "block");
                     }
-                    console.log("form action info" + formActionInfo);
-                    target.append(
+                    $(target).append(
                     '<div class="box box-solid">' +
                         '<div class="box-header with-border">' +
                             '<i class="fa fa-fw fa-edit"></i>&nbsp;' +
@@ -160,12 +161,13 @@
                         '</div>' +
                         '<div class="box-body">' +
                             '<blockquote>' +
-                                '<label>Course:</label>'+ formActionInfo.course.courseTitle + '<br/>' +
+                                '<label>Course:</label>'+ formActionInfo.course.title + '<br/>' +
                                 '<label>CCN:</label>' + formActionInfo.course.ccn + '<br/>' +
                                 '<label>Units:</label>' + formActionInfo.course.units + '<br/>' +
                                 '<label>Action Type:</label> Regular <br/>' +
-                                '<label>Waitlisted?</label> No <br/>' +
-                                '<label>Attended?</label> No <br/>' +
+                                '<label>Waitlisted? </label> ' + courseFormValues.waitlisted +'<br/>' +
+                                '<label>Attended? </label> ' + courseFormValues.attended + '<br/>' +
+                                '<label>Date last attended: </label> ' + courseFormValues.date + '<br/>' +
                                 '<small style="font-size: 12px;">&nbsp;Approvers' +
                                     '<ol>' +
                                         '<li>Faculty Athletic Representative</li>' +
@@ -176,6 +178,7 @@
                     '</div>' +
                 '</div>')
                 },
+
                 //set other accordian options to unavaliable with hover text
                 collapseAccordian: function() {
                     accordion.children(":not(:eq(" + accordin_index + "))").each(function () {
@@ -227,14 +230,16 @@
                        }
                 },
                 getXMLInfo: function(ccn) {
-                    courseInfo.course.ccn = ccn.toString();
+                    var gci = $.getCourseInfo();
+                    gci.course.ccn = ccn.toString();
                     $.ajax({
-                            url:"https://mysummer-dev-demo.berkeley.edu/services/getSelfSupportedCCN.php?ccn=" + ccn,
+                            url: "https://mysummer-dev-demo.berkeley.edu/services/getServices.php?ccn=" + ccn + "&ucb_sid=26909772&action_id=1&program_id=230&student_type_id=1&form_action_id=1&is_ucb=true",
                             success: function(xml) {
+
                                 if (xml.getElementsByTagName("errors").length === 0) {
-                                    courseInfo.init(xml);
-                                    currentCourse.course = courseInfo.course;
-                                    ccnActions.showCourseInfo(courseInfo.course, 'ccn_info');
+                                    gci.parseXML(xml);
+                                    currentCourse.course = gci.course;
+                                    ccnActions.showCourseInfo(currentCourse.course, 'ccn_info', 'actionApprovers');
                                 } else {
                                     ccnActions.noCCN();
                                 }
@@ -242,14 +247,16 @@
                             }
                     })
                 },
-                showCourseInfo: function(course, target) {
+                showCourseInfo: function(course, target, approvers) {
                     var div = $("#" + target);
+                    var approversDiv = $("." + approvers)
                     div.empty();
+                    approversDiv.empty();
                     div.append(
                         '<h5 style="margin-top: 0px; margin-bottom: 5px; font-weight: bold;">'+ 
-                        course.courseTitle + '</h5>' +
+                        course.title + '</h5>' +
                         '<div class="divider-line">'+ '</div>' +
-                        course.dateTimeLoc + '<br/>' +
+                        course.date + " " + course.time + " " + course.loc + '<br/>' +
                         '<b>Instructor: </b>' + course.instructor + '<br/>')
                     
                     if(course.variable === "true") {
@@ -257,15 +264,17 @@
                         ccnActions.variableCourse(course);
                     } else {
                         console.log("not variable");
-                        div.append('<b>Units: </b>' + course.unitsLower + '<br/>');
+                        div.append('<b>Units: </b>' + course.units + '<br/>');
                     }
                     
                     div.append(
                         '<b>Enrollment: </b>' + course.enrollment + '<br/>' +
                         '<b>CCN: </b>' + course.ccn
                     )
-                    console.log(course);
-                    $("#ccn_info").fadeIn(1000);
+                    $.map(course.approvers, function(i, v) {
+                        approversDiv.append('<li>' + input + '</li>');
+                    });
+                    $div.fadeIn(1000);
                     $(".import-container").delay(700).fadeIn(1000);
                 },
                 hideElement: function(inputArray) {
@@ -589,7 +598,7 @@
                         <input type="text" name="date" id="datepicker"class="form-control input-sm pull-right" style="width: 25%; height: 18px; margin-right: 15%"/></li>
                     </ol>
                      <h5 style="margin-bottom: 8px;">This request needs to be approved by the following</h5>
-                    <ol>
+                    <ol class="actionApprovers">
                         <li> Faculty Athletic Representative</li>
                         <li> Summer Session Staff</li>
                     </ol>

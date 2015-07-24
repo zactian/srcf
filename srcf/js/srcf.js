@@ -398,101 +398,114 @@
     };
 }(jQuery));
 
-/*strips the xml info by nodes named in the input array. 
- * returns the results as a joined string.
- */
-function getXMLInfo(xml, inputArray, partition) {
-    partition = partition || "";
-    try {
-        var result = inputArray.map(function(input) {
-            x = xml.getElementsByTagName(input)[0];
-            y = x.childNodes[0];
-            return y.nodeValue;
-        });
-        return result.join(partition);
-    } catch (err) {
-        console.log(err);
-        return "";
-    }
-};
+(function($) {
+    $.getCourseInfo = function(options) {
 
-var courseInfo = {
-    init: function(xml, target_div) {
-          courseInfo.getTitle(xml);
-       },
-    getTitle: function(xml) {
-        courseInfo.course.courseTitle = getXMLInfo(xml, ["departmentCode","coursePrefixNumber","courseRootNumber", "courseSuffixNumber1", "courseSuffixNumber2",
-            "instructionFormat", "sectionNumber"], " ");
-        courseInfo.getDateTimeLoc(xml);
-    },
-    getDateTimeLoc: function(xml) {
-        var date = getXMLInfo(xml, ["weekDay1", "weekDay2", "weekDay3", "weekDay4", "weekDay5", "weekDay6", "weekDay7",], "");
-        var DOW = ["Sun", "M", "Tu", "W", "Th", "F", "Sat"];
-        for (var i=0; i < date.length; i++) {
-            if (date[i] === "N") {
-                DOW[i] = ""
-            } 
-        }
+        var selectors ={
+            title: [["departmentCode","coursePrefixNumber","courseRootNumber", "courseSuffixNumber1", "courseSuffixNumber2",
+                    "instructionFormat", "sectionNumber"], " "],
+            date: [["weekDay1", "weekDay2", "weekDay3", "weekDay4", "weekDay5", "weekDay6", "weekDay7",], ""],
+            time: [["startTime", "startTimeAmPm", "endTime", "endTimeAmPm"]," "],
+            loc: [["buildingCode", "roomRootNumber"], " "],
+            instructor: [["instructorName"],""],
+            units: [["unitsLower", "unitsUpper"], " "],
+            sessions: [["session"], ""],
+            enrollment: [["enrollCount", "enrollLimit"], "/"],
+            approvers: [["display_name"], " "]
+        };
+
+        var settings= $.extend(selectors, options);
+
+        var courseInfo = { 
         
-        var timeStart = getXMLInfo(xml, ["startTime"], "");
-        var startAMPM = getXMLInfo(xml, ["startTimeAmPm"], "");
-        var timeEnd = getXMLInfo(xml, ["endTime"], "");
-        var endAMPM = getXMLInfo(xml, ["endTimeAmPm"], "");
+            course: {},
 
-        var loc = getXMLInfo(xml, ["buildingCode", "roomRootNumber"], " ");
-        courseInfo.course.dateTimeLoc = DOW.join("") + " " + timeStart.slice(0, 5) + startAMPM + "-" + timeEnd.slice(0,5) + endAMPM + " " + loc;
+            /*strips the xml info by nodes named in the input array. 
+            * returns the results as a joined string.*/
+            getXMLInfo: function(xml, inputArray, partition) {
+                partition = partition || "";
+                try {
+                    var result = inputArray.map(function(input) {
+                        x = xml.getElementsByTagName(input)[0];
+                        y = x.childNodes[0];
+                        return y.nodeValue;
+                    }); 
+                 return result.join(partition);
+                } catch (err) {
+                    console.log(err);
+                    return "";
+                }
+            },
 
-        courseInfo.getInstructorUnitsSession(xml);
-    },
-    getInstructorUnitsSession: function(xml) {
-        courseInfo.course.instructor = getXMLInfo(xml, ["instructorName"], "");
-        courseInfo.course.session = getXMLInfo(xml, ["session"], "");
-        courseInfo.course.unitsLower = getXMLInfo(xml, ["unitsLower"], "");
-        courseInfo.course.unitsLower = getXMLInfo(xml, ["unitsUpper"], "");
+            getXMLInfoMultiple: function(xml, input, partition) {
+                partition = partition || "";
+                try {
+                     x = xml.getElementsByTagName(input);
+                     y = [];
+                     for (var i = 0; i < x.length; i++) {
+                         y[i] = x[i].childNodes[0].nodeValue;
+                     }
+                     return y;
+                } catch (err) {
+                    console.log(err);
+                    return "";
+                }
+            },
+            
+            parseXML: function(xml) {
+                $.map(selectors, function(val, i) {
+                    if(i === 'date') {
+                        courseInfo.course[i] = courseInfo.days(xml, val);
+                    } else if (i === 'units') {
+                        courseInfo.course[i] = courseInfo.units(xml, val);
+                    } else if (i === 'time') {
+                        courseInfo.course[i] = courseInfo.time(xml, val);
+                    } else if (i === 'approvers') {
+                        courseInfo.course[i] = courseInfo.getXMLInfoMultiple(xml, val[0], val[1]);
+                    } else{
+                        courseInfo.course[i] = courseInfo.getXMLInfo(xml, val[0], val[1]);
+                    }
+                })
+            },
+            
+            days: function(xml, val) {
+                var daysTemp = courseInfo.getXMLInfo(xml, val[0], val[1]);
+                var DOW = ["Sun", "M", "Tu", "W", "Th", "F", "Sat"];
+                for (var i=0; i < daysTemp.length; i++) {
+                    if (daysTemp[i] === "N") {
+                        DOW[i] = ""
+                    }   
+                }
+                return DOW.join("");
+            },
+            
+            units: function(xml, val) {
+                var unitsTemp = courseInfo.getXMLInfo(xml, val[0], val[1]).split(" ");
+                var lower = unitsTemp[0];
+                var upper = unitsTemp[1];
 
-        if(courseInfo.course.unitsLower !== courseInfo.course.unitsUpper) {
-            courseInfo.course.variable = "true";
-        } else {
-            courseInfo.course.variable = "false";
+                if(upper !== lower) {
+                    courseInfo.course['variable'] = "true";
+                    return unitsTemp.join("-");
+                } else {
+                    courseInfo.course['variable'] = "false";
+                    return upper;
+                }
+            },
+            
+            time: function(xml, val) {
+                var timeTemp = courseInfo.getXMLInfo(xml, val[0], val[1]).split(" ");
+                return timeTemp[0].slice(0, 5) + timeTemp[1] + "-" + timeTemp[2].slice(0,5) + timeTemp[3];
+                
+            }
+        };
+        return {
+            parseXML: courseInfo.parseXML,
+            course: courseInfo.course,
         }
-        courseInfo.getEnrollment(xml);
-    },
-    getEnrollment: function(xml) {
-        courseInfo.course.enrollment = getXMLInfo(xml, ["enrollCount", "enrollLimit"], "/");
-        courseInfo.finalize();
-    },
-    finalize: function() {
-        console.log
-        return courseInfo.course[0];
-    }
+    };
+})(jQuery);
 
-    course: {
-        courseTitle: "",
-        dateTimeLoc: "",
-        instructor: "",
-        unitsLower: "",
-        unitsUpper:"",
-        session:"",
-        enrollment: "",
-        ccn: "",
-        variable:""
-    }
-};
-
-// function appendCourseInfo(input, target) {
-//     var div = $("#" + input.target_div);
-//     div.empty();
-//     div.append(
-//         '<h5 style="margin-top: 0px; margin-bottom: 5px; font-weight: bold;">'+ 
-//         input.courseTitle + '</h5>' +
-//         '<div class="divider-line">'+ '</div>' +
-//         input.dateTimeLoc + '<br/>' +
-//         '<b>Instructor: </b>' + input.instructor + '<br/>' +
-//         '<b>Units: </b>' + input.units + '<br/>' +
-//         '<b>Enrollment: </b>' + input.enrollment + '<br/>' +
-//         '<b>CCN: </b>' + input.ccn
-//     )
-// };
 
 
 
