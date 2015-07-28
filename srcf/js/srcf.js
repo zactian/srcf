@@ -460,6 +460,8 @@
                         courseInfo.course[i] = courseInfo.units(xml, val);
                     } else if (i === 'time') {
                         courseInfo.course[i] = courseInfo.time(xml, val);
+                    }else if (i === 'timing') {
+                        courseInfo.course[i] = courseInfo.timing(xml, val);
                     } else if (i === 'approvers') {
                         courseInfo.course[i] = courseInfo.getXMLInfoMultiple(xml, val[0], val[1]);
                     } else{
@@ -497,6 +499,16 @@
                 var timeTemp = courseInfo.getXMLInfo(xml, val[0], val[1]).split(" ");
                 return timeTemp[0].slice(0, 5) + timeTemp[1] + "-" + timeTemp[2].slice(0,5) + timeTemp[3];
                 
+            },
+            timing: function(xml, val) {
+                var timingTemp = courseInfo.getXMLInfo(xml, val[0], val[1]);
+                if (timingTemp === "L") {
+                    return "Late";
+                } else if (timingTemp === "R") {
+                    return "Retroactive";
+                } else {
+                    return "Normal";
+                }
             }
         };
         return {
@@ -506,6 +518,96 @@
     };
 })(jQuery);
 
+(function($) {
+    $.srcfAction = function(options) {
+        var selectors = {
+            errors: [],
+            form_requests: ,
+            reset_forms: ,
+            unit_counts: ,
+            accordian: ,
+        }
 
+        var settings = $.extend(selectors, options);
+
+        var actions = {
+            init: function() {
+                form_requests.prev().remove();
+                reset_forms.show();
+                unit_counts.show();
+            },
+            pullFormData: function(target) {
+                var courseFormValues = {};
+                var textInput = $(target + " input:text");
+                var radioInput = $(target + " input:radio");
+                textInput.each(function() {
+                    courseFormValues[this.name] = $(this).val();
+                });
+                radioInput.each(function() {
+                    if($(this).is(':checked')) {
+                        courseFormValues[this.name] = $(this).val();
+                    }
+                });
+                if(courseFormValues.date === "") {
+                    courseFormValues.date = "N/A";
+                }
+            },
+            appendAction: function(formActionInfo, target) {
+                if (!$(target).is(':visible')) {
+                    $(target).css('display', "block");
+                }
+                $(target).append(
+                    '<div class="box box-solid">' +
+                        '<div class="box-header with-border">' +
+                            '<i class="fa fa-fw fa-edit"></i>&nbsp;' +
+                            '<h3 class="box-title" style="font-size: 16px; font-weight:bold">' + formActionInfo.actionTitle + '</h3>' +
+                            '<a style="cursor: pointer; font-size: 14px;">' +
+                            '<i class="fa fa-fw fa-times pull-right"></a></i>' +
+                        '</div>' +
+                        '<div class="box-body">' +
+                            '<blockquote>' +
+                                '<label>Course:</label>'+ formActionInfo.course.title + '<br/>' +
+                                '<label>CCN:</label>' + formActionInfo.course.ccn + '<br/>' +
+                                '<label>Units:</label>' + formActionInfo.course.units + '<br/>' +
+                                '<label>Action Type:</label> Regular <br/>' +
+                                '<label>Waitlisted? </label> ' + courseFormValues.waitlisted +'<br/>' +
+                                '<label>Attended? </label> ' + courseFormValues.attended + '<br/>' +
+                                '<label>Date last attended: </label> ' + courseFormValues.date + '<br/>' +
+                                '<label>Action Type: </label> ' + formActionInfo.course.timing + '<br/>' +
+                                '<small style="font-size: 12px;">&nbsp;Approvers' +
+                                    '<ol>' +
+                                        $('.actionApprovers').html() +
+                                    '</ol>' +
+                               ' </small>' +
+                        '</blockquote>' +
+                    '</div>' +
+                '</div>')
+            },
+            collapseAccordian: function() {
+                accordion.children(":not(:eq(" + accordin_index + "))").each(function () {
+                    $(this).find('.panel-collapse.in').collapse('hide');
+                    $(this).find('h4 a').attr({"data-toggle": "tooltip", class: "red-toolip", "data-replacement": "left bottom", "title": "You can only select one form action at the time. To select different form requests, please reset the form. "}).css({"color": "#777", "cursor": "default"});
+                    $(this).find('.panel-heading').css({"background": "#D0D0D0"});
+                    $('[data-toggle="tooltip"]').tooltip({placement: 'bottom'});
+                });
+            },
+            updateCCNs: function() {
+                var current = JSON.parse($('#current_taken_ccns').val());
+                ccns.push($("#form_content").find("#ccn").val());
+                current.push($("#form_content").find("#ccn").val());
+                // the line below this needs to be edited to be more anonymous
+                $('#current_taken_ccns').val(JSON.stringify(current));
+            },
+            deleteAction: function(that) {
+                that.parentsUntil("#actionContainer").remove();
+                if (form_requests.children().length == 0) {
+                    ray.action();
+                }
+            }
+    }
+    return {
+
+    }
+})(jQuery);
 
 
