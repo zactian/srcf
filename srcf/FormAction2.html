@@ -15,7 +15,6 @@
     <title></title>
     <script type="text/javascript">
         $(document).ready(function () {
-            var ccns = [];
             var currentCourse = {};
             var courseFormValues = {};
             var accordion = $("#accordion");
@@ -23,9 +22,9 @@
             var each_request = $(".divider-line-requests .col-md-4");
             var form_requests = $("#actionContainer");
             var unit_counts = $("#unit_counts");
-            form_requests.empty();
             var reset_forms = $("#reset_form_actions");
 
+            form_requests.empty();
             $('.panel-collapse').collapse('show');
             $('.panel-title').attr('data-toggle', '');
             $("#accordion .panel-body a").click(function () {
@@ -53,7 +52,7 @@
                             ;
                             $(this).find('.panel-heading').css({"background": "#f5f5f5"});
                         });
-                        ccnActions.resetOverlay(["#ccn", "#datepicker"], ["#secondary-error", "#third-error", "#fourth-error", "#ccn_info", ".import-container", 'general-form-error', "#fifth-error", "#sixth-error", "#seventh-error"]);
+                        ccnActions.resetOverlay(["#ccn", "#datepicker"], ["#secondary-error", "#third-error", "#fourth-error", "#ccn_info", ".import-container", 'general-form-error', "#fifth-error", "#sixth-error", "#seventh-error", '#actionFormError']);
                         $('#current_taken_ccns').val('[]');
                         unit_counts.hide();
                         $reset_button.parent().hide();
@@ -64,20 +63,22 @@
 
 
             $("#srcf_action").click(function (e) {
-                if (!srcfAction.confirmForm()) {
+                var srcf = $.srcfAction();
+                if (!srcf.confirmForm('.import-container', courseFormValues)) {
                     e.preventDefault();
-                    $('#actionFormError').show();
+                    e.stopPropagation()
+                    $('#actionFormError').fadeIn(1000);
                 } else {
-                    srcfAction.init();
-                    srcfAction.pullFormData('.import-container');
-                    srcfAction.appendAction(currentCourse, '#actionContainer');
-                    srcfAction.collapseAccordian();
-                    srcfAction.updateCCNs();
-                    ccnActions.resetOverlay(["#ccn", "#datepicker"], ["#secondary-error", "#third-error", "#fourth-error", "#ccn_info", ".import-container", "#general-form-error", "#fifth-error", "#sixth-error", "#seventh-error"]);
+                    srcf.init();
+                    srcf.pullFormData('.import-container', courseFormValues);
+                    srcf.appendAction('#actionContainer', currentCourse, courseFormValues);
+                    srcf.collapseAccordian(accordin_index);
+                    srcf.updateCCNs();
+                    ccnActions.resetOverlay(["#ccn", "#datepicker"], ["#secondary-error", "#third-error", "#fourth-error", "#ccn_info", ".import-container", "#general-form-error", "#fifth-error", "#sixth-error", "#seventh-error", '#actionFormError']);
                 }
                     
                 $(".fa-times").click(function() {
-                    srcfAction.deleteAction($(this));
+                    srcf.deleteAction($(this));
                 })
             });
             
@@ -97,21 +98,21 @@
             })
 
             $('.close').click(function() {
-                ccnActions.resetOverlay(["#ccn", "#datepicker"], ["#secondary-error", "#third-error", "#fourth-error", "#fifth-error", "#ccn_info", ".import-container", "#general-form-error", "#sixth-error", "#seventh-error"]);
+                ccnActions.resetOverlay(["#ccn", "#datepicker"], ["#secondary-error", "#third-error", "#fourth-error", "#fifth-error", "#ccn_info", ".import-container", "#general-form-error", "#sixth-error", "#seventh-error", '#actionFormError']);
             });
             $("#ccn").keyup(function () {
                 if ($(this).val().length == 5) {
-                    ccnActions.resetOverlay(["#datepicker"], ["#secondary-error", "#third-error", "#fourth-error", "#general-form-error", "#fifth-error", "#sixth-error", "#seventh-error"]);
+                    ccnActions.resetOverlay(["#datepicker"], ["#secondary-error", "#third-error", "#fourth-error", "#general-form-error", "#fifth-error", "#sixth-error", "#seventh-error", '#actionFormError']);
                     ccnActions.validateCCN($(this).val());
-                    
                 }
-            }).blur(function () {
-                $(this).validateInput({
-                    input: $(this).val(),
-                    comparable: /^[0-9]{5}$/i,
-                    containerID: 'general-form-error',
-                    errorID: 'general-form-error'})
-            });
+            })
+            // .blur(function () {
+                // $(this).validateInput({
+                    // input: $(this).val(),
+                    // comparable: /^[0-9]{5}$/i,
+                    // containerID: 'general-form-error',
+                    // errorID: 'general-form-error'})
+            // });
 
             $('input[name="variableUnit"').blur(function() {
                 $(this).validateInput({
@@ -129,95 +130,6 @@
                 else
                     var $arrow = $(this).prev().css("transform", "rotate(0deg)");
             });
-
-            /* need documentation */
-            var srcfAction = {
-                init: function() {
-                    if (form_requests.children().length == 0) {
-                        form_requests.prev().remove();
-                        reset_forms.show();
-                        unit_counts.show();
-                    }
-                },
-                pullFormData: function(target) {
-                    var textInput = $(target + " input:text");
-                    var radioInput = $(target + " input:radio");
-                    textInput.each(function() {
-                        courseFormValues[this.name] = $(this).val();
-                    });
-                    radioInput.each(function() {
-                        if($(this).is(':checked')) {
-                            courseFormValues[this.name] = $(this).val();
-                        }
-                    });
-                    
-                    if(courseFormValues.date === "") {
-                        courseFormValues.date = "N/A";
-                    }
-                },
-                confirmForm: function() {
-                    var radioInput = $(target + " input:radio").length; 
-                    if (radioInput === 0) {
-                        return false;
-                    } else if(courseFormValues.attended === "Yes" && courseFormValues.date === "") {
-                        return false;
-                    } else return true;
-                },
-                appendAction: function(formActionInfo, target) {
-                    if (!$(target).is(':visible')) {
-                        $(target).css('display', "block");
-                    }
-                    $(target).append(
-                    '<div class="box box-solid">' +
-                        '<div class="box-header with-border">' +
-                            '<i class="fa fa-fw fa-edit"></i>&nbsp;' +
-                            '<h3 class="box-title" style="font-size: 16px; font-weight:bold">' + formActionInfo.actionTitle + '</h3>' +
-                            '<a style="cursor: pointer; font-size: 14px;">' +
-                            '<i class="fa fa-fw fa-times pull-right"></a></i>' +
-                        '</div>' +
-                        '<div class="box-body">' +
-                            '<blockquote>' +
-                                '<label>Course:</label>'+ formActionInfo.course.title + '<br/>' +
-                                '<label>CCN:</label>' + formActionInfo.course.ccn + '<br/>' +
-                                '<label>Units:</label>' + formActionInfo.course.units + '<br/>' +
-                                '<label>Action Type:</label> Regular <br/>' +
-                                '<label>Waitlisted? </label> ' + courseFormValues.waitlisted +'<br/>' +
-                                '<label>Attended? </label> ' + courseFormValues.attended + '<br/>' +
-                                '<label>Date last attended: </label> ' + courseFormValues.date + '<br/>' +
-                                '<label>Action Type: </label> ' + formActionInfo.course.timing + '<br/>' +
-                                '<small style="font-size: 12px;">&nbsp;Approvers' +
-                                    '<ol>' +
-                                        $('.actionApprovers').html() +
-                                    '</ol>' +
-                               ' </small>' +
-                        '</blockquote>' +
-                    '</div>' +
-                '</div>')
-                },
-
-                //set other accordian options to unavaliable with hover text
-                collapseAccordian: function() {
-                    accordion.children(":not(:eq(" + accordin_index + "))").each(function () {
-                        $(this).find('.panel-collapse.in').collapse('hide');
-                        $(this).find('h4 a').attr({"data-toggle": "tooltip", class: "red-toolip", "data-replacement": "left bottom", "title": "You can only select one form action at the time. To select different form requests, please reset the form. "}).css({"color": "#777", "cursor": "default"});
-                        $(this).find('.panel-heading').css({"background": "#D0D0D0"});
-                        $('[data-toggle="tooltip"]').tooltip({placement: 'bottom'});
-                    });
-                },
-                /* accessing and updating input hidden value to log ccns */
-                updateCCNs: function() {
-                    var current = JSON.parse($('#current_taken_ccns').val());
-                    ccns.push($("#form_content").find("#ccn").val());
-                    current.push($("#form_content").find("#ccn").val());
-                    $('#current_taken_ccns').val(JSON.stringify(current));
-                },
-                deleteAction: function(that) {
-                    that.parentsUntil("#actionContainer").remove();
-                    if (form_requests.children().length == 0) {
-                        ray.action();
-                    }
-                }
-            };
 
             /* need documentation */
             var ccnActions = {
@@ -247,14 +159,18 @@
                 },
                 getXMLInfo: function(ccn) {
                     var gci = $.getCourseInfo();
-                    gci.course.ccn = ccn.toString();
+                    // gci.course.ccn = ccn.toString();
                     $.ajax({
                             url: "../services/getServices.php?ccn=" + ccn + "&ucb_sid=26909772&action_id=1&program_id=230&student_type_id=1&form_action_id=1&is_ucb=true",
                             success: function(xml) {
                                  if (xml.getElementsByTagName("errors").length === 0) {
-                                    gci.parseXML(xml);
-                                    currentCourse.course = gci.course;
-                                    ccnActions.showCourseInfo(currentCourse.course, 'ccn_info', 'actionApprovers');
+                                    // gci.parseXML(xml);
+                                    var secondaryGci = $.getCourseInfo({section: [["sectionNumber"], ""],
+                                                                        format: [["instructionFormat"], ""],
+                                                                        waitlist: [["waitListCount", "waitListLimit"], "/"]})
+                                    secondaryGci.secondary(xml);
+                                    // currentCourse.course = gci.course;
+                                    // ccnActions.showCourseInfo(currentCourse.course, 'ccn_info', 'actionApprovers');
                                 } else {
                                     var err = xml.getElementsByTagName("errorMsg")[0].childNodes[0].nodeValue.trim();
                                     ccnActions.badCCN(err);
@@ -572,14 +488,10 @@
             </div>
             <div class="modal-body" id="form_content">
 
-                  <div id="general-form-error" class="alert-danger alert">
-                      <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style="line-height:16px;"></span>
-                      Please enter a correct 5 digit CCN number.
-                  </div>
                 <div class="form-group">
                     <label>CCN:</label>
                     <input type="text" class="form-control required input-sm" id="ccn"
-                           placeholder="Enter CCN" style="width: 50%;">
+                           placeholder="Enter CCN" style="width: 50%;" autofocus>
                     <span class="help-link">To access the online schedule of classes, <a href="http://schedule.berkeley.edu/?PageID=srchsmr.html" target="_blank">click here</a></span>
                 </div>
 
@@ -623,6 +535,21 @@
                         <label for="variableUnit"> Unit Value </label>
                             <input name="variableUnit" class="form-control input-sm" type="text" style="margin-left: 10px;width: 35px; height: 18px; display: inline;">
                     </div>
+                    <h5>Select a Discussion Section</h5>
+                    <div class="secondary">
+                        <ul>
+                            <li>This is one option</li>
+                            <li>This is the second option</li>
+                        </ul>   
+                    </div>
+                    <h5>Select a Lab Section</h5>
+                    <div class="secondary tertiary">
+                        <ul>
+                            <li>This is one option</li>
+                            <li>This is the second option</li>
+                        </ul>   
+                    </div>
+
 
                     <h5 style="margin: 4px 0 4px;">Please answering the following question below</h5>
                     <ol>

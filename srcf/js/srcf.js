@@ -411,7 +411,10 @@
             units: [["unitsLower", "unitsUpper"], " "],
             sessions: [["session"], ""],
             enrollment: [["enrollCount", "enrollLimit"], "/"],
-            approvers: [["display_name"], " "]
+            approvers: [["display_name"], " "],
+            timing: [["reques_timing"], ""],
+
+            ccn: [["ccn"], ""]
         };
 
         var settings= $.extend(selectors, options);
@@ -449,6 +452,30 @@
                 } catch (err) {
                     console.log(err);
                     return "";
+                }
+            },
+            
+            /* Returns information about secondary sections including the classes' ccn, section number,
+             * format, date, time, instructor, enrollment info, waitlist info, and location. It is important to 
+             * note that you need to pass in section and format options when instatiating the main function (getCourseInfo).
+             * var xml is the xml documents you wish to search for secondary information.
+             * In the case of an error, the error will be logged to the consol.
+             */
+            getSecondaryInfo: function(xml) {
+                try {
+                    x = xml.getElementsByTagName("secondary");
+                    var requiredInfo = ["ccn", "section", "format", "date", "time", "loc", "instructor", "enrollment", "waitlist"]; 
+                    var secondaryArray = $.map(x, function(input) {
+                        var sectionInfo = {};
+                        for (var i=0; i < requiredInfo.length; i++) {
+                            var info = requiredInfo[i];
+                            sectionInfo[info] = courseInfo.getXMLInfo(input, selectors[info][0], selectors[info][1]);
+                        }
+                        return sectionInfo;
+                    });   
+                } catch (err) {
+                        console.log(err);
+                        return "";
                 }
             },
             
@@ -514,6 +541,7 @@
         return {
             parseXML: courseInfo.parseXML,
             course: courseInfo.course,
+            secondary: courseInfo.getSecondaryInfo
         }
     };
 })(jQuery);
@@ -522,58 +550,70 @@
     $.srcfAction = function(options) {
         var selectors = {
             errors: [],
-            form_requests: ,
-            reset_forms: ,
-            unit_counts: ,
-            accordian: ,
+            form_requests:$("#actionContainer"),
+            reset_forms: $("#reset_form_actions"),
+            unit_counts: $("#unit_counts"),
+            accordion: $("#accordion")
         }
 
         var settings = $.extend(selectors, options);
 
         var actions = {
             init: function() {
-                form_requests.prev().remove();
-                reset_forms.show();
-                unit_counts.show();
+                if (selectors.form_requests.children().length == 0) {
+                    selectors.form_requests.prev().remove();
+                    selectors.reset_forms.show();
+                    selectors.unit_counts.show();
+                }
             },
-            pullFormData: function(target) {
-                var courseFormValues = {};
+            pullFormData: function(target, formData) {
                 var textInput = $(target + " input:text");
                 var radioInput = $(target + " input:radio");
                 textInput.each(function() {
-                    courseFormValues[this.name] = $(this).val();
+                    formData[this.name] = $(this).val();
                 });
                 radioInput.each(function() {
                     if($(this).is(':checked')) {
-                        courseFormValues[this.name] = $(this).val();
+                        formData[this.name] = $(this).val();
                     }
                 });
-                if(courseFormValues.date === "") {
-                    courseFormValues.date = "N/A";
+                
+                if(formData.date === "") {
+                    formData.date = "N/A";
                 }
             },
-            appendAction: function(formActionInfo, target) {
-                if (!$(target).is(':visible')) {
-                    $(target).css('display', "block");
-                }
-                $(target).append(
+            confirmForm: function(target, formData) {
+                var radioInput = $(target + " input:radio:checked").length; 
+                actions.pullFormData(target, formData);
+                if (radioInput === 0) {
+                    return false;
+                } else if(formData.attended === "Yes" && formData.date === "N/A") {
+                    return false;
+                } else return true;
+            },
+            appendAction: function(target, courseData, formData) {
+                 if (!$(target).is(':visible')) {
+                        $(target).css('display', "block");
+                    }
+                    console.log(formData);
+                    console.log(courseData.course);
+                    $(target).append(
                     '<div class="box box-solid">' +
                         '<div class="box-header with-border">' +
                             '<i class="fa fa-fw fa-edit"></i>&nbsp;' +
-                            '<h3 class="box-title" style="font-size: 16px; font-weight:bold">' + formActionInfo.actionTitle + '</h3>' +
+                            '<h3 class="box-title" style="font-size: 16px; font-weight:bold">' + courseData.actionTitle + '</h3>' +
                             '<a style="cursor: pointer; font-size: 14px;">' +
-                            '<i class="fa fa-fw fa-times pull-right"></a></i>' +
+                            '<i id="' + courseData.course.ccn + '"class="fa fa-fw fa-times pull-right"></a></i>' +
                         '</div>' +
                         '<div class="box-body">' +
                             '<blockquote>' +
-                                '<label>Course:</label>'+ formActionInfo.course.title + '<br/>' +
-                                '<label>CCN:</label>' + formActionInfo.course.ccn + '<br/>' +
-                                '<label>Units:</label>' + formActionInfo.course.units + '<br/>' +
-                                '<label>Action Type:</label> Regular <br/>' +
-                                '<label>Waitlisted? </label> ' + courseFormValues.waitlisted +'<br/>' +
-                                '<label>Attended? </label> ' + courseFormValues.attended + '<br/>' +
-                                '<label>Date last attended: </label> ' + courseFormValues.date + '<br/>' +
-                                '<label>Action Type: </label> ' + formActionInfo.course.timing + '<br/>' +
+                                '<label>Course:</label>'+ courseData.course.title + '<br/>' +
+                                '<label>CCN:</label>' + courseData.course.ccn + '<br/>' +
+                                '<label>Units:</label>' + courseData.course.units + '<br/>' +
+                                '<label>Waitlisted? </label> ' + formData.waitlisted +'<br/>' +
+                                '<label>Attended? </label> ' + formData.attended + '<br/>' +
+                                '<label>Date last attended: </label> ' + formData.date + '<br/>' +
+                                '<label>Action Type: </label> ' + courseData.course.timing + '<br/>' +
                                 '<small style="font-size: 12px;">&nbsp;Approvers' +
                                     '<ol>' +
                                         $('.actionApprovers').html() +
@@ -582,9 +622,9 @@
                         '</blockquote>' +
                     '</div>' +
                 '</div>')
-            },
-            collapseAccordian: function() {
-                accordion.children(":not(:eq(" + accordin_index + "))").each(function () {
+             },
+            collapseAccordian: function(index) {
+                selectors.accordion.children(":not(:eq(" + index + "))").each(function () {
                     $(this).find('.panel-collapse.in').collapse('hide');
                     $(this).find('h4 a').attr({"data-toggle": "tooltip", class: "red-toolip", "data-replacement": "left bottom", "title": "You can only select one form action at the time. To select different form requests, please reset the form. "}).css({"color": "#777", "cursor": "default"});
                     $(this).find('.panel-heading').css({"background": "#D0D0D0"});
@@ -593,21 +633,39 @@
             },
             updateCCNs: function() {
                 var current = JSON.parse($('#current_taken_ccns').val());
-                ccns.push($("#form_content").find("#ccn").val());
                 current.push($("#form_content").find("#ccn").val());
-                // the line below this needs to be edited to be more anonymous
+                $('#current_taken_ccns').val(JSON.stringify(current));
+            },
+            removeCCN: function(ccn) {
+                var current = JSON.parse($('#current_taken_ccns').val());
+                var index = current.indexOf(ccn);
+                if (index >= 0) {
+                    current.splice(index, 1);
+                }
                 $('#current_taken_ccns').val(JSON.stringify(current));
             },
             deleteAction: function(that) {
+                console.log(that);
                 that.parentsUntil("#actionContainer").remove();
                 if (form_requests.children().length == 0) {
                     ray.action();
+                } else {
+                    srcfAction.removeCCN(that.attr('id'));
                 }
             }
     }
-    return {
-
-    }
+        return {
+            init: actions.init,
+            pullFormData: actions.pullFormData,
+            confirmForm: actions.confirmForm,
+            appendAction: actions.appendAction,
+            collapseAccordian: actions.collapseAccordian,
+            updateCCNs: actions.updateCCNs,
+            deleteAction: actions.deleteAction
+        }
+    };
 })(jQuery);
+
+
 
 

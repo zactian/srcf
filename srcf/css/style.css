@@ -498,6 +498,24 @@ p {
     }
 }
 
+.secondary {
+    border:1px solid grey;
+    height: 150px;
+    padding:0;
+    margin:5px;
+    width:95%;
+    overflow: scroll;
+}
+
+.secondary ul {
+    list-style-type: none;
+}
+
+.secondary ul li {
+    height: 50px;
+    width: 100%;
+}
+
 
 /* Timeline Specific Styles */
 .timeline-item img {
