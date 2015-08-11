@@ -104,7 +104,7 @@ p {
 
 #logo
 {
-	margin-left:10px;
+    margin-left:10px;
 }
 
 @media only screen and (max-width: 390px) {
@@ -498,23 +498,45 @@ p {
     }
 }
 
-.secondary {
-    border:1px solid grey;
-    height: 150px;
-    padding:0;
-    margin:5px;
+.supp-header {
+    display: none;
+    margin:4px 0;
+}
+
+.supp-container {
+    border:1px solid #ddd;
+    height: 120px;
+    padding:5px;
+    margin:5px 5px 12px;
     width:95%;
     overflow: scroll;
+    overflow-x:hidden;
+    display:none;
 }
 
-.secondary ul {
-    list-style-type: none;
+.supp-container h5 {
+    font-size: 12px;
+    margin:0 0 1px 0;
 }
 
-.secondary ul li {
-    height: 50px;
+.supp-container table {
     width: 100%;
+    font-size: 11px;
 }
+
+.supp-container tr {
+    border-bottom: 1px solid #ddd;
+}
+.supp-container td.supp-choose {
+    padding: 0 10px;
+    width: 10%;
+    background-color: #ffffff;
+} 
+
+.supp-container td.supp-info {
+    padding: 5px 10px;;
+} 
+
 
 
 /* Timeline Specific Styles */

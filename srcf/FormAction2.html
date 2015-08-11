@@ -12,9 +12,31 @@
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/srcf.js"></script>
+    <script type="text/javascript" src="js/handlebars.js"></script>
+    <script type="text/html" src="js/templates/supp.html"></script>
+    <script type="text/html" src="js/templates/courseInfo.html"></script>
+    </script>
     <title></title>
     <script type="text/javascript">
+    
         $(document).ready(function () {
+
+            /* Handlebars templating system helpers */
+            Handlebars.registerHelper('grade', function(conditional, options) {
+                if (conditional === 0 || conditional === 1 || conditional === 6) {
+                    return options.fn(this);
+                }
+                return options.inverse(this);
+            });
+            Handlebars.registerHelper('drop', function(conditional, options) {
+                if (conditional === 7 || conditional === 2) {
+                    return options.fn(this);
+                }
+                return options.inverse(this);
+                }
+            });
+
+
             var currentCourse = {};
             var courseFormValues = {};
             var accordion = $("#accordion");
@@ -98,21 +120,23 @@
             })
 
             $('.close').click(function() {
-                ccnActions.resetOverlay(["#ccn", "#datepicker"], ["#secondary-error", "#third-error", "#fourth-error", "#fifth-error", "#ccn_info", ".import-container", "#general-form-error", "#sixth-error", "#seventh-error", '#actionFormError']);
+                ccnActions.resetOverlay(["#ccn", "#datepicker"], ["#secondary-error", "#third-error", "#fourth-error", 
+                                                                "#fifth-error", "#ccn_info", ".import-container", 
+                                                                "#general-form-error", "#sixth-error", "#seventh-error", '#actionFormError']);
             });
             $("#ccn").keyup(function () {
                 if ($(this).val().length == 5) {
-                    ccnActions.resetOverlay(["#datepicker"], ["#secondary-error", "#third-error", "#fourth-error", "#general-form-error", "#fifth-error", "#sixth-error", "#seventh-error", '#actionFormError']);
+                    ccnActions.resetOverlay(["#datepicker"], ["#secondary-error", "#third-error", "#fourth-error", 
+                                                              "#general-form-error", "#fifth-error", "#sixth-error", 
+                                                              "#seventh-error", '#actionFormError', ".secondary", ".tertiary"]);
                     ccnActions.validateCCN($(this).val());
                 }
+            });
+            
+            $(".supp-container").on("click", ".secondary-table input:radio", function(event) {
+                var elem = $(this);
+                ccnActions.showTertiary(currentCourse, elem.val());
             })
-            // .blur(function () {
-                // $(this).validateInput({
-                    // input: $(this).val(),
-                    // comparable: /^[0-9]{5}$/i,
-                    // containerID: 'general-form-error',
-                    // errorID: 'general-form-error'})
-            // });
 
             $('input[name="variableUnit"').blur(function() {
                 $(this).validateInput({
@@ -131,7 +155,11 @@
                     var $arrow = $(this).prev().css("transform", "rotate(0deg)");
             });
 
-            /* need documentation */
+            
+
+
+
+            /* does a lot of stuff */
             var ccnActions = {
                 resetOverlay: function(textInputFields, inputArray) {
                     $.each(textInputFields, function(index, val) {
@@ -159,18 +187,22 @@
                 },
                 getXMLInfo: function(ccn) {
                     var gci = $.getCourseInfo();
+                    currentCourse["course"] = {};
+                    currentCourse["secondary"]= {};
+                    currentCourse["tertiary"] = {};
                     // gci.course.ccn = ccn.toString();
                     $.ajax({
                             url: "../services/getServices.php?ccn=" + ccn + "&ucb_sid=26909772&action_id=1&program_id=230&student_type_id=1&form_action_id=1&is_ucb=true",
                             success: function(xml) {
                                  if (xml.getElementsByTagName("errors").length === 0) {
-                                    // gci.parseXML(xml);
-                                    var secondaryGci = $.getCourseInfo({section: [["sectionNumber"], ""],
-                                                                        format: [["instructionFormat"], ""],
-                                                                        waitlist: [["waitListCount", "waitListLimit"], "/"]})
-                                    secondaryGci.secondary(xml);
-                                    // currentCourse.course = gci.course;
-                                    // ccnActions.showCourseInfo(currentCourse.course, 'ccn_info', 'actionApprovers');
+                                    gci.parseXML(xml, undefined, currentCourse.course);
+                                    if(xml.getElementsByTagName("secondary").length > 0) {
+                                        currentCourse.secondary = gci.secondary(xml, "secondary");
+                                    }
+                                    if(xml.getElementsByTagName("tertiary").length > 0) {
+                                        currentCourse.tertiary = gci.tertiary(xml, "tertiary");
+                                    }
+                                    ccnActions.showCourseInfo(currentCourse, 'ccn_info', 'actionApprovers');
                                 } else {
                                     var err = xml.getElementsByTagName("errorMsg")[0].childNodes[0].nodeValue.trim();
                                     ccnActions.badCCN(err);
@@ -178,45 +210,44 @@
                             }
                     })
                 },
-                showCourseInfo: function(course, target, approvers) {
+                showCourseInfo: function(courseObj, target, approvers) {
                     var div = $("#" + target);
-                    var approversDiv = $("." + approvers)
+                    var approversDiv = $("." + approvers);
+                    var course = courseObj.course;
                     div.empty();
                     approversDiv.empty();
-                    div.append(
-                        '<h5 style="margin-top: 0px; margin-bottom: 5px; font-weight: bold;">'+ 
-                        course.title + '</h5>' +
-                        '<div class="divider-line">'+ '</div>' +
-                        course.date + " " + course.time + " " + course.loc + '<br/>' +
-                        '<b>Instructor: </b>' + course.instructor + '<br/>')
+                    ccnActions.loadTemplate('js/templates/courseInfo.html', ccnActions.showTemplate, 
+                                            '#' + target, courseObj.course, 
+                                            ['title', 'ccn', 'date', 
+                                             'time', 'loc', 'variable', 
+                                             'units', 'enrollment', 'timing']);
                     
-                    if(course.variable === "true") {
-                        console.log("variable")
-                        ccnActions.variableCourse(course);
-                    } else {
-                        console.log("not variable");
-                        div.append('<b>Units: </b>' + course.units + '<br/>');
-                    }
-                    
-                    div.append(
-                        '<b>Enrollment: </b>' + course.enrollment + '<br/>' +
-                        '<b>CCN: </b>' + course.ccn + '<br/>' +
-                        '<b>Action Type: </b>' + course.timing
-                    )
-                    console.log(course.approvers);
                     course.approvers.map(function(i) {
                         approversDiv.append('<li>' + i + '</li>');
-                    });
+                    });             
+                        
+                    if(!$.isEmptyObject(courseObj.secondary)) {
+                        $('.secondary table').empty();
+                        ccnActions.loadTemplate('js/templates/supp.html', 
+                                                 ccnActions.showTemplate, 
+                                                 ".secondary table",
+                                                 currentCourse.secondary,
+                                                 ['format', 'section', 'instructor', 'name',
+                                                 'date', 'time', 'loc', 'enrollment', 'waitlist', 'ccn']);
+                        ccnActions.showSecondary();
+                    } 
+                    
                     div.fadeIn(1000);
                     $(".import-container").delay(700).fadeIn(1000);
                 },
+                
                 hideElement: function(inputArray) {
                     $.each(inputArray, function(index, val) {
                         $(val).hide();
                     });
                 },
+                //change to switch
                 badCCN: function(err) {
-                    console.log("here " + err);
                     ccnActions.hideElement(["#ccn_info", ".import-container"]);
                     if ( err === "Could not find the course") {
                         $("#fifth-error").fadeIn(1000);
@@ -234,11 +265,63 @@
                 variableCourse: function(course) {
                     $('.variableUnitDiv label').html("Enter Units (" + course.units + ')');
                     $('.variableUnitDiv').fadeIn(1000);
+                },
+                
+                showSecondary: function() {
+                    $(".secondary").show();
+                },
+                
+                hideSecondary: function() {
+                    $(".secondary").hide();
+                },
+                loadTemplate: function(url, callback, target, data, parameters) {
+                    console.log("loading " + url);
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', url, true);
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState == 4 && xhr.status == 200) {
+                            var raw = xhr.responseText;
+                            var compiled = Handlebars.compile(raw);
+                            callback(compiled, target, data, parameters);
+                        }
+                    };
+                    xhr.send(); 
+                },
+                showTertiary: function(courseObj, ccn) {
+                    var target = ".tertiary table";
+                    $(target).empty();
+                    if(!$.isEmptyObject(courseObj.tertiary)) {
+                        var data = courseObj.tertiary[ccn];
+                        ccnActions.loadTemplate('js/templates/supp.html', ccnActions.showTemplate, 
+                                    target, data, ['format', 'section', 'instructor', 'name',
+                                                 'date', 'time', 'loc', 'enrollment', 
+                                                 'waitlist', 'ccn']);
+                        $('.tertiary').show();
+                    } else {
+                        console.log("no tertiary");
+                    }
+                    
+                },
+                showTemplate: function(template, target, dataObj, parameters) {
+                    var target = $(target);
+                    if(Array.isArray(dataObj)) {
+                        ccnActions.templateArray(template, target, dataObj, parameters);
+                    } else {
+                        var content = {};
+                        $.map(parameters, function(val, index) {
+                            content[val] = dataObj[val];
+                        });
+                        var html = template(content);
+                        target.append(html);
+                    }
+                },
+                templateArray: function(template, target, dataObj, parameters) {
+                    $.map(dataObj, function(val, index) {
+                        ccnActions.showTemplate(template, target, val, parameters);
+                    });
                 }
             };
         });
-
-
     </script>
 </head>
 <body>
@@ -248,7 +331,6 @@
         <img src="images/2014_BSSLogo.jpg"/>
     </div>
 </header>
-
 <div class="content-wrapper form-action-page">
 <div class="row">
     <div class="col-sm-6 col-lg-offset-3 pull-left center-text"><h3>Student Record Change Form Actions</h3></div>
@@ -535,21 +617,22 @@
                         <label for="variableUnit"> Unit Value </label>
                             <input name="variableUnit" class="form-control input-sm" type="text" style="margin-left: 10px;width: 35px; height: 18px; display: inline;">
                     </div>
-                    <h5>Select a Discussion Section</h5>
-                    <div class="secondary">
-                        <ul>
-                            <li>This is one option</li>
-                            <li>This is the second option</li>
-                        </ul>   
+                    <h5 class="supp-header secondary">Select a Discussion Section</h5>
+                    <div class="supp-container secondary">
+                        <table class="table-striped table-hover secondary-table">
+                        </table>
                     </div>
-                    <h5>Select a Lab Section</h5>
-                    <div class="secondary tertiary">
-                        <ul>
-                            <li>This is one option</li>
-                            <li>This is the second option</li>
-                        </ul>   
+                    <h5 class="supp-header tertiary">Select a Lab Section</h5>
+                    <div class="supp-container tertiary">
+                        <table class="table-striped table-hover">
+                        </table>
                     </div>
-
+                    
+                    Select a grading option &nbsp;
+                    <select>
+                        <option value="PNP">PNP</option>
+                        <option value="Letter Grade">Letter Grade</option>
+                    </select>
 
                     <h5 style="margin: 4px 0 4px;">Please answering the following question below</h5>
                     <ol>
